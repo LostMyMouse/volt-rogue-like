@@ -7,7 +7,7 @@
 // Gravemark's rooftops have a single way in. Odds mirror Hades: mostly boons, some upgrades, meta currency rare.
 const REWARD_ODDS = { boon:60, tech:25, shards:15 };
 const DOOR_COUNT_ODDS = [[1,20],[2,50],[3,30]];
-const SHARD_ROOM = [12,18], SHARD_BOSS = [30,40,60];
+const SHARD_ROOM = [12,18];
 const PADS = [ {x:ARENA.w/2, y:44, side:'top'}, {x:44, y:ARENA.h*0.48, side:'left'}, {x:ARENA.w-44, y:ARENA.h*0.48, side:'right'} ];
 const LANDING = { top:{x:ARENA.w/2, y:ARENA.h-90}, left:{x:ARENA.w-90, y:ARENA.h*0.48}, right:{x:90, y:ARENA.h*0.48} };
 const REWARD_STYLE = {
@@ -51,7 +51,7 @@ function buildRoom(n){
   floorTint = concept ? FLOOR_TINTS[0] : pick(FLOOR_TINTS);
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }
-  enemies=[]; bullets=[]; decals=[]; rocks=[]; cracks=[]; packs=[]; zones=[]; bossHazards=[]; exits=[]; boss=null;
+  enemies=[]; bullets=[]; decals=[]; packs=[]; zones=[]; bossHazards=[]; exits=[]; boss=null;
 }
 function rollReward(taken){
   for (let tries=0; tries<30; tries++){

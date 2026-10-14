@@ -10,7 +10,8 @@ function updateHud(){
   setVar(hud.hp,'--hp',clamp(p.hp/p.maxHp,0,1)); hud.hp.classList.toggle('low',p.hp/p.maxHp<0.3);
   const hpT=String(Math.ceil(p.hp)); if (hud.hpText.textContent!==hpT) hud.hpText.textContent=hpT;
   const showBoss=!!(boss && boss.spawnT<=0 && state!=='start'); if (hud.boss.hidden===showBoss) hud.boss.hidden=!showBoss;
-  if (showBoss && hud.bossName.textContent!==boss.name){
+  if (showBoss && hud.bossKind!==boss){
+    hud.bossKind=boss;
     hud.bossName.textContent=boss.name; hud.boss.style.setProperty('--bc',KIND_COL[boss.kind]||COL.boon); hud.bossTitle.textContent=isSpecBoss(boss)?BOSSES[boss.kind].title:'Boss';
     const th=isSpecBoss(boss)?BOSSES[boss.kind].phases:[]; [hud.tick1,hud.tick2].forEach((t,i)=>{ t.hidden=th[i]===undefined; if (th[i]!==undefined) t.style.setProperty('--at',(th[i]*100)+'%'); });
   }
@@ -48,7 +49,7 @@ const RANKS = [
   {r:'C', min:50,  title:'Rookie on Probation',  c:COL.text},
   {r:'D', min:-1e9,title:'Sidekick Material',    c:COL.threat},
 ];
-const CAUSE = { rusher:"a Rusher's pipe", needle:'a Needle drone shot', slam:"Gravemark's Ring Slam", rock:'a hurled grave-rock', charge:"Gravemark's charge", cracks:"Gravemark's grave cracks" };
+const CAUSE = { rusher:"a Rusher's pipe", needle:'a Needle drone shot' }; // bosses add theirs in their definitions
 // Speakers are placeholders until the roster has portraits and voices (see plan: Halo, Bastion, Echo, Thorn).
 const SPEAKERS = {
   halo:{name:'Halo', role:"The world's #1 hero", c:'#ffe08a'},
@@ -63,10 +64,6 @@ const QUOTES = {
   won: [['halo',"Fifteen waves, and Gravemark in the dirt. The city noticed tonight. So did I."],['bastion',"Clean work, rookie. Don't let it go to your head. The next roof won't be so kind."],['echo',"Okay. Fine. That was impressive. Don't tell anyone I said that."]],
   high:[['halo',"Not bad. I've seen worse first years. I was one of them."],['thorn',"You fight like someone with something to prove. Good. Keep proving it."],['bastion',"Solid. Now do it again without the close calls."]],
   mid: [['halo',"Heroes aren't measured by how they fall. Get up. Again."],['thorn',"I spent years on the wrong side of this fight. Losing isn't the end. Quitting is."],['echo',"I'd have lasted longer. Probably. ...That was decent, I guess."],['bastion',"You hesitated. Hesitation gets people hurt. Dash first, think second."]],
-  slam:[['bastion',"The ring always leaves a gap. Find it before it finds you."],['halo',"When the purple ring glows, don't stand there admiring it. Move."]],
-  charge:[['bastion',"Gravemark charges like a freight train. Put a wall between you and let it hit that instead."]],
-  rock:[['thorn',"Rocks don't fall from nowhere. The purple circle tells you exactly where. Trust it."]],
-  cracks:[['echo',"You stood in the glowing cracks. The glowing ones. On purpose?"]],
   rusher:[['bastion',"Watch the coral arc. When the pipe goes back, you go sideways."]],
   needle:[['echo',"Those drones telegraph like bad poker players. Watch the amber line, then move."]],
   villain:[['gravemark',"Is this what the Fortress sends now? I've crushed sturdier gravel."],['gravemark',"Little spark. You flickered, and then you went out."],['gravemark',"Run home to your heroes. Tell them Gravemark sends its regards."],['gravemark',"The roof will remember you. As a stain."]],

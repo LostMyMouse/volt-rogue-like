@@ -6,7 +6,7 @@
 // (jagged hazard border, dodge only). Tap Block as the glint closes for a perfect parry: no damage, the
 // attacker is staggered and Exposed, shots reflect. Holding Block takes 40% damage. Blocking a super Shatters.
 // Not blocking a parryable attack makes it hit harder.
-const PARRY_CLASS = { rusher:'parry', needle:'parry', charge:'parry', slam:'super', rock:'super', cracks:'super' };
+const PARRY_CLASS = { rusher:'parry', needle:'parry' }; // bosses add theirs via registerBoss
 const BLOCK = { held:0.4, failMul:1.5, exposed:1.5, exposedMul:1.5, guardHits:3, guardWindow:2, guardBreak:0.6, shatterStun:0.5, shatterLock:1.0, whiffT:0.25, whiffLock:0.35, glint:0.25, sig:15 };
 const parryWindow = () => T.parryWindow;
 function pressBlock(){
@@ -23,7 +23,6 @@ function exposeEnemy(e){
   const dur=BLOCK.exposed*(run.style==='titan'?1.4:1);
   e.exposedT=dur;
   if (isSpecBoss(e)) bossExposed(e,dur);
-  else if (e.kind==='gravemark'){ e.state='stagger'; e.timer=dur; e.mx=e.my=0; e.slamsLeft=0; }
   else { e.stunT=Math.max(e.stunT,dur*0.8); e.state=e.kind==='rusher'?'recover':'move'; e.timer=dur; }
   texts.push({x:e.x,y:e.y-e.r-28,v:'EXPOSED',t:0,big:true,c:COL.spark});
 }
@@ -72,10 +71,6 @@ function glintFor(e){
   if (isSpecBoss(e)) return bossGlint(e);
   if (e.kind==='rusher' && e.state==='windup') return e.timer;
   if (e.kind==='rusher' && e.state==='swing' && !e.hitDone) return 0;
-  if (e.kind==='gravemark'){
-    if (e.state==='chargeWind') return e.timer+Math.max(0,(Math.hypot(p.x-e.x,p.y-e.y)-e.r-p.r)/(GM.chargeSpeed*T.enemySpeed));
-    if (e.state==='charging' && !e.hitDone) return Math.max(0,(Math.hypot(p.x-e.x,p.y-e.y)-e.r-p.r)/(GM.chargeSpeed*T.enemySpeed));
-  }
   return -1;
 }
 function drawGlint(x,y,r,tti){

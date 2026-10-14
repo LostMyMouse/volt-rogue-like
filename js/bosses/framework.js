@@ -11,8 +11,8 @@ let bossDebug = { hitboxes:false };
 function registerBoss(def){ BOSSES[def.id]=def; Object.assign(BOSS_PARRY, def.parryClass||{}); }
 const isSpecBoss = e => !!(e && BOSSES[e.kind]);
 
-function makeBoss(id, at){
-  const def=BOSSES[id], hp=def.hp*T.enemyHealth;
+function makeBoss(id, at, opt={}){
+  const def=BOSSES[id], hp=def.hp*T.enemyHealth*(opt.hpMul||1);
   return { kind:id, isBoss:true, name:def.name, x:at.x, y:at.y, vx:0, vy:0, mx:0, my:0, r:def.radius*U, hp, maxHp:hp,
     flashT:0, stunT:0, spawnT:0, face:Math.PI/2, dead:false,
     bstate:'INTRO', stateT:0, phase:1, queuedPhase:1, seqI:0, atk:null, invuln:true, exposedT:0, vent:0 };
@@ -38,7 +38,8 @@ function bossUpdate(e,dt){
       if (e.stateT>=e.exposedFor) bossEndAttack(e);
       break;
     case 'REPOSITION':
-      if (def.reposition(e,dt) || e.stateT>=1.5) bossBeginStep(e,0);
+      // waitFor: some attacks can't start while a conflicting hazard is still live (e.g. Gravemark's well).
+      if ((def.reposition(e,dt) || e.stateT>=1.5) && !(e.atk.def.waitFor && e.atk.def.waitFor(e))) bossBeginStep(e,0);
       break;
     case 'WINDUP': bossWindup(e,dt); break;
     case 'ACTIVE': bossActive(e,dt); break;
@@ -152,6 +153,51 @@ const BOSS_PRIMS = {
       return done;
     },
   },
+  // Places a Gravity Well hazard on the captured player position. Fields: radius, inner (u), dur, charge (s), pull (u/s), dmg, src.
+  placeWell:{
+    active(e,a){
+      const s=a.step;
+      bossHazards=bossHazards.filter(h=>!(h.owner===e && h.kind==='well'));
+      bossHazards.push({ owner:e, kind:'well', src:s.src, shape:'disk', x:a.target.x, y:a.target.y, radius:s.radius*U, inner:s.inner*U, pull:s.pull*U,
+        t:0, arm:0, dur:s.dur, charge:s.charge, every:99, tick:0, dmg:s.dmg, c:BOSSES[e.kind].color, fill:BOSSES[e.kind].color });
+      addShake(4); return true;
+    },
+  },
+  // One projectile down a frozen lane. Fields: width (u, also the projectile size), speed (u/s), dmg, src, kind.
+  lane:{
+    active(e,a){
+      const s=a.step, sp=s.speed*U*T.enemySpeed, r=s.width*U/2;
+      bullets.push({ x:e.x+Math.cos(a.aim)*(e.r+r), y:e.y+Math.sin(a.aim)*(e.r+r), vx:Math.cos(a.aim)*sp, vy:Math.sin(a.aim)*sp, r, dmg:s.dmg, src:s.src, kind:s.kind, owner:e, c:BOSSES[e.kind].color, knock:s.knock, dead:false, t:0 });
+      addShake(7); sparks(e.x+Math.cos(a.aim)*e.r,e.y+Math.sin(a.aim)*e.r,a.aim,12,'#9aa0ad',520,.5);
+      return true;
+    },
+  },
+  // Projectiles orbit the boss, then fly radially outward. Fields: n, radius (u), r (u), spin (deg/s), hold (s), speed (u/s), life (s), dmg, src.
+  orbit:{
+    activate(e,a){
+      const s=a.step; a.rubble=[];
+      for (let i=0;i<s.n;i++){ const b={ x:e.x, y:e.y, vx:0, vy:0, r:Math.max(9,s.r*U), dmg:s.dmg, src:s.src, kind:'rubble', owner:e, c:BOSSES[e.kind].color, dead:false, t:0, maxT:s.hold+s.life,
+        orbit:{ ang:a.aim+i/s.n*PI2, rad:s.radius*U } }; bullets.push(b); a.rubble.push(b); }
+    },
+    active(e,a,dt){
+      const s=a.step;
+      for (const b of a.rubble){ if (b.dead || !b.orbit) continue; b.orbit.ang+=s.spin*DEG*dt; b.x=e.x+Math.cos(b.orbit.ang)*b.orbit.rad; b.y=e.y+Math.sin(b.orbit.ang)*b.orbit.rad; }
+      if (a.activeT<s.hold) return false;
+      for (const b of a.rubble){ if (b.dead || !b.orbit) continue; const sp=s.speed*U*T.enemySpeed; b.vx=Math.cos(b.orbit.ang)*sp; b.vy=Math.sin(b.orbit.ang)*sp; b.orbit=null; }
+      addShake(6); return true;
+    },
+  },
+  // Boss-centred ring band with one safe sector aimed at the captured player position. Fields: rIn, rOut (u), gap (deg), active, dmg, src.
+  annulus:{
+    activate(e,a){ addShake(14); fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.35,r:a.step.rOut*U,c:BOSSES[e.kind].color,gapA:a.aim,gap:a.step.gap*DEG}); },
+    active(e,a){
+      const s=a.step, p=player, dx=p.x-a.origin.x, dy=p.y-a.origin.y, d=Math.hypot(dx,dy);
+      const inBand = d>s.rIn*U-p.r && d<s.rOut*U+p.r;
+      const inGap = d>0 && Math.abs(angDiff(Math.atan2(dy,dx),a.aim)) < s.gap*DEG/2 - Math.asin(Math.min(1,p.r/Math.max(d,p.r)));
+      if (!a.hit && inBand && !inGap) a.hit=!!hurtPlayer(s.dmg,Math.atan2(dy,dx),s.src,{});
+      return a.activeT>=s.active;
+    },
+  },
   // Boss-centred disk impact, optionally followed by evenly spaced radial projectiles.
   // Fields: radius (u), dmg, src, active (s), shots:{n, speed (u/s), r (u), dmg, src}.
   selfDisk:{
@@ -177,9 +223,23 @@ function updateBossHazards(dt){
     if (h.t>=h.dur){ h.dead=true; continue; }
     if (h.t<h.arm) continue;
     const inside = h.shape==='sector' ? inSectorShape(p.x,p.y,p.r*0.5,h.x,h.y,h.aim,h.arc,h.radius) : Math.hypot(p.x-h.x,p.y-h.y)<h.radius+p.r*0.5;
+    if (h.kind==='well'){ updateWell(h,dt); continue; }
     if (inside && h.tick<=0){ h.tick=h.every; hurtPlayer(h.dmg,Math.atan2(p.y-h.y,p.x-h.x),h.src,{}); }
   }
   bossHazards=bossHazards.filter(h=>!h.dead);
+}
+
+// Gravity well: a force zone (no damage) pulling toward its centre, then a separately warned inner detonation.
+// Pull = cap x clamp(1 - d/radius); added to walking, collision-resolved, ignored while dashing.
+function updateWell(h,dt){
+  const p=player, dx=h.x-p.x, dy=h.y-p.y, d=Math.hypot(dx,dy)||1;
+  if (p.dashT<=0 && d<h.radius){ const pull=h.pull*clamp(1-d/h.radius,0,1); p.x+=dx/d*pull*dt; p.y+=dy/d*pull*dt; collide(p); }
+  if (h.t>=h.dur-0.02 && !h.fired){
+    h.fired=true; h.dead=true;
+    if (d<h.inner+p.r) hurtPlayer(h.dmg,Math.atan2(-dy,-dx),h.src,{});
+    fx.push({type:'shock',x:h.x,y:h.y,t:0,dur:.3,r:h.inner*1.6,c:h.c}); addShake(8);
+    stainAtColor(h.x,h.y,h.inner*0.9,'#2a1748');
+  }
 }
 
 /* ---- Parry glint timing for spec bosses: seconds until a parryable component lands, or -1 ---- */
@@ -192,6 +252,7 @@ function bossGlint(e){
     if (e.bstate==='ACTIVE' && !a.hit) return travel;
     return -1;
   }
+  if (s.prim!=='sector') return -1; // projectile attacks glint on the projectile itself
   if (e.bstate==='WINDUP') return a.windup-e.stateT;
   if (e.bstate==='ACTIVE' && !a.hit) return 0;
   return -1;
@@ -232,6 +293,26 @@ function drawBossTelegraph(e){
     ctx.strokeStyle=c; ctx.lineWidth=4; ctx.globalAlpha=0.5+0.5*k;
     for (let i=0;i<4;i++){ const x=L*(0.2+i*0.2)+((time*120)%40); ctx.beginPath(); ctx.moveTo(x,-Wd*0.3); ctx.lineTo(x+16,0); ctx.lineTo(x,Wd*0.3); ctx.stroke(); }
     ctx.restore();
+  } else if (s.prim==='lane'){
+    const Wd=s.width*U, L=1600;
+    ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.aim);
+    drawFootprint(()=>{ ctx.beginPath(); ctx.rect(e.r,-Wd/2,L,Wd); }, c, k, isSuper, false, ()=>{});
+    ctx.restore();
+  } else if (s.prim==='placeWell'){
+    drawWellShape(a.target.x,a.target.y,s.radius*U,s.inner*U,c,k,false);
+  } else if (s.prim==='orbit' && e.bstate==='WINDUP'){
+    const R=s.radius*U;
+    ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.3+0.5*k; ctx.lineWidth=2; ctx.setLineDash([8,8]); ctx.lineDashOffset=-time*30;
+    ctx.beginPath(); ctx.arc(ox,oy,R,0,PI2); ctx.stroke(); ctx.setLineDash([]);
+    for (let i=0;i<s.n;i++){ const ang=a.aim+i/s.n*PI2+e.stateT*s.spin*DEG*0.3, x=ox+Math.cos(ang)*R, y=oy+Math.sin(ang)*R;
+      ctx.beginPath(); ctx.arc(x,y,s.r*U+4,0,PI2); ctx.stroke();
+      const t=ang+0.35; ctx.beginPath(); ctx.moveTo(ox+Math.cos(t-0.08)*(R-10),oy+Math.sin(t-0.08)*(R-10)); ctx.lineTo(ox+Math.cos(t)*R,oy+Math.sin(t)*R); ctx.lineTo(ox+Math.cos(t-0.08)*(R+10),oy+Math.sin(t-0.08)*(R+10)); ctx.stroke(); }
+    ctx.restore();
+  } else if (s.prim==='annulus'){
+    const r0=s.rIn*U, r1=s.rOut*U, g=s.gap*DEG/2, a0=a.aim+g, a1=a.aim-g+PI2;
+    drawFootprint(()=>{ ctx.beginPath(); ctx.arc(ox,oy,r1,a0,a1); ctx.arc(ox,oy,r0,a1,a0,true); ctx.closePath(); }, c, k, isSuper, pulse, ()=>jaggedRing(ox,oy,r1+6,a0,a1,60,7));
+    if (e.bstate==='WINDUP'){ ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.aim); ctx.strokeStyle=`rgba(244,251,255,${0.35+0.4*Math.sin(time*12)**2})`; ctx.lineWidth=4; ctx.lineCap='round';
+      for (let i=0;i<3;i++){ const x=r0+30+i*30; ctx.beginPath(); ctx.moveTo(x,-12); ctx.lineTo(x+12,0); ctx.lineTo(x,12); ctx.stroke(); } ctx.restore(); }
   } else if (s.prim==='selfDisk'){
     const R=s.radius*U;
     drawFootprint(()=>{ ctx.beginPath(); ctx.arc(ox,oy,R,0,PI2); }, c, k, isSuper, pulse, ()=>jaggedRing(ox,oy,R+6,0,PI2,56,7));
@@ -242,8 +323,19 @@ function drawBossTelegraph(e){
     }
   }
 }
+// Force zone (outer, swirling arrows, no hatch: it pulls but never damages) around a damage zone (inner, charges up).
+function drawWellShape(x,y,R,ri,c,k,live,charge=0){
+  ctx.save();
+  ctx.strokeStyle=c; ctx.globalAlpha=live?0.7:0.35+0.4*k; ctx.lineWidth=2; ctx.setLineDash([3,9]); ctx.lineDashOffset=time*40;
+  ctx.beginPath(); ctx.arc(x,y,R,0,PI2); ctx.stroke(); ctx.setLineDash([]);
+  for (let i=0;i<6;i++){ const ang=i/6*PI2+time*1.6, r1=R*0.92, r2=R*0.62; ctx.beginPath(); ctx.moveTo(x+Math.cos(ang)*r1,y+Math.sin(ang)*r1); ctx.quadraticCurveTo(x+Math.cos(ang+0.5)*R*0.8,y+Math.sin(ang+0.5)*R*0.8,x+Math.cos(ang+0.7)*r2,y+Math.sin(ang+0.7)*r2); ctx.stroke(); }
+  ctx.globalAlpha=1; ctx.lineWidth=2+3*charge; ctx.beginPath(); ctx.arc(x,y,ri,0,PI2); ctx.stroke();
+  if (charge>0){ ctx.save(); ctx.beginPath(); ctx.arc(x,y,ri,0,PI2); ctx.fillStyle=c; ctx.globalAlpha=0.15+0.45*charge; ctx.fill(); ctx.restore(); ctx.beginPath(); ctx.arc(x,y,ri,0,PI2); hatch(c,12,0.5*charge); jaggedRing(x,y,ri+5,0,PI2,28,6); }
+  ctx.restore();
+}
 function drawBossHazards(){
   for (const h of bossHazards){
+    if (h.kind==='well'){ drawWellShape(h.x,h.y,h.radius,h.inner,h.c,1,true,clamp((h.t-(h.dur-h.charge))/h.charge,0,1)); continue; }
     const fade=Math.min(1,(h.dur-h.t)/0.4)*Math.min(1,h.t/0.2);
     ctx.save(); ctx.globalAlpha=fade;
     const path = h.shape==='sector' ? ()=>{ ctx.beginPath(); ctx.moveTo(h.x,h.y); ctx.arc(h.x,h.y,h.radius,h.aim-h.arc/2,h.aim+h.arc/2); ctx.closePath(); }

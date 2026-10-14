@@ -3,9 +3,6 @@
 
 // Lines for characters without a spec-boss definition. Spec bosses carry their own `intro` block.
 const CHARACTER_INTROS = {
-  gravemark:{ kind:'villain', title:'Stone and gravity', flourish:'blocks your path!',
-    first:"Another rookie on my roof. I'll carve your name next to the others.",
-    repeat:["The stone remembers you.","Every fall makes you lighter. Every stone makes me heavier.","Back again? Then stay down this time."] },
   halo:{ kind:'hero', flourish:'is on comms!', first:"So you're the rookie everyone keeps talking about. Show me why." },
   bastion:{ kind:'hero', flourish:'is on comms!', first:"Bastion. I hold this city's line. Tonight I'm holding yours." },
   echo:{ kind:'hero', flourish:'is on comms!', first:"Echo. I already know how this ends. You're going to need me." },
