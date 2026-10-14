@@ -16,6 +16,8 @@ function updateHud(){
     const th=isSpecBoss(boss)?BOSSES[boss.kind].phases:[]; [hud.tick1,hud.tick2].forEach((t,i)=>{ t.hidden=th[i]===undefined; if (th[i]!==undefined) t.style.setProperty('--at',(th[i]*100)+'%'); });
   }
   if (showBoss) setVar(hud.boss,'--hp',clamp(boss.hp/boss.maxHp,0,1));
+  if (showBoss && isSpecBoss(boss)){ const lbl=(boss.atk && boss.atk.def && boss.atk.def.label) || BOSSES[boss.kind].title; if (hud.bossTitle.textContent!==lbl) hud.bossTitle.textContent=lbl; }
+  { const sup=!!player.suppressed; for (const el of [hud.ab.p,hud.ab.q,hud.tb.p,hud.tb.q]) el.classList.toggle('suppressed',sup); }
   const bl=clamp(Math.max(p.blockLock,p.stunT)/BLOCK.shatterLock,0,1); setVar(hud.blockAb,'--cd',bl); setVar(hud.blockTb,'--cd',bl);
   hud.blockAb.classList.toggle('ready',p.blockHeld); hud.blockTb.classList.toggle('ready',p.blockHeld);
   const sT='◆ '+run.shards; if (hud.shards.textContent!==sT) hud.shards.textContent=sT;
@@ -39,7 +41,7 @@ function startGame(){
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
 function gameOver(){ state='over'; fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
-function winRun(){ state='over'; run.won=true; banner('ROOFTOP SECURED'); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },1600); }
+function winRun(){ state='over'; run.won=true; banner(run.route && curDistrict()==='redactor' ? 'THE CITY\'S POWER RETURNS' : 'CITY SECURED'); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },1600); }
 
 /* ---------- Run results ---------- */
 // Rank: reward progress and bosses, punish sloppiness. Roughly 330 for a clean win.
@@ -63,6 +65,7 @@ const SPEAKERS = {
   verdigris:{name:'Verdigris', role:'Villain', c:'#b8e62e'},
   glasswake:{name:'Glasswake', role:'Villain', c:'#ff3f9a'},
   undertow:{name:'Undertow', role:'Villain', c:'#7fd8ff'},
+  redactor:{name:'The Redactor', role:'Villain', c:'#e0283c'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
 };
 const QUOTES = {
@@ -85,6 +88,7 @@ const PORTRAIT_SVG = {
   halo: `<circle cx="32" cy="14" r="13" fill="none" stroke="#fff6d6" stroke-width="3"/>${BUST}<path d="M22 27 h20" stroke="#ffe08a" stroke-width="3"/><path d="M14 52 L32 44 L50 52" stroke="#ffe08a" stroke-width="3" fill="none"/>`,
   bastion: `<path d="M2 64 C4 42 16 38 32 38 C48 38 60 42 62 64 Z" fill="#0b111c"/><rect x="18" y="13" width="28" height="27" rx="4" fill="#0b111c"/><rect x="22" y="23" width="20" height="5" fill="#9fb0c8"/><path d="M6 50 h52" stroke="#9fb0c8" stroke-width="3"/>`,
   echo: `<path d="M17 36 C14 20 20 11 32 11 C44 11 50 20 47 36 Z" fill="#0b111c"/>${BUST}<path d="M24 26 h16" stroke="#ff5cc8" stroke-width="3"/><path d="M47 20 a9 9 0 0 1 0 13 M51 16 a15 15 0 0 1 0 21" stroke="#ff5cc8" stroke-width="2.5" fill="none"/>`,
+  redactor: `${BUST}<rect x="24" y="17" width="16" height="20" rx="2" fill="#ece6d6"/><rect x="30.5" y="21" width="3" height="12" fill="#e0283c"/><path d="M10 50 h44" stroke="#e0283c" stroke-width="3"/>`,
   gravemark: `${BUST}<rect x="30" y="18" width="4" height="14" fill="#b56cff"/>`,
   patch: `${BUST}<path d="M19 27 a13 13 0 0 1 26 0" stroke="#55e6c1" stroke-width="3" fill="none"/><rect x="16" y="25" width="6" height="9" rx="2" fill="#55e6c1"/><path d="M19 33 q2 7 9 7" stroke="#55e6c1" stroke-width="2" fill="none"/><rect x="24" y="24" width="16" height="4" fill="#55e6c1"/>`,
   thorn: `${BUST}<path d="M20 20 L16 8 L25 16 L28 4 L33 15 L39 5 L40 16 L49 9 L44 21" fill="#0b111c" stroke="#6ad46a" stroke-width="2"/><circle cx="27" cy="28" r="2" fill="#6ad46a"/><circle cx="37" cy="28" r="2" fill="#6ad46a"/><path d="M18 52 l6 -6 l2 8 M46 52 l-6 -6 l-2 8" stroke="#6ad46a" stroke-width="2.5" fill="none"/>`,

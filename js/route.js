@@ -25,6 +25,7 @@ const isBossRoom = () => run.route.room > roomsIn(curDistrict());
 // What comes after this district: another city-map choice, Gravemark, the Redactor, or the end of the run.
 function nextAfterDistrict(){
   const r=run.route, beaten=r.order.filter(id=>DISTRICT_POOL.includes(id)).length;
+  if (curDistrict()==='redactor') return {type:'end'}; // the Redactor is always the last villain
   if (DISTRICT_POOL.includes(curDistrict()) && beaten<r.picks) return {type:'map'};
   if (curDistrict()!=='gravemark' && !r.order.includes('gravemark') && BOSSES.gravemark) return {type:'fixed', id:'gravemark'};
   if (curDistrict()!=='redactor' && BOSSES.redactor) return {type:'fixed', id:'redactor'};

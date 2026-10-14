@@ -3,7 +3,7 @@
 
 /* ---------- Waves ---------- */
 // Health never refills between waves. The only healing is these rare drops (full HP walks over them).
-const PACK = { heal:20, chance:{ rusher:0.02, needle:0.02, gravemark:0.25, kilnheart:0.25, bellwether:0.25, verdigris:0.25, glasswake:0.25, undertow:0.25 } };
+const PACK = { heal:20, chance:{ rusher:0.02, needle:0.02, gravemark:0.25, kilnheart:0.25, bellwether:0.25, verdigris:0.25, glasswake:0.25, undertow:0.25, redactor:0 } };
 const RUSH = { reach:72, arc:2.3, step:420, swingT:0.16, wind:0.5 };
 function spawnPoint(){
   for (let i=0;i<40;i++){
@@ -66,7 +66,7 @@ function update(dt){
     const dx=p.x-e.x, dy=p.y-e.y, d=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx);
     e.mx=0; e.my=0;
     if (e.isBud){ updateBud(e,dt); continue; }
-    if (e.isDecoy || e.isIce){ e.flashT-=dt; continue; }
+    if (e.isDecoy || e.isIce || e.isPlate){ e.flashT-=dt; continue; }
     if (isSpecBoss(e)) bossUpdate(e,dt);
     else if (e.stunT<=0){
       if (e.kind==='rusher'){

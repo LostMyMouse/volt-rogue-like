@@ -46,6 +46,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   // Boon multipliers stack multiplicatively, like Hades.
   let m=1;
   if (e.exposedT>0) m*=BLOCK.exposedMul;
+  if (isSpecBoss(e) && BOSSES[e.kind].damageMul) m*=BOSSES[e.kind].damageMul(e);
   if (e.markT>0) m*=1+(has('mindspike')?val('mindspike'):25)/100;
   if (has('inspire') && player.hp>=player.maxHp*0.8) m*=1+val('inspire')/100;
   if (has('guiding') && e.isBoss) m*=1+val('guiding')/100;
@@ -76,6 +77,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
 }
 function killEnemy(e,ang){
   if (e.isIce){ breakIce(e); return; }
+  if (e.isPlate){ e.dead=true; e.killed=true; sparks(e.x,e.y,ang,16,'#e0283c',480,1.4); fx.push({type:'impact',x:e.x,y:e.y,t:0,dur:.15,size:44,rot:rand(PI2),c:'#e0283c'}); rdPlateBroken(e); return; }
   if (e.isBud||e.isDecoy){ e.dead=true; e.killed=true; sparks(e.x,e.y,ang,14,e.c,420,1.4); fx.push({type:'impact',x:e.x,y:e.y,t:0,dur:.15,size:40,rot:rand(PI2),c:e.c}); return; }
   e.dead=true; kills++;
   if (has('feedback') && (e.markT>0||e.stunT>0||e.rootT>0)) burst(e.x,e.y,95,val('feedback'),HEROES.echo.c);
@@ -114,6 +116,7 @@ function doDash(){
 }
 function doSig(){
   const p=player; if (state!=='play'||p.sig<100) return;
+  if (p.suppressed){ texts.push({x:p.x,y:p.y-40,v:'SUPPRESSED',t:0,c:'#e0283c'}); return; }
   p.sig=0;
   fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.45,r:290});
   const storm=has('storm');

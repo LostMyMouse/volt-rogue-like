@@ -191,6 +191,7 @@ button{font:inherit;color:inherit}
 .card-desc{font-size:13px;line-height:1.45;color:var(--text)}
 .card-desc b{color:var(--spark)}
 .card-foot{margin-top:auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ab.suppressed,.tb.suppressed{opacity:.45;border-color:#e0283c;box-shadow:3px 3px 0 var(--ink),inset 0 0 0 2px #e0283c}
 .ab.boon{border-color:var(--bc);box-shadow:3px 3px 0 var(--ink),inset 0 -3px 0 var(--bc)}
 .tb.boon{border-color:var(--bc)}
 

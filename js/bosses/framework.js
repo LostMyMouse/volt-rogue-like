@@ -26,14 +26,15 @@ function bossUpdate(e,dt){
   const def=BOSSES[e.kind], p=player;
   e.stateT+=dt; e.mx=e.my=0;
   if (e.vent>0) e.vent-=dt;
+  if (def.tick) def.tick(e,dt);
   const ph=bossPhaseFor(e); if (ph>e.queuedPhase) e.queuedPhase=ph;
   switch (e.bstate){
     case 'INTRO':
       e.face=Math.atan2(p.y-e.y,p.x-e.x);
-      if (e.stateT>=1.5){ e.invuln=false; bossNextAttack(e); }
+      if (e.stateT>=1.5){ e.invuln=false; if (def.onPhaseStart) def.onPhaseStart(e); bossNextAttack(e); }
       break;
     case 'PHASE_CHANGE':
-      if (e.stateT>=1.2){ e.invuln=false; bossNextAttack(e); }
+      if (e.stateT>=1.2){ e.invuln=false; if (def.onPhaseStart) def.onPhaseStart(e); bossNextAttack(e); }
       break;
     case 'EXPOSED':
       if (e.stateT>=e.exposedFor) bossEndAttack(e);
@@ -52,7 +53,7 @@ function bossUpdate(e,dt){
 function bossNextAttack(e){
   const def=BOSSES[e.kind], seq=def.sequences[e.phase-1], id=seq[e.seqI % seq.length];
   e.seqI++;
-  e.atk={ id, def:def.attacks[id], stepI:-1, step:null };
+  e.atk={ id, def:def.attacks[id] || (def.resolveAttack && def.resolveAttack(e,id)), stepI:-1, step:null };
   bossSetState(e,'REPOSITION');
 }
 function bossEndAttack(e){
@@ -198,6 +199,14 @@ const BOSS_PRIMS = {
       return done;
     },
   },
+  // Null Field: a no-damage zone on the captured player position. Inside, Power and Overload can't be used. Fields: radius (u), dur, src.
+  placeNull:{
+    active(e,a){
+      const s=a.step; bossHazards=bossHazards.filter(h=>!(h.owner===e && h.kind==='null'));
+      bossHazards.push({ owner:e, kind:'null', src:s.src, shape:'disk', x:a.target.x, y:a.target.y, radius:s.radius*U, t:0, arm:0, dur:s.dur, every:99, tick:0, dmg:0, c:BOSSES[e.kind].color, fill:BOSSES[e.kind].color });
+      return true;
+    },
+  },
   // Places a Gravity Well hazard on the captured player position. Fields: radius, inner (u), dur, charge (s), pull (u/s), dmg, src.
   placeWell:{
     active(e,a){
@@ -238,7 +247,8 @@ const BOSS_PRIMS = {
     active(e,a){
       const s=a.step, p=player, dx=p.x-a.origin.x, dy=p.y-a.origin.y, d=Math.hypot(dx,dy);
       const inBand = d>s.rIn*U-p.r && d<s.rOut*U+p.r;
-      const inGap = d>0 && Math.abs(angDiff(Math.atan2(dy,dx),a.aim)) < s.gap*DEG/2 - Math.asin(Math.min(1,p.r/Math.max(d,p.r)));
+      const half=s.gap*DEG/2 - Math.asin(Math.min(1,p.r/Math.max(d,p.r))), ang=Math.atan2(dy,dx);
+      let inGap=false; for (let i=0;i<(s.gaps||1);i++) if (d>0 && Math.abs(angDiff(ang,a.aim+i*PI2/(s.gaps||1)))<half) inGap=true;
       if (!a.hit && inBand && !inGap) a.hit=!!hurtPlayer(s.dmg,Math.atan2(dy,dx),s.src,{});
       return a.activeT>=s.active;
     },
@@ -386,7 +396,7 @@ const BOSS_PRIMS = {
 
 /* ---- Persistent hazards (owned by a boss, cleared on phase change and death) ---- */
 function updateBossHazards(dt){
-  const p=player;
+  const p=player; let suppressed=false;
   for (const k in bossTicks) bossTicks[k]-=dt;
   for (const h of bossHazards){
     h.t+=dt; h.tick-=dt;
@@ -394,10 +404,15 @@ function updateBossHazards(dt){
     if (h.t<h.arm) continue;
     const inside = h.shape==='sector' ? inSectorShape(p.x,p.y,p.r*0.5,h.x,h.y,h.aim,h.arc,h.radius) : Math.hypot(p.x-h.x,p.y-h.y)<h.radius+p.r*0.5;
     if (h.kind==='well'){ updateWell(h,dt); continue; }
+    if (h.kind==='null'){ if (Math.hypot(p.x-h.x,p.y-h.y)<h.radius){ suppressed=true; } continue; }
     if (inside && h.shared){ if ((bossTicks[h.src]||0)<=0){ bossTicks[h.src]=h.every; hurtPlayer(h.dmg,Math.atan2(p.y-h.y,p.x-h.x),h.src,{}); } }
     else if (inside && h.tick<=0){ h.tick=h.every; hurtPlayer(h.dmg,Math.atan2(p.y-h.y,p.x-h.x),h.src,{}); }
   }
   bossHazards=bossHazards.filter(h=>!h.dead);
+  // Suppression never cancels a dash or an ability already running, but a charge in progress fizzles (no cooldown).
+  if (suppressed && !p.suppressed) texts.push({x:p.x,y:p.y-40,v:'SUPPRESSED',t:0,c:'#e0283c'});
+  if (suppressed && p.charging) p.charging=0;
+  p.suppressed=suppressed;
 }
 
 // Gravity well: a force zone (no damage) pulling toward its centre, then a separately warned inner detonation.
@@ -472,7 +487,7 @@ function drawFootprint(path, c, k, isSuper, pulse, jagged){
 function drawBossTelegraph(e){
   const def=BOSSES[e.kind], a=e.atk;
   if (!a || !a.step || !(e.bstate==='WINDUP'||e.bstate==='ACTIVE')) return;
-  const s=a.step, c=def.color, isSuper=BOSS_PARRY[s.src]!=='parry';
+  const s=a.step, c=s.color||def.color, isSuper=BOSS_PARRY[s.src]!=='parry';
   const k=e.bstate==='ACTIVE'?1:clamp(e.stateT/a.windup,0,1), pulse=e.bstate==='ACTIVE';
   const ox=a.origin.x, oy=a.origin.y;
   if (s.prim==='sector'){
@@ -535,8 +550,9 @@ function drawBossTelegraph(e){
       const t=ang+0.35; ctx.beginPath(); ctx.moveTo(ox+Math.cos(t-0.08)*(R-10),oy+Math.sin(t-0.08)*(R-10)); ctx.lineTo(ox+Math.cos(t)*R,oy+Math.sin(t)*R); ctx.lineTo(ox+Math.cos(t-0.08)*(R+10),oy+Math.sin(t-0.08)*(R+10)); ctx.stroke(); }
     ctx.restore();
   } else if (s.prim==='annulus'){
-    const r0=s.rIn*U, r1=s.rOut*U, g=s.gap*DEG/2, a0=a.aim+g, a1=a.aim-g+PI2;
-    drawFootprint(()=>{ ctx.beginPath(); ctx.arc(ox,oy,r1,a0,a1); ctx.arc(ox,oy,r0,a1,a0,true); ctx.closePath(); }, c, k, isSuper, pulse, ()=>jaggedRing(ox,oy,r1+6,a0,a1,60,7));
+    const r0=s.rIn*U, r1=s.rOut*U, g=s.gap*DEG/2, n=s.gaps||1;
+    for (let i=0;i<n;i++){ const a0=a.aim+i*PI2/n+g, a1=a.aim+(i+1)*PI2/n-g;
+      drawFootprint(()=>{ ctx.beginPath(); ctx.arc(ox,oy,r1,a0,a1); ctx.arc(ox,oy,r0,a1,a0,true); ctx.closePath(); }, c, k, isSuper, pulse, ()=>jaggedRing(ox,oy,r1+6,a0,a1,60,7)); }
     if (e.bstate==='WINDUP'){ ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.aim); ctx.strokeStyle=`rgba(244,251,255,${0.35+0.4*Math.sin(time*12)**2})`; ctx.lineWidth=4; ctx.lineCap='round';
       for (let i=0;i<3;i++){ const x=r0+30+i*30; ctx.beginPath(); ctx.moveTo(x,-12); ctx.lineTo(x+12,0); ctx.lineTo(x,12); ctx.stroke(); } ctx.restore(); }
   } else if (s.prim==='selfDisk'){
@@ -586,8 +602,21 @@ function drawWellShape(x,y,R,ri,c,k,live,charge=0){
   if (charge>0){ ctx.save(); ctx.beginPath(); ctx.arc(x,y,ri,0,PI2); ctx.fillStyle=c; ctx.globalAlpha=0.15+0.45*charge; ctx.fill(); ctx.restore(); ctx.beginPath(); ctx.arc(x,y,ri,0,PI2); hatch(c,12,0.5*charge); jaggedRing(x,y,ri+5,0,PI2,28,6); }
   ctx.restore();
 }
+// Null Field: broken crimson boundary, crosshatched interior. Never damaging, so no jagged edge.
+function drawNullField(h){
+  const fade=Math.min(1,(h.dur-h.t)/0.3)*Math.min(1,h.t/0.2);
+  ctx.save(); ctx.globalAlpha=fade;
+  ctx.beginPath(); ctx.arc(h.x,h.y,h.radius,0,PI2); ctx.fillStyle='rgba(224,40,60,.08)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(h.x,h.y,h.radius,0,PI2); hatch(h.c,16,0.22);
+  ctx.beginPath(); ctx.arc(h.x,h.y,h.radius,0,PI2); ctx.save(); ctx.clip(); ctx.globalAlpha=fade*0.22; ctx.strokeStyle=h.c; ctx.lineWidth=2; ctx.beginPath();
+  for (let x=-ARENA.h; x<ARENA.w+ARENA.h; x+=16){ ctx.moveTo(x,ARENA.h+100); ctx.lineTo(x+ARENA.h+200,-100); } ctx.stroke(); ctx.restore();
+  ctx.strokeStyle=h.c; ctx.lineWidth=3; ctx.setLineDash([14,10]); ctx.lineDashOffset=time*30; ctx.beginPath(); ctx.arc(h.x,h.y,h.radius,0,PI2); ctx.stroke();
+  ctx.setLineDash([]); ctx.font='900 18px "Big Shoulders Display", Impact, sans-serif'; ctx.textAlign='center'; ctx.fillStyle=h.c; ctx.globalAlpha=fade*0.8; ctx.fillText('NULL FIELD',h.x,h.y-h.radius+24);
+  ctx.restore();
+}
 function drawBossHazards(){
   for (const h of bossHazards){
+    if (h.kind==='null'){ drawNullField(h); continue; }
     if (h.kind==='well'){ drawWellShape(h.x,h.y,h.radius,h.inner,h.c,1,true,clamp((h.t-(h.dur-h.charge))/h.charge,0,1)); continue; }
     const fade=Math.min(1,(h.dur-h.t)/0.4)*Math.min(1,h.t/0.2);
     ctx.save(); ctx.globalAlpha=fade;

@@ -8,7 +8,7 @@ function verdPools(e,a){
   for (const sp of diskSpots(a)){
     const mine=bossHazards.filter(h=>h.owner===e && h.src==='verd_acid' && !h.fading);
     if (mine.length>=VG_POOL_CAP){ const old=mine[0]; old.fading=true; old.t=Math.max(old.t,old.dur-0.4); }
-    bossHazards.push({ owner:e, src:'verd_acid', shape:'disk', x:sp.x, y:sp.y, radius:a.step.radius*U, t:0, arm:0.15, dur:5, every:0.75, tick:0, dmg:5, shared:true, c:'#b8e62e', fill:'#7fa318' });
+    bossHazards.push({ owner:e, src:'verd_acid', shape:'disk', x:sp.x, y:sp.y, radius:a.step.radius*U, t:0, arm:0.15, dur:a.step.poolDur||5, every:0.75, tick:0, dmg:5, shared:true, c:'#b8e62e', fill:'#7fa318' });
   }
 }
 const VG_SEED = { prim:'disks', windup:0.9, active:0.15, n:1, radius:1.6, spread:0, dmg:10, src:'verd_seed', after:verdPools };

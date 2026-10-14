@@ -12,7 +12,7 @@ const clamp = (v,a,b) => v<a?a:v>b?b:v;
 const rand = (a=1,b) => b===undefined ? Math.random()*a : a+Math.random()*(b-a);
 const angDiff = (a,b) => { let d=a-b; while(d>Math.PI)d-=PI2; while(d<-Math.PI)d+=PI2; return d; };
 const COL = { ink:'#04070e', night:'#080d18', volt:'#26bfff', spark:'#f4fbff', threat:'#ff5a45', amber:'#ffb647', rim:'#42516a', text:'#dde8f5', heal:'#55e6c1', boon:'#b56cff', slate:'#253247', edge:'#42516a' };
-const KIND_COL = { rusher:COL.threat, needle:COL.amber, gravemark:COL.boon, kilnheart:'#ff7a1a', bellwether:'#f5b915', verdigris:'#b8e62e', bud:'#b8e62e', glasswake:'#ff3f9a', decoy:'#ff3f9a', undertow:'#7fd8ff', ice:'#cff4ff' };
+const KIND_COL = { rusher:COL.threat, needle:COL.amber, gravemark:COL.boon, kilnheart:'#ff7a1a', bellwether:'#f5b915', verdigris:'#b8e62e', bud:'#b8e62e', glasswake:'#ff3f9a', decoy:'#ff3f9a', undertow:'#7fd8ff', ice:'#cff4ff', redactor:'#e0283c', plate:'#e0283c' };
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- Tuning ---------- */
