@@ -60,6 +60,7 @@ const SPEAKERS = {
   gravemark:{name:'Gravemark', role:'Villain', c:COL.boon},
   kilnheart:{name:'Kilnheart', role:'Villain', c:'#ff7a1a'},
   bellwether:{name:'Bellwether', role:'Villain', c:'#f5b915'},
+  verdigris:{name:'Verdigris', role:'Villain', c:'#b8e62e'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
 };
 const QUOTES = {
@@ -87,7 +88,7 @@ const PORTRAIT_SVG = {
   thorn: `${BUST}<path d="M20 20 L16 8 L25 16 L28 4 L33 15 L39 5 L40 16 L49 9 L44 21" fill="#0b111c" stroke="#6ad46a" stroke-width="2"/><circle cx="27" cy="28" r="2" fill="#6ad46a"/><circle cx="37" cy="28" r="2" fill="#6ad46a"/><path d="M18 52 l6 -6 l2 8 M46 52 l-6 -6 l-2 8" stroke="#6ad46a" stroke-width="2.5" fill="none"/>`,
 };
 // Add an id here when its PNG lands in assets/portraits/.
-const PORTRAIT_FILES = ['gravemark','kilnheart','bellwether'];
+const PORTRAIT_FILES = ['gravemark','kilnheart','bellwether','verdigris','glasswake','undertow'];
 function setPortrait(el,who){
   const sp=SPEAKERS[who];
   el.innerHTML=''; el.style.backgroundImage=''; el.className='portrait';

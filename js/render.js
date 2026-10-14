@@ -345,7 +345,7 @@ function drawActors(){
   // Depth sort by feet y so things lower on screen draw on top (3/4 view).
   const list=[];
   for (const b of obstacles) list.push({y:obstacleDepth(b),f:()=>drawObstacle(b)});
-  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>(isSpecBoss(e)?BOSSES[e.kind].draw(e):VECTOR[e.kind](e))});
+  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>(e.drawFn?e.drawFn(e):isSpecBoss(e)?BOSSES[e.kind].draw(e):VECTOR[e.kind](e))});
   for (const b of bullets) list.push({y:b.y,f:()=>drawBullet(b)});
   for (const k of packs) list.push({y:k.y,f:()=>drawPack(k)});
   if (state!=='over' || player.hp>0) list.push({y:player.y,f:drawPlayer});

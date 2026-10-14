@@ -7,6 +7,7 @@ const BOSSES = {};
 const BOSS_PARRY = {};      // damage source id -> 'parry' | 'super', merged from every boss
 let bossHazards = [];       // persistent boss-owned floor hazards (heated floor, pools, ...)
 let bossDebug = { hitboxes:false };
+let bossTicks = {};          // shared per-source damage intervals (e.g. overlapping acid pools hit as one)
 
 function registerBoss(def){ BOSSES[def.id]=def; Object.assign(BOSS_PARRY, def.parryClass||{}); }
 const isSpecBoss = e => !!(e && BOSSES[e.kind]);
@@ -64,6 +65,7 @@ function bossPhaseChange(e){
   fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.5,r:220,c:BOSSES[e.kind].color}); addShake(10);
 }
 function bossClearOwned(e){
+  for (const m of enemies) if (m.owner===e && !m.dead) m.dead=true;
   for (const b of bullets) if (b.owner===e) b.dead=true;
   for (const h of bossHazards) if (h.owner===e) h.dead=true;
   bossHazards=bossHazards.filter(h=>!h.dead);
@@ -101,6 +103,7 @@ function bossActive(e,dt){
   } else bossToRecovery(e);
 }
 function bossToRecovery(e){
+  if (e.atk.exposeInstead){ exposeEnemy(e); return; }
   bossSetState(e,'RECOVERY');
   if (e.atk.def.vent) e.vent=e.atk.def.recovery; // visual punish cue, no hidden multiplier
 }
@@ -239,6 +242,21 @@ const BOSS_PRIMS = {
     },
     activate(e,a){ addShake(6); for (const c of diskSpots(a)) fx.push({type:'shock',x:c.x,y:c.y,t:0,dur:.25,r:a.step.radius*U,c:BOSSES[e.kind].color}); },
   },
+  // Spawns damageable buds on marked spots; after a visible growth warning each fires a small aimed fan, then wilts.
+  // Fields: n, dist (u), hp, grow (s), lock (s before firing), fan [deg...], speed (u/s), dmg, src, r (u).
+  buds:{
+    begin(e,a){ const s=a.step; a.spots=[]; for (let i=0;i<s.n;i++){ const ang=a.aim+(i-(s.n-1)/2)*1.2; a.spots.push({x:clamp(e.x+Math.cos(ang)*s.dist*U,60,ARENA.w-60), y:clamp(e.y+Math.sin(ang)*s.dist*U,60,ARENA.h-60)}); } },
+    activate(e,a){
+      const s=a.step; a.buds=a.spots.map(sp=>({ kind:'bud', isBud:true, anchored:true, owner:e, x:sp.x, y:sp.y, r:(s.r||0.45)*U, hp:s.hp, maxHp:s.hp,
+        vx:0, vy:0, mx:0, my:0, flashT:0, stunT:0, spawnT:0, face:0, dead:false, growT:0, step:s, c:BOSSES[e.kind].color, drawFn:drawBud }));
+      enemies.push(...a.buds);
+    },
+    active(e,a){
+      if (!a.buds.every(b=>b.dead||b.fired)) return false;
+      if (a.buds.every(b=>b.killed)) a.exposeInstead=true; // every bud destroyed before it fired
+      return true;
+    },
+  },
   // Boss-centred disk impact, optionally followed by evenly spaced radial projectiles.
   // Fields: radius (u), dmg, src, active (s), shots:{n, speed (u/s), r (u), dmg, src}.
   selfDisk:{
@@ -259,13 +277,15 @@ const BOSS_PRIMS = {
 /* ---- Persistent hazards (owned by a boss, cleared on phase change and death) ---- */
 function updateBossHazards(dt){
   const p=player;
+  for (const k in bossTicks) bossTicks[k]-=dt;
   for (const h of bossHazards){
     h.t+=dt; h.tick-=dt;
     if (h.t>=h.dur){ h.dead=true; continue; }
     if (h.t<h.arm) continue;
     const inside = h.shape==='sector' ? inSectorShape(p.x,p.y,p.r*0.5,h.x,h.y,h.aim,h.arc,h.radius) : Math.hypot(p.x-h.x,p.y-h.y)<h.radius+p.r*0.5;
     if (h.kind==='well'){ updateWell(h,dt); continue; }
-    if (inside && h.tick<=0){ h.tick=h.every; hurtPlayer(h.dmg,Math.atan2(p.y-h.y,p.x-h.x),h.src,{}); }
+    if (inside && h.shared){ if ((bossTicks[h.src]||0)<=0){ bossTicks[h.src]=h.every; hurtPlayer(h.dmg,Math.atan2(p.y-h.y,p.x-h.x),h.src,{}); } }
+    else if (inside && h.tick<=0){ h.tick=h.every; hurtPlayer(h.dmg,Math.atan2(p.y-h.y,p.x-h.x),h.src,{}); }
   }
   bossHazards=bossHazards.filter(h=>!h.dead);
 }
@@ -281,6 +301,30 @@ function updateWell(h,dt){
     fx.push({type:'shock',x:h.x,y:h.y,t:0,dur:.3,r:h.inner*1.6,c:h.c}); addShake(8);
     stainAtColor(h.x,h.y,h.inner*0.9,'#2a1748');
   }
+}
+
+// Buds grow in place, lock their aim 0.4s before firing, fire a fan of thorns, then wilt (no reward, no kill).
+function updateBud(b,dt){
+  const s=b.step, p=player; b.growT+=dt; b.flashT-=dt;
+  if (!b.aim && b.growT>=s.grow-s.lock) b.aim=Math.atan2(p.y-b.y,p.x-b.x);
+  if (b.growT>=s.grow && !b.fired){
+    b.fired=true; b.dead=true;
+    for (const da of s.fan){ const ang=b.aim+da*DEG, sp=s.speed*U*T.enemySpeed;
+      bullets.push({x:b.x,y:b.y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,r:7,dmg:s.dmg,src:s.src,owner:b.owner,c:b.c,dead:false,t:0}); }
+    sparks(b.x,b.y,b.aim,8,b.c,320,0.6);
+  }
+}
+function drawBud(b){
+  const s=b.step, k=clamp(b.growT/s.grow,0,1), white=b.flashT>0;
+  if (b.aim){ ctx.save(); ctx.strokeStyle=b.c; ctx.globalAlpha=0.6; ctx.lineWidth=2; ctx.setLineDash([6,6]);
+    for (const da of s.fan){ const ang=b.aim+da*DEG; ctx.beginPath(); ctx.moveTo(b.x,b.y); ctx.lineTo(b.x+Math.cos(ang)*260,b.y+Math.sin(ang)*260); ctx.stroke(); } ctx.restore(); }
+  ctx.save(); ctx.translate(b.x,b.y); const sc=0.5+0.5*k; ctx.scale(sc,sc);
+  ctx.shadowColor=b.c; ctx.shadowBlur=8+16*k;
+  for (let i=0;i<5;i++){ const ang=i/5*PI2+time*0.6; ctx.fillStyle=white?'#fff':'#5a7a3a'; ctx.beginPath(); ctx.ellipse(Math.cos(ang)*10,Math.sin(ang)*10,12,5,ang,0,PI2); ctx.fill(); ctx.strokeStyle=COL.ink; ctx.lineWidth=2; ctx.stroke(); }
+  ctx.fillStyle=white?'#fff':b.c; ctx.beginPath(); ctx.arc(0,0,7+4*k,0,PI2); ctx.fill(); ctx.shadowBlur=0; ctx.strokeStyle=COL.ink; ctx.lineWidth=2.5; ctx.stroke();
+  ctx.restore();
+  // growth timer ring
+  ctx.save(); ctx.strokeStyle=b.c; ctx.lineWidth=3; ctx.globalAlpha=0.8; ctx.beginPath(); ctx.arc(b.x,b.y,b.r+8,-Math.PI/2,-Math.PI/2+PI2*k); ctx.stroke(); ctx.restore();
 }
 
 /* ---- Parry glint timing for spec bosses: seconds until a parryable component lands, or -1 ---- */
@@ -343,6 +387,8 @@ function drawBossTelegraph(e){
     drawWellShape(a.target.x,a.target.y,s.radius*U,s.inner*U,c,k,false);
   } else if (s.prim==='ring'){
     drawRingTelegraph(e,a,s,c,k);
+  } else if (s.prim==='buds' && e.bstate==='WINDUP'){
+    for (const sp of a.spots){ ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.4+0.5*k; ctx.lineWidth=2; ctx.setLineDash([5,5]); ctx.beginPath(); ctx.arc(sp.x,sp.y,24,0,PI2); ctx.stroke(); ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(sp.x-8,sp.y); ctx.lineTo(sp.x+8,sp.y); ctx.moveTo(sp.x,sp.y-8); ctx.lineTo(sp.x,sp.y+8); ctx.stroke(); ctx.restore(); }
   } else if (s.prim==='disks'){
     for (const sp of diskSpots(a)) drawFootprint(()=>{ ctx.beginPath(); ctx.arc(sp.x,sp.y,s.radius*U,0,PI2); }, c, k, isSuper, pulse, ()=>jaggedRing(sp.x,sp.y,s.radius*U+5,0,PI2,28,6));
   } else if (s.prim==='orbit' && e.bstate==='WINDUP'){
