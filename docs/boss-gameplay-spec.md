@@ -82,7 +82,7 @@ Every damaging attack component has a `parryClass`.
 | **super** | Rings, sectors, disks, lanes, beams, pools, pulls, waves | The standard outlined footprint, plus a **jagged hazard border**. Never a glint. | Dodge only |
 
 **Volt's responses to a parryable component:**
-- **Perfect parry:** Block pressed within ±0.06s of the damage frame, or ±0.10s with the accessibility option. No damage and no status. Projectiles are reflected at the attacker and deal 2× their listed damage to it. A melee or charge source becomes **Exposed** for 1.5s: it takes +50% damage, and its next scheduled action is deferred by the exposed time. This doesn't stack with recovery and is the only way to stagger a boss. Each parry also adds 15% Overload charge.
+- **Perfect parry:** Block pressed within the **0.12s before** the damage frame. The accessibility setting adjusts this window from 0.08s to 0.25s. No damage and no status. Projectiles are reflected at the attacker and deal 2× their listed damage to it. A melee or charge source becomes **Exposed** for 1.5s: it takes +50% damage, and its next scheduled action is deferred by the exposed time. This doesn't stack with recovery and is the only way to stagger a boss. Each parry also adds 15% Overload charge.
 - **Block held** (raised before the window): 40% of listed damage, no status, knockback halved. Three blocked hits within 2s cause a **guard break**: block is disabled for 0.6s.
 - **No block (failed parry):** the full listed damage. Listed damage for parryable components is already the "hit harder" value.
 - **Whiffed parry:** pressing block with nothing incoming leaves block on a 0.35s recovery. Dash is still available.

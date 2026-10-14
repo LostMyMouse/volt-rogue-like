@@ -24,6 +24,7 @@ Then visit http://localhost:8000.
 | K / right click | Power (hold for Arc Caster's Lance and Magnetar's Shield) |
 | Space / Shift | Dash (invulnerable while dashing) |
 | Q | Overload, when charged |
+| L / middle click | Block. Tap it as the white ring closes to parry |
 | E | Jump to the next rooftop (or stand on a jump point) |
 | P / Esc | Pause |
 | 1–3, R | Pick a boon, reroll |
@@ -34,6 +35,7 @@ Touch controls appear automatically on phones and tablets.
 
 - **15 rooftops, Hades-style.** Clearing a rooftop opens 1–3 jump points, each showing the reward on the next roof: a hero's boon, Patch's Fortress tech, or rare Renown Shards. You claim it on landing, before the fight. Gravemark guards rooftops 5, 10 and 15.
 - **Hero boons.** Halo, Bastion, Echo and Thorn offer 28 boons across Strike, Power, Dash, Overload and passives, with Common, Rare and Epic rarities and up to 3 levels.
+- **Block and parry.** Attacks with a closing white ring can be parried: no damage, and the attacker is left Exposed. Holding Block takes reduced damage. Attacks with a jagged edge are supers: dodge them. Not blocking a parryable attack makes it hit harder.
 - **Five combat styles.** Brawler, Arc Caster, Titan, Speedster and Magnetar each replace Strike and Power, with their own strengths and weaknesses. Unlock them with Hero Licences.
 - **Fortress upgrades.** Renown Shards are kept when you fall and spent in Patch's workshop on permanent upgrades.
 - **Scarce healing.** Health carries between rooftops. The only healing is rare health packs dropped by enemies.
