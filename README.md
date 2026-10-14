@@ -46,7 +46,8 @@ Progress (shards, upgrades, styles) is saved in this browser's local storage und
 
 ## Design docs
 
-- [`docs/boss-gameplay-spec.md`](docs/boss-gameplay-spec.md): the seven-boss spec (Revision 2), including the block and parry system and the non-linear five-villain run. Not yet implemented.
+- [`docs/boss-gameplay-spec.md`](docs/boss-gameplay-spec.md): the seven-boss spec (Revision 2), including the block and parry system and the non-linear five-villain run. Kilnheart and Gravemark are built; the rest come with the five-district phase.
+- [`docs/art-brief.md`](docs/art-brief.md): everything the game needs from art: sprite specs, animation lists with timings, portraits and intro art, environment kits, icons, effects, and priority order.
 
 ## Debug
 
