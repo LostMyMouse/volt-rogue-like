@@ -2,7 +2,7 @@
 'use strict';
 
 /* ---------- HUD ---------- */
-const hud = { bossName:$('#bossName'), bossTitle:$('#bossTitle'), tick1:$('#bossTick1'), tick2:$('#bossTick2'), blockAb:$('#abBlock'), blockTb:$('#tBlock'), shards:$('#hudShards'), boss:$('#bossBar'), hp:$('#hp'), hpText:$('#hpText'), wave:$('#waveNum'), ab:{ s:$('#abStrike'), p:$('#abPower'), d:$('#abDash'), q:$('#abSig') }, tb:{ s:$('#tStrike'), p:$('#tPower'), d:$('#tDash'), q:$('#tSig') } };
+const hud = { district:$('#hudDistrict'), bossName:$('#bossName'), bossTitle:$('#bossTitle'), tick1:$('#bossTick1'), tick2:$('#bossTick2'), blockAb:$('#abBlock'), blockTb:$('#tBlock'), shards:$('#hudShards'), boss:$('#bossBar'), hp:$('#hp'), hpText:$('#hpText'), wave:$('#waveNum'), ab:{ s:$('#abStrike'), p:$('#abPower'), d:$('#abDash'), q:$('#abSig') }, tb:{ s:$('#tStrike'), p:$('#tPower'), d:$('#tDash'), q:$('#tSig') } };
 const last = {};
 function setVar(el,name,v){ const key=el.id+name, r=Math.round(v*100)/100; if (last[key]!==r){ last[key]=r; el.style.setProperty(name,r); } }
 function updateHud(){
@@ -19,7 +19,8 @@ function updateHud(){
   const bl=clamp(Math.max(p.blockLock,p.stunT)/BLOCK.shatterLock,0,1); setVar(hud.blockAb,'--cd',bl); setVar(hud.blockTb,'--cd',bl);
   hud.blockAb.classList.toggle('ready',p.blockHeld); hud.blockTb.classList.toggle('ready',p.blockHeld);
   const sT='◆ '+run.shards; if (hud.shards.textContent!==sT) hud.shards.textContent=sT;
-  const wT=String(wave); if (hud.wave.dataset.w!==wT){ hud.wave.dataset.w=wT; hud.wave.innerHTML=`${wave}<small>/${RUN_WAVES}</small>`; }
+  const r=run.route, dId=r&&curDistrict(), wT=dId?dId+':'+r.room:'';
+  if (hud.wave.dataset.w!==wT){ hud.wave.dataset.w=wT; hud.district.textContent=dId?DISTRICTS[dId].name:'Rooftop'; hud.wave.innerHTML = !dId ? '–' : isBossRoom() ? 'Boss' : `${r.room}<small>/${roomsIn(dId)}</small>`; }
   const cds = { s:clamp(p.strikeCd/(p.strikeCdMax||0.34),0,1), p:clamp(p.powerCd/(p.powerCdMax||1),0,1), d:clamp(p.dashCd/(T.dashCooldown+T.dashTime),0,1) };
   for (const k of ['s','p','d']){ setVar(hud.ab[k],'--cd',cds[k]); setVar(hud.tb[k],'--cd',cds[k]); }
   const ch=p.sig/100; setVar(hud.ab.q,'--ch',ch); setVar(hud.tb.q,'--ch',ch);
@@ -29,11 +30,11 @@ function updateHud(){
 /* ---------- Flow ---------- */
 function show(id,on){ $(id).hidden=!on; }
 function startGame(){
-  reset(); lastCaller=null; buildRoom(1); exits=[]; roomPhase='reward'; arrivalT=0; transit=null; powerHeld=false;
+  reset(); lastCaller=null; routeStart(); exits=[]; roomPhase='reward'; arrivalT=0; transit=null; powerHeld=false;
   { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
   save.runs++; writeSave();
-  show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); refreshSlotHud(); state='play';
-  openDraft('boon');
+  show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
+  openCityMap();
 }
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
@@ -58,10 +59,11 @@ const SPEAKERS = {
   thorn:{name:'Thorn', role:'Reformed villain', c:'#6ad46a'},
   gravemark:{name:'Gravemark', role:'Villain', c:COL.boon},
   kilnheart:{name:'Kilnheart', role:'Villain', c:'#ff7a1a'},
+  bellwether:{name:'Bellwether', role:'Villain', c:'#f5b915'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
 };
 const QUOTES = {
-  won: [['halo',"Fifteen waves, and Gravemark in the dirt. The city noticed tonight. So did I."],['bastion',"Clean work, rookie. Don't let it go to your head. The next roof won't be so kind."],['echo',"Okay. Fine. That was impressive. Don't tell anyone I said that."]],
+  won: [['halo',"District by district, and Gravemark in the dirt. The city noticed tonight. So did I."],['bastion',"Clean work, rookie. Don't let it go to your head. The next roof won't be so kind."],['echo',"Okay. Fine. That was impressive. Don't tell anyone I said that."]],
   high:[['halo',"Not bad. I've seen worse first years. I was one of them."],['thorn',"You fight like someone with something to prove. Good. Keep proving it."],['bastion',"Solid. Now do it again without the close calls."]],
   mid: [['halo',"Heroes aren't measured by how they fall. Get up. Again."],['thorn',"I spent years on the wrong side of this fight. Losing isn't the end. Quitting is."],['echo',"I'd have lasted longer. Probably. ...That was decent, I guess."],['bastion',"You hesitated. Hesitation gets people hurt. Dash first, think second."]],
   rusher:[['bastion',"Watch the coral arc. When the pipe goes back, you go sideways."]],
@@ -85,7 +87,7 @@ const PORTRAIT_SVG = {
   thorn: `${BUST}<path d="M20 20 L16 8 L25 16 L28 4 L33 15 L39 5 L40 16 L49 9 L44 21" fill="#0b111c" stroke="#6ad46a" stroke-width="2"/><circle cx="27" cy="28" r="2" fill="#6ad46a"/><circle cx="37" cy="28" r="2" fill="#6ad46a"/><path d="M18 52 l6 -6 l2 8 M46 52 l-6 -6 l-2 8" stroke="#6ad46a" stroke-width="2.5" fill="none"/>`,
 };
 // Add an id here when its PNG lands in assets/portraits/.
-const PORTRAIT_FILES = ['gravemark','kilnheart'];
+const PORTRAIT_FILES = ['gravemark','kilnheart','bellwether'];
 function setPortrait(el,who){
   const sp=SPEAKERS[who];
   el.innerHTML=''; el.style.backgroundImage=''; el.className='portrait';
@@ -96,18 +98,21 @@ function setPortrait(el,who){
   img.onload=()=>{ el.innerHTML=''; el.style.backgroundImage=`url(${img.src})`; el.classList.add('has-img'); };
   img.src=`assets/portraits/${who}.png`;
 }
+// Rooftops plus villain rooms in a full run with the villains built so far.
+function routeLength(){ const p=Math.min(DISTRICT_PICKS,builtPool().length); return p*(ROOMS_PER_DISTRICT+1)+(BOSSES.gravemark?ROOMS_PER_DISTRICT+1:0)+(BOSSES.redactor?3:0) || 15; }
 function runScore(){
-  const cleared = run.won ? RUN_WAVES : Math.max(0,wave-1);
-  return Math.round(cleared*10 + run.bossKills*30 + kills*0.5 + (run.won?60:0) - run.hits*3);
+  return Math.round((run.roomsCleared||0)*10 + run.bossKills*30 + kills*0.5 + (run.won?60:0) - run.hits*3);
 }
 function fillResults(){
-  const score=runScore(), rk=RANKS.find(x=>score>=x.min), cleared=run.won?RUN_WAVES:Math.max(0,wave-1);
-  $('#resTag').textContent = (run.won ? 'Run complete · Rooftop secured' : 'Hero down · Rooftop '+wave)+' · '+STYLE().name;
+  // Rank thresholds scale with the length of a full run (they were tuned for 15 rooftops).
+  const full=routeLength(), score=runScore()*15/full, rk=RANKS.find(x=>score>=x.min), dTotal=run.route?run.route.picks+(BOSSES.gravemark?1:0)+(BOSSES.redactor?1:0):0;
+  const where = run.route && curDistrict() ? DISTRICTS[curDistrict()].name+(isBossRoom()?' · villain':' · rooftop '+run.route.room) : 'the rooftops';
+  $('#resTag').textContent = (run.won ? 'Run complete · City secured' : 'Hero down · '+where)+' · '+STYLE().name;
   const rEl=$('#resRank'); rEl.textContent=rk.r; rEl.style.setProperty('--rank',rk.c);
-  $('#resRankTag').textContent=`${rk.r}-Rank hero · ${score} pts`;
+  $('#resRankTag').textContent=`${rk.r}-Rank hero · ${Math.round(score)} pts`;
   $('#overTitle').textContent=rk.title;
   $('#resCause').textContent = run.won ? `Gravemark defeated ${run.bossKills} time${run.bossKills===1?'':'s'}.` : `Defeated by ${causeText(run.lastHit)}.`;
-  $('#statWaves').textContent=`${cleared}/${RUN_WAVES}`;
+  $('#statWaves').textContent=`${run.districtsCleared||0}/${dTotal}`;
   $('#statKills').textContent=kills;
   const t=Math.floor(run.time); $('#statTime').textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;
   $('#statHits').textContent=run.hits+(run.parries?` · ${run.parries} parried`:'');

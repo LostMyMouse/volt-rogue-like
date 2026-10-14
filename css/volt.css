@@ -151,6 +151,17 @@ button{font:inherit;color:inherit}
 .draft-foot{align-items:center;justify-content:space-between}
 .draft-foot .hint{flex:1;min-width:200px;margin:0}
 
+/* City map */
+.city-panel{max-width:760px}
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.gate{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:6px;padding:14px;background:var(--ink);border:2px solid color-mix(in srgb,var(--c) 50%,transparent);border-top:5px solid var(--c);box-shadow:4px 4px 0 rgba(4,7,14,.8);transition:transform .1s,box-shadow .1s,border-color .1s;overflow:hidden;min-height:220px}
+.gate:hover,.gate:focus-visible{transform:translate(-2px,-3px);border-color:var(--c);box-shadow:6px 7px 0 rgba(4,7,14,.8),0 0 26px color-mix(in srgb,var(--c) 40%,transparent);outline:none}
+.gate-art{position:absolute;right:-10px;bottom:-10px;width:150px;height:150px;background:center/cover no-repeat;opacity:.35;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%);pointer-events:none}
+.gate-art svg{width:100%;height:100%}
+.gate strong{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;text-transform:uppercase;color:var(--c);position:relative}
+.gate-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);position:relative}
+.gate .card-desc,.gate .card-foot,.gate .card-top{position:relative}
+
 /* Style select */
 .style-panel{max-width:820px}
 .style-panel .fort-total strong{color:var(--spark)}

@@ -29,6 +29,7 @@ addEventListener('keydown', e => {
     return;
   }
   if (state==='intro'){ dismissIntro(); return; }
+  if (state==='map'){ if ((k==='1'||k==='2') && cityGates[+k-1]) chooseDistrict(cityGates[+k-1]); return; }
   if (state==='start' && k==='enter'){ startGame(); return; }
   if (state==='draft'){ if (k==='1'||k==='2'||k==='3') pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
   keys.add(k);

@@ -17,7 +17,7 @@
     <div class="hp" id="hp"><div class="hp-fill"></div><span id="hpText">100</span></div>
   </div>
   <div class="hud-right">
-    <div class="wave"><span class="tag">Rooftop</span><strong id="waveNum">0</strong><span class="shards" id="hudShards">◆ 0</span></div>
+    <div class="wave"><span class="tag" id="hudDistrict">Rooftop</span><strong id="waveNum">0</strong><span class="shards" id="hudShards">◆ 0</span></div>
     <div class="hud-btns">
       <button class="chip" id="btnTune" type="button">Tune</button>
       <button class="chip" id="btnPause" type="button">Pause</button>
@@ -64,7 +64,7 @@
   <div class="panel" role="dialog" aria-labelledby="startTitle">
     <span class="tag">Rookie run · Rooftop</span>
     <h1 id="startTitle">VOLT</h1>
-    <p>Fifteen rooftops between you and the title of greatest hero. Clear a roof, then leap to the next: each jump point shows what's waiting there. Rushers flash a coral arc before they swing, Needles lock an amber line before they fire, and Gravemark guards rooftops 5, 10 and 15. When its purple ring glows, find the gap.</p>
+    <p>The Redactor's villains hold the city, district by district. Choose which district to liberate next, leap across its rooftops (each jump point shows what's waiting there), then face its villain. Clear your districts, then take Gravemark's roof. Parry attacks marked with a closing white ring; dodge the ones with a jagged edge.</p>
     <dl class="controls" id="ctrlKb">
       <dt>WASD</dt><dd>Move</dd>
       <dt>Mouse</dt><dd>Aim</dd>
@@ -93,6 +93,15 @@
     </figure>
     <div class="cards" id="draftCards"></div>
     <div class="row draft-foot"><p class="hint">Choose one: click, tap or press 1 to 3. One boon per slot; a new one replaces the old.</p><button class="btn" id="btnReroll" type="button" hidden>Reroll</button></div>
+  </div>
+</div>
+
+<div class="scrim" id="mCity" hidden>
+  <div class="panel city-panel" role="dialog" aria-labelledby="cityTitle">
+    <span class="tag" id="cityStep">District 1 of 3</span>
+    <h2 id="cityTitle">Where to next?</h2>
+    <p class="hint">Each district is held by one of the Redactor's villains. Pick who you take on next: villains fought later in the run are tougher.</p>
+    <div class="gates" id="cityGates"></div>
   </div>
 </div>
 
@@ -139,7 +148,7 @@
       <div class="rank-text"><span class="tag" id="resRankTag">Heroism rank</span><h2 id="overTitle">Rising Hero</h2><p class="res-cause" id="resCause"></p></div>
     </div>
     <div class="stats stats4">
-      <div><span class="tag">Rooftops</span><strong id="statWaves">0</strong></div>
+      <div><span class="tag">Districts</span><strong id="statWaves">0</strong></div>
       <div><span class="tag">Takedowns</span><strong id="statKills">0</strong></div>
       <div><span class="tag">Time</span><strong id="statTime">0:00</strong></div>
       <div><span class="tag">Hits taken</span><strong id="statHits">0</strong></div>
@@ -183,11 +192,13 @@
 <script src="js/update.js"></script>
 <script src="js/bosses/framework.js"></script>
 <script src="js/bosses/kilnheart.js"></script>
+<script src="js/bosses/bellwether.js"></script>
 <script src="js/bosses/gravemark.js"></script>
 <script src="js/boons.js"></script>
 <script src="js/parry.js"></script>
 <script src="js/styles.js"></script>
 <script src="js/rooms.js"></script>
+<script src="js/route.js"></script>
 <script src="js/draft.js"></script>
 <script src="js/intro.js"></script>
 <script src="js/render.js"></script>

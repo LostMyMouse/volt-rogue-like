@@ -7,7 +7,7 @@ bindTouch('#tPower', doPower, releasePower);
 bindTouch('#tDash', doDash);
 bindTouch('#tBlock', pressBlock, releaseBlock);
 bindTouch('#tSig', doSig);
-reset();
+reset(); run.route={order:['kilnheart'],i:0,room:1,picks:0}; buildRoom(); run.route={order:[],i:-1,room:0,picks:0};
 
 let lastT=performance.now();
 function frame(now){

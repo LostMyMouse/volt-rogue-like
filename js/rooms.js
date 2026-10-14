@@ -45,10 +45,10 @@ function randomLayout(){
   }
   return out;
 }
-function buildRoom(n){
-  const concept = n<=1 || BOSS_WAVES.includes(n);
+function buildRoom(){
+  const concept = isBossRoom() || (run.route.i===0 && run.route.room===1);
   obstacles = finishObstacles(concept ? CONCEPT_LAYOUT.map(b=>Object.assign({},b)) : randomLayout());
-  floorTint = concept ? FLOOR_TINTS[0] : pick(FLOOR_TINTS);
+  floorTint = DISTRICTS[curDistrict()] ? DISTRICTS[curDistrict()].tint : pick(FLOOR_TINTS);
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }
   enemies=[]; bullets=[]; decals=[]; packs=[]; zones=[]; bossHazards=[]; exits=[]; boss=null;
@@ -64,8 +64,7 @@ function rollReward(taken){
   return {type:'tech'};
 }
 function openExits(){
-  const next=wave+1;
-  if (BOSS_WAVES.includes(next)){ exits=[{...PADS[0], reward:{type:'boss', boss:BOSS_PLAN[next]}, hold:0, t:0}]; return; }
+  if (run.route.room+1 > roomsIn(curDistrict())){ exits=[{...PADS[0], reward:{type:'boss', boss:curDistrict()}, hold:0, t:0}]; return; }
   const count=weighted(DOOR_COUNT_ODDS), spots=count===1?[PADS[0]]:shuffle(PADS.slice()).slice(0,count), taken=[];
   exits=spots.map(s=>{ const r=rollReward(taken); taken.push(r); return {...s, reward:r, hold:0, t:0}; });
 }
@@ -95,7 +94,8 @@ function updateTransit(dt){
     if (Math.random()<.8) particles.push({x:p.x,y:p.y,vx:rand(-60,60),vy:rand(-60,60),life:.25,max:.25,color:COL.volt,w:2});
     if (tr.t>=TRANSIT_OUT){
       tr.swapped=true;
-      buildRoom(wave+1);
+      if (tr.ex.reward.type==='district') enterDistrict(tr.ex.reward.id); else run.route.room++;
+      buildRoom();
       const land=LANDING[tr.ex.side], back={top:[0,1],left:[1,0],right:[-1,0]}[tr.ex.side];
       tr.land=land; tr.from={x:land.x+back[0]*180, y:land.y+back[1]*180};
       p.x=tr.from.x; p.y=tr.from.y; cam.x=land.x; cam.y=land.y;
@@ -113,7 +113,8 @@ function updateTransit(dt){
 }
 function arrive(reward){
   roomPhase='reward';
-  if (reward.type==='boon') openDraft('boon',reward.hero);
+  if (reward.type==='district'){ banner(DISTRICTS[curDistrict()].name.toUpperCase()); openDraft('boon'); }
+  else if (reward.type==='boon') openDraft('boon',reward.hero);
   else if (reward.type==='tech') openDraft('tech');
   else if (reward.type==='shards'){
     const n=Math.round(rand(SHARD_ROOM[0],SHARD_ROOM[1]));

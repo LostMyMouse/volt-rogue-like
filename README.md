@@ -1,6 +1,6 @@
 # volt-rogue-like
 
-A top-down action roguelite about Volt, a rookie superhero trying to prove they can become the world's greatest hero. This is a vertical slice: 15 rooftops, the boss Gravemark, hero boons, five combat styles and Fortress upgrades.
+A top-down action roguelite about Volt, a rookie superhero trying to prove they can become the world's greatest hero. The Redactor's villains hold the city district by district: pick your route on the city map, cross each district's rooftops, and take down its villain.
 
 ## Play
 
@@ -33,8 +33,8 @@ Touch controls appear automatically on phones and tablets.
 
 ## What's in the slice
 
-- **15 rooftops, Hades-style.** Clearing a rooftop opens 1–3 jump points, each showing the reward on the next roof: a hero's boon, Patch's Fortress tech, or rare Renown Shards. You claim it on landing, before the fight. Kilnheart guards rooftop 5 and Gravemark guards rooftops 10 and 15.
-- **Villains.** Kilnheart (rooftop 5) and Gravemark (rooftops 10 and 15) run on the spec's shared boss framework: three phases, frozen-aim telegraphs, and a mix of parryable attacks and supers. Kilnheart punches, charges and slams; Gravemark pulls with gravity wells, orbits rubble, fires a rock cannon you can parry back at it, and collapses a ring with one safe gap. Rooftop 10's Gravemark is a lighter (80% health) first meeting. Every boss fight opens with an intro card; each hero gets one the first time they call in.
+- **A route through the city.** Each run, choose up to three districts from two villain gates on the city map, then take Gravemark's roof. A district is four rooftops and its villain; villains fought later are tougher. Clearing a rooftop opens 1–3 jump points showing the next reward (a hero's boon, Patch's Fortress tech, or rare Renown Shards), claimed on landing before the fight.
+- **Villains.** Kilnheart (Foundry Roofs), Bellwether (Concert District) and Gravemark (the penultimate roof) run on the spec's shared boss framework: three phases, frozen-aim telegraphs, and a mix of parryable attacks and supers. Kilnheart punches, charges and slams; Bellwether fires expanding sonic rings with gaps you walk through (twin and rotating in later phases); Gravemark pulls with gravity wells, orbits rubble, fires a rock cannon you can parry back at it, and collapses a ring with one safe gap. Verdigris, Glasswake, Undertow and the Redactor are next. Every boss fight opens with an intro card; each hero gets one the first time they call in.
 - **Hero boons.** Halo, Bastion, Echo and Thorn offer 28 boons across Strike, Power, Dash, Overload and passives, with Common, Rare and Epic rarities and up to 3 levels.
 - **Block and parry.** Attacks with a closing white ring can be parried: no damage, and the attacker is left Exposed. Holding Block takes reduced damage. Attacks with a jagged edge are supers: dodge them. Not blocking a parryable attack makes it hit harder.
 - **Five combat styles.** Brawler, Arc Caster, Titan, Speedster and Magnetar each replace Strike and Power, with their own strengths and weaknesses. Unlock them with Hero Licences.
@@ -53,7 +53,7 @@ Progress (shards, upgrades, styles) is saved in this browser's local storage und
 
 Add `?debug` to the URL. `]` skips to the next boss rooftop, and `window.__volt` exposes game state for testing.
 
-- `?debug&boss=kilnheart` drops straight into a boss fight.
+- `?debug&boss=kilnheart` (or `bellwether`, `gravemark`) drops straight into a boss fight.
 - `?debug&nointro` skips intro cards (used by automated tests).
 - `__volt.bossAttack('rush')`, `__volt.bossHp(0.5)` and `__volt.hitboxes()` force attacks, set health and show hit shapes.
 
@@ -75,6 +75,7 @@ No build step: plain HTML, CSS and JavaScript. Scripts are loaded in order by `i
 - `js/parry.js`: block and parry
 - `js/styles.js`: the five combat styles
 - `js/rooms.js`: rooftop layouts, jump points, Renown Shards, Fortress upgrades
+- `js/route.js`: districts, the city map and the run route
 - `js/draft.js`: the comms boon draft
 - `js/render.js`: all canvas drawing
 - `js/ui.js`: HUD, menus, run results

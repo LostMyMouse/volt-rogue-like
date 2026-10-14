@@ -3,7 +3,7 @@
 
 /* ---------- Waves ---------- */
 // Health never refills between waves. The only healing is these rare drops (full HP walks over them).
-const PACK = { heal:20, chance:{ rusher:0.02, needle:0.02, gravemark:0.25, kilnheart:0.25 } };
+const PACK = { heal:20, chance:{ rusher:0.02, needle:0.02, gravemark:0.25, kilnheart:0.25, bellwether:0.25 } };
 const RUSH = { reach:72, arc:2.3, step:420, swingT:0.16, wind:0.5 };
 function spawnPoint(){
   for (let i=0;i<40;i++){
@@ -13,7 +13,9 @@ function spawnPoint(){
   }
   return {x:90,y:90};
 }
-const waveHp = () => T.enemyHealth*(1+(wave-1)*0.04);
+// Ordinary enemies scale with how many rooftops this run has crossed (capped so late districts stay fair).
+const diffStep = () => Math.min(wave,18);
+const waveHp = () => T.enemyHealth*(1+(diffStep()-1)*0.04);
 function makeEnemy(kind,delay,at){
   const {x,y}=at||spawnPoint();
   const base={kind,x,y,vx:0,vy:0,mx:0,my:0,flashT:0,stunT:0,spawnT:delay,face:Math.atan2(player.y-y,player.x-x),dead:false};
@@ -23,16 +25,17 @@ function makeEnemy(kind,delay,at){
 function startWave(){
   wave++; waveClearing=false; roomPhase='fight';
   let i=0; const add=(k,n)=>{ for (let j=0;j<n;j++) enemies.push(makeEnemy(k,0.8+i++*0.18)); };
-  if (BOSS_WAVES.includes(wave)){
-    const id=BOSS_PLAN[wave];
+  if (isBossRoom()){
+    const id=curDistrict();
     // Bosses fight alone (no ordinary enemies) and open with a 1.5s intro. Gravemark's first meeting
     // (rooftop 10) is a lighter version of the final stand on rooftop 15.
-    boss=makeBoss(id,{x:ARENA.w/2,y:ARENA.h*0.35},{hpMul:BOSS_HP_MUL[wave]||1}); enemies.push(boss);
-    maybeIntro(id,null, wave===RUN_WAVES?{flourish:'makes a final stand!'}:{});
+    boss=makeBoss(id,{x:ARENA.w/2,y:ARENA.h*0.35},{hpMul:villainHpMul(id)}); enemies.push(boss);
+    maybeIntro(id,null, isFinalVillain()?{flourish:'makes a final stand!'}:{});
   } else {
-    add('rusher',2+Math.floor(wave*0.6));
-    add('needle',wave>=2?1+Math.floor((wave-2)/3):0);
-    banner('WAVE '+wave);
+    const w=diffStep();
+    add('rusher',2+Math.floor(w*0.6));
+    add('needle',w>=2?1+Math.floor((w-2)/3):0);
+    banner(isBossRoom()?'':'ROOFTOP '+run.route.room);
   }
 }
 
@@ -145,8 +148,9 @@ function update(dt){
   updateBossHazards(dt);
 
   if (roomPhase==='fight' && !enemies.length){
-    roomPhase='cleared'; clearT=0.9; waveClearing=true;
-    if (wave>=RUN_WAVES){ winRun(); return; }
+    waveClearing=true; run.roomsCleared=(run.roomsCleared||0)+1;
+    if (isBossRoom()){ roomPhase='done'; banner('DISTRICT CLEAR',true); districtCleared(); return; }
+    roomPhase='cleared'; clearT=0.9;
     banner('CLEAR',true);
   }
   if (roomPhase==='cleared'){ clearT-=dt; if (clearT<=0){ openExits(); roomPhase='exits'; } }

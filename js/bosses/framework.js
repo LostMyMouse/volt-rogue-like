@@ -74,7 +74,7 @@ function bossBeginStep(e,i){
   const st=steps[i], w=st.windup*R.windMul;
   Object.assign(a,{ stepI:i, step:st, hit:false, locked:false, windup:w, lockAt:Math.max(0,Math.min(w*0.6,w-0.3)),
     aim:Math.atan2(p.y-e.y,p.x-e.x), target:{x:p.x,y:p.y}, origin:{x:e.x,y:e.y}, activeT:0, dist:0, stopped:false });
-  (BOSS_PRIMS[st.prim].begin||(()=>{}))(e,a);
+  (BOSS_PRIMS[st.prim].begin||(()=>{}))(e,a,st);
   bossSetState(e,'WINDUP');
 }
 function bossWindup(e,dt){
@@ -127,6 +127,16 @@ function inLaneShape(px,py,pr,ox,oy,aim,len,width){
 }
 
 /* ---- Attack primitives, reused by every boss ---- */
+// Is this angle inside one of a ring attack's safe gaps right now? (Gaps can rotate.) The player's own radius must fit.
+function ringGapAt(a,s,ang,d){
+  const base=a.gapA+(s.rotate||0)*DEG*a.activeT, half=s.gap*DEG/2 - Math.asin(Math.min(1,player.r/Math.max(d,player.r)));
+  for (let i=0;i<s.gaps;i++){ if (Math.abs(angDiff(ang,base+i*PI2/s.gaps))<half) return true; }
+  return false;
+}
+function diskSpots(a){
+  const s=a.step, h=s.spread*U/2, ox=Math.cos(a.axis)*h, oy=Math.sin(a.axis)*h;
+  return s.n===1 ? [a.target] : [{x:a.target.x-ox,y:a.target.y-oy},{x:a.target.x+ox,y:a.target.y+oy}];
+}
 // Where a sector attack's apex sits: at the boss, or `lunge` units ahead of it.
 function sectorApex(a){ const l=(a.step.lunge||0)*U; return {x:a.origin.x+Math.cos(a.aim)*l, y:a.origin.y+Math.sin(a.aim)*l}; }
 const BOSS_PRIMS = {
@@ -197,6 +207,37 @@ const BOSS_PRIMS = {
       if (!a.hit && inBand && !inGap) a.hit=!!hurtPlayer(s.dmg,Math.atan2(dy,dx),s.src,{});
       return a.activeT>=s.active;
     },
+  },
+  // Expanding sonic rings with safe gaps. Fields: r0, rMax (u), speed (u/s), thick (u), gaps (n opposite gaps),
+  // gap (deg), rotate (deg/s, gaps turn together), count (rings), every (s between rings), dmg, src.
+  // Gap angles are fixed when the attack begins so the warning can show them; each ring can hit once.
+  ring:{
+    begin(e,a,s){ a.gapA=rand(PI2); },
+    activate(e,a){ a.rings=[]; a.nextRing=0; },
+    active(e,a){
+      const s=a.step, p=player;
+      if (a.rings.length<(s.count||1) && a.activeT>=a.nextRing){ a.rings.push({born:a.activeT, hit:false}); a.nextRing+=s.every||0; addShake(5); }
+      const dx=p.x-a.origin.x, dy=p.y-a.origin.y, d=Math.hypot(dx,dy), ang=Math.atan2(dy,dx);
+      let alive=false;
+      for (const rg of a.rings){
+        const R=(s.r0+(a.activeT-rg.born)*s.speed*T.enemySpeed)*U; rg.R=R;
+        if (R<s.rMax*U) alive=true; else continue;
+        if (rg.hit || Math.abs(d-R)>s.thick*U/2+p.r) continue;
+        if (ringGapAt(a,s,ang,d)) continue;
+        rg.hit=!!hurtPlayer(rg.dmg||s.dmg,ang,s.src,{});
+      }
+      return !alive && a.rings.length>=(s.count||1);
+    },
+  },
+  // Several targeted ground disks around the captured player position. Fields: n, radius (u), spread (u), active, dmg, src.
+  disks:{
+    begin(e,a){ a.axis=rand(PI2); },
+    active(e,a){
+      const s=a.step, p=player;
+      if (!a.hit && diskSpots(a).some(c=>Math.hypot(p.x-c.x,p.y-c.y)<s.radius*U+p.r)) a.hit=!!hurtPlayer(s.dmg,a.axis,s.src,{});
+      return a.activeT>=s.active;
+    },
+    activate(e,a){ addShake(6); for (const c of diskSpots(a)) fx.push({type:'shock',x:c.x,y:c.y,t:0,dur:.25,r:a.step.radius*U,c:BOSSES[e.kind].color}); },
   },
   // Boss-centred disk impact, optionally followed by evenly spaced radial projectiles.
   // Fields: radius (u), dmg, src, active (s), shots:{n, speed (u/s), r (u), dmg, src}.
@@ -300,6 +341,10 @@ function drawBossTelegraph(e){
     ctx.restore();
   } else if (s.prim==='placeWell'){
     drawWellShape(a.target.x,a.target.y,s.radius*U,s.inner*U,c,k,false);
+  } else if (s.prim==='ring'){
+    drawRingTelegraph(e,a,s,c,k);
+  } else if (s.prim==='disks'){
+    for (const sp of diskSpots(a)) drawFootprint(()=>{ ctx.beginPath(); ctx.arc(sp.x,sp.y,s.radius*U,0,PI2); }, c, k, isSuper, pulse, ()=>jaggedRing(sp.x,sp.y,s.radius*U+5,0,PI2,28,6));
   } else if (s.prim==='orbit' && e.bstate==='WINDUP'){
     const R=s.radius*U;
     ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.3+0.5*k; ctx.lineWidth=2; ctx.setLineDash([8,8]); ctx.lineDashOffset=-time*30;
@@ -320,6 +365,33 @@ function drawBossTelegraph(e){
       ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.25+0.35*k; ctx.setLineDash([4,8]); ctx.lineWidth=2;
       for (let i=0;i<s.shots.n;i++){ const ang=a.aim+i/s.shots.n*PI2; ctx.beginPath(); ctx.moveTo(ox+Math.cos(ang)*R,oy+Math.sin(ang)*R); ctx.lineTo(ox+Math.cos(ang)*(R+160),oy+Math.sin(ang)*(R+160)); ctx.stroke(); }
       ctx.restore();
+    }
+  }
+}
+// Rings: during the wind-up, show the safe lanes (white) running out from the boss and which way they'll turn.
+// While active, draw each expanding band with the gaps cut out and a jagged edge (super).
+function drawRingTelegraph(e,a,s,c,k){
+  const ox=a.origin.x, oy=a.origin.y, rot=(s.rotate||0)*DEG, t=e.bstate==='ACTIVE'?a.activeT:0, base=a.gapA+rot*t, g=s.gap*DEG/2, Rmax=s.rMax*U;
+  ctx.save();
+  for (let i=0;i<s.gaps;i++){
+    const ga=base+i*PI2/s.gaps;
+    ctx.globalAlpha=e.bstate==='WINDUP'?0.25+0.35*k:0.18; ctx.fillStyle='rgba(244,251,255,.5)';
+    ctx.beginPath(); ctx.moveTo(ox,oy); ctx.arc(ox,oy,Rmax,ga-g,ga+g); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha=0.7; ctx.strokeStyle='#f4fbff'; ctx.lineWidth=2; ctx.setLineDash([10,8]);
+    for (const sd of [-1,1]){ ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(ox+Math.cos(ga+sd*g)*Rmax,oy+Math.sin(ga+sd*g)*Rmax); ctx.stroke(); }
+    ctx.setLineDash([]);
+    if (rot && e.bstate==='WINDUP'){ // rotation arrows on each gap
+      const R=180, dir=Math.sign(rot); ctx.lineWidth=4; ctx.beginPath(); ctx.arc(ox,oy,R,ga-g*0.8*dir,ga+g*0.8*dir,dir<0); ctx.stroke();
+      const ta=ga+g*0.8*dir; ctx.beginPath(); ctx.moveTo(ox+Math.cos(ta)*(R-10),oy+Math.sin(ta)*(R-10)); ctx.lineTo(ox+Math.cos(ta+0.12*dir)*R,oy+Math.sin(ta+0.12*dir)*R); ctx.lineTo(ox+Math.cos(ta)*(R+10),oy+Math.sin(ta)*(R+10)); ctx.stroke();
+    }
+  }
+  ctx.restore();
+  const bands = e.bstate==='ACTIVE' ? (a.rings||[]).filter(r=>r.R<Rmax).map(r=>r.R) : [s.r0*U];
+  for (const R of bands){
+    const th=s.thick*U;
+    for (let i=0;i<s.gaps;i++){
+      const a0=base+i*PI2/s.gaps+g, a1=base+(i+1)*PI2/s.gaps-g;
+      drawFootprint(()=>{ ctx.beginPath(); ctx.arc(ox,oy,R+th/2,a0,a1); ctx.arc(ox,oy,Math.max(1,R-th/2),a1,a0,true); ctx.closePath(); }, c, e.bstate==='ACTIVE'?1:k, true, e.bstate==='ACTIVE', ()=>jaggedRing(ox,oy,R+th/2+4,a0,a1,Math.max(8,R/10|0),5));
     }
   }
 }
