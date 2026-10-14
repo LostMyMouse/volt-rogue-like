@@ -217,11 +217,11 @@ button{font:inherit;color:inherit}
 </div>
 
 <div class="abilities" id="abilities">
-  <div class="ab" id="abStrike"><i class="cd"></i><span class="key">J · Left click</span><b>Strike</b></div>
-  <div class="ab" id="abPower"><i class="cd"></i><span class="key">K · Right click</span><b>Power</b></div>
+  <div class="ab" id="abStrike"><i class="cd"></i><span class="key">Left click</span><b>Strike</b></div>
+  <div class="ab" id="abPower"><i class="cd"></i><span class="key">Right click</span><b>Power</b></div>
   <div class="ab" id="abDash"><i class="cd"></i><span class="key">Space</span><b>Dash</b></div>
   <div class="ab" id="abSig"><i class="charge"></i><span class="key">Q</span><b>Overload</b></div>
-  <div class="ab" id="abBlock"><i class="cd"></i><span class="key">Shift · Middle click</span><b>Block</b></div>
+  <div class="ab" id="abBlock"><i class="cd"></i><span class="key">Shift</span><b>Block</b></div>
 </div>
 
 <div class="touch" id="touch" hidden>
@@ -245,14 +245,15 @@ button{font:inherit;color:inherit}
     <h1 id="startTitle">VOLT</h1>
     <p>Fifteen rooftops between you and the title of greatest hero. Clear a roof, then leap to the next: each jump point shows what's waiting there. Rushers flash a coral arc before they swing, Needles lock an amber line before they fire, and Gravemark guards rooftops 5, 10 and 15. When its purple ring glows, find the gap.</p>
     <dl class="controls" id="ctrlKb">
-      <dt>WASD / Arrows</dt><dd>Move</dd>
+      <dt>WASD</dt><dd>Move</dd>
       <dt>Mouse</dt><dd>Aim</dd>
-      <dt>J / Left click</dt><dd>Strike, hold for a 3-hit combo</dd>
-      <dt>K / Right click</dt><dd>Power: depends on your style (hold for Lance and Shield)</dd>
+      <dt>Left click</dt><dd>Strike, hold to keep attacking</dd>
+      <dt>Right click</dt><dd>Power: depends on your style (hold to charge Arc Caster's Lance)</dd>
       <dt>Space</dt><dd>Dash, invulnerable while dashing</dd>
       <dt>Q</dt><dd>Overload when charged</dd>
-      <dt>Shift / Middle click</dt><dd>Block. Tap as the white ring closes to parry</dd>
-      <dt>P / Esc</dt><dd>Pause and tune</dd>
+      <dt>Shift</dt><dd>Block. Tap as the white ring closes to parry</dd>
+      <dt>Esc</dt><dd>Pause and tune</dd>
+      <dt>E</dt><dd>Jump to the next rooftop</dd>
     </dl>
     <dl class="controls" id="ctrlTouch" hidden>
       <dt>Left thumb</dt><dd>Drag anywhere on the left side to move</dd>
@@ -468,10 +469,10 @@ setMode(inputMode);
 
 addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
-  if ([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k)) e.preventDefault();
+  if (k===' ') e.preventDefault();
   if (e.repeat) return;
   if (inputMode !== 'kb') setMode('kb');
-  if (k==='escape' || k==='p'){
+  if (k==='escape'){
     if (state==='play') openPause();
     else if (!$('#mTune').hidden) closeTune();
     else if (state==='paused') closePause();
@@ -481,14 +482,12 @@ addEventListener('keydown', e => {
   if (state==='draft'){ if (k==='1'||k==='2'||k==='3') pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
   keys.add(k);
   if (state!=='play') return;
-  if (k==='j') { strikeHeld = true; doStrike(); }
-  if (k==='k') doPower();
   if (k==='shift') pressBlock();
   if (k===' ') doDash();
   if (k==='q') doSig();
   if (k==='e' && roomPhase==='exits') jumpTo(exitNear());
 });
-addEventListener('keyup', e => { const k=e.key.toLowerCase(); keys.delete(k); if (k==='j') strikeHeld=false; if (k==='k') releasePower(); if (k==='shift') releaseBlock(); });
+addEventListener('keyup', e => { const k=e.key.toLowerCase(); keys.delete(k); if (k==='shift') releaseBlock(); });
 addEventListener('blur', () => { keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; powerHeld=false; if (player){ player.charging=0; player.shield=false; player.blockHeld=false; } if (state==='play') openPause(); });
 cv.addEventListener('contextmenu', e => e.preventDefault());
 
@@ -499,7 +498,6 @@ cv.addEventListener('pointerdown', e => {
     if (state!=='play') return;
     if (e.button===0){ mouse.left=true; doStrike(); }
     else if (e.button===2) doPower();
-    else if (e.button===1){ e.preventDefault(); pressBlock(); }
     return;
   }
   if (inputMode!=='touch') setMode('touch');
@@ -514,7 +512,7 @@ cv.addEventListener('pointermove', e => {
     stick.x=dx/R; stick.y=dy/R;
   }
 });
-const endPointer = e => { if (e.pointerType==='mouse' && e.button===0) mouse.left=false; if (e.pointerType==='mouse' && e.button===2) releasePower(); if (e.pointerType==='mouse' && e.button===1) releaseBlock(); if (e.pointerId===stick.id){ stick.id=null; stick.x=stick.y=0; } };
+const endPointer = e => { if (e.pointerType==='mouse' && e.button===0) mouse.left=false; if (e.pointerType==='mouse' && e.button===2) releasePower(); if (e.pointerId===stick.id){ stick.id=null; stick.x=stick.y=0; } };
 cv.addEventListener('pointerup', endPointer); cv.addEventListener('pointercancel', endPointer);
 
 function bindTouch(id, down, up){
@@ -531,8 +529,8 @@ bindTouch('#tSig', doSig);
 
 function moveInput(){
   let x=0,y=0;
-  if (keys.has('a')||keys.has('arrowleft')) x--; if (keys.has('d')||keys.has('arrowright')) x++;
-  if (keys.has('w')||keys.has('arrowup')) y--; if (keys.has('s')||keys.has('arrowdown')) y++;
+  if (keys.has('a')) x--; if (keys.has('d')) x++;
+  if (keys.has('w')) y--; if (keys.has('s')) y++;
   if (stick.id!==null){ x+=stick.x; y+=stick.y; }
   const m=Math.hypot(x,y); if (m>1){ x/=m; y/=m; }
   if (m<0.15 && stick.id!==null && !keys.size){ x=0; y=0; }

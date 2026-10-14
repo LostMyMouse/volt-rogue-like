@@ -18,15 +18,15 @@ Then visit http://localhost:8000.
 
 | Input | Action |
 |---|---|
-| WASD / arrows | Move |
+| WASD | Move |
 | Mouse | Aim |
-| J / left click | Strike (hold to repeat) |
-| K / right click | Power (hold for Arc Caster's Lance and Magnetar's Shield) |
+| Left click | Strike (hold to repeat) |
+| Right click | Power (hold to charge Arc Caster's Lance) |
 | Space | Dash (invulnerable while dashing) |
 | Q | Overload, when charged |
-| Shift / middle click | Block. Tap it as the white ring closes to parry |
+| Shift | Block. Tap it as the white ring closes to parry |
 | E | Jump to the next rooftop (or stand on a jump point) |
-| P / Esc | Pause |
+| Esc | Pause |
 | 1–3, R | Pick a boon, reroll |
 
 Touch controls appear automatically on phones and tablets.
