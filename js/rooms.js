@@ -51,6 +51,7 @@ function buildRoom(){
   floorTint = DISTRICTS[curDistrict()] ? DISTRICTS[curDistrict()].tint : pick(FLOOR_TINTS);
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }
+  obstacles=obstacles.filter(o=>o.kind!=='ice');
   enemies=[]; bullets=[]; decals=[]; packs=[]; zones=[]; bossHazards=[]; exits=[]; boss=null;
 }
 function rollReward(taken){

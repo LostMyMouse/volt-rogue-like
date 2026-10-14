@@ -75,6 +75,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (e.hp<=0) killEnemy(e,ang);
 }
 function killEnemy(e,ang){
+  if (e.isIce){ breakIce(e); return; }
   if (e.isBud||e.isDecoy){ e.dead=true; e.killed=true; sparks(e.x,e.y,ang,14,e.c,420,1.4); fx.push({type:'impact',x:e.x,y:e.y,t:0,dur:.15,size:40,rot:rand(PI2),c:e.c}); return; }
   e.dead=true; kills++;
   if (has('feedback') && (e.markT>0||e.stunT>0||e.rootT>0)) burst(e.x,e.y,95,val('feedback'),HEROES.echo.c);
@@ -143,6 +144,7 @@ function hurtPlayer(dmg,ang,src,opt={}){
   if (dmg<=0){ p.iT=0.4; return true; }
   p.hp-=dmg; p.iT=0.6+val('hold'); p.vx+=Math.cos(ang)*420; p.vy+=Math.sin(ang)*420;
   if (has('retaliate')) burst(p.x,p.y,120,val('retaliate'),HEROES.bastion.c);
+  if (opt.slow) p.slowT=Math.max(p.slowT||0,opt.slow);
   run.hits++; run.dmgTaken+=dmg; run.lastHit=src;
   hurtFlash=.4; addShake(11); hitStop=Math.max(hitStop,0.08);
   sparks(p.x,p.y,ang,12,COL.threat,480);

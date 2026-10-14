@@ -74,6 +74,7 @@ function box3(x,y,w,h,ht,top,front){
   ctx.strokeStyle='rgba(66,81,106,.95)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(x+3,y+h-ht-3); ctx.lineTo(x+3,y-ht+3); ctx.lineTo(x+w-3,y-ht+3); ctx.stroke();
 }
 function drawObstacle(b){
+  if (b.kind==='ice'){ if (b.drawSeg) drawIceWall(b.wall); return; }
   ctx.fillStyle='rgba(0,0,0,.45)';
   if (b.circle){ ctx.beginPath(); ctx.ellipse(b.cx+14,b.cy+10,b.rad*1.05,b.rad*0.62,0,0,PI2); ctx.fill(); }
   else ctx.fillRect(b.x+12,b.y+12,b.w,b.h);
@@ -118,6 +119,16 @@ function drawObstacle(b){
     ctx.strokeStyle='#46546e'; ctx.lineWidth=3; ctx.beginPath(); for (let y=b.y-b.ht+22;y<b.y-b.ht+b.h-24;y+=9){ ctx.moveTo(b.x+24,y); ctx.lineTo(b.x+b.w-24,y); } ctx.stroke();
     ctx.strokeStyle='#1e2738'; ctx.lineWidth=3; ctx.beginPath(); for (let y=b.y+b.h-b.ht+12;y<b.y+b.h-6;y+=9){ ctx.moveTo(b.x+14,y); ctx.lineTo(b.x+b.w-14,y); } ctx.stroke();
   }
+}
+function drawIceWall(w){
+  const g=w.seg, s=w.owner && w.owner.atk ? null : null, len=3*U, th=0.7*U, age=run.time-w.born, fade=Math.min(1,(w.dur-age)/0.4), hurt=1-w.hp/w.maxHp;
+  ctx.save(); ctx.globalAlpha=Math.max(0,fade); ctx.translate(g.x,g.y); ctx.rotate(g.ang);
+  ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(-len/2+6,-th/2+8,len,th);
+  ctx.fillStyle=w.flashT>0?'#ffffff':'rgba(190,240,255,.75)'; ctx.strokeStyle='#e8fbff'; ctx.lineWidth=2;
+  ctx.beginPath(); for (let i=0;i<=8;i++){ const x=-len/2+i*len/8; ctx.lineTo(x,-th/2-((i%2)?14:6)); } ctx.lineTo(len/2,th/2); ctx.lineTo(-len/2,th/2); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle=COL.ink; ctx.lineWidth=3; ctx.stroke();
+  if (hurt>0){ ctx.strokeStyle='rgba(4,7,14,.6)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(-10,-th/2); ctx.lineTo(4,0); ctx.lineTo(-6,th/2); if (hurt>0.5){ ctx.moveTo(20,-th/2); ctx.lineTo(28,4); } ctx.stroke(); }
+  ctx.restore();
 }
 const obstacleDepth = b => b.circle ? b.cy+b.rad*0.5 : b.y+b.h;
 
@@ -326,6 +337,7 @@ function drawPlayer(){
   ctx.globalAlpha=1;
   VECTOR.volt(p);
   if (p.guard>0){ ctx.save(); ctx.strokeStyle=HEROES.bastion.c; ctx.lineWidth=3; ctx.globalAlpha=0.6+0.3*Math.sin(time*8); ctx.beginPath(); for (let i=0;i<6;i++){ const a=i/6*PI2+time; ctx.lineTo(p.x+Math.cos(a)*28,p.y+Math.sin(a)*28); } ctx.closePath(); ctx.stroke(); ctx.restore(); }
+  if (p.slowT>0){ ctx.save(); ctx.strokeStyle='#cff4ff'; ctx.globalAlpha=0.6; ctx.lineWidth=2; ctx.setLineDash([3,5]); ctx.beginPath(); ctx.arc(p.x,p.y,24,0,PI2); ctx.stroke(); ctx.restore(); }
   if (p.reflectT>0){ ctx.save(); ctx.strokeStyle=HEROES.bastion.c; ctx.lineWidth=4; ctx.shadowColor=HEROES.bastion.c; ctx.shadowBlur=14; ctx.beginPath(); ctx.arc(p.x,p.y,32,0,PI2); ctx.stroke(); ctx.restore(); }
   if (inputMode==='kb' && mouse.active && state==='play'){
     ctx.strokeStyle='rgba(38,191,255,.35)'; ctx.lineWidth=2;

@@ -62,6 +62,7 @@ const SPEAKERS = {
   bellwether:{name:'Bellwether', role:'Villain', c:'#f5b915'},
   verdigris:{name:'Verdigris', role:'Villain', c:'#b8e62e'},
   glasswake:{name:'Glasswake', role:'Villain', c:'#ff3f9a'},
+  undertow:{name:'Undertow', role:'Villain', c:'#7fd8ff'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
 };
 const QUOTES = {

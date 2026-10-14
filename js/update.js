@@ -3,7 +3,7 @@
 
 /* ---------- Waves ---------- */
 // Health never refills between waves. The only healing is these rare drops (full HP walks over them).
-const PACK = { heal:20, chance:{ rusher:0.02, needle:0.02, gravemark:0.25, kilnheart:0.25, bellwether:0.25, verdigris:0.25, glasswake:0.25 } };
+const PACK = { heal:20, chance:{ rusher:0.02, needle:0.02, gravemark:0.25, kilnheart:0.25, bellwether:0.25, verdigris:0.25, glasswake:0.25, undertow:0.25 } };
 const RUSH = { reach:72, arc:2.3, step:420, swingT:0.16, wind:0.5 };
 function spawnPoint(){
   for (let i=0;i<40;i++){
@@ -43,7 +43,7 @@ function startWave(){
 function update(dt){
   const p=player; run.time+=dt;
   const mv=moveInput(); updateAim(mv);
-  p.strikeCd-=dt; p.powerCd-=dt; p.dashCd-=dt; p.iT-=dt; p.comboT-=dt; p.reflectT-=dt; tickBlock(dt);
+  p.strikeCd-=dt; p.powerCd-=dt; p.dashCd-=dt; p.iT-=dt; p.comboT-=dt; p.reflectT-=dt; if (p.slowT>0) p.slowT-=dt; tickBlock(dt);
   if ((mouse.left||strikeHeld) && p.strikeCd<=0) doStrike();
 
   if (p.dashT>0){
@@ -52,7 +52,7 @@ function update(dt){
     if (Math.random()<.7) particles.push({x:p.x+rand(-10,10),y:p.y+rand(-10,10),vx:-p.dashDir.x*rand(200,500),vy:-p.dashDir.y*rand(200,500),life:.18,max:.18,color:COL.volt,w:2});
     if (p.dashT<=0){ p.vx*=0.3; p.vy*=0.3; }
   } else {
-    const so=STYLE(), sp=p.stunT>0 ? 0 : T.moveSpeed*R.moveMul*(so.move||1)*(p.strikeCd>0?(so.strikeSlow??0.55):1)*(p.charging?0.5:1)*(p.blockHeld?0.4:1);
+    const so=STYLE(), sp=p.stunT>0 ? 0 : T.moveSpeed*R.moveMul*(so.move||1)*(p.strikeCd>0?(so.strikeSlow??0.55):1)*(p.charging?0.5:1)*(p.blockHeld?0.4:1)*(p.slowT>0?0.75:1);
     const k=Math.min(1,((mv.x||mv.y)?14:11)*dt);
     p.vx+=(mv.x*sp-p.vx)*k; p.vy+=(mv.y*sp-p.vy)*k;
   }
@@ -66,7 +66,7 @@ function update(dt){
     const dx=p.x-e.x, dy=p.y-e.y, d=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx);
     e.mx=0; e.my=0;
     if (e.isBud){ updateBud(e,dt); continue; }
-    if (e.isDecoy){ e.flashT-=dt; continue; }
+    if (e.isDecoy || e.isIce){ e.flashT-=dt; continue; }
     if (isSpecBoss(e)) bossUpdate(e,dt);
     else if (e.stunT<=0){
       if (e.kind==='rusher'){
@@ -148,6 +148,7 @@ function update(dt){
   packs=packs.filter(k=>!k.dead);
   updateZones(dt);
   updateBossHazards(dt);
+  updateIceWalls(dt);
 
   if (roomPhase==='fight' && !enemies.length){
     waveClearing=true; run.roomsCleared=(run.roomsCleared||0)+1;

@@ -40,6 +40,7 @@ function bossUpdate(e,dt){
       break;
     case 'REPOSITION':
       // waitFor: some attacks can't start while a conflicting hazard is still live (e.g. Gravemark's well).
+      if (e.holdT>0){ e.holdT-=dt; break; }
       if ((def.reposition(e,dt) || e.stateT>=1.5) && !(e.atk.def.waitFor && e.atk.def.waitFor(e))) bossBeginStep(e,0);
       break;
     case 'WINDUP': bossWindup(e,dt); break;
@@ -65,6 +66,7 @@ function bossPhaseChange(e){
   fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.5,r:220,c:BOSSES[e.kind].color}); addShake(10);
 }
 function bossClearOwned(e){
+  for (const m of enemies) if (m.owner===e && m.isIce) removeIceWalls(m);
   for (const m of enemies) if (m.owner===e && !m.dead) m.dead=true;
   for (const b of bullets) if (b.owner===e) b.dead=true;
   for (const h of bossHazards) if (h.owner===e) h.dead=true;
@@ -139,6 +141,35 @@ function ringGapAt(a,s,ang,d){
 function diskSpots(a){
   const s=a.step, h=s.spread*U/2, ox=Math.cos(a.axis)*h, oy=Math.sin(a.axis)*h;
   return s.n===1 ? [a.target] : [{x:a.target.x-ox,y:a.target.y-oy},{x:a.target.x+ox,y:a.target.y+oy}];
+}
+// How far a beam reaches before props or ice stop it.
+function beamReach(x,y,ang,max){ for (let d=20; d<max; d+=12){ const px=x+Math.cos(ang)*d, py=y+Math.sin(ang)*d; if (px<10||py<10||px>ARENA.w-10||py>ARENA.h-10||inObstacle(px,py)) return d; } return max; }
+// Ice wall geometry: two collinear segments centred `ahead` units in front of the boss, across its aim, `gap` apart.
+function iceSegments(e,a){
+  const s=a.step, cx=e.x+Math.cos(a.aim)*s.ahead*U, cy=e.y+Math.sin(a.aim)*s.ahead*U, perp=a.aim+Math.PI/2, off=(s.gap/2+s.seg/2)*U;
+  return [-1,1].map(sd=>({x:cx+Math.cos(perp)*off*sd, y:cy+Math.sin(perp)*off*sd, ang:perp}));
+}
+function iceCircles(g,s){
+  const n=7, half=s.seg*U/2, r=s.thick*U*0.62, out=[];
+  for (let i=0;i<n;i++){ const t=-half+i*(2*half/(n-1)); out.push({x:g.x+Math.cos(g.ang)*t, y:g.y+Math.sin(g.ang)*t, r}); }
+  return out;
+}
+function removeIceWalls(w){
+  w.dead=true;
+  obstacles=obstacles.filter(o=>o.wall!==w); // collision stops the same tick the ice disappears
+}
+function breakIce(w){
+  removeIceWalls(w); w.killed=true;
+  for (const o of w.obstacles){ for (let i=0;i<4;i++) particles.push({x:o.cx,y:o.cy,vx:rand(-260,260),vy:rand(-260,260),life:.45,max:.45,color:'#cff4ff',w:3}); }
+  addShake(4);
+  // Break both segments within 2s of creation and the boss's next attack is delayed by 1s (once per pair).
+  const pr=w.owner && w.owner.icePair;
+  if (pr && !pr.rewarded && pr.walls.every(x=>x.killed) && run.time-pr.born<=2){ pr.rewarded=true; w.owner.holdT=(w.owner.holdT||0)+1.0; texts.push({x:w.x,y:w.y-30,v:'SHATTERED ICE',t:0,c:'#cff4ff'}); }
+}
+function updateIceWalls(dt){
+  for (const w of enemies) if (w.isIce && !w.dead){
+    if (run.time-w.born>=w.dur) removeIceWalls(w);
+  }
 }
 // Where a sector attack's apex sits: at the boss, or `lunge` units ahead of it.
 function sectorApex(a){ const l=(a.step.lunge||0)*U; return {x:a.origin.x+Math.cos(a.aim)*l, y:a.origin.y+Math.sin(a.aim)*l}; }
@@ -238,7 +269,7 @@ const BOSS_PRIMS = {
     begin(e,a){ a.axis=rand(PI2); },
     active(e,a){
       const s=a.step, p=player;
-      if (!a.hit && diskSpots(a).some(c=>Math.hypot(p.x-c.x,p.y-c.y)<s.radius*U+p.r)) a.hit=!!hurtPlayer(s.dmg,a.axis,s.src,{});
+      if (!a.hit && diskSpots(a).some(c=>Math.hypot(p.x-c.x,p.y-c.y)<s.radius*U+p.r)) a.hit=!!hurtPlayer(s.dmg,a.axis,s.src,{slow:s.slow});
       return a.activeT>=s.active;
     },
     activate(e,a){ addShake(6); for (const c of diskSpots(a)) fx.push({type:'shock',x:c.x,y:c.y,t:0,dur:.25,r:a.step.radius*U,c:BOSSES[e.kind].color}); },
@@ -301,6 +332,40 @@ const BOSS_PRIMS = {
       if (a.activeT>=s.warn+s.fire){ for (const d of a.decoys) d.dead=true; return true; }
       return false;
     },
+  },
+  // A beam that locks, then sweeps through an arc. Stops at props and ice. Fields: length, width (u), sweep (deg), sweepT (s), dmg, slow, src.
+  jet:{
+    begin(e,a){ a.dir=Math.random()<.5?-1:1; },
+    activate(e,a){ addShake(5); },
+    active(e,a){
+      const s=a.step, p=player, ang=a.aim+a.dir*s.sweep*DEG*clamp(a.activeT/s.sweepT,0,1), L=beamReach(a.origin.x,a.origin.y,ang,s.length*U);
+      a.beamAng=ang; a.beamLen=L;
+      if (!a.hit && inLaneShape(p.x,p.y,p.r,a.origin.x,a.origin.y,ang,L,s.width*U)) a.hit=!!hurtPlayer(s.dmg,ang,s.src,{slow:s.slow});
+      if (Math.random()<.6){ const d=rand(L); particles.push({x:a.origin.x+Math.cos(ang)*d,y:a.origin.y+Math.sin(ang)*d,vx:rand(-60,60),vy:rand(-60,60),life:.25,max:.25,color:BOSSES[e.kind].color,w:2}); }
+      return a.activeT>=s.sweepT;
+    },
+  },
+  // Two breakable ice wall segments with a walkable gap, across the line to Volt. Fields: seg, thick, gap, ahead (u), hp, dur, src.
+  iceWall:{
+    begin(e,a){ a.segs=iceSegments(e,a); },
+    activate(e,a){
+      // only one wall pair at a time: the old one melts away
+      for (const m of enemies) if (m.owner===e && m.isIce) removeIceWalls(m);
+      const s=a.step, p=player, born=run.time;
+      a.wallSegs=[];
+      for (const g of iceSegments(e,a)){
+        const circles=iceCircles(g,s);
+        if (circles.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<c.r+p.r || Math.hypot(e.x-c.x,e.y-c.y)<c.r+e.r)) continue; // never entomb anyone
+        const wall={ kind:'ice', isIce:true, anchored:true, owner:e, x:g.x, y:g.y, r:1.3*U, hp:s.hp, maxHp:s.hp, vx:0, vy:0, mx:0, my:0, flashT:0, stunT:0, spawnT:0, face:g.ang, dead:false,
+          seg:g, born, dur:s.dur, obstacles:[], drawFn:()=>{} };
+        for (const c of circles){ const ob={kind:'ice', circle:true, cx:c.x, cy:c.y, rad:c.r, x:c.x-c.r, y:c.y-c.r, w:c.r*2, h:c.r*2, ht:30, wall}; wall.obstacles.push(ob); obstacles.push(ob); }
+        wall.obstacles[0].drawSeg=true;
+        enemies.push(wall); a.wallSegs.push(wall);
+      }
+      e.icePair={walls:a.wallSegs, born, rewarded:false};
+      addShake(5); return;
+    },
+    active(e,a){ return true; },
   },
   // Boss-centred disk impact, optionally followed by evenly spaced radial projectiles.
   // Fields: radius (u), dmg, src, active (s), shots:{n, speed (u/s), r (u), dmg, src}.
@@ -446,6 +511,19 @@ function drawBossTelegraph(e){
       for (const em of emit){ ctx.save(); ctx.translate(em.x,em.y); ctx.rotate(a.aim);
         drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-s.width*U/2,s.length*U,s.width*U); }, c, a.firing?1:clamp(a.activeT/s.warn,0,1), true, a.firing, ()=>{ ctx.beginPath(); ctx.moveTo(0,-s.width*U/2-5); for (let x=0;x<=s.length*U;x+=14) ctx.lineTo(x,-s.width*U/2-((x/14)%2?9:5)); ctx.stroke(); });
         ctx.restore(); } }
+  } else if (s.prim==='jet'){
+    const L=s.length*U, Wd=s.width*U;
+    if (e.bstate==='WINDUP'){
+      const a0=Math.min(a.aim,a.aim+a.dir*s.sweep*DEG), a1=Math.max(a.aim,a.aim+a.dir*s.sweep*DEG);
+      ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.3+0.4*k; ctx.setLineDash([6,8]); ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(ox,oy); ctx.arc(ox,oy,L,a0,a1); ctx.closePath(); ctx.stroke(); ctx.setLineDash([]);
+      const ta=a.aim+a.dir*s.sweep*DEG*0.6; ctx.lineWidth=4; ctx.beginPath(); ctx.arc(ox,oy,L*0.55,a.aim,ta,a.dir<0); ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.aim); drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-Wd/2,beamReach(ox,oy,a.aim,L),Wd); }, c, k, isSuper, false, ()=>{}); ctx.restore();
+    } else {
+      ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.beamAng||a.aim); drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-Wd/2,a.beamLen||L,Wd); }, c, 1, isSuper, true, ()=>{}); ctx.restore();
+    }
+  } else if (s.prim==='iceWall' && e.bstate==='WINDUP'){
+    for (const g of a.segs){ ctx.save(); ctx.translate(g.x,g.y); ctx.rotate(g.ang); ctx.strokeStyle=c; ctx.globalAlpha=0.4+0.5*k; ctx.lineWidth=2; ctx.setLineDash([6,6]);
+      ctx.strokeRect(-s.seg*U/2,-s.thick*U/2,s.seg*U,s.thick*U); ctx.restore(); }
   } else if (s.prim==='disks'){
     for (const sp of diskSpots(a)) drawFootprint(()=>{ ctx.beginPath(); ctx.arc(sp.x,sp.y,s.radius*U,0,PI2); }, c, k, isSuper, pulse, ()=>jaggedRing(sp.x,sp.y,s.radius*U+5,0,PI2,28,6));
   } else if (s.prim==='orbit' && e.bstate==='WINDUP'){
