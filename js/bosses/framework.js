@@ -81,6 +81,7 @@ function bossWindup(e,dt){
   // Targeted footprints track the player for the first 60% of the wind-up, then freeze (at least 0.3s of frozen warning).
   if (!a.locked){
     a.aim=Math.atan2(p.y-e.y,p.x-e.x); a.target={x:p.x,y:p.y}; a.origin={x:e.x,y:e.y};
+    if (a.step.creep){ const d=Math.hypot(p.x-e.x,p.y-e.y), sp=a.step.creep*U*T.enemySpeed; if (a.step.creep<0 || d>e.r+p.r+U){ e.mx=Math.cos(a.aim)*sp; e.my=Math.sin(a.aim)*sp; e.walkT=(e.walkT||0)+Math.abs(sp)*dt; } }
     if (e.stateT>=a.lockAt) a.locked=true;
   }
   e.face=a.aim;
@@ -125,12 +126,15 @@ function inLaneShape(px,py,pr,ox,oy,aim,len,width){
 }
 
 /* ---- Attack primitives, reused by every boss ---- */
+// Where a sector attack's apex sits: at the boss, or `lunge` units ahead of it.
+function sectorApex(a){ const l=(a.step.lunge||0)*U; return {x:a.origin.x+Math.cos(a.aim)*l, y:a.origin.y+Math.sin(a.aim)*l}; }
 const BOSS_PRIMS = {
   // Frontal sector (punches, sweeps, cones). Fields: arc (deg), radius (u), dmg, knock (u), src.
   sector:{
     active(e,a){
-      const s=a.step, p=player;
-      if (!a.hit && inSectorShape(p.x,p.y,p.r,a.origin.x,a.origin.y,a.aim,s.arc*DEG,s.radius*U)){ a.hit=!!hurtPlayer(s.dmg,a.aim,s.src,{attacker:e}); if (a.hit && e.bstate==='ACTIVE' && s.knock){ p.vx+=Math.cos(a.aim)*s.knock*U*4; p.vy+=Math.sin(a.aim)*s.knock*U*4; } }
+      const s=a.step, p=player, ap=sectorApex(a);
+      if (s.lunge && a.activeT<s.active){ const sp=s.lunge*U/s.active; e.mx=Math.cos(a.aim)*sp; e.my=Math.sin(a.aim)*sp; }
+      if (!a.hit && inSectorShape(p.x,p.y,p.r,ap.x,ap.y,a.aim,s.arc*DEG,s.radius*U)){ a.hit=!!hurtPlayer(s.dmg,a.aim,s.src,{attacker:e}); if (a.hit && e.bstate==='ACTIVE' && s.knock){ p.vx+=Math.cos(a.aim)*s.knock*U*4; p.vy+=Math.sin(a.aim)*s.knock*U*4; } }
       return a.activeT>=s.active;
     },
     activate(e,a){ addShake(6); sparks(e.x+Math.cos(a.aim)*e.r,e.y+Math.sin(a.aim)*e.r,a.aim,10,BOSSES[e.kind].color,520,0.6); },
@@ -216,9 +220,10 @@ function drawBossTelegraph(e){
   const k=e.bstate==='ACTIVE'?1:clamp(e.stateT/a.windup,0,1), pulse=e.bstate==='ACTIVE';
   const ox=a.origin.x, oy=a.origin.y;
   if (s.prim==='sector'){
-    const R=s.radius*U, half=s.arc*DEG/2;
-    drawFootprint(()=>{ ctx.beginPath(); ctx.moveTo(ox,oy); ctx.arc(ox,oy,R,a.aim-half,a.aim+half); ctx.closePath(); }, c, k, isSuper, pulse,
-      ()=>jaggedRing(ox,oy,R+6,a.aim-half,a.aim+half,40,6));
+    const R=s.radius*U, half=s.arc*DEG/2, ap=sectorApex(a);
+    drawFootprint(()=>{ ctx.beginPath(); ctx.moveTo(ap.x,ap.y); ctx.arc(ap.x,ap.y,R,a.aim-half,a.aim+half); ctx.closePath(); }, c, k, isSuper, pulse,
+      ()=>jaggedRing(ap.x,ap.y,R+6,a.aim-half,a.aim+half,40,6));
+    if (s.lunge){ ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.35+0.4*k; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(ap.x,ap.y); ctx.stroke(); ctx.restore(); }
     if (!a.locked && e.bstate==='WINDUP'){ ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.5; ctx.setLineDash([6,6]); ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(ox+Math.cos(a.aim)*R,oy+Math.sin(a.aim)*R); ctx.stroke(); ctx.restore(); }
   } else if (s.prim==='charge'){
     const L=s.length*U, Wd=s.width*U;

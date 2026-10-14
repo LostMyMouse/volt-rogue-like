@@ -116,7 +116,7 @@ Every damaging attack component has a `parryClass`.
 
 | Slot | Boss | HP (×1.5) | Body radius | Move speed | Core test |
 |---|---|---:|---:|---:|---|
-| District pool | Kilnheart | 1,800 | 0.9 | 2.2 | Commit, dodge sideways, punish recovery, parry punches |
+| District pool | Kilnheart | 1,800 | 0.9 | 2.8 | Commit, dodge sideways, punish recovery, parry punches |
 | District pool | Bellwether | 2,000 | 0.8 | 2.6 | Read moving gaps and dash timing |
 | District pool | Verdigris | 2,200 | 0.7 | 2.4 | Preserve space against persistent hazards |
 | District pool | Glasswake | 2,000 | 0.6 | 3.4 | Identify real target, avoid beam lanes, parry the lunge |
@@ -134,7 +134,12 @@ Attack-specific cooldowns default to zero in this specification: warning, execut
 
 **Player experience:** a close-range bruiser who chases Volt, commits to an attack, then leaves a generous punish window. Most damage comes from staying in front of her. Her silhouette and furnace glow make impending attacks easy to read.
 
-**Positioning:** between attacks, approach until 3 units from Volt. Stop there; do not continually chase through WINDUP or RECOVERY. No passive armor or damage reduction.
+**Positioning:** between attacks, approach until 3 units from Volt on a slightly curving path, then side-step around Volt for 0.35–0.75s before committing (still within the 1.5s REPOSITION cap). Don't chase through RECOVERY. No passive armour or damage reduction.
+
+**Movement during wind-ups (Revision 2 playtest change):**
+- Furnace Punch: she creeps toward Volt at 1.2 units/s while aim is tracking, then lunges 1 unit during ACTIVE into a 3.5-unit sector. The total forward reach is unchanged at 4.5 units, and the telegraph shows the lunge end point.
+- Boiler Rush: she rears back at 0.9 units/s while aim is tracking.
+- All movement stops when aim locks, so the frozen warning is always accurate.
 
 | Attack | WINDUP | Execution / ACTIVE | Damage and recovery | Counterplay |
 |---|---:|---|---|---|
