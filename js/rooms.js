@@ -231,4 +231,4 @@ function fillFortress(){
 }
 let fortReturn=null;
 function openFortress(){ fortReturn=state; fillFortress(); show('#mFortress',true); $('#btnFortClose').focus(); }
-function closeFortress(){ show('#mFortress',false); $('#startShards').textContent='◆ '+save.shards; const back=fortReturn==='start'?'#btnStart':'#btnAgain'; $(back) && $(back).focus(); }
+function closeFortress(){ show('#mFortress',false); if (fortReturn==='hubmenu'){ hubMenuClosed(); return; } const back=fortReturn==='start'?'#btnStart':'#btnAgain'; $(back) && $(back).focus(); }

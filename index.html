@@ -46,6 +46,17 @@
   <div class="bossbar-hp"><div class="bossbar-fill"></div><i class="bossbar-tick" id="bossTick1" hidden></i><i class="bossbar-tick" id="bossTick2" hidden></i></div>
 </div>
 
+<div class="hub-hud" id="hubHud">
+  <span class="tag">Superhero Fortress</span><strong>THE FORTRESS</strong>
+  <div class="hub-wallet"><span id="hubShards">◆ 0</span><span id="hubLic">✦ 0</span></div>
+  <p class="hub-hint" id="hubHint">WASD to move · E to interact · The Deploy Gate starts a run</p>
+</div>
+<button class="hub-prompt" id="hubPrompt" type="button" hidden><kbd>E</kbd><span id="hubPromptText"></span></button>
+<div class="talk" id="hubTalk" hidden>
+  <div class="portrait" id="talkPortrait" role="img"></div>
+  <div class="talk-body"><span class="talk-who" id="talkWho"></span><p id="talkLine"></p><span class="talk-next" id="talkNext">E · close</span></div>
+</div>
+
 <div class="banner" id="banner"></div>
 
 <div class="intro" id="introCard" hidden>
@@ -81,7 +92,7 @@
       <dt>Buttons</dt><dd>Strike, Power, Dash and Overload. Attacks aim at the nearest enemy.</dd>
     </dl>
     <p class="hint">Attacks marked with a closing white ring can be parried: tap Block as the ring closes to take no damage and leave the attacker Exposed. Attacks with a jagged edge are supers: dodge them, never block.</p>
-    <div class="row"><button class="btn primary" id="btnStart" type="button">Start</button><button class="btn" id="btnStartStyle" type="button">Style: <span class="btn-sub" id="startStyle">Brawler</span></button><button class="btn" id="btnStartFort" type="button">Fortress <span class="btn-sub" id="startShards">◆ 0</span></button></div>
+    <div class="row"><button class="btn primary" id="btnStart" type="button">Enter the Fortress</button></div>
   </div>
 </div>
 
@@ -159,11 +170,9 @@
       <div class="portrait" id="resPortrait" role="img"></div>
       <div><blockquote id="resLine"></blockquote><figcaption id="resWho"></figcaption></div>
     </figure>
-    <p class="hint">In the full game this is where you'd return to the Fortress.</p>
-    <div class="row">
-      <button class="btn primary" id="btnAgain" type="button">Go again</button>
-      <button class="btn" id="btnOverStyle" type="button">Style: <span class="btn-sub" id="overStyle">Brawler</span></button>
-      <button class="btn" id="btnOverFort" type="button">Fortress</button>
+        <div class="row">
+      <button class="btn primary" id="btnAgain" type="button">Return to the Fortress</button>
+      <button class="btn" id="btnQuick" type="button">Quick restart</button>
       <button class="btn" id="btnOverTune" type="button">Tune</button>
     </div>
   </div>
@@ -205,7 +214,9 @@
 <script src="js/route.js"></script>
 <script src="js/draft.js"></script>
 <script src="js/intro.js"></script>
+<script src="js/sprites.js"></script>
 <script src="js/render.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/hub.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/main.js"></script>

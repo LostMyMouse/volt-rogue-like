@@ -332,10 +332,12 @@ function drawPlayer(){
       ctx.globalAlpha=k*0.8; ctx.strokeStyle=COL.volt; ctx.lineWidth=2+k*10; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
     ctx.restore();
   }
-  for (const f of ghosts){
-    const k=1-f.t/f.dur; ctx.save(); ctx.translate(f.x,f.y); ctx.rotate(f.a); ctx.globalAlpha=k*0.5; heroShape(); ctx.fillStyle=COL.volt; ctx.fill(); ctx.restore(); }
-  ctx.globalAlpha=1;
-  VECTOR.volt(p);
+  if (!drawVoltSprite(p)){
+    for (const f of ghosts){
+      const k=1-f.t/f.dur; ctx.save(); ctx.translate(f.x,f.y); ctx.rotate(f.a); ctx.globalAlpha=k*0.5; heroShape(); ctx.fillStyle=COL.volt; ctx.fill(); ctx.restore(); }
+    ctx.globalAlpha=1;
+    VECTOR.volt(p);
+  }
   if (p.guard>0){ ctx.save(); ctx.strokeStyle=HEROES.bastion.c; ctx.lineWidth=3; ctx.globalAlpha=0.6+0.3*Math.sin(time*8); ctx.beginPath(); for (let i=0;i<6;i++){ const a=i/6*PI2+time; ctx.lineTo(p.x+Math.cos(a)*28,p.y+Math.sin(a)*28); } ctx.closePath(); ctx.stroke(); ctx.restore(); }
   if (p.slowT>0){ ctx.save(); ctx.strokeStyle='#cff4ff'; ctx.globalAlpha=0.6; ctx.lineWidth=2; ctx.setLineDash([3,5]); ctx.beginPath(); ctx.arc(p.x,p.y,24,0,PI2); ctx.stroke(); ctx.restore(); }
   if (p.reflectT>0){ ctx.save(); ctx.strokeStyle=HEROES.bastion.c; ctx.lineWidth=4; ctx.shadowColor=HEROES.bastion.c; ctx.shadowBlur=14; ctx.beginPath(); ctx.arc(p.x,p.y,32,0,PI2); ctx.stroke(); ctx.restore(); }
@@ -445,6 +447,7 @@ function drawFx(){
   ctx.globalAlpha=1;
 }
 function render(){
+  if (inHub()){ renderHub(); return; }
   ctx.setTransform(DPR,0,0,DPR,0,0);
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
   const sx=(Math.random()*2-1)*shakeAmt, sy=(Math.random()*2-1)*shakeAmt;

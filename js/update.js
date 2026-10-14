@@ -48,7 +48,7 @@ function update(dt){
 
   if (p.dashT>0){
     p.vx=p.dashDir.x*T.dashSpeed; p.vy=p.dashDir.y*T.dashSpeed; p.dashT-=dt; p.ghostT-=dt;
-    if (p.ghostT<=0){ p.ghostT=0.018; fx.push({type:'ghost',x:p.x,y:p.y,a:p.aim,t:0,dur:.2}); }
+    if (p.ghostT<=0){ p.ghostT=0.018; fx.push({type:'ghost',x:p.x,y:p.y,a:Math.atan2(p.dashDir.y,p.dashDir.x),t:0,dur:.2}); }
     if (Math.random()<.7) particles.push({x:p.x+rand(-10,10),y:p.y+rand(-10,10),vx:-p.dashDir.x*rand(200,500),vy:-p.dashDir.y*rand(200,500),life:.18,max:.18,color:COL.volt,w:2});
     if (p.dashT<=0){ p.vx*=0.3; p.vy*=0.3; }
   } else {

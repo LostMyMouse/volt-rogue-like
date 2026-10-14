@@ -237,3 +237,27 @@ button{font:inherit;color:inherit}
   .rank{width:76px;height:76px;font-size:64px}
   .rank-text h2{font-size:30px}
 }
+
+/* Fortress hub: room name and wallet top-left, a prompt over whatever is in reach, a comms-style talk box */
+.hub-hud{display:none;position:fixed;left:16px;top:calc(env(safe-area-inset-top,0px) + 14px);gap:4px;pointer-events:none}
+.hub-hud strong{font-family:var(--display);font-weight:900;font-size:34px;line-height:.9;color:var(--spark);text-shadow:3px 3px 0 var(--ink),0 0 18px rgba(38,191,255,.45)}
+.hub-wallet{display:flex;gap:12px;font-family:var(--display);font-weight:900;font-size:20px;text-shadow:2px 2px 0 var(--ink)}
+.hub-wallet span:first-child{color:var(--boon)}
+.hub-wallet span:last-child{color:var(--spark)}
+.hub-hint{margin:4px 0 0;max-width:min(400px,calc(100vw - 32px));font-size:12px;color:var(--text);text-shadow:1px 1px 0 var(--ink)}
+.hub-hint[hidden]{display:none}
+body.in-hub .hub-hud{display:grid}
+body.in-hub .hud, body.in-hub .abilities, body.in-hub .touch, body.in-hub .bossbar{display:none!important}
+.hub-prompt{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%) skewX(-8deg);display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;background:var(--panel);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink),0 0 18px color-mix(in srgb,var(--c,var(--volt)) 45%,transparent);font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:.05em;text-transform:uppercase;color:var(--spark)}
+.hub-prompt > *{transform:skewX(8deg)}
+.hub-prompt kbd{font-family:var(--ui);font-size:13px;padding:2px 7px;background:var(--c,var(--volt));color:var(--ink);border:2px solid var(--ink)}
+.talk{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);width:min(720px,calc(100vw - 32px));box-sizing:border-box;display:flex;gap:16px;align-items:flex-start;padding:16px 18px;background:var(--ink);border:3px solid var(--c,var(--volt));box-shadow:6px 6px 0 rgba(4,7,14,.8),0 0 30px color-mix(in srgb,var(--c,var(--volt)) 30%,transparent);cursor:pointer;z-index:20}
+.talk::before{content:"FORTRESS";position:absolute;top:-10px;left:14px;padding:0 6px;background:var(--ink);font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--c,var(--volt))}
+.talk .portrait{width:88px;height:88px}
+.talk .portrait[hidden]{display:none}
+.talk-body{display:grid;gap:6px;min-width:0}
+.talk-who{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.talk-who b{color:var(--c)}
+.talk p{margin:0;font-size:16px;line-height:1.5;color:var(--text)}
+.talk-next{justify-self:end;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--volt))}
+@media (max-width:600px){ .talk .portrait{width:60px;height:60px} .talk p{font-size:14px} .hub-hud strong{font-size:26px} }

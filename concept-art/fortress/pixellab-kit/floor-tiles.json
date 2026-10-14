@@ -1,0 +1,15 @@
+{
+  "tile_size": 32,
+  "columns": 9,
+  "tiles": {
+    "floor_steel": 0,
+    "floor_steel_worn": 1,
+    "floor_concrete": 2,
+    "floor_concrete_cracked": 3,
+    "floor_grate": 4,
+    "floor_rubber": 5,
+    "floor_rubber_stripe": 6,
+    "floor_wood": 7,
+    "floor_hazard": 8
+  }
+}

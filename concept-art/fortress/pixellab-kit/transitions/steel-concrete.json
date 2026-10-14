@@ -1,0 +1,254 @@
+{
+  "tile_size": 32,
+  "atlas": "steel-concrete-atlas.png",
+  "terrain": {
+    "lower": "steel",
+    "upper": "concrete"
+  },
+  "tiles": {
+    "steel_concrete_00": {
+      "file": "steel_concrete_00.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "lower",
+        "SW": "lower",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        0,
+        0,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_01": {
+      "file": "steel_concrete_01.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "lower",
+        "SW": "lower",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        32,
+        0,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_02": {
+      "file": "steel_concrete_02.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "lower",
+        "SW": "upper",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        64,
+        0,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_03": {
+      "file": "steel_concrete_03.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "lower",
+        "SW": "upper",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        96,
+        0,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_04": {
+      "file": "steel_concrete_04.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "upper",
+        "SW": "lower",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        0,
+        32,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_05": {
+      "file": "steel_concrete_05.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "upper",
+        "SW": "lower",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        32,
+        32,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_06": {
+      "file": "steel_concrete_06.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "upper",
+        "SW": "upper",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        64,
+        32,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_07": {
+      "file": "steel_concrete_07.png",
+      "corners": {
+        "NW": "lower",
+        "NE": "upper",
+        "SW": "upper",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        96,
+        32,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_08": {
+      "file": "steel_concrete_08.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "lower",
+        "SW": "lower",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        0,
+        64,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_09": {
+      "file": "steel_concrete_09.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "lower",
+        "SW": "lower",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        32,
+        64,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_10": {
+      "file": "steel_concrete_10.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "lower",
+        "SW": "upper",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        64,
+        64,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_11": {
+      "file": "steel_concrete_11.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "lower",
+        "SW": "upper",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        96,
+        64,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_12": {
+      "file": "steel_concrete_12.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "upper",
+        "SW": "lower",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        0,
+        96,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_13": {
+      "file": "steel_concrete_13.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "upper",
+        "SW": "lower",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        32,
+        96,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_14": {
+      "file": "steel_concrete_14.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "upper",
+        "SW": "upper",
+        "SE": "lower"
+      },
+      "atlas_rect": [
+        64,
+        96,
+        32,
+        32
+      ]
+    },
+    "steel_concrete_15": {
+      "file": "steel_concrete_15.png",
+      "corners": {
+        "NW": "upper",
+        "NE": "upper",
+        "SW": "upper",
+        "SE": "upper"
+      },
+      "atlas_rect": [
+        96,
+        96,
+        32,
+        32
+      ]
+    }
+  },
+  "notes": [
+    "Choose by matching NW, NE, SW and SE terrain corners.",
+    "Use this dedicated set as a unit, including its solid lower and upper tiles. Custom floor variants are separate textures."
+  ]
+}

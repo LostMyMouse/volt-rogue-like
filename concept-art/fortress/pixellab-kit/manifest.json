@@ -1,0 +1,1712 @@
+{
+  "native_tile_size": 32,
+  "display_scale": 2,
+  "texture_filter": "nearest",
+  "camera": "high top-down",
+  "ground_anchor": "front-centre of visible footprint",
+  "assets": {
+    "floor_steel": {
+      "file": "assets/fortress/floor_steel.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_steel_worn": {
+      "file": "assets/fortress/floor_steel_worn.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_concrete": {
+      "file": "assets/fortress/floor_concrete.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_concrete_cracked": {
+      "file": "assets/fortress/floor_concrete_cracked.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_grate": {
+      "file": "assets/fortress/floor_grate.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_rubber": {
+      "file": "assets/fortress/floor_rubber.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_rubber_stripe": {
+      "file": "assets/fortress/floor_rubber_stripe.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_wood": {
+      "file": "assets/fortress/floor_wood.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "floor_hazard": {
+      "file": "assets/fortress/floor_hazard.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "floors",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    },
+    "wall_straight": {
+      "file": "assets/fortress/wall_straight.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        46
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -25,
+          -5,
+          50,
+          5
+        ]
+      }
+    },
+    "wall_inner_corner": {
+      "file": "assets/fortress/wall_inner_corner.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        54
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -24,
+          -8,
+          47,
+          8
+        ]
+      }
+    },
+    "wall_outer_corner": {
+      "file": "assets/fortress/wall_outer_corner.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -24,
+          -8,
+          48,
+          8
+        ]
+      }
+    },
+    "wall_pipe": {
+      "file": "assets/fortress/wall_pipe.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        61
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -25,
+          -9,
+          49,
+          9
+        ]
+      }
+    },
+    "wall_vent": {
+      "file": "assets/fortress/wall_vent.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        52
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -23,
+          -6,
+          46,
+          6
+        ]
+      }
+    },
+    "window_arch": {
+      "file": "assets/fortress/window_arch.png",
+      "size": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        93
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -19,
+          -14,
+          37,
+          14
+        ]
+      }
+    },
+    "glass_wall": {
+      "file": "assets/fortress/glass_wall.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -19,
+          -8,
+          38,
+          8
+        ]
+      }
+    },
+    "glass_corner": {
+      "file": "assets/fortress/glass_corner.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        60
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -23,
+          -8,
+          46,
+          8
+        ]
+      }
+    },
+    "railing": {
+      "file": "assets/fortress/railing.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        31
+      ],
+      "group": "walls",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -23,
+          -5,
+          46,
+          5
+        ]
+      }
+    },
+    "balcony": {
+      "file": "assets/fortress/balcony.png",
+      "size": [
+        128,
+        96
+      ],
+      "anchor": [
+        64,
+        81
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "steps": {
+      "file": "assets/fortress/steps.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        30
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "deploy_gate_closed": {
+      "file": "assets/fortress/deploy_gate_closed.png",
+      "size": [
+        128,
+        96
+      ],
+      "anchor": [
+        64,
+        74
+      ],
+      "group": "doors",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -43,
+          -18,
+          85,
+          18
+        ]
+      }
+    },
+    "deploy_gate_open": {
+      "file": "assets/fortress/deploy_gate_open.png",
+      "size": [
+        128,
+        96
+      ],
+      "anchor": [
+        64,
+        74
+      ],
+      "group": "doors",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -43,
+          -18,
+          85,
+          18
+        ]
+      }
+    },
+    "side_door": {
+      "file": "assets/fortress/side_door.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        31,
+        60
+      ],
+      "group": "doors",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -21,
+          -15,
+          41,
+          15
+        ]
+      }
+    },
+    "command_table": {
+      "file": "assets/fortress/command_table.png",
+      "size": [
+        96,
+        64
+      ],
+      "anchor": [
+        48,
+        54
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -29,
+          -11,
+          58,
+          11
+        ]
+      }
+    },
+    "command_chair": {
+      "file": "assets/fortress/command_chair.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        14,
+        31
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -10,
+          -8,
+          20,
+          8
+        ]
+      }
+    },
+    "hologram_map": {
+      "file": "assets/fortress/hologram_map.png",
+      "size": [
+        96,
+        64
+      ],
+      "anchor": [
+        48,
+        58
+      ],
+      "group": "overlays",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null,
+      "blend": "screen"
+    },
+    "upgrade_terminal": {
+      "file": "assets/fortress/upgrade_terminal.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        30,
+        55
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -12,
+          -12,
+          23,
+          12
+        ]
+      }
+    },
+    "terminal_screen": {
+      "file": "assets/fortress/terminal_screen.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        29
+      ],
+      "group": "overlays",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null,
+      "blend": "screen"
+    },
+    "workbench": {
+      "file": "assets/fortress/workbench.png",
+      "size": [
+        96,
+        32
+      ],
+      "anchor": [
+        48,
+        31
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -19,
+          -8,
+          37,
+          8
+        ]
+      }
+    },
+    "gadget_shelf": {
+      "file": "assets/fortress/gadget_shelf.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        30,
+        60
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -16,
+          -14,
+          31,
+          14
+        ]
+      }
+    },
+    "drone_dock": {
+      "file": "assets/fortress/drone_dock.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        29
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -15,
+          -7,
+          30,
+          7
+        ]
+      }
+    },
+    "support_drone": {
+      "file": "assets/fortress/support_drone.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        25
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "rack_brawler": {
+      "file": "assets/fortress/rack_brawler.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        15,
+        63
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -16,
+          25,
+          16
+        ]
+      }
+    },
+    "rack_arc_caster": {
+      "file": "assets/fortress/rack_arc_caster.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        15,
+        63
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -16,
+          25,
+          16
+        ]
+      }
+    },
+    "rack_titan": {
+      "file": "assets/fortress/rack_titan.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        61
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -15,
+          26,
+          15
+        ]
+      }
+    },
+    "rack_speedster": {
+      "file": "assets/fortress/rack_speedster.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        63
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -12,
+          -16,
+          24,
+          16
+        ]
+      }
+    },
+    "rack_magnetar": {
+      "file": "assets/fortress/rack_magnetar.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        63
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -16,
+          26,
+          16
+        ]
+      }
+    },
+    "rack_locked": {
+      "file": "assets/fortress/rack_locked.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        62
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -16,
+          26,
+          16
+        ]
+      }
+    },
+    "training_dummy_intact": {
+      "file": "assets/fortress/training_dummy_intact.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        58
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -12,
+          -14,
+          23,
+          14
+        ]
+      }
+    },
+    "training_dummy_battered": {
+      "file": "assets/fortress/training_dummy_battered.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        15,
+        61
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -15,
+          25,
+          15
+        ]
+      }
+    },
+    "sparring_mat": {
+      "file": "assets/fortress/sparring_mat.png",
+      "size": [
+        96,
+        64
+      ],
+      "anchor": [
+        48,
+        57
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "crate_stack": {
+      "file": "assets/fortress/crate_stack.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        31,
+        60
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -21,
+          -14,
+          41,
+          14
+        ]
+      }
+    },
+    "plant_broadleaf": {
+      "file": "assets/fortress/plant_broadleaf.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        14,
+        27
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -8,
+          -6,
+          16,
+          6
+        ]
+      }
+    },
+    "plant_fern": {
+      "file": "assets/fortress/plant_fern.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        31
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -8,
+          26,
+          8
+        ]
+      }
+    },
+    "plant_vine": {
+      "file": "assets/fortress/plant_vine.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        15,
+        29
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -9,
+          -7,
+          17,
+          7
+        ]
+      }
+    },
+    "plant_flowers": {
+      "file": "assets/fortress/plant_flowers.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        15,
+        27
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -9,
+          -6,
+          17,
+          6
+        ]
+      }
+    },
+    "hanging_plant": {
+      "file": "assets/fortress/hanging_plant.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        15,
+        48
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "watering_can": {
+      "file": "assets/fortress/watering_can.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        29
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -7,
+          26,
+          7
+        ]
+      }
+    },
+    "stool": {
+      "file": "assets/fortress/stool.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        31
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -8,
+          26,
+          8
+        ]
+      }
+    },
+    "potting_bench": {
+      "file": "assets/fortress/potting_bench.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        30,
+        30
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -8,
+          26,
+          8
+        ]
+      }
+    },
+    "commendations_board": {
+      "file": "assets/fortress/commendations_board.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        62
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_shelf": {
+      "file": "assets/fortress/trophy_shelf.png",
+      "size": [
+        96,
+        32
+      ],
+      "anchor": [
+        48,
+        27
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_kilnheart": {
+      "file": "assets/fortress/trophy_kilnheart.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        14
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_bellwether": {
+      "file": "assets/fortress/trophy_bellwether.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        13
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_verdigris": {
+      "file": "assets/fortress/trophy_verdigris.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        14
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_glasswake": {
+      "file": "assets/fortress/trophy_glasswake.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        13
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_undertow": {
+      "file": "assets/fortress/trophy_undertow.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        14
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_gravemark": {
+      "file": "assets/fortress/trophy_gravemark.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        14
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "trophy_redactor": {
+      "file": "assets/fortress/trophy_redactor.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        13
+      ],
+      "group": "trophies",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "locker": {
+      "file": "assets/fortress/locker.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        14,
+        63
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -12,
+          -16,
+          23,
+          16
+        ]
+      }
+    },
+    "cot": {
+      "file": "assets/fortress/cot.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        31,
+        30
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -17,
+          -8,
+          33,
+          8
+        ]
+      }
+    },
+    "halo_poster": {
+      "file": "assets/fortress/halo_poster.png",
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        43
+      ],
+      "group": "decals",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "work_lamp": {
+      "file": "assets/fortress/work_lamp.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        62
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "light_pool": {
+      "file": "assets/fortress/light_pool.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "group": "overlays",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null,
+      "blend": "screen"
+    },
+    "pipe_run": {
+      "file": "assets/fortress/pipe_run.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        31,
+        28
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -21,
+          -7,
+          41,
+          7
+        ]
+      }
+    },
+    "cable_bundle": {
+      "file": "assets/fortress/cable_bundle.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        30,
+        30
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -15,
+          -8,
+          29,
+          8
+        ]
+      }
+    },
+    "toolbox": {
+      "file": "assets/fortress/toolbox.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        30
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -8,
+          26,
+          8
+        ]
+      }
+    },
+    "coffee_mug": {
+      "file": "assets/fortress/coffee_mug.png",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        13
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -5,
+          -4,
+          9,
+          4
+        ]
+      }
+    },
+    "crate": {
+      "file": "assets/fortress/crate.png",
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        31
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -13,
+          -8,
+          26,
+          8
+        ]
+      }
+    },
+    "fire_extinguisher": {
+      "file": "assets/fortress/fire_extinguisher.png",
+      "size": [
+        32,
+        64
+      ],
+      "anchor": [
+        15,
+        58
+      ],
+      "group": "props",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": {
+        "shape": "rect",
+        "relative_to_anchor": [
+          -12,
+          -14,
+          23,
+          14
+        ]
+      }
+    },
+    "deploy_arrow": {
+      "file": "assets/fortress/deploy_arrow.png",
+      "size": [
+        64,
+        32
+      ],
+      "anchor": [
+        32,
+        27
+      ],
+      "group": "decals",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null
+    },
+    "rain_overlay": {
+      "file": "assets/fortress/rain_overlay.png",
+      "size": [
+        96,
+        96
+      ],
+      "anchor": [
+        48,
+        91
+      ],
+      "group": "overlays",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "collision": null,
+      "blend": "screen"
+    },
+    "night_city": {
+      "file": "assets/fortress/night_city.png",
+      "size": [
+        384,
+        256
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "group": "backgrounds",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "collision": null
+    }
+  },
+  "animations": {
+    "hologram_map": {
+      "file": "assets/fortress/hologram_map_loop.png",
+      "frame": [
+        96,
+        64
+      ],
+      "frames": 4,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        48,
+        58
+      ],
+      "source_frames": 5,
+      "source_selection": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "terminal_screen": {
+      "file": "assets/fortress/terminal_screen_loop.png",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        16,
+        29
+      ],
+      "source_frames": 5,
+      "source_selection": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "support_drone": {
+      "file": "assets/fortress/support_drone_loop.png",
+      "frame": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        16,
+        25
+      ],
+      "source_frames": 5,
+      "source_selection": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "work_lamp": {
+      "file": "assets/fortress/work_lamp_loop.png",
+      "frame": [
+        32,
+        64
+      ],
+      "frames": 4,
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        16,
+        62
+      ],
+      "source_frames": 5,
+      "source_selection": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "rain_overlay": {
+      "file": "assets/fortress/rain_overlay_loop.png",
+      "frame": [
+        96,
+        96
+      ],
+      "frames": 4,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        48,
+        91
+      ],
+      "source_frames": 5,
+      "source_selection": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "notes": [
+    "Suggested colliders are approximate ground footprints; review them in the game.",
+    "Station props use the approved paintings as reference; minor stylistic variation remains between generation models.",
+    "Floors have matching opposing outer pixel rows and columns after edge conditioning.",
+    "Animation sprites retain a fixed canvas and anchor. Hand cleanup may be needed for motion consistency and a perfectly smooth loop seam."
+  ],
+  "tilesets": {
+    "steel_concrete": {
+      "metadata": "assets/fortress/transitions/steel-concrete.json",
+      "atlas": "assets/fortress/transitions/steel-concrete-atlas.png",
+      "tile_size": 32,
+      "tiles": 16,
+      "rule": "Match four terrain corners; use as a separate connected set."
+    }
+  }
+}

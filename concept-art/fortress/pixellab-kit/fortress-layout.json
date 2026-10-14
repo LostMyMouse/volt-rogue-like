@@ -1,0 +1,1393 @@
+{
+  "tile_size": 32,
+  "width": 28,
+  "height": 20,
+  "floor": [
+    [
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_grate",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_steel",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_wood",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_rubber",
+      "floor_concrete"
+    ],
+    [
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete",
+      "floor_concrete"
+    ]
+  ],
+  "objects": [
+    {
+      "asset": "wall_straight",
+      "position": [
+        32,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        96,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        160,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        224,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        288,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        352,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        416,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        480,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        544,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        608,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        672,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        736,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        800,
+        25.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        864,
+        25.6
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        64,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        160,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        256,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        352,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        448,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        544,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        640,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        736,
+        32.0
+      ]
+    },
+    {
+      "asset": "window_arch",
+      "position": [
+        832,
+        32.0
+      ]
+    },
+    {
+      "asset": "balcony",
+      "position": [
+        448,
+        128.0
+      ]
+    },
+    {
+      "asset": "steps",
+      "position": [
+        448,
+        150.4
+      ]
+    },
+    {
+      "asset": "command_table",
+      "position": [
+        448,
+        336.0
+      ]
+    },
+    {
+      "asset": "hologram_map",
+      "position": [
+        448,
+        308.8
+      ],
+      "animation": "hologram_map",
+      "collision": false,
+      "sort_y_offset": 32
+    },
+    {
+      "asset": "command_chair",
+      "position": [
+        384,
+        358.4
+      ]
+    },
+    {
+      "asset": "command_chair",
+      "position": [
+        512,
+        358.4
+      ]
+    },
+    {
+      "asset": "workbench",
+      "position": [
+        128,
+        320
+      ]
+    },
+    {
+      "asset": "upgrade_terminal",
+      "position": [
+        108.8,
+        262.4
+      ]
+    },
+    {
+      "asset": "terminal_screen",
+      "position": [
+        108.8,
+        233.6
+      ],
+      "animation": "terminal_screen",
+      "collision": false,
+      "sort_y_offset": 32
+    },
+    {
+      "asset": "gadget_shelf",
+      "position": [
+        54.4,
+        262.4
+      ]
+    },
+    {
+      "asset": "drone_dock",
+      "position": [
+        192.0,
+        262.4
+      ]
+    },
+    {
+      "asset": "support_drone",
+      "position": [
+        192.0,
+        243.2
+      ],
+      "animation": "support_drone",
+      "collision": false,
+      "sort_y_offset": 32
+    },
+    {
+      "asset": "rack_brawler",
+      "position": [
+        672,
+        291.2
+      ]
+    },
+    {
+      "asset": "rack_arc_caster",
+      "position": [
+        704,
+        291.2
+      ]
+    },
+    {
+      "asset": "rack_titan",
+      "position": [
+        736,
+        291.2
+      ]
+    },
+    {
+      "asset": "rack_speedster",
+      "position": [
+        768,
+        291.2
+      ]
+    },
+    {
+      "asset": "rack_magnetar",
+      "position": [
+        800,
+        291.2
+      ]
+    },
+    {
+      "asset": "sparring_mat",
+      "position": [
+        752.0,
+        576.0
+      ],
+      "collision": false
+    },
+    {
+      "asset": "training_dummy_intact",
+      "position": [
+        697.6,
+        473.6
+      ]
+    },
+    {
+      "asset": "training_dummy_battered",
+      "position": [
+        793.6,
+        473.6
+      ]
+    },
+    {
+      "asset": "crate_stack",
+      "position": [
+        832,
+        544.0
+      ]
+    },
+    {
+      "asset": "glass_wall",
+      "position": [
+        64,
+        204.8
+      ]
+    },
+    {
+      "asset": "glass_wall",
+      "position": [
+        208.0,
+        204.8
+      ]
+    },
+    {
+      "asset": "plant_broadleaf",
+      "position": [
+        64,
+        96
+      ]
+    },
+    {
+      "asset": "plant_fern",
+      "position": [
+        112.0,
+        89.6
+      ]
+    },
+    {
+      "asset": "plant_vine",
+      "position": [
+        192,
+        102.4
+      ]
+    },
+    {
+      "asset": "plant_flowers",
+      "position": [
+        185.6,
+        179.2
+      ]
+    },
+    {
+      "asset": "hanging_plant",
+      "position": [
+        198.4,
+        73.6
+      ]
+    },
+    {
+      "asset": "potting_bench",
+      "position": [
+        128,
+        105.6
+      ]
+    },
+    {
+      "asset": "watering_can",
+      "position": [
+        96,
+        176.0
+      ]
+    },
+    {
+      "asset": "stool",
+      "position": [
+        137.6,
+        176.0
+      ]
+    },
+    {
+      "asset": "commendations_board",
+      "position": [
+        262.4,
+        86.4
+      ],
+      "collision": false
+    },
+    {
+      "asset": "trophy_shelf",
+      "position": [
+        736,
+        112.0
+      ],
+      "collision": false
+    },
+    {
+      "asset": "trophy_kilnheart",
+      "position": [
+        697.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_kilnheart",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "trophy_bellwether",
+      "position": [
+        710.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_bellwether",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "trophy_verdigris",
+      "position": [
+        723.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_verdigris",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "trophy_glasswake",
+      "position": [
+        736.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_glasswake",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "trophy_undertow",
+      "position": [
+        749.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_undertow",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "trophy_gravemark",
+      "position": [
+        762.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_gravemark",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "trophy_redactor",
+      "position": [
+        775.0,
+        99.2
+      ],
+      "collision": false,
+      "unlock": "defeat_redactor",
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        64,
+        457.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        128,
+        457.6
+      ]
+    },
+    {
+      "asset": "wall_straight",
+      "position": [
+        192,
+        457.6
+      ]
+    },
+    {
+      "asset": "locker",
+      "position": [
+        70.4,
+        553.6
+      ]
+    },
+    {
+      "asset": "cot",
+      "position": [
+        156.8,
+        563.2
+      ]
+    },
+    {
+      "asset": "halo_poster",
+      "position": [
+        147.2,
+        451.2
+      ],
+      "collision": false,
+      "sort_y_offset": 16
+    },
+    {
+      "asset": "crate",
+      "position": [
+        80.0,
+        608
+      ]
+    },
+    {
+      "asset": "coffee_mug",
+      "position": [
+        99.2,
+        585.6
+      ],
+      "collision": false
+    },
+    {
+      "asset": "deploy_gate_open",
+      "position": [
+        448,
+        640
+      ],
+      "interaction": "deploy"
+    },
+    {
+      "asset": "deploy_arrow",
+      "position": [
+        448,
+        569.6
+      ],
+      "collision": false,
+      "rotation_degrees": 135
+    },
+    {
+      "asset": "fire_extinguisher",
+      "position": [
+        320,
+        608
+      ]
+    },
+    {
+      "asset": "toolbox",
+      "position": [
+        230.4,
+        329.6
+      ]
+    },
+    {
+      "asset": "pipe_run",
+      "position": [
+        57.6,
+        400.0
+      ]
+    },
+    {
+      "asset": "cable_bundle",
+      "position": [
+        243.2,
+        259.2
+      ]
+    },
+    {
+      "asset": "work_lamp",
+      "position": [
+        32,
+        208.0
+      ],
+      "animation": "work_lamp",
+      "collision": false
+    },
+    {
+      "asset": "light_pool",
+      "position": [
+        32,
+        230.4
+      ],
+      "collision": false,
+      "opacity": 0.33,
+      "blend": "screen"
+    },
+    {
+      "asset": "work_lamp",
+      "position": [
+        240.0,
+        208.0
+      ],
+      "animation": "work_lamp",
+      "collision": false
+    },
+    {
+      "asset": "light_pool",
+      "position": [
+        240.0,
+        230.4
+      ],
+      "collision": false,
+      "opacity": 0.33,
+      "blend": "screen"
+    },
+    {
+      "asset": "work_lamp",
+      "position": [
+        640,
+        192.0
+      ],
+      "animation": "work_lamp",
+      "collision": false
+    },
+    {
+      "asset": "light_pool",
+      "position": [
+        640,
+        214.4
+      ],
+      "collision": false,
+      "opacity": 0.33,
+      "blend": "screen"
+    },
+    {
+      "asset": "work_lamp",
+      "position": [
+        864,
+        384
+      ],
+      "animation": "work_lamp",
+      "collision": false
+    },
+    {
+      "asset": "light_pool",
+      "position": [
+        864,
+        406.4
+      ],
+      "collision": false,
+      "opacity": 0.33,
+      "blend": "screen"
+    },
+    {
+      "asset": "work_lamp",
+      "position": [
+        256,
+        592.0
+      ],
+      "animation": "work_lamp",
+      "collision": false
+    },
+    {
+      "asset": "light_pool",
+      "position": [
+        256,
+        614.4
+      ],
+      "collision": false,
+      "opacity": 0.33,
+      "blend": "screen"
+    },
+    {
+      "asset": "work_lamp",
+      "position": [
+        608,
+        592.0
+      ],
+      "animation": "work_lamp",
+      "collision": false
+    },
+    {
+      "asset": "light_pool",
+      "position": [
+        608,
+        614.4
+      ],
+      "collision": false,
+      "opacity": 0.33,
+      "blend": "screen"
+    }
+  ],
+  "spawn": [
+    448,
+    560.0
+  ],
+  "stations": [
+    {
+      "id": "command",
+      "npc": "Bastion",
+      "interaction_point": [
+        448,
+        371.2
+      ]
+    },
+    {
+      "id": "workshop",
+      "npc": "Patch",
+      "interaction_point": [
+        217.6,
+        320
+      ]
+    },
+    {
+      "id": "armoury",
+      "npc": null,
+      "interaction_point": [
+        736,
+        332.8
+      ]
+    },
+    {
+      "id": "greenhouse",
+      "npc": "Thorn",
+      "interaction_point": [
+        144.0,
+        214.4
+      ]
+    },
+    {
+      "id": "balcony",
+      "npc": "Halo",
+      "interaction_point": [
+        448,
+        172.8
+      ]
+    },
+    {
+      "id": "training",
+      "npc": "Echo",
+      "interaction_point": [
+        752.0,
+        592.0
+      ]
+    },
+    {
+      "id": "commendations",
+      "npc": null,
+      "interaction_point": [
+        262.4,
+        115.2
+      ]
+    },
+    {
+      "id": "trophies",
+      "npc": null,
+      "interaction_point": [
+        736,
+        140.8
+      ]
+    },
+    {
+      "id": "bunk",
+      "npc": "Volt",
+      "interaction_point": [
+        240.0,
+        560.0
+      ]
+    },
+    {
+      "id": "deploy",
+      "npc": null,
+      "interaction_point": [
+        448,
+        601.6
+      ]
+    }
+  ],
+  "notes": [
+    "Layout draft: ground positions and suggested collisions need integration with the game.",
+    "Render ground decals first, then depth sort by position.y + sort_y_offset (default 0). Overlays use offsets to appear over their parent props.",
+    "Trophies have individual unlock keys; preview shows all seven.",
+    "Raised balcony and wall occlusion require game-side handling."
+  ]
+}

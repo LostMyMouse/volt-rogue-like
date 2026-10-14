@@ -246,6 +246,7 @@ function stainAtColor(x,y,r,c){ decals.push({x,y,r,pts:Array.from({length:9},()=
 function doStrike(){
   const p=player; if (state!=='play'||p.strikeCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   STYLE().strike();
+  if (p.strikeCd>0) playerAnim(['strike1','strike2','strike3'][(p.combo||0)%3]);
 }
 let powerHeld=false;
 function doPower(){
@@ -253,6 +254,7 @@ function doPower(){
   if (state!=='play'||p.powerCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   if (p.suppressed){ texts.push({x:p.x,y:p.y-40,v:'SUPPRESSED',t:0,c:'#e0283c'}); return; }
   STYLE().powerPress();
+  if (p.powerCd>0 || p.charging) playerAnim('strike2');
 }
 function releasePower(){
   powerHeld=false;
@@ -322,6 +324,6 @@ function fillStyles(){
     list.appendChild(b);
   }
 }
-function refreshStyleButtons(){ const n=STYLES[save.style].name; $('#startStyle').textContent=n; $('#overStyle').textContent=n; $('#startShards').textContent='◆ '+save.shards; }
+function refreshStyleButtons(){ const n=STYLES[save.style].name; for (const id of ['#startStyle','#overStyle']) if ($(id)) $(id).textContent=n; }
 function openStyles(){ fillStyles(); show('#mStyle',true); $('#btnStyleClose').focus(); }
-function closeStyles(){ show('#mStyle',false); refreshStyleButtons(); }
+function closeStyles(){ show('#mStyle',false); refreshStyleButtons(); hubMenuClosed(); }

@@ -79,7 +79,8 @@ function beginDistrict(id){
 }
 // Called when a district villain falls.
 function districtCleared(){
-  const n=nextAfterDistrict();
+  const n=nextAfterDistrict(), id=curDistrict();
+  save.beaten=save.beaten||{}; save.beaten[id]=(save.beaten[id]||0)+1; writeSave(); // the Fortress trophy shelf and dialogue read this
   run.districtsCleared=run.route.i+1;
   if (n.type==='end'){ winRun(); return; }
   roomPhase='done';

@@ -22,6 +22,8 @@ addEventListener('keydown', e => {
   if (k===' ') e.preventDefault();
   if (e.repeat) return;
   if (inputMode !== 'kb') setMode('kb');
+  if (state==='hubtalk'){ if (k==='e'||k===' '||k==='enter'||k==='escape') advanceTalk(); return; }
+  if (state==='hubmenu' && k==='escape'){ if (!$('#mFortress').hidden) closeFortress(); else if (!$('#mStyle').hidden) closeStyles(); return; }
   if (k==='escape'){
     if (state==='play') openPause();
     else if (!$('#mTune').hidden) closeTune();
@@ -30,9 +32,10 @@ addEventListener('keydown', e => {
   }
   if (state==='intro'){ dismissIntro(); return; }
   if (state==='map'){ if ((k==='1'||k==='2') && cityGates[+k-1]) chooseDistrict(cityGates[+k-1]); return; }
-  if (state==='start' && k==='enter'){ startGame(); return; }
+  if (state==='start' && k==='enter'){ enterHub(); return; }
   if (state==='draft'){ if (k==='1'||k==='2'||k==='3') pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
   keys.add(k);
+  if (state==='hub' && (k==='e'||k==='enter')){ hubInteract(); return; }
   if (state!=='play') return;
   if (k==='shift') pressBlock();
   if (k===' ') doDash();
@@ -53,7 +56,7 @@ cv.addEventListener('pointerdown', e => {
     return;
   }
   if (inputMode!=='touch') setMode('touch');
-  if (state!=='play') return;
+  if (state!=='play' && state!=='hub') return;
   if (stick.id===null){ stick.id=e.pointerId; stick.ox=e.clientX; stick.oy=e.clientY; stick.x=0; stick.y=0; try{cv.setPointerCapture(e.pointerId)}catch(_){} }
 });
 cv.addEventListener('pointermove', e => {

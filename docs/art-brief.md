@@ -361,3 +361,12 @@ Hero NPCs then need walk, idle and talk loops at 96 × 96.
 - **Same light, same outline weight** across everything: top-left light, and an ink outline about 3 px at final size.
 - **Keep effects off the character sheets** where possible (sparks, trails, glows). The game layers its own effects, and baked-in ones double up.
 - **Transparent backgrounds** throughout. If a tool only outputs solid backgrounds, a flat magenta (`#FF00FF`) background is the next best thing, and I can key it out.
+
+## Sprite pass 1 feedback (2026-10-15)
+
+The first Volt batch (`assets/sprites/volt/`) is wired in and works: sheet format, anchor, 8 directions and timing are all correct. The look needs a second pass before the other characters are made from it:
+
+- **Proportions are chibi.** The head is about 1/3 of body height. Target heroic proportions: head about 1/6–1/7 of height, long legs, broad shoulders, as in `concept-art/volt.webp`.
+- **Missing signature features:** the spiky swept hair above the visor, and the white forearm and shin fins. Keep the white collar, blue rails and angular visor; they read well.
+- **Figure size:** the figure fills about 58 of 96 px. Fill about 80 px of the frame height so detail survives.
+- **Idle visor flicker:** in idle frames 3–5 the visor goes dark blue. Keep it consistently bright.

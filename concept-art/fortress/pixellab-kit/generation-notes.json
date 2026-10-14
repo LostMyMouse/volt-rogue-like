@@ -1,0 +1,669 @@
+{
+  "floor_steel": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Riveted navy steel panel, thin dark seam at each boundary and tiny corner rivets. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_steel_worn": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Worn riveted navy steel panel with restrained scratches. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_concrete": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "A seamless overhead square floor texture: nearly solid dark slate #253247, with only a few extremely subtle grain pixels #29374C and #223044. Flat poured concrete, low contrast. No mottling, facets, diamonds, chevrons, decorative pattern, gloss, stripes, border or mini tiles inside this square. Fill all 32x32 pixels; opaque. Background floor for a dark navy superhero headquarters.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png",
+    "selected_revision": "floor_concrete_refined"
+  },
+  "floor_concrete_cracked": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Dark slate concrete floor with a small fine central crack that does not cross edges. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_grate": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Dark steel grated walkway texture, regular evenly spaced horizontal and vertical bars over dark gaps. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_rubber": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Plain dark charcoal rubber safety mat, subtle stipple, no rim or border. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_rubber_stripe": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Dark rubber safety mat with one faded pale slate stripe crossing horizontally through center. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_wood": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Worn dark brown wooden floorboards, parallel vertical planks, continuous grain and dark straight joints. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "floor_hazard": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Dark steel safety floor edge strip with continuous diagonal muted amber-and-black hazard stripes. Flat seamless repeating square FLOOR TEXTURE filling whole canvas. No raised sides, perspective, objects or light pools. Repeat cleanly on both axes. Crisp low-contrast pixel art. Match dark slate #253247 and night navy #141C2B. Exact square overhead texture, no object, depth or raised rim, fill every pixel. Seamless repeating floor.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "wall_straight": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Straight horizontal navy riveted steel wall, top coping and inner south-facing concrete wall face, ends cleanly cut for repetition. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "wall_inner_corner": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Concave L-shaped inner corner of navy riveted steel wall, opening toward south-east, visible top coping and inner faces. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "wall_outer_corner": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Convex L-shaped outer corner of navy riveted steel wall, outside corner facing south-east, visible top coping and matching wall height. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "wall_pipe": {
+    "endpoint": "/create-image-pixen",
+    "description": "Straight horizontal navy steel wall section with one tidy pipe run attached to its inner south-facing wall face. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "wall_vent": {
+    "endpoint": "/create-image-pixen",
+    "description": "Straight horizontal navy steel wall section with one small rectangular vent grille on its inner south-facing face. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "window_arch": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Single tall arched steel window segment with riveted ribs and a dark night skyline behind glass. Warm small window lights in distant city; no room floor. Connectable straight base and full arch visible. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      96,
+      96
+    ],
+    "reference_painting": "05-observation-balcony.png"
+  },
+  "glass_wall": {
+    "endpoint": "/create-image-pixen",
+    "description": "Single transparent glass greenhouse wall panel in narrow dark steel frame, straight horizontal base, no plants or floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "glass_corner": {
+    "endpoint": "/create-image-pixen",
+    "description": "L-shaped transparent glass greenhouse wall corner, narrow dark steel frame and clear panes, no plants or floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "railing": {
+    "endpoint": "/create-image-pixen",
+    "description": "Straight horizontal navy steel safety railing with three thin vertical posts and two horizontal rails, no floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "05-observation-balcony.png"
+  },
+  "balcony": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Shallow semicircular raised observation platform, dark grated floor and curved steel safety rail, two shallow entrance steps along south edge, small warm lamps at railing ends. No window wall, telescope, crates, plants or city backdrop. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      128,
+      96
+    ],
+    "reference_painting": "05-observation-balcony.png"
+  },
+  "steps": {
+    "endpoint": "/create-image-pixen",
+    "description": "Two shallow wide concrete-and-steel access steps, horizontal orientation, dark navy sides and worn slate treads. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "05-observation-balcony.png"
+  },
+  "deploy_gate_closed": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Reinforced navy steel Deploy Gate, two interlocking door panels closed, blue status bar above, blue access panel to right, heavy steel jambs and pistons. Short grated threshold. Identical frame and dimensions in both door states. No city, floor beyond threshold or crates. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      128,
+      96
+    ],
+    "reference_painting": "07-deploy-gate.png"
+  },
+  "deploy_gate_open": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Reinforced navy steel Deploy Gate, door panels fully retracted with transparent doorway opening, blue status bar above, blue access panel to right, heavy steel jambs and pistons. Short grated threshold. Identical frame and dimensions in both door states. No city, floor beyond threshold or crates. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      128,
+      96
+    ],
+    "reference_painting": "07-deploy-gate.png",
+    "selected_revision": "Masked inpaint of closed gate. Only door-panel region changed; exterior frame preserved exactly."
+  },
+  "side_door": {
+    "endpoint": "/create-image-pixen",
+    "description": "Small closed reinforced navy steel side door with practical handle and dim blue access light. Full frame and threshold visible. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "command_table": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "ONE isolated hexagonal command table base, dark navy riveted steel, low chunky industrial waist-high table, recessed controls, projector lenses on top and dark glass tabletop. NO hologram, NO map, NO chairs, no floor or ground shadow. High top-down view around 60 degrees, north edge farther from viewer, south front panel visible. Single black pixel outline, medium graphic shading and detail, subdued slate #253247 and gunmetal #42516A. Warm top-left light, small blue indicator. Center whole object within native 96x64 canvas, 2px empty margins, transparent background. Original grounded superhero headquarters game prop.",
+    "size": [
+      96,
+      64
+    ],
+    "reference_painting": "01-command-table.png"
+  },
+  "command_chair": {
+    "endpoint": "/create-image-pixen",
+    "description": "One worn navy command chair with dark padded seat and back, short swivel base, facing north. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "01-command-table.png"
+  },
+  "hologram_map": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "Separate luminous electric-blue holographic relief map of city towers and district lines floating over an elliptical projection footprint. NO physical table or projector, only the blue map overlay. No text. Pure energy on transparent background; fine dark-blue edges instead of a heavy black enclosing border. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      96,
+      64
+    ],
+    "reference_painting": "01-command-table.png"
+  },
+  "upgrade_terminal": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "One freestanding compact navy engineer upgrade kiosk, angled screen is blank dark teal glass with thin glowing teal rim; buttons and solid stand. No desk, other monitors or tools. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "02-workshop.png"
+  },
+  "terminal_screen": {
+    "endpoint": "/create-image-pixen",
+    "description": "One rectangular teal terminal display overlay showing abstract cyan circuit diagrams and small geometric icons. No text, numbers, frame, stand or physical hardware. Glowing lines on transparent background. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "02-workshop.png"
+  },
+  "workbench": {
+    "endpoint": "/create-image-pixen",
+    "description": "One long narrow practical engineer workbench, worn wood worktop on navy steel drawers, two small hand tools resting at far edge. No monitors, wall, lamp or floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      96,
+      32
+    ],
+    "reference_painting": "02-workshop.png"
+  },
+  "gadget_shelf": {
+    "endpoint": "/create-image-pixen",
+    "description": "Tall open navy steel shelf with neatly spaced toolboxes, teal component jars and half-built gadgets. No wall or floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "02-workshop.png"
+  },
+  "drone_dock": {
+    "endpoint": "/create-image-pixen",
+    "description": "One flat circular drone charging dock in navy steel, concentric dim blue rings and two short alignment posts. No drone, beam or floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "02-workshop.png"
+  },
+  "support_drone": {
+    "endpoint": "/create-image-pixen",
+    "description": "One compact friendly noncombat workshop drone hovering level, dark navy chassis and three small rotor rings, single teal status light. No weapon, face, stand, shadow or charging beam. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "02-workshop.png"
+  },
+  "rack_brawler": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE tall narrow navy steel equipment display bay containing two wrapped hand guards, dim warm downlight above, storage drawer below, same rectangular rack silhouette as every other style bay. No surrounding bays. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "03-armoury.png"
+  },
+  "rack_arc_caster": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE tall narrow navy steel equipment display bay containing two circular induction coils, dim warm downlight above, storage drawer below, same rectangular rack silhouette as every other style bay. No surrounding bays. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "03-armoury.png"
+  },
+  "rack_titan": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE tall narrow navy steel equipment display bay containing one pair of massive reinforced gauntlets, dim warm downlight above, storage drawer below, same rectangular rack silhouette as every other style bay. No surrounding bays. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "03-armoury.png"
+  },
+  "rack_speedster": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE tall narrow navy steel equipment display bay containing one pair of sleek reinforced boots, dim warm downlight above, storage drawer below, same rectangular rack silhouette as every other style bay. No surrounding bays. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "03-armoury.png"
+  },
+  "rack_magnetar": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE tall narrow navy steel equipment display bay containing one thick metal throwing disc with a restrained blue edge, dim warm downlight above, storage drawer below, same rectangular rack silhouette as every other style bay. No surrounding bays. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "03-armoury.png"
+  },
+  "rack_locked": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE tall narrow navy steel equipment display bay with a fully lowered dark metal roller shutter, small blue lock status light, storage drawer below. Same silhouette as equipment racks. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "03-armoury.png"
+  },
+  "training_dummy_intact": {
+    "endpoint": "/create-image-pixen",
+    "description": "One clearly artificial padded human torso practice dummy on a round weighted stand, dark muted red padding, intact stitched pads. No legs, face detail or live person. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "06-training-corner.png"
+  },
+  "training_dummy_battered": {
+    "endpoint": "/create-image-pixen",
+    "description": "One clearly artificial padded human torso practice dummy on a round weighted stand, dark muted red padding, scuffed torn padding and taped repairs. No legs, face detail or live person. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "06-training-corner.png"
+  },
+  "sparring_mat": {
+    "endpoint": "/create-image-pixen",
+    "description": "One flat rectangular worn charcoal rubber sparring mat with muted faded red edge and a simple practice circle, patched cracks, no objects. Show full rectangular footprint with straight horizontal edges. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      96,
+      64
+    ],
+    "reference_painting": "06-training-corner.png"
+  },
+  "crate_stack": {
+    "endpoint": "/create-image-pixen",
+    "description": "Compact stack of three battered navy equipment crates, one low enough to sit on, with practical metal latches. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "06-training-corner.png"
+  },
+  "plant_broadleaf": {
+    "endpoint": "/create-image-pixen",
+    "description": "One potted plant: Broad green leaves in a squat brown ceramic pot. Living wood and leaves, natural leaf green, no acid lime or metal foliage. No other plants. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "plant_fern": {
+    "endpoint": "/create-image-pixen",
+    "description": "One potted plant: Bushy fern fronds in a dark clay pot. Living wood and leaves, natural leaf green, no acid lime or metal foliage. No other plants. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "plant_vine": {
+    "endpoint": "/create-image-pixen",
+    "description": "One potted plant: Climbing living green vine on a small wood trellis in a round pot. Living wood and leaves, natural leaf green, no acid lime or metal foliage. No other plants. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "plant_flowers": {
+    "endpoint": "/create-image-pixen",
+    "description": "One potted plant: Compact green shrub with tiny pale-white flowers in a clay pot. Living wood and leaves, natural leaf green, no acid lime or metal foliage. No other plants. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "hanging_plant": {
+    "endpoint": "/create-image-pixen",
+    "description": "One hanging planter with cascading leaf-green foliage and thin suspension cords. Natural plant, no stand or background. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "watering_can": {
+    "endpoint": "/create-image-pixen",
+    "description": "One scuffed slate metal watering can with long spout and curved handle. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "stool": {
+    "endpoint": "/create-image-pixen",
+    "description": "One small old wooden three-legged stool with a round worn seat. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "potting_bench": {
+    "endpoint": "/create-image-pixen",
+    "description": "One narrow old wood potting bench with two small pots and a soil tray, lower shelf, no plants extending above it. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "04-greenhouse.png"
+  },
+  "commendations_board": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "One battered framed wall notice board filled with cream licence cards, tiny monochrome photographs, ribbon medals and pinned papers. Absolutely no legible text, numbers or logos. No wall or console. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "08-commendations-wall.png"
+  },
+  "trophy_shelf": {
+    "endpoint": "/create-image-pro-flash",
+    "description": "One EMPTY wall-mounted horizontal trophy shelf. Exactly seven small warm downlights on a dark navy rectangular backing board, with a straight narrow horizontal shelf bar along its lower edge and seven empty small mounting pads. No trophies, no floor, no table, no tray, no diamond shape or isometric rotation. High top-down camera with south-facing front, clean black outlines, dark slate steel with amber top-left lighting. Whole isolated wall fixture with transparent background, width96 height32, matching approved Fortress art.",
+    "size": [
+      96,
+      32
+    ],
+    "reference_painting": "09-trophy-shelf.png",
+    "selected_revision": "trophy_shelf_refined"
+  },
+  "trophy_kilnheart": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Cracked black furnace visor fragment with dull orange inner glow. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "trophy_bellwether": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Single brass speaker cone with concentric grooves. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "trophy_verdigris": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Curved oxidized copper leaf blade with tiny dim chartreuse vein. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "trophy_glasswake": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Triangular broken mirror shard with one magenta-lit edge. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "trophy_undertow": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Pale teal ice chunk inside a small clear cylindrical cold-storage jar. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "trophy_gravemark": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Rough dark stone with thin dim violet veins. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "trophy_redactor": {
+    "endpoint": "/create-image-pixen",
+    "description": "ONE small trophy, no pedestal: Broken ivory rectangular mask fragment with a single narrow crimson eye slit. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "09-trophy-shelf.png"
+  },
+  "locker": {
+    "endpoint": "/create-image-pixen",
+    "description": "One tall narrow dented navy metal locker, door slightly ajar, spare dark clothes inside. No adjacent furniture. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "10-volt-locker-and-bunk.png"
+  },
+  "cot": {
+    "endpoint": "/create-image-pixen",
+    "description": "One low compact cot with rumpled grey blanket and one pillow, dark metal legs, no rug or floor. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "10-volt-locker-and-bunk.png"
+  },
+  "halo_poster": {
+    "endpoint": "/create-image-pixen",
+    "description": "One small rectangular paper poster depicting an original heroic woman, late 40s, dark brown skin, close-cropped silver-white hair, high cheekbones, ivory suit, technological dawn-white ring behind her head. A printed illustration only, no lettering. Whole paper rectangle, no frame or wall. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      48
+    ],
+    "reference_painting": "10-volt-locker-and-bunk.png"
+  },
+  "work_lamp": {
+    "endpoint": "/create-image-pixen",
+    "description": "One practical amber cage work lamp on a short steel pole with a small round base. Lamp hardware only, no baked floor light pool. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "light_pool": {
+    "endpoint": "/create-image-pixen",
+    "description": "A soft elliptical amber lamp light pool on transparency, broad low-intensity feathered edge and warm center. No lamp, surface, objects, black border or hard edge. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "pipe_run": {
+    "endpoint": "/create-image-pixen",
+    "description": "Short tidy horizontal bundle of two dark steel utility pipes with two mounting brackets. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "cable_bundle": {
+    "endpoint": "/create-image-pixen",
+    "description": "Short coiled and bundled navy utility cables with two straps. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "toolbox": {
+    "endpoint": "/create-image-pixen",
+    "description": "Compact closed dark navy tool box with a handle and dull orange latch. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "coffee_mug": {
+    "endpoint": "/create-image-pixen",
+    "description": "One small plain ceramic coffee mug with handle and dark coffee visible from above. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      16,
+      16
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "crate": {
+    "endpoint": "/create-image-pixen",
+    "description": "One squat navy equipment crate with a metal latch and reinforced corners. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "fire_extinguisher": {
+    "endpoint": "/create-image-pixen",
+    "description": "One practical muted red fire extinguisher with black hose and safety handle, no label lettering. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      32,
+      64
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "deploy_arrow": {
+    "endpoint": "/create-image-pixen",
+    "description": "One broad flat electric-blue painted floor arrow pointing north, two short chevrons behind it. Worn paint decal only, no floor or shadow. No lettering. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      64,
+      32
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "rain_overlay": {
+    "endpoint": "/create-image-pixen",
+    "description": "Sparse thin blue-grey rain streaks and tiny droplets on transparent window glass. Overlay only, no glass frame, skyline, window or background, no hard border. Restrained atmospheric lines, not white noise. Original Volt superhero headquarters game prop. Crisp pixel art, single-colour black outlines, medium graphic shading, medium detail. High top-down three-quarter camera about 60 degrees above horizontal; vertical fronts face south, no isometric diamond rotation. Navy steel #141C2B, slate #253247, edges #42516A, warm top-left highlights and restrained blue tech accents. Whole isolated object centered with 2px margin. No floor, ground shadow, scene, people, text, labels or watermarks. Transparent background.",
+    "size": [
+      96,
+      96
+    ],
+    "reference_painting": "05-observation-balcony.png"
+  },
+  "night_city": {
+    "endpoint": "/create-image-pixen",
+    "description": "Wide dark night skyline seen from a skyscraper window. Dense distant navy towers, small restrained warm window lights, few cool blue signals, no foreground room, no window frames, no people or text. Low contrast 2D pixel art background. Crisp pixel art. Subdued navy slate palette, low contrast, medium detail. No characters or text.",
+    "size": [
+      384,
+      256
+    ],
+    "reference_painting": "00-fortress-overview.png"
+  },
+  "post_processing": {
+    "floors": "One-pixel matching opposing-edge conditioning on all nine standalone floor textures.",
+    "atlases": "Lossless packing with source rectangles.",
+    "display": "All preview enlargement uses nearest-neighbour sampling.",
+    "animations": "Four distinct frames selected from each five-image result; sheets preserve native size.",
+    "provider": "PixelLab API v2; Pro Flash for core reference-guided props and floor textures, Pixen for smaller props, animation v3 for loops, standard square tileset for transitions."
+  }
+}

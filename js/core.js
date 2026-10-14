@@ -49,7 +49,7 @@ buildTune();
 /* ---------- Save (kept between runs, this browser only) ---------- */
 const SAVE_KEY='volt-save';
 function loadSave(){
-  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}};
+  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}, talk:{}, beaten:{}, last:null};
   try { const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null'); if (s && s.v===1) return Object.assign(base,s); } catch(e){}
   return base;
 }

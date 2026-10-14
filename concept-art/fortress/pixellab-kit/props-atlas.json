@@ -1,0 +1,383 @@
+{
+  "file": "props-atlas.png",
+  "rectangles": {
+    "wall_straight": [
+      2,
+      2,
+      64,
+      64
+    ],
+    "wall_inner_corner": [
+      70,
+      2,
+      64,
+      64
+    ],
+    "wall_outer_corner": [
+      138,
+      2,
+      64,
+      64
+    ],
+    "wall_pipe": [
+      206,
+      2,
+      64,
+      64
+    ],
+    "wall_vent": [
+      274,
+      2,
+      64,
+      64
+    ],
+    "window_arch": [
+      342,
+      2,
+      96,
+      96
+    ],
+    "glass_wall": [
+      442,
+      2,
+      64,
+      64
+    ],
+    "glass_corner": [
+      510,
+      2,
+      64,
+      64
+    ],
+    "railing": [
+      578,
+      2,
+      64,
+      32
+    ],
+    "balcony": [
+      646,
+      2,
+      128,
+      96
+    ],
+    "steps": [
+      778,
+      2,
+      64,
+      32
+    ],
+    "deploy_gate_closed": [
+      846,
+      2,
+      128,
+      96
+    ],
+    "deploy_gate_open": [
+      2,
+      102,
+      128,
+      96
+    ],
+    "side_door": [
+      134,
+      102,
+      64,
+      64
+    ],
+    "command_table": [
+      202,
+      102,
+      96,
+      64
+    ],
+    "command_chair": [
+      302,
+      102,
+      32,
+      32
+    ],
+    "hologram_map": [
+      338,
+      102,
+      96,
+      64
+    ],
+    "upgrade_terminal": [
+      438,
+      102,
+      64,
+      64
+    ],
+    "terminal_screen": [
+      506,
+      102,
+      32,
+      32
+    ],
+    "workbench": [
+      542,
+      102,
+      96,
+      32
+    ],
+    "gadget_shelf": [
+      642,
+      102,
+      64,
+      64
+    ],
+    "drone_dock": [
+      710,
+      102,
+      64,
+      32
+    ],
+    "support_drone": [
+      778,
+      102,
+      32,
+      32
+    ],
+    "rack_brawler": [
+      814,
+      102,
+      32,
+      64
+    ],
+    "rack_arc_caster": [
+      850,
+      102,
+      32,
+      64
+    ],
+    "rack_titan": [
+      886,
+      102,
+      32,
+      64
+    ],
+    "rack_speedster": [
+      922,
+      102,
+      32,
+      64
+    ],
+    "rack_magnetar": [
+      958,
+      102,
+      32,
+      64
+    ],
+    "rack_locked": [
+      2,
+      202,
+      32,
+      64
+    ],
+    "training_dummy_intact": [
+      38,
+      202,
+      32,
+      64
+    ],
+    "training_dummy_battered": [
+      74,
+      202,
+      32,
+      64
+    ],
+    "sparring_mat": [
+      110,
+      202,
+      96,
+      64
+    ],
+    "crate_stack": [
+      210,
+      202,
+      64,
+      64
+    ],
+    "plant_broadleaf": [
+      278,
+      202,
+      32,
+      32
+    ],
+    "plant_fern": [
+      314,
+      202,
+      32,
+      32
+    ],
+    "plant_vine": [
+      350,
+      202,
+      32,
+      32
+    ],
+    "plant_flowers": [
+      386,
+      202,
+      32,
+      32
+    ],
+    "hanging_plant": [
+      422,
+      202,
+      32,
+      64
+    ],
+    "watering_can": [
+      458,
+      202,
+      32,
+      32
+    ],
+    "stool": [
+      494,
+      202,
+      32,
+      32
+    ],
+    "potting_bench": [
+      530,
+      202,
+      64,
+      32
+    ],
+    "commendations_board": [
+      598,
+      202,
+      64,
+      64
+    ],
+    "trophy_shelf": [
+      666,
+      202,
+      96,
+      32
+    ],
+    "trophy_kilnheart": [
+      766,
+      202,
+      16,
+      16
+    ],
+    "trophy_bellwether": [
+      786,
+      202,
+      16,
+      16
+    ],
+    "trophy_verdigris": [
+      806,
+      202,
+      16,
+      16
+    ],
+    "trophy_glasswake": [
+      826,
+      202,
+      16,
+      16
+    ],
+    "trophy_undertow": [
+      846,
+      202,
+      16,
+      16
+    ],
+    "trophy_gravemark": [
+      866,
+      202,
+      16,
+      16
+    ],
+    "trophy_redactor": [
+      886,
+      202,
+      16,
+      16
+    ],
+    "locker": [
+      906,
+      202,
+      32,
+      64
+    ],
+    "cot": [
+      942,
+      202,
+      64,
+      32
+    ],
+    "halo_poster": [
+      2,
+      270,
+      32,
+      48
+    ],
+    "work_lamp": [
+      38,
+      270,
+      32,
+      64
+    ],
+    "light_pool": [
+      74,
+      270,
+      64,
+      64
+    ],
+    "pipe_run": [
+      142,
+      270,
+      64,
+      32
+    ],
+    "cable_bundle": [
+      210,
+      270,
+      64,
+      32
+    ],
+    "toolbox": [
+      278,
+      270,
+      32,
+      32
+    ],
+    "coffee_mug": [
+      314,
+      270,
+      16,
+      16
+    ],
+    "crate": [
+      334,
+      270,
+      32,
+      32
+    ],
+    "fire_extinguisher": [
+      370,
+      270,
+      32,
+      64
+    ],
+    "deploy_arrow": [
+      406,
+      270,
+      64,
+      32
+    ],
+    "rain_overlay": [
+      474,
+      270,
+      96,
+      96
+    ]
+  }
+}

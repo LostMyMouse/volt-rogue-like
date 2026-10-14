@@ -34,7 +34,7 @@ function show(id,on){ $(id).hidden=!on; }
 function startGame(){
   reset(); lastCaller=null; routeStart(); exits=[]; roomPhase='reward'; arrivalT=0; transit=null; powerHeld=false;
   { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
-  save.runs++; writeSave();
+  save.runs++; writeSave(); leaveHub();
   show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
   openCityMap();
 }
@@ -135,6 +135,7 @@ function fillResults(){
   else { const adv=QUOTES[run.lastHit] || bossAdvice(run.lastHit); pool = (adv && Math.random()<0.65) ? adv : QUOTES.mid; }
   const [who,line]=pick(pool), sp=SPEAKERS[who];
   const q=$('#resQuote'); q.classList.toggle('villain',sp.role==='Villain'); q.style.setProperty('--c',sp.c);
+  save.last={won:run.won, cause:run.lastHit, districts:run.districtsCleared||0, rank:rk.r}; writeSave();
   setPortrait($('#resPortrait'),who); $('#resLine').textContent=line; $('#resWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;
 }
 let tuneReturn=null;
@@ -145,17 +146,14 @@ function openTune(){
 }
 function closeTune(){ show('#mTune',false); if (tuneReturn==='play' && $('#mPause').hidden) state='play'; tuneReturn=null; }
 
-$('#btnStart').addEventListener('click', startGame);
+$('#btnStart').addEventListener('click', () => enterHub());
 $('#introCard').addEventListener('pointerdown', ()=>dismissIntro());
-$('#btnStartFort').addEventListener('click', openFortress);
-$('#btnStartStyle').addEventListener('click', openStyles);
-$('#btnOverStyle').addEventListener('click', openStyles);
 $('#btnStyleClose').addEventListener('click', closeStyles);
-$('#btnOverFort').addEventListener('click', openFortress);
 $('#btnFortClose').addEventListener('click', closeFortress);
 $('#btnReroll').addEventListener('click', rerollDraft);
 refreshStyleButtons();
-$('#btnAgain').addEventListener('click', startGame);
+$('#btnAgain').addEventListener('click', () => enterHub());
+$('#btnQuick').addEventListener('click', startGame);
 $('#btnRestart').addEventListener('click', startGame);
 $('#btnResume').addEventListener('click', closePause);
 $('#btnPause').addEventListener('click', () => state==='play'?openPause():state==='paused'&&$('#mTune').hidden?closePause():null);
