@@ -162,6 +162,7 @@ const BOSS_PRIMS = {
       if (!a.hit && Math.hypot(p.x-e.x,p.y-e.y)<e.r+p.r+4) a.hit=!!hurtPlayer(s.dmg,a.aim,s.src,{attacker:e});
       if (e.bstate!=='ACTIVE'){ e.mx=e.my=0; return false; }
       const done=a.dist>=s.length*U || a.stopped;
+      if (done && s.endSlash && !a.hit && Math.hypot(p.x-e.x,p.y-e.y)<(s.endSlash*U)+e.r+p.r){ a.hit=!!hurtPlayer(s.dmg,a.aim,s.src,{attacker:e}); if (e.bstate!=='ACTIVE'){ e.mx=e.my=0; return false; } }
       if (done){ e.mx=e.my=0; addShake(a.stopped?10:4); if (a.stopped) sparks(e.x+Math.cos(a.aim)*e.r,e.y+Math.sin(a.aim)*e.r,a.aim+Math.PI,14,'#9aa0ad',480,1.0); }
       return done;
     },
@@ -255,6 +256,50 @@ const BOSS_PRIMS = {
       if (!a.buds.every(b=>b.dead||b.fired)) return false;
       if (a.buds.every(b=>b.killed)) a.exposeInstead=true; // every bud destroyed before it fired
       return true;
+    },
+  },
+  // Fan of straight beams from the boss. Fields: angles [deg], length, width (u), active, dmg, src.
+  beams:{
+    activate(e,a){ addShake(6); a.beamHit=[]; },
+    active(e,a){
+      const s=a.step, p=player;
+      for (let i=0;i<s.angles.length;i++){ if (a.beamHit[i]) continue; const ang=a.aim+s.angles[i]*DEG;
+        if (inLaneShape(p.x,p.y,p.r,a.origin.x,a.origin.y,ang,s.length*U,s.width*U)) a.beamHit[i]=!!hurtPlayer(s.dmg,ang,s.src,{}); }
+      return a.activeT>=s.active;
+    },
+  },
+  // Warned teleport: a destination disk 5-8 units away; arrive with a damaging pulse. Fields: radius, minD, maxD (u), active, dmg, src.
+  step:{
+    begin(e,a){
+      const s=a.step; let best=null;
+      for (let i=0;i<30 && !best;i++){ const ang=rand(PI2), d=rand(s.minD,s.maxD)*U, x=e.x+Math.cos(ang)*d, y=e.y+Math.sin(ang)*d;
+        if (x>80 && y>80 && x<ARENA.w-80 && y<ARENA.h-80 && !inObstacle(x,y,e.r+10)) best={x,y}; }
+      a.dest=best||{x:ARENA.w/2,y:ARENA.h/2};
+    },
+    activate(e,a){
+      for (let i=0;i<10;i++) particles.push({x:e.x+rand(-14,14),y:e.y+rand(-14,14),vx:rand(-200,200),vy:rand(-200,200),life:.3,max:.3,color:BOSSES[e.kind].color,w:3});
+      e.x=a.dest.x; e.y=a.dest.y; a.origin={x:e.x,y:e.y};
+      fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.25,r:a.step.radius*U,c:BOSSES[e.kind].color}); addShake(6);
+    },
+    active(e,a){ const s=a.step, p=player; if (!a.hit && Math.hypot(p.x-e.x,p.y-e.y)<s.radius*U+p.r) a.hit=!!hurtPlayer(s.dmg,Math.atan2(p.y-e.y,p.x-e.x),s.src,{}); return a.activeT>=s.active; },
+  },
+  // Decoys appear, then every emitter (boss + decoys) warns one parallel beam and fires it.
+  // Fields: decoys, offset (u), spread (deg), warn (s), fire (s), length, width (u), dmg, src.
+  refract:{
+    begin(e,a){
+      const s=a.step; a.decoys=[];
+      for (const sd of [-1,1].slice(0,s.decoys)){ const ang=a.aim+Math.PI+sd*(180-s.spread)*DEG; // ±110° from the direction to Volt
+        const x=clamp(e.x+Math.cos(a.aim+sd*s.spread*DEG)*s.offset*U,60,ARENA.w-60), y=clamp(e.y+Math.sin(a.aim+sd*s.spread*DEG)*s.offset*U,60,ARENA.h-60);
+        const d={ kind:'decoy', isDecoy:true, anchored:true, owner:e, x, y, r:e.r, hp:1, maxHp:1, vx:0, vy:0, mx:0, my:0, flashT:0, stunT:0, spawnT:0, face:a.aim, dead:false, drawFn:(m)=>BOSSES[e.kind].drawDecoy(m) };
+        a.decoys.push(d); enemies.push(d); }
+    },
+    active(e,a){
+      const s=a.step, p=player, live=[{x:e.x,y:e.y,ref:e}].concat(a.decoys.filter(d=>!d.dead).map(d=>({x:d.x,y:d.y,ref:d})));
+      a.firing=a.activeT>=s.warn;
+      if (a.firing){ a.beamHit=a.beamHit||new Set();
+        for (const em of live){ if (a.beamHit.has(em.ref)) continue; if (inLaneShape(p.x,p.y,p.r,em.x,em.y,a.aim,s.length*U,s.width*U)){ if (hurtPlayer(s.dmg,a.aim,s.src,{})) a.beamHit.add(em.ref); } } }
+      if (a.activeT>=s.warn+s.fire){ for (const d of a.decoys) d.dead=true; return true; }
+      return false;
     },
   },
   // Boss-centred disk impact, optionally followed by evenly spaced radial projectiles.
@@ -389,6 +434,18 @@ function drawBossTelegraph(e){
     drawRingTelegraph(e,a,s,c,k);
   } else if (s.prim==='buds' && e.bstate==='WINDUP'){
     for (const sp of a.spots){ ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.4+0.5*k; ctx.lineWidth=2; ctx.setLineDash([5,5]); ctx.beginPath(); ctx.arc(sp.x,sp.y,24,0,PI2); ctx.stroke(); ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(sp.x-8,sp.y); ctx.lineTo(sp.x+8,sp.y); ctx.moveTo(sp.x,sp.y-8); ctx.lineTo(sp.x,sp.y+8); ctx.stroke(); ctx.restore(); }
+  } else if (s.prim==='beams'){
+    for (const da of s.angles){ const ang=a.aim+da*DEG; ctx.save(); ctx.translate(ox,oy); ctx.rotate(ang);
+      drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-s.width*U/2,s.length*U,s.width*U); }, c, k, isSuper, pulse, ()=>{ ctx.beginPath(); ctx.moveTo(0,-s.width*U/2-5); for (let x=0;x<=s.length*U;x+=14) ctx.lineTo(x,-s.width*U/2-((x/14)%2?9:5)); ctx.stroke(); });
+      ctx.restore(); }
+  } else if (s.prim==='step'){
+    if (e.bstate==='WINDUP'){ const R=s.radius*U; drawFootprint(()=>{ ctx.beginPath(); ctx.arc(a.dest.x,a.dest.y,R,0,PI2); }, c, k, isSuper, false, ()=>jaggedRing(a.dest.x,a.dest.y,R+5,0,PI2,32,6));
+      ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.35; ctx.setLineDash([4,8]); ctx.beginPath(); ctx.moveTo(e.x,e.y); ctx.lineTo(a.dest.x,a.dest.y); ctx.stroke(); ctx.restore(); }
+  } else if (s.prim==='refract'){
+    if (e.bstate==='ACTIVE'){ const emit=[{x:e.x,y:e.y}].concat((a.decoys||[]).filter(d=>!d.dead));
+      for (const em of emit){ ctx.save(); ctx.translate(em.x,em.y); ctx.rotate(a.aim);
+        drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-s.width*U/2,s.length*U,s.width*U); }, c, a.firing?1:clamp(a.activeT/s.warn,0,1), true, a.firing, ()=>{ ctx.beginPath(); ctx.moveTo(0,-s.width*U/2-5); for (let x=0;x<=s.length*U;x+=14) ctx.lineTo(x,-s.width*U/2-((x/14)%2?9:5)); ctx.stroke(); });
+        ctx.restore(); } }
   } else if (s.prim==='disks'){
     for (const sp of diskSpots(a)) drawFootprint(()=>{ ctx.beginPath(); ctx.arc(sp.x,sp.y,s.radius*U,0,PI2); }, c, k, isSuper, pulse, ()=>jaggedRing(sp.x,sp.y,s.radius*U+5,0,PI2,28,6));
   } else if (s.prim==='orbit' && e.bstate==='WINDUP'){

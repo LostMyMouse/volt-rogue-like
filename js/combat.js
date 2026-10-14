@@ -75,7 +75,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (e.hp<=0) killEnemy(e,ang);
 }
 function killEnemy(e,ang){
-  if (e.isBud){ e.dead=true; e.killed=true; sparks(e.x,e.y,ang,14,e.c,420,1.4); fx.push({type:'impact',x:e.x,y:e.y,t:0,dur:.15,size:40,rot:rand(PI2),c:e.c}); return; }
+  if (e.isBud||e.isDecoy){ e.dead=true; e.killed=true; sparks(e.x,e.y,ang,14,e.c,420,1.4); fx.push({type:'impact',x:e.x,y:e.y,t:0,dur:.15,size:40,rot:rand(PI2),c:e.c}); return; }
   e.dead=true; kills++;
   if (has('feedback') && (e.markT>0||e.stunT>0||e.rootT>0)) burst(e.x,e.y,95,val('feedback'),HEROES.echo.c);
   if (Math.random() < (PACK.chance[e.kind]||0)+0.01*metaRank('scavenger')) packs.push({x:e.x,y:e.y,t:0,bob:rand(PI2)});
