@@ -219,9 +219,9 @@ button{font:inherit;color:inherit}
 <div class="abilities" id="abilities">
   <div class="ab" id="abStrike"><i class="cd"></i><span class="key">J · Left click</span><b>Strike</b></div>
   <div class="ab" id="abPower"><i class="cd"></i><span class="key">K · Right click</span><b>Power</b></div>
-  <div class="ab" id="abDash"><i class="cd"></i><span class="key">Space · Shift</span><b>Dash</b></div>
+  <div class="ab" id="abDash"><i class="cd"></i><span class="key">Space</span><b>Dash</b></div>
   <div class="ab" id="abSig"><i class="charge"></i><span class="key">Q</span><b>Overload</b></div>
-  <div class="ab" id="abBlock"><i class="cd"></i><span class="key">L · Middle click</span><b>Block</b></div>
+  <div class="ab" id="abBlock"><i class="cd"></i><span class="key">Shift · Middle click</span><b>Block</b></div>
 </div>
 
 <div class="touch" id="touch" hidden>
@@ -249,9 +249,9 @@ button{font:inherit;color:inherit}
       <dt>Mouse</dt><dd>Aim</dd>
       <dt>J / Left click</dt><dd>Strike, hold for a 3-hit combo</dd>
       <dt>K / Right click</dt><dd>Power: depends on your style (hold for Lance and Shield)</dd>
-      <dt>Space / Shift</dt><dd>Dash, invulnerable while dashing</dd>
+      <dt>Space</dt><dd>Dash, invulnerable while dashing</dd>
       <dt>Q</dt><dd>Overload when charged</dd>
-      <dt>L / Middle click</dt><dd>Block. Tap as the white ring closes to parry</dd>
+      <dt>Shift / Middle click</dt><dd>Block. Tap as the white ring closes to parry</dd>
       <dt>P / Esc</dt><dd>Pause and tune</dd>
     </dl>
     <dl class="controls" id="ctrlTouch" hidden>
@@ -483,12 +483,12 @@ addEventListener('keydown', e => {
   if (state!=='play') return;
   if (k==='j') { strikeHeld = true; doStrike(); }
   if (k==='k') doPower();
-  if (k==='l') pressBlock();
-  if (k===' ' || k==='shift') doDash();
+  if (k==='shift') pressBlock();
+  if (k===' ') doDash();
   if (k==='q') doSig();
   if (k==='e' && roomPhase==='exits') jumpTo(exitNear());
 });
-addEventListener('keyup', e => { const k=e.key.toLowerCase(); keys.delete(k); if (k==='j') strikeHeld=false; if (k==='k') releasePower(); if (k==='l') releaseBlock(); });
+addEventListener('keyup', e => { const k=e.key.toLowerCase(); keys.delete(k); if (k==='j') strikeHeld=false; if (k==='k') releasePower(); if (k==='shift') releaseBlock(); });
 addEventListener('blur', () => { keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; powerHeld=false; if (player){ player.charging=0; player.shield=false; player.blockHeld=false; } if (state==='play') openPause(); });
 cv.addEventListener('contextmenu', e => e.preventDefault());
 
