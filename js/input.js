@@ -28,6 +28,7 @@ addEventListener('keydown', e => {
     else if (state==='paused') closePause();
     return;
   }
+  if (state==='intro'){ dismissIntro(); return; }
   if (state==='start' && k==='enter'){ startGame(); return; }
   if (state==='draft'){ if (k==='1'||k==='2'||k==='3') pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
   keys.add(k);

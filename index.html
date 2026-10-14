@@ -41,11 +41,23 @@
 </div>
 
 <div class="bossbar" id="bossBar" hidden>
-  <div class="bossbar-name"><span class="tag">Boss</span><strong>Gravemark</strong></div>
-  <div class="bossbar-hp"><div class="bossbar-fill"></div></div>
+  <div class="bossbar-name"><span class="tag" id="bossTitle">Boss</span><strong id="bossName">Gravemark</strong></div>
+  <div class="bossbar-hp"><div class="bossbar-fill"></div><i class="bossbar-tick" id="bossTick1" hidden></i><i class="bossbar-tick" id="bossTick2" hidden></i></div>
 </div>
 
 <div class="banner" id="banner"></div>
+
+<div class="intro" id="introCard" hidden>
+  <div class="intro-band"></div>
+  <div class="intro-art" id="introArt"></div>
+  <div class="intro-text">
+    <span class="intro-tag" id="introTag"></span>
+    <h2 class="intro-name" id="introName"></h2>
+    <div class="intro-sub" id="introSub"></div>
+    <blockquote class="intro-line" id="introLine"></blockquote>
+  </div>
+  <span class="intro-skip">Click or press any key</span>
+</div>
 
 <div class="scrim" id="mStart">
   <div class="panel" role="dialog" aria-labelledby="startTitle">
@@ -169,11 +181,14 @@
 <script src="js/combat.js"></script>
 <script src="js/update.js"></script>
 <script src="js/bosses/gravemark.js"></script>
+<script src="js/bosses/framework.js"></script>
+<script src="js/bosses/kilnheart.js"></script>
 <script src="js/boons.js"></script>
 <script src="js/parry.js"></script>
 <script src="js/styles.js"></script>
 <script src="js/rooms.js"></script>
 <script src="js/draft.js"></script>
+<script src="js/intro.js"></script>
 <script src="js/render.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/debug.js"></script>

@@ -184,6 +184,7 @@ function drawTelegraphs(){
       ctx.beginPath(); ctx.ellipse(ix,iy,22*k,14*k,0,0,PI2); ctx.stroke();
     }
     if (e.kind==='gravemark') drawGravemarkTelegraph(e);
+    if (isSpecBoss(e)) drawBossTelegraph(e);
   }
 }
 function drawGravemarkTelegraph(e){
@@ -378,7 +379,7 @@ function drawActors(){
   // Depth sort by feet y so things lower on screen draw on top (3/4 view).
   const list=[];
   for (const b of obstacles) list.push({y:obstacleDepth(b),f:()=>drawObstacle(b)});
-  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>VECTOR[e.kind](e)});
+  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>(isSpecBoss(e)?BOSSES[e.kind].draw(e):VECTOR[e.kind](e))});
   for (const b of bullets) list.push({y:b.y,f:()=>drawBullet(b)});
   for (const k of packs) list.push({y:k.y,f:()=>drawPack(k)});
   if (state!=='over' || player.hp>0) list.push({y:player.y,f:drawPlayer});
@@ -387,7 +388,7 @@ function drawActors(){
 }
 function drawBars(){
   for (const e of enemies){
-    if (e.spawnT<=0 && e.stunT>0 && e.kind!=='gravemark'){
+    if (e.spawnT<=0 && e.stunT>0 && !e.isBoss){
       ctx.strokeStyle=COL.volt; ctx.lineWidth=2;
       for (let i=0;i<2;i++){ const a=rand(PI2); strokePts(jag(e.x,e.y,e.x+Math.cos(a)*(e.r+12),e.y+Math.sin(a)*(e.r+12),3,4)); }
     }
@@ -395,10 +396,10 @@ function drawBars(){
       if (e.rootT>0){ ctx.strokeStyle=HEROES.thorn.c; ctx.lineWidth=3; ctx.beginPath(); ctx.ellipse(e.x,e.y+e.r*0.6,e.r*1.3,e.r*0.55,0,0,PI2); ctx.stroke();
         for (let i=0;i<4;i++){ const a=i*1.57+0.4; ctx.beginPath(); ctx.moveTo(e.x+Math.cos(a)*e.r*1.3,e.y+e.r*0.6+Math.sin(a)*e.r*0.55); ctx.quadraticCurveTo(e.x+Math.cos(a)*e.r,e.y,e.x+Math.cos(a)*e.r*0.5,e.y-e.r*0.3); ctx.stroke(); } }
       if (e.exposedT>0){ ctx.save(); ctx.strokeStyle='#ffffff'; ctx.globalAlpha=0.5+0.4*Math.sin(time*20); ctx.lineWidth=3; ctx.setLineDash([6,5]); ctx.beginPath(); ctx.arc(e.x,e.y,e.r+10,0,PI2); ctx.stroke(); ctx.restore(); }
-      if (e.markT>0){ const y=e.y-e.r-(e.kind==='gravemark'?70:30); ctx.save(); ctx.translate(e.x,y); ctx.rotate(time*3); ctx.strokeStyle=HEROES.echo.c; ctx.lineWidth=2.5; ctx.shadowColor=HEROES.echo.c; ctx.shadowBlur=10; ctx.strokeRect(-6,-6,12,12); ctx.restore(); }
-      if (e.poison){ ctx.fillStyle=HEROES.thorn.c; for (let i=0;i<e.poison.stacks;i++){ ctx.beginPath(); ctx.arc(e.x-8+i*8,e.y-e.r-(e.kind==='gravemark'?58:22)+Math.sin(time*6+i)*2,3,0,PI2); ctx.fill(); } }
+      if (e.markT>0){ const y=e.y-e.r-(e.isBoss?70:30); ctx.save(); ctx.translate(e.x,y); ctx.rotate(time*3); ctx.strokeStyle=HEROES.echo.c; ctx.lineWidth=2.5; ctx.shadowColor=HEROES.echo.c; ctx.shadowBlur=10; ctx.strokeRect(-6,-6,12,12); ctx.restore(); }
+      if (e.poison){ ctx.fillStyle=HEROES.thorn.c; for (let i=0;i<e.poison.stacks;i++){ ctx.beginPath(); ctx.arc(e.x-8+i*8,e.y-e.r-(e.isBoss?58:22)+Math.sin(time*6+i)*2,3,0,PI2); ctx.fill(); } }
     }
-    if (e.spawnT<=0 && e.kind!=='gravemark' && e.hp<e.maxHp){
+    if (e.spawnT<=0 && !e.isBoss && e.hp<e.maxHp){
       const w=34, x=e.x-w/2, y=e.y-e.r-(e.kind==='needle'?30:18);
       ctx.fillStyle=COL.ink; ctx.fillRect(x-2,y-2,w+4,7);
       ctx.fillStyle=KIND_COL[e.kind]; ctx.fillRect(x,y,w*clamp(e.hp/e.maxHp,0,1),3);
@@ -479,7 +480,7 @@ function render(){
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
   const sx=(Math.random()*2-1)*shakeAmt, sy=(Math.random()*2-1)*shakeAmt;
   ctx.save(); ctx.translate(W/2+sx,H/2+sy); ctx.scale(cam.zoom,cam.zoom); ctx.translate(-cam.x,-cam.y);
-  drawCity(); drawFloor(); drawDecals(); drawExitPads(); drawZones(); drawTelegraphs(); drawActors(); drawStyleFx(); drawBlockFx(); drawGlints(); drawFrontWall(); drawBars(); drawExitIcons(); drawFx(); drawRocks();
+  drawCity(); drawFloor(); drawDecals(); drawExitPads(); drawZones(); drawBossHazards(); drawTelegraphs(); drawActors(); drawStyleFx(); drawBlockFx(); drawGlints(); drawFrontWall(); drawBars(); drawExitIcons(); drawFx(); drawRocks(); drawBossHitboxes();
   ctx.restore();
   drawExitPointers(); drawTransitOverlay();
   if (flash>0){ ctx.fillStyle=`rgba(38,191,255,${flash*0.7})`; ctx.fillRect(0,0,W,H); }

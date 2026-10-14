@@ -42,12 +42,13 @@ function updateAim(mv){
 }
 function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (e.dead) return;
+  if (e.invuln){ if (!opt.quiet) sparks(e.x-Math.cos(ang)*e.r,e.y-Math.sin(ang)*e.r,ang+Math.PI,4,'#9aa0ad',260,.8); return; }
   // Boon multipliers stack multiplicatively, like Hades.
   let m=1;
   if (e.exposedT>0) m*=BLOCK.exposedMul;
   if (e.markT>0) m*=1+(has('mindspike')?val('mindspike'):25)/100;
   if (has('inspire') && player.hp>=player.maxHp*0.8) m*=1+val('inspire')/100;
-  if (has('guiding') && e.kind==='gravemark') m*=1+val('guiding')/100;
+  if (has('guiding') && e.isBoss) m*=1+val('guiding')/100;
   if (has('natsel') && e.hp<e.maxHp*0.3) m*=1+val('natsel')/100;
   dmg*=m;
   e.hp-=dmg; e.flashT=opt.quiet?0.04:0.09;
@@ -57,7 +58,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
     if (e.hp<=0) killEnemy(e,rand(PI2));
     return;
   }
-  if (e.kind==='gravemark'){
+  if (e.isBoss){
     // Too heavy to juggle: tiny knockback, no stun. Only heavy hits during the slam wind-up stagger it.
     e.vx+=Math.cos(ang)*knock*0.06; e.vy+=Math.sin(ang)*knock*0.06;
     // Bosses are never interrupted by damage. Only a perfect parry staggers them (see Block and parry).
@@ -78,13 +79,14 @@ function killEnemy(e,ang){
   if (has('feedback') && (e.markT>0||e.stunT>0||e.rootT>0)) burst(e.x,e.y,95,val('feedback'),HEROES.echo.c);
   if (Math.random() < (PACK.chance[e.kind]||0)+0.01*metaRank('scavenger')) packs.push({x:e.x,y:e.y,t:0,bob:rand(PI2)});
   const c = KIND_COL[e.kind];
-  if (e.kind==='gravemark'){
-    boss=null; rocks=[]; cracks.length=0; run.bossKills++; gainShards(SHARD_BOSS[e.tier]||30,e.x,e.y-80);
+  if (e.isBoss){
+    if (isSpecBoss(e)) bossKilled(e);
+    boss=null; rocks=[]; cracks.length=0; run.bossKills++; gainShards(isSpecBoss(e)?BOSSES[e.kind].shards:(SHARD_BOSS[e.tier]||30),e.x,e.y-80);
     save.licences++; run.licences++; writeSave(); texts.push({x:e.x,y:e.y-120,v:'+1 HERO LICENCE',t:0,big:true,c:COL.spark});
-    fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.6,r:340,c:COL.boon});
-    for (let i=0;i<5;i++) sparks(e.x,e.y,rand(PI2),14,i%2?COL.boon:'#9aa0ad',700,Math.PI);
+    fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.6,r:340,c:KIND_COL[e.kind]});
+    for (let i=0;i<5;i++) sparks(e.x,e.y,rand(PI2),14,i%2?KIND_COL[e.kind]:'#9aa0ad',700,Math.PI);
     flash=.3; hitStop=Math.max(hitStop,0.25); addShake(24);
-    banner('GRAVEMARK DOWN');
+    banner(e.name.toUpperCase()+' DOWN');
   }
   sparks(e.x,e.y,ang,18,c,560,1.6); sparks(e.x,e.y,ang,10,COL.spark,700,.8);
   fx.push({type:'impact',x:e.x,y:e.y,t:0,dur:.2,size:62,rot:rand(PI2),c});
@@ -101,7 +103,7 @@ function doDash(){
   const m=Math.hypot(dx,dy); p.dashDir={x:dx/m,y:dy/m};
   p.dashT=T.dashTime; p.dashCd=T.dashCooldown*R.dashCdMul+T.dashTime; p.iT=Math.max(p.iT,T.dashTime+0.06);
   p.charging=0; p.shield=false; { const so=STYLE(); so.onDash && so.onDash(); }
-  if (has('flashstep')){ fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.25,r:120,c:HEROES.halo.c}); for (const e of liveEnemies()) if (e.kind!=='gravemark' && Math.hypot(e.x-p.x,e.y-p.y)<120+e.r){ e.stunT=Math.max(e.stunT,val('flashstep')); if (e.state==='windup'||e.state==='charge'){ e.state=e.kind==='rusher'?'recover':'move'; e.timer=0.6; } } }
+  if (has('flashstep')){ fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.25,r:120,c:HEROES.halo.c}); for (const e of liveEnemies()) if (!e.isBoss && Math.hypot(e.x-p.x,e.y-p.y)<120+e.r){ e.stunT=Math.max(e.stunT,val('flashstep')); if (e.state==='windup'||e.state==='charge'){ e.state=e.kind==='rusher'?'recover':'move'; e.timer=0.6; } } }
   if (has('aegis')) p.reflectT=T.dashTime+val('aegis');
   if (has('phase')) zones.push({kind:'echo',x:p.x,y:p.y,a:p.aim,t:0,dur:0.8,dmg:val('phase'),r:90,c:HEROES.echo.c});
   if (has('thorntrail')) zones.push({kind:'thorns',x:p.x,y:p.y,t:0,dur:4,dps:val('thorntrail'),r:58,c:HEROES.thorn.c,seed:rand(PI2)});
@@ -138,7 +140,7 @@ function hurtPlayer(dmg,ang,src,opt={}){
   if (p.guard>0){ dmg*=1-p.guard/100; p.guard=0; texts.push({x:p.x,y:p.y-44,v:'BLOCKED',t:0,c:HEROES.bastion.c}); fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.25,r:40,c:HEROES.bastion.c}); }
   dmg=Math.round(dmg);
   if (dmg<=0){ p.iT=0.4; return true; }
-  p.hp-=dmg; p.iT=0.7+val('hold'); p.vx+=Math.cos(ang)*420; p.vy+=Math.sin(ang)*420;
+  p.hp-=dmg; p.iT=0.6+val('hold'); p.vx+=Math.cos(ang)*420; p.vy+=Math.sin(ang)*420;
   if (has('retaliate')) burst(p.x,p.y,120,val('retaliate'),HEROES.bastion.c);
   run.hits++; run.dmgTaken+=dmg; run.lastHit=src;
   hurtFlash=.4; addShake(11); hitStop=Math.max(hitStop,0.08);

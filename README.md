@@ -33,7 +33,8 @@ Touch controls appear automatically on phones and tablets.
 
 ## What's in the slice
 
-- **15 rooftops, Hades-style.** Clearing a rooftop opens 1–3 jump points, each showing the reward on the next roof: a hero's boon, Patch's Fortress tech, or rare Renown Shards. You claim it on landing, before the fight. Gravemark guards rooftops 5, 10 and 15.
+- **15 rooftops, Hades-style.** Clearing a rooftop opens 1–3 jump points, each showing the reward on the next roof: a hero's boon, Patch's Fortress tech, or rare Renown Shards. You claim it on landing, before the fight. Kilnheart guards rooftop 5 and Gravemark guards rooftops 10 and 15.
+- **Villains.** Kilnheart is the first boss built on the spec's shared boss framework (phases, frozen-aim telegraphs, parryable punches and charges, a super slam with parryable embers, heated floor). Every boss fight opens with an intro card; each hero gets one the first time they call in.
 - **Hero boons.** Halo, Bastion, Echo and Thorn offer 28 boons across Strike, Power, Dash, Overload and passives, with Common, Rare and Epic rarities and up to 3 levels.
 - **Block and parry.** Attacks with a closing white ring can be parried: no damage, and the attacker is left Exposed. Holding Block takes reduced damage. Attacks with a jagged edge are supers: dodge them. Not blocking a parryable attack makes it hit harder.
 - **Five combat styles.** Brawler, Arc Caster, Titan, Speedster and Magnetar each replace Strike and Power, with their own strengths and weaknesses. Unlock them with Hero Licences.
@@ -49,7 +50,11 @@ Progress (shards, upgrades, styles) is saved in this browser's local storage und
 
 ## Debug
 
-Add `?debug` to the URL. `]` skips to the next Gravemark wave, and `window.__volt` exposes game state for testing.
+Add `?debug` to the URL. `]` skips to the next boss rooftop, and `window.__volt` exposes game state for testing.
+
+- `?debug&boss=kilnheart` drops straight into a boss fight.
+- `?debug&nointro` skips intro cards (used by automated tests).
+- `__volt.bossAttack('rush')`, `__volt.bossHp(0.5)` and `__volt.hitboxes()` force attacks, set health and show hit shapes.
 
 ## Project layout
 
@@ -62,7 +67,9 @@ No build step: plain HTML, CSS and JavaScript. Scripts are loaded in order by `i
 - `js/input.js`: keyboard, mouse and touch
 - `js/combat.js`: damage, dash, Overload, taking hits
 - `js/update.js`: wave spawning and the per-frame simulation
-- `js/bosses/`: one file per boss (`gravemark.js` today)
+- `js/bosses/`: `framework.js` (shared boss state machine, attack primitives, telegraphs) plus one file per boss
+- `js/intro.js`: villain and hero intro cards
+- `assets/intro/`: intro card art cropped from the concept sheets
 - `js/boons.js`: hero boons, Fortress tech, status effects
 - `js/parry.js`: block and parry
 - `js/styles.js`: the five combat styles

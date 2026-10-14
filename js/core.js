@@ -12,7 +12,7 @@ const clamp = (v,a,b) => v<a?a:v>b?b:v;
 const rand = (a=1,b) => b===undefined ? Math.random()*a : a+Math.random()*(b-a);
 const angDiff = (a,b) => { let d=a-b; while(d>Math.PI)d-=PI2; while(d<-Math.PI)d+=PI2; return d; };
 const COL = { ink:'#04070e', night:'#080d18', volt:'#26bfff', spark:'#f4fbff', threat:'#ff5a45', amber:'#ffb647', rim:'#42516a', text:'#dde8f5', heal:'#55e6c1', boon:'#b56cff', slate:'#253247', edge:'#42516a' };
-const KIND_COL = { rusher:COL.threat, needle:COL.amber, gravemark:COL.boon };
+const KIND_COL = { rusher:COL.threat, needle:COL.amber, gravemark:COL.boon, kilnheart:'#ff7a1a' };
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- Tuning ---------- */
@@ -49,7 +49,7 @@ buildTune();
 /* ---------- Save (kept between runs, this browser only) ---------- */
 const SAVE_KEY='volt-save';
 function loadSave(){
-  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler'};
+  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}};
   try { const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null'); if (s && s.v===1) return Object.assign(base,s); } catch(e){}
   return base;
 }

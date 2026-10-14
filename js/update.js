@@ -17,7 +17,7 @@ function makeEnemy(kind,delay,at){
   if (kind==='rusher'){ const hp=44*waveHp(); return Object.assign(base,{r:17,hp,maxHp:hp,state:'chase',timer:rand(.4,1)}); }
   if (kind==='gravemark'){
     const tier=BOSS_WAVES.indexOf(wave), hp=[900,1400,2000][Math.max(0,tier)]*T.enemyHealth;
-    return Object.assign(base,{r:50,hp,maxHp:hp,state:'walk',timer:1.6,tier:Math.max(0,tier),summoned:false,slamsLeft:0,lastAtk:'',spin:rand(PI2)});
+    return Object.assign(base,{isBoss:true,name:'Gravemark',r:50,hp,maxHp:hp,state:'walk',timer:1.6,tier:Math.max(0,tier),summoned:false,slamsLeft:0,lastAtk:'',spin:rand(PI2)});
   }
   const hp=30*waveHp(); return Object.assign(base,{r:14,hp,maxHp:hp,state:'move',timer:rand(1,2),strafe:Math.random()<.5?1:-1,bob:rand(PI2)});
 }
@@ -25,10 +25,16 @@ function startWave(){
   wave++; waveClearing=false; roomPhase='fight';
   let i=0; const add=(k,n)=>{ for (let j=0;j<n;j++) enemies.push(makeEnemy(k,0.8+i++*0.18)); };
   if (BOSS_WAVES.includes(wave)){
-    const tier=BOSS_WAVES.indexOf(wave);
-    boss=makeEnemy('gravemark',1.4,{x:ARENA.w/2,y:ARENA.h*0.32}); enemies.push(boss);
-    add('rusher',[2,2,3][tier]); add('needle',[0,1,1][tier]);
-    banner(wave===RUN_WAVES?'FINAL: GRAVEMARK':'GRAVEMARK',true);
+    const tier=BOSS_WAVES.indexOf(wave), id=BOSS_PLAN[wave];
+    if (BOSSES[id]){
+      // Spec bosses fight alone (no ordinary enemies) and open with a 1.5s intro.
+      boss=makeBoss(id,{x:ARENA.w/2,y:ARENA.h*0.35}); enemies.push(boss);
+      maybeIntro(id,null);
+    } else {
+      boss=makeEnemy('gravemark',1.4,{x:ARENA.w/2,y:ARENA.h*0.32}); enemies.push(boss);
+      add('rusher',[2,2,3][tier]); add('needle',[0,1,1][tier]);
+      maybeIntro('gravemark',null, wave===RUN_WAVES?{flourish:'makes a final stand!'}:{});
+    }
   } else {
     add('rusher',2+Math.floor(wave*0.6));
     add('needle',wave>=2?1+Math.floor((wave-2)/3):0);
@@ -62,7 +68,8 @@ function update(dt){
     e.flashT-=dt; e.stunT-=dt; tickStatus(e,dt); if (e.dead) continue;
     const dx=p.x-e.x, dy=p.y-e.y, d=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx);
     e.mx=0; e.my=0;
-    if (e.kind==='gravemark') updateGravemark(e,dt,dx,dy,d,a);
+    if (isSpecBoss(e)) bossUpdate(e,dt);
+    else if (e.kind==='gravemark') updateGravemark(e,dt,dx,dy,d,a);
     else if (e.stunT<=0){
       if (e.kind==='rusher'){
         const sp=150*T.enemySpeed;
@@ -99,13 +106,14 @@ function update(dt){
         }
       }
     }
-    if (e.rootT>0 && (e.kind!=='gravemark' || e.state==='walk')){ e.mx=0; e.my=0; }
+    if (e.rootT>0 && (!e.isBoss || e.state==='walk' || e.bstate==='REPOSITION')){ e.mx=0; e.my=0; }
     const kd=Math.min(1,(e.kbT>0?3:8)*dt); e.vx-=e.vx*kd; e.vy-=e.vy*kd;
     e.x+=(e.mx+e.vx)*dt; e.y+=(e.my+e.vy)*dt;
-    if (e.kind!=='gravemark') for (const o of enemies){ if (o===e||o.dead||o.spawnT>0) continue; const ox=e.x-o.x, oy=e.y-o.y, od=Math.hypot(ox,oy), m=e.r+o.r+2; if (od>0&&od<m){ const w=o.kind==='gravemark'?1:.5; e.x+=ox/od*(m-od)*w; e.y+=oy/od*(m-od)*w; } }
+    if (!e.isBoss) for (const o of enemies){ if (o===e||o.dead||o.spawnT>0) continue; const ox=e.x-o.x, oy=e.y-o.y, od=Math.hypot(ox,oy), m=e.r+o.r+2; if (od>0&&od<m){ const w=o.kind==='gravemark'?1:.5; e.x+=ox/od*(m-od)*w; e.y+=oy/od*(m-od)*w; } }
     const tx=e.x, ty=e.y, hitWall=collide(e) || Math.abs(e.x-tx)+Math.abs(e.y-ty)>0.5;
     if (e.kind==='gravemark' && e.state==='charging' && hitWall) gravemarkCrash(e);
-    if (hitWall && e.kbT>0 && e.kind!=='gravemark'){ e.kbT=0; damageEnemy(e,val('kinetic'),Math.atan2(e.vy,e.vx)+Math.PI,0,0.3,{src:'boon',c:HEROES.bastion.c}); texts.push({x:e.x,y:e.y-e.r-20,v:'SLAM',t:0,c:HEROES.bastion.c}); addShake(5); }
+    if (isSpecBoss(e) && e.bstate==='ACTIVE' && e.atk && e.atk.step.prim==='charge' && hitWall) e.atk.stopped=true;
+    if (hitWall && e.kbT>0 && !e.isBoss){ e.kbT=0; damageEnemy(e,val('kinetic'),Math.atan2(e.vy,e.vx)+Math.PI,0,0.3,{src:'boon',c:HEROES.bastion.c}); texts.push({x:e.x,y:e.y-e.r-20,v:'SLAM',t:0,c:HEROES.bastion.c}); addShake(5); }
   }
   enemies=enemies.filter(e=>!e.dead);
 
@@ -114,15 +122,16 @@ function update(dt){
 
   for (const b of bullets){
     b.t+=dt; b.px=b.x; b.py=b.y; b.x+=b.vx*dt; b.y+=b.vy*dt;
+    if (b.t>4){ b.dead=true; continue; }
     if (b.x<20||b.y<20||b.x>ARENA.w-20||b.y>ARENA.h-20||inObstacle(b.x,b.y)){ b.dead=true; sparks(b.x,b.y,Math.atan2(-b.vy,-b.vx),6,COL.amber,250); continue; }
     if (b.friendly){
       for (const e of liveEnemies()) if (Math.hypot(b.x-e.x,b.y-e.y)<b.r+e.r){ b.dead=true; damageEnemy(e,b.dmg||18,Math.atan2(b.vy,b.vx),200,0.2,{src:'boon',c:HEROES.bastion.c}); break; }
       continue;
     }
     if (Math.hypot(b.x-p.x,b.y-p.y)<b.r+p.r){
-      const res = p.reflectT>0 ? 'aegis' : hurtPlayer(10,Math.atan2(b.vy,b.vx),'needle',{bullet:b});
+      const res = p.reflectT>0 ? 'aegis' : hurtPlayer(b.dmg||10,Math.atan2(b.vy,b.vx),b.src||'needle',{bullet:b});
       if (res==='aegis' || res==='parried' || (res==='blocked' && run.style==='magnetar')){
-        b.dmg = res==='parried' ? 20 : 18;
+        b.dmg = res==='parried' ? 2*(b.dmg||10) : 18;
         // Aegis: send it back at the nearest enemy.
         const t=nearestEnemy(p.x,p.y,900), s=Math.hypot(b.vx,b.vy)*1.3, ra=t?Math.atan2(t.y-b.y,t.x-b.x):Math.atan2(-b.vy,-b.vx);
         b.vx=Math.cos(ra)*s; b.vy=Math.sin(ra)*s; b.friendly=true; sparks(b.x,b.y,ra,8,HEROES.bastion.c,320,.6); texts.push({x:p.x,y:p.y-30,v:'REFLECT',t:0,c:HEROES.bastion.c});
@@ -153,6 +162,7 @@ function update(dt){
   }
   packs=packs.filter(k=>!k.dead);
   updateZones(dt);
+  updateBossHazards(dt);
 
   if (roomPhase==='fight' && !enemies.length){
     roomPhase='cleared'; clearT=0.9; waveClearing=true;

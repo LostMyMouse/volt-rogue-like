@@ -22,7 +22,8 @@ function releaseBlock(){
 function exposeEnemy(e){
   const dur=BLOCK.exposed*(run.style==='titan'?1.4:1);
   e.exposedT=dur;
-  if (e.kind==='gravemark'){ e.state='stagger'; e.timer=dur; e.mx=e.my=0; e.slamsLeft=0; }
+  if (isSpecBoss(e)) bossExposed(e,dur);
+  else if (e.kind==='gravemark'){ e.state='stagger'; e.timer=dur; e.mx=e.my=0; e.slamsLeft=0; }
   else { e.stunT=Math.max(e.stunT,dur*0.8); e.state=e.kind==='rusher'?'recover':'move'; e.timer=dur; }
   texts.push({x:e.x,y:e.y-e.r-28,v:'EXPOSED',t:0,big:true,c:COL.spark});
 }
@@ -39,7 +40,7 @@ function onParry(ang,opt){
 }
 // Called at the top of hurtPlayer. Returns {result, dmg}: result is 'parried' | 'blocked' | 'shattered' | 'hit'.
 function resolveBlock(dmg,ang,src,opt){
-  const p=player, cls=PARRY_CLASS[src]||'super';
+  const p=player, cls=PARRY_CLASS[src]||BOSS_PARRY[src]||'super';
   if (!p.blockHeld) return {result:'hit', dmg: cls==='parry' ? dmg*BLOCK.failMul : dmg};
   if (cls==='super'){
     p.blockHeld=false; p.blockLock=BLOCK.shatterLock; p.stunT=BLOCK.shatterStun;
@@ -68,6 +69,7 @@ function tickBlock(dt){
 // Time until a parryable attack lands, for the glint cue. Returns -1 when no glint should show.
 function glintFor(e){
   const p=player;
+  if (isSpecBoss(e)) return bossGlint(e);
   if (e.kind==='rusher' && e.state==='windup') return e.timer;
   if (e.kind==='rusher' && e.state==='swing' && !e.hitDone) return 0;
   if (e.kind==='gravemark'){
@@ -86,7 +88,7 @@ function drawGlint(x,y,r,tti){
   ctx.restore();
 }
 function drawGlints(){
-  for (const e of enemies){ if (e.spawnT>0) continue; drawGlint(e.x,e.y-(e.kind==='gravemark'?10:0),e.r,glintFor(e)); }
+  for (const e of enemies){ if (e.spawnT>0) continue; drawGlint(e.x,e.y-(e.isBoss?10:0),e.r,glintFor(e)); }
   const p=player;
   for (const b of bullets){
     if (b.friendly) continue;

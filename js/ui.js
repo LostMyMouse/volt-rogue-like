@@ -2,7 +2,7 @@
 'use strict';
 
 /* ---------- HUD ---------- */
-const hud = { blockAb:$('#abBlock'), blockTb:$('#tBlock'), shards:$('#hudShards'), boss:$('#bossBar'), hp:$('#hp'), hpText:$('#hpText'), wave:$('#waveNum'), ab:{ s:$('#abStrike'), p:$('#abPower'), d:$('#abDash'), q:$('#abSig') }, tb:{ s:$('#tStrike'), p:$('#tPower'), d:$('#tDash'), q:$('#tSig') } };
+const hud = { bossName:$('#bossName'), bossTitle:$('#bossTitle'), tick1:$('#bossTick1'), tick2:$('#bossTick2'), blockAb:$('#abBlock'), blockTb:$('#tBlock'), shards:$('#hudShards'), boss:$('#bossBar'), hp:$('#hp'), hpText:$('#hpText'), wave:$('#waveNum'), ab:{ s:$('#abStrike'), p:$('#abPower'), d:$('#abDash'), q:$('#abSig') }, tb:{ s:$('#tStrike'), p:$('#tPower'), d:$('#tDash'), q:$('#tSig') } };
 const last = {};
 function setVar(el,name,v){ const key=el.id+name, r=Math.round(v*100)/100; if (last[key]!==r){ last[key]=r; el.style.setProperty(name,r); } }
 function updateHud(){
@@ -10,6 +10,10 @@ function updateHud(){
   setVar(hud.hp,'--hp',clamp(p.hp/p.maxHp,0,1)); hud.hp.classList.toggle('low',p.hp/p.maxHp<0.3);
   const hpT=String(Math.ceil(p.hp)); if (hud.hpText.textContent!==hpT) hud.hpText.textContent=hpT;
   const showBoss=!!(boss && boss.spawnT<=0 && state!=='start'); if (hud.boss.hidden===showBoss) hud.boss.hidden=!showBoss;
+  if (showBoss && hud.bossName.textContent!==boss.name){
+    hud.bossName.textContent=boss.name; hud.boss.style.setProperty('--bc',KIND_COL[boss.kind]||COL.boon); hud.bossTitle.textContent=isSpecBoss(boss)?BOSSES[boss.kind].title:'Boss';
+    const th=isSpecBoss(boss)?BOSSES[boss.kind].phases:[]; [hud.tick1,hud.tick2].forEach((t,i)=>{ t.hidden=th[i]===undefined; if (th[i]!==undefined) t.style.setProperty('--at',(th[i]*100)+'%'); });
+  }
   if (showBoss) setVar(hud.boss,'--hp',clamp(boss.hp/boss.maxHp,0,1));
   const bl=clamp(Math.max(p.blockLock,p.stunT)/BLOCK.shatterLock,0,1); setVar(hud.blockAb,'--cd',bl); setVar(hud.blockTb,'--cd',bl);
   hud.blockAb.classList.toggle('ready',p.blockHeld); hud.blockTb.classList.toggle('ready',p.blockHeld);
@@ -52,6 +56,7 @@ const SPEAKERS = {
   echo:{name:'Echo', role:'Psychic · your rival', c:'#ff5cc8'},
   thorn:{name:'Thorn', role:'Reformed villain', c:'#6ad46a'},
   gravemark:{name:'Gravemark', role:'Villain', c:COL.boon},
+  kilnheart:{name:'Kilnheart', role:'Villain', c:'#ff7a1a'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
 };
 const QUOTES = {
@@ -67,6 +72,10 @@ const QUOTES = {
   villain:[['gravemark',"Is this what the Fortress sends now? I've crushed sturdier gravel."],['gravemark',"Little spark. You flickered, and then you went out."],['gravemark',"Run home to your heroes. Tell them Gravemark sends its regards."],['gravemark',"The roof will remember you. As a stain."]],
 };
 const pick = a => a[Math.floor(Math.random()*a.length)];
+// Which villain taunts a D rank: whoever's attack landed the final blow, else Gravemark.
+function villainFor(src){ for (const id in BOSSES) if (BOSSES[id].cause && BOSSES[id].cause[src]) return id; return 'gravemark'; }
+function bossAdvice(src){ for (const id in BOSSES) if (BOSSES[id].advice && BOSSES[id].advice[src]) return BOSSES[id].advice[src]; return null; }
+function causeText(src){ if (CAUSE[src]) return CAUSE[src]; for (const id in BOSSES) if (BOSSES[id].cause && BOSSES[id].cause[src]) return BOSSES[id].cause[src]; return 'the rooftop'; }
 // Comms portraits: a real image in assets/portraits/<id>.png wins; until then each speaker gets a drawn bust
 // (Gravemark uses a crop of its concept sheet).
 const BUST = '<path d="M6 64 C8 46 20 40 32 40 C44 40 56 46 58 64 Z" fill="#0b111c"/><circle cx="32" cy="27" r="12" fill="#0b111c"/>';
@@ -79,7 +88,7 @@ const PORTRAIT_SVG = {
   thorn: `${BUST}<path d="M20 20 L16 8 L25 16 L28 4 L33 15 L39 5 L40 16 L49 9 L44 21" fill="#0b111c" stroke="#6ad46a" stroke-width="2"/><circle cx="27" cy="28" r="2" fill="#6ad46a"/><circle cx="37" cy="28" r="2" fill="#6ad46a"/><path d="M18 52 l6 -6 l2 8 M46 52 l-6 -6 l-2 8" stroke="#6ad46a" stroke-width="2.5" fill="none"/>`,
 };
 // Add an id here when its PNG lands in assets/portraits/.
-const PORTRAIT_FILES = ['gravemark'];
+const PORTRAIT_FILES = ['gravemark','kilnheart'];
 function setPortrait(el,who){
   const sp=SPEAKERS[who];
   el.innerHTML=''; el.style.backgroundImage=''; el.className='portrait';
@@ -100,7 +109,7 @@ function fillResults(){
   const rEl=$('#resRank'); rEl.textContent=rk.r; rEl.style.setProperty('--rank',rk.c);
   $('#resRankTag').textContent=`${rk.r}-Rank hero · ${score} pts`;
   $('#overTitle').textContent=rk.title;
-  $('#resCause').textContent = run.won ? `Gravemark defeated ${run.bossKills} time${run.bossKills===1?'':'s'}.` : `Defeated by ${CAUSE[run.lastHit]||'the rooftop'}.`;
+  $('#resCause').textContent = run.won ? `Gravemark defeated ${run.bossKills} time${run.bossKills===1?'':'s'}.` : `Defeated by ${causeText(run.lastHit)}.`;
   $('#statWaves').textContent=`${cleared}/${RUN_WAVES}`;
   $('#statKills').textContent=kills;
   const t=Math.floor(run.time); $('#statTime').textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;
@@ -112,11 +121,11 @@ function fillResults(){
   for (const b of owned){ const c=document.createElement('span'); c.className='boon-chip'; c.textContent=b.name; c.style.setProperty('--c',b.c||COL.boon); boons.appendChild(c); }
   let pool;
   if (run.won) pool=QUOTES.won;
-  else if (rk.r==='D') pool=QUOTES.villain;
+  else if (rk.r==='D'){ const v=villainFor(run.lastHit); pool = v==='gravemark' ? QUOTES.villain : BOSSES[v].quotes.map(l=>[v,l]); }
   else if (rk.r==='S'||rk.r==='A') pool=QUOTES.high;
-  else pool = (QUOTES[run.lastHit] && Math.random()<0.65) ? QUOTES[run.lastHit] : QUOTES.mid;
+  else { const adv=QUOTES[run.lastHit] || bossAdvice(run.lastHit); pool = (adv && Math.random()<0.65) ? adv : QUOTES.mid; }
   const [who,line]=pick(pool), sp=SPEAKERS[who];
-  const q=$('#resQuote'); q.classList.toggle('villain',who==='gravemark'); q.style.setProperty('--c',sp.c);
+  const q=$('#resQuote'); q.classList.toggle('villain',sp.role==='Villain'); q.style.setProperty('--c',sp.c);
   setPortrait($('#resPortrait'),who); $('#resLine').textContent=line; $('#resWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;
 }
 let tuneReturn=null;
@@ -128,6 +137,7 @@ function openTune(){
 function closeTune(){ show('#mTune',false); if (tuneReturn==='play' && $('#mPause').hidden) state='play'; tuneReturn=null; }
 
 $('#btnStart').addEventListener('click', startGame);
+$('#introCard').addEventListener('pointerdown', ()=>dismissIntro());
 $('#btnStartFort').addEventListener('click', openFortress);
 $('#btnStartStyle').addEventListener('click', openStyles);
 $('#btnOverStyle').addEventListener('click', openStyles);

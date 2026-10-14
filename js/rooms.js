@@ -51,7 +51,7 @@ function buildRoom(n){
   floorTint = concept ? FLOOR_TINTS[0] : pick(FLOOR_TINTS);
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }
-  enemies=[]; bullets=[]; decals=[]; rocks=[]; cracks=[]; packs=[]; zones=[]; exits=[]; boss=null;
+  enemies=[]; bullets=[]; decals=[]; rocks=[]; cracks=[]; packs=[]; zones=[]; bossHazards=[]; exits=[]; boss=null;
 }
 function rollReward(taken){
   for (let tries=0; tries<30; tries++){
@@ -65,7 +65,7 @@ function rollReward(taken){
 }
 function openExits(){
   const next=wave+1;
-  if (BOSS_WAVES.includes(next)){ exits=[{...PADS[0], reward:{type:'boss'}, hold:0, t:0}]; return; }
+  if (BOSS_WAVES.includes(next)){ exits=[{...PADS[0], reward:{type:'boss', boss:BOSS_PLAN[next]}, hold:0, t:0}]; return; }
   const count=weighted(DOOR_COUNT_ODDS), spots=count===1?[PADS[0]]:shuffle(PADS.slice()).slice(0,count), taken=[];
   exits=spots.map(s=>{ const r=rollReward(taken); taken.push(r); return {...s, reward:r, hold:0, t:0}; });
 }
@@ -149,18 +149,19 @@ function drawTransitOverlay(){
 /* Jump-point visuals: a glowing pad on the floor, the reward medallion floating above it */
 const ICON_CACHE = {};
 function rewardIcon(r){
-  const key = r.type==='boon' ? r.hero : r.type;
+  const key = r.type==='boon' ? r.hero : r.type==='boss' ? 'boss_'+r.boss : r.type;
   if (ICON_CACHE[key]) return ICON_CACHE[key];
   let inner, bg;
   if (r.type==='boon'){ inner=PORTRAIT_SVG[r.hero]; bg=HEROES[r.hero].c; }
   else if (r.type==='tech'){ bg=COL.heal; inner='<circle cx="32" cy="32" r="13" fill="none" stroke="#0b111c" stroke-width="7"/><g stroke="#0b111c" stroke-width="7" stroke-linecap="round"><path d="M32 8v8M32 48v8M8 32h8M48 32h8M15 15l6 6M43 43l6 6M15 49l6-6M43 21l6-6"/></g>'; }
   else if (r.type==='shards'){ bg='#2a1748'; inner='<path d="M32 6 L50 26 L32 58 L14 26 Z" fill="#b56cff" stroke="#f4fbff" stroke-width="2"/><path d="M14 26 H50 M32 6 L26 26 L32 58 L38 26 Z" fill="none" stroke="#f4fbff" stroke-width="1.5" opacity=".7"/>'; }
-  else { bg='#1a1428'; inner=PORTRAIT_SVG.gravemark; }
+  else if (PORTRAIT_FILES.includes(r.boss)){ const img=new Image(); img.src=`assets/portraits/${r.boss}.png`; return ICON_CACHE[key]=img; }
+  else { bg='#1a1428'; inner=PORTRAIT_SVG[r.boss]||PORTRAIT_SVG.gravemark; }
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="${bg}"/>${inner}</svg>`;
   const img=new Image(); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   return ICON_CACHE[key]=img;
 }
-function rewardStyle(r){ return r.type==='boon' ? {c:HEROES[r.hero].c, label:SPEAKERS[r.hero].name+' · boon'} : REWARD_STYLE[r.type]; }
+function rewardStyle(r){ return r.type==='boon' ? {c:HEROES[r.hero].c, label:SPEAKERS[r.hero].name+' · boon'} : r.type==='boss' ? {c:KIND_COL[r.boss]||COL.boon, label:(SPEAKERS[r.boss]||{name:'Boss'}).name} : REWARD_STYLE[r.type]; }
 function drawExitPads(){
   for (const x of exits){
     const st=rewardStyle(x.reward), pop=Math.min(1,x.t/0.35), pulse=0.5+0.5*Math.sin(time*5+x.x);

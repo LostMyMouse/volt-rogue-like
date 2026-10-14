@@ -97,6 +97,41 @@ button{font:inherit;color:inherit}
 .tune-out{width:100%;box-sizing:border-box;min-height:90px;background:var(--ink);color:var(--spark);border:2px solid #2a3a54;font:12px/1.4 ui-monospace,Menlo,monospace;padding:8px;resize:vertical}
 .hint{font-size:12px;color:var(--muted)}
 
+/* Intro splash cards (villains every fight, heroes on first contact) */
+.intro{position:fixed;inset:0;z-index:30;overflow:hidden;background:radial-gradient(ellipse at 28% 55%,color-mix(in srgb,var(--c) 30%,transparent),rgba(4,7,14,.9) 70%);cursor:pointer}
+.intro-band{position:absolute;left:-10%;right:-10%;top:30%;height:46%;transform:skewY(-6deg);background:
+  repeating-linear-gradient(100deg,transparent 0 60px,rgba(255,255,255,.035) 60px 64px),
+  linear-gradient(180deg,var(--c) 0 5px,var(--ink) 5px calc(100% - 5px),var(--c) calc(100% - 5px));
+  clip-path:polygon(2% 8%,10% 0,30% 4%,52% 0,78% 5%,100% 0,98% 92%,82% 100%,60% 95%,38% 100%,14% 94%,0 100%);box-shadow:0 0 60px color-mix(in srgb,var(--c) 40%,transparent)}
+.intro-art{position:absolute;left:3%;bottom:0;width:min(44vw,560px);height:92%;background:center top/cover no-repeat var(--ink);clip-path:polygon(12% 0,100% 0,86% 100%,0 100%);filter:drop-shadow(0 0 24px var(--c))}
+.intro-art.bust{display:grid;place-items:end center;background:linear-gradient(160deg,var(--c),color-mix(in srgb,var(--c) 30%,var(--ink)))}
+.intro-art.bust svg{width:92%;height:auto}
+.intro-text{position:absolute;left:44%;right:4%;top:31%;display:grid;gap:6px;justify-items:start}
+.intro-tag{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--c);background:var(--ink);padding:3px 8px}
+.intro-name{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(56px,10vw,150px);line-height:.85;letter-spacing:.01em;text-transform:uppercase;color:#fff;transform:skewX(-10deg);-webkit-text-stroke:3px var(--ink);text-shadow:7px 7px 0 var(--ink),0 0 34px var(--c)}
+.intro-sub{font-family:var(--display);font-weight:900;font-size:clamp(24px,3.6vw,48px);line-height:1;text-transform:uppercase;color:var(--c);transform:skewX(-10deg);-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink);margin-left:clamp(16px,4vw,60px)}
+.intro-line{margin:14px 0 0;max-width:46ch;font-size:clamp(15px,1.5vw,19px);line-height:1.45;color:var(--text);background:var(--ink);border-left:4px solid var(--c);padding:10px 14px;box-shadow:5px 5px 0 rgba(0,0,0,.5)}
+.intro-skip{position:absolute;right:18px;bottom:16px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:0}
+.intro.in .intro-band{animation:introBand .35s cubic-bezier(.2,.9,.3,1) both}
+.intro.in .intro-art{animation:introArt .45s .05s cubic-bezier(.2,.9,.3,1) both}
+.intro.in .intro-name{animation:introName .4s .18s cubic-bezier(.2,1.5,.4,1) both}
+.intro.in .intro-sub{animation:introSlide .35s .4s both}
+.intro.in .intro-tag{animation:introSlide .3s .12s both}
+.intro.in .intro-line{animation:introSlide .4s .6s both}
+.intro.in .intro-skip{animation:introFade .3s .9s both}
+.intro.out{animation:introOut .28s ease-in both}
+@keyframes introBand{from{transform:skewY(-6deg) translateX(-110%)}to{transform:skewY(-6deg) translateX(0)}}
+@keyframes introArt{from{transform:translateX(-60%);opacity:0}to{transform:none;opacity:1}}
+@keyframes introName{from{transform:skewX(-10deg) scale(1.7);opacity:0}to{transform:skewX(-10deg) scale(1);opacity:1}}
+@keyframes introSlide{from{transform:translateX(40px);opacity:0}to{opacity:1}}
+@keyframes introFade{to{opacity:1}}
+@keyframes introOut{to{opacity:0;transform:translateX(6%)}}
+@media (max-width:640px){
+  .intro-art{width:70vw;height:62%;left:-6%;opacity:.55}
+  .intro-text{left:6%;right:6%;top:40%}
+}
+@media (prefers-reduced-motion:reduce){ .intro.in *,.intro.out{animation-duration:.01s !important;animation-delay:0s !important} }
+
 /* Shards, Fortress upgrades */
 .wave .shards{display:block;margin-top:4px;font-family:var(--display);font-weight:900;font-size:16px;color:var(--boon);text-shadow:2px 2px 0 var(--ink);font-variant-numeric:tabular-nums}
 .btn-sub{font-size:.7em;color:var(--boon);margin-left:4px}
@@ -151,9 +186,10 @@ button{font:inherit;color:inherit}
 /* Boss bar */
 .bossbar{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 16px);transform:translateX(-50%);width:min(440px,calc(100vw - 32px));pointer-events:none;display:grid;gap:4px}
 .bossbar-name{display:flex;align-items:baseline;gap:8px}
-.bossbar-name strong{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:var(--boon);text-shadow:2px 2px 0 var(--ink),0 0 14px rgba(181,108,255,.6)}
+.bossbar-name strong{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:var(--bc,var(--boon));text-shadow:2px 2px 0 var(--ink),0 0 14px rgba(181,108,255,.6)}
 .bossbar-hp{position:relative;height:12px;background:var(--ink);border:2px solid var(--ink);transform:skewX(-18deg);box-shadow:3px 3px 0 rgba(4,7,14,.6)}
-.bossbar-fill{position:absolute;inset:0;background:linear-gradient(90deg,#7a3fd0,var(--boon));transform-origin:left;transform:scaleX(var(--hp,1));transition:transform .12s ease-out}
+.bossbar-tick{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--ink);left:calc(var(--at,50%) - 1px)}
+.bossbar-fill{position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bc,var(--boon)) 60%,#000),var(--bc,var(--boon)));transform-origin:left;transform:scaleX(var(--hp,1));transition:transform .12s ease-out}
 
 /* Run results */
 .panel.results{max-width:540px}

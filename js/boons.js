@@ -25,7 +25,7 @@ const BOONS = [
   {id:'flashstep', hero:'halo', slot:'dash', name:'Flashstep', v:[0.6,0.9,1.2], desc:a=>`Dashing releases a blinding flash: nearby enemies are <b>stunned ${a}s</b>.`},
   {id:'daybreak', hero:'halo', slot:'overload', name:'Daybreak', v:[14,20,28], desc:a=>`Overload leaves a sunlit zone for 4s that burns enemies for <b>${a}</b> damage per second.`},
   {id:'inspire', hero:'halo', slot:'passive', name:'Inspire', v:[15,22,30], desc:a=>`While above 80% health you deal <b>+${a}%</b> damage.`},
-  {id:'guiding', hero:'halo', slot:'passive', name:'Guiding Light', v:[20,30,45], desc:a=>`Deal <b>+${a}%</b> damage to Gravemark.`},
+  {id:'guiding', hero:'halo', slot:'passive', name:'Guiding Light', v:[20,30,45], desc:a=>`Deal <b>+${a}%</b> damage to villains.`},
   {id:'halo_sig', hero:'halo', slot:'passive', name:'Spotlight', v:[25,35,50], desc:a=>`Overload charges <b>${a}%</b> faster.`},
   // Bastion: force fields. Guards, deflection, invulnerability, punishing walls.
   {id:'bulwark', hero:'bastion', slot:'strike', name:'Bulwark Strike', v:[50,70,100], desc:a=>`Landing a heavy hit raises a <b>Guard</b> that blocks <b>${a}%</b> of the next hit.`},
@@ -111,7 +111,7 @@ function poisonEnemy(e,stacks=1){
   if (!e.poison) e.poison={stacks:0,t:0,acc:0,dps};
   e.poison.stacks=Math.min(3,e.poison.stacks+stacks); e.poison.t=3; e.poison.dps=Math.max(e.poison.dps,dps);
 }
-function rootEnemy(e,s){ s+=val('deeproots'); if (e.kind==='gravemark') s*=0.35; e.rootT=Math.max(e.rootT||0,s); }
+function rootEnemy(e,s){ s+=val('deeproots'); if (e.isBoss) s*=0.35; e.rootT=Math.max(e.rootT||0,s); }
 function tickStatus(e,dt){
   if (e.markT>0) e.markT-=dt;
   if (e.exposedT>0) e.exposedT-=dt;

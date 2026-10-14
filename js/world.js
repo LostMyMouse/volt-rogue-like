@@ -21,7 +21,8 @@ for (let i=0;i<520;i++){
 }
 const stains = Array.from({length:22},()=>({x:rand(60,ARENA.w-60),y:rand(60,ARENA.h-60),r:rand(20,70),a:rand(.04,.1)}));
 
-const RUN_WAVES = 15, BOSS_WAVES = [5,10,15];
+// Slice lineup: a district villain first, then Gravemark. Spec bosses use js/bosses/framework.js.
+const RUN_WAVES = 15, BOSS_WAVES = [5,10,15], BOSS_PLAN = {5:'kilnheart', 10:'gravemark', 15:'gravemark'};
 let shots=[], player, enemies, bullets, fx, particles, decals, texts, bolts, rocks, cracks, packs, zones, boss, run, wave, waveTimer, waveClearing, kills, R;
 let state = 'start', prevState = 'start', hitStop = 0, shakeAmt = 0, flash = 0, hurtFlash = 0, time = 0;
 const cam = { x:ARENA.w/2, y:ARENA.h/2, zoom:1 };
@@ -31,7 +32,7 @@ function reset(){
     slots:{strike:null,power:null,dash:null,overload:null}, passives:[], owned:{}, tech:{}, guard:0, reflectT:0,
     strikeCdMax:0.34, powerCdMax:1.1, charging:0, shield:false, shieldT:0, mom:0, disc:null,
     blockHeld:false, blockT:0, blockLock:0, blockUsed:false, blockHits:[], stunT:0, parries:0 };
-  enemies=[]; bullets=[]; fx=[]; particles=[]; decals=[]; texts=[]; bolts=[]; rocks=[]; cracks=[]; packs=[]; zones=[]; boss=null;
+  enemies=[]; bullets=[]; fx=[]; particles=[]; decals=[]; texts=[]; bolts=[]; rocks=[]; cracks=[]; packs=[]; zones=[]; bossHazards=[]; boss=null;
   run={ time:0, hits:0, dmgTaken:0, bossKills:0, lastHit:null, won:false, calls:{}, shards:0, licences:0, rerolls:metaRank('reroll'), lastStands:metaRank('laststand'), style:save.unlocked.includes(save.style)?save.style:'brawler' };
   shots=[];
   recalcRun(); player.hp=player.maxHp;

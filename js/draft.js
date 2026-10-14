@@ -10,6 +10,14 @@ function rollRarity(){
 function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 let draftKind='boon', draftHero=null;
 function openDraft(kind='boon', hero=null, reroll=false){
+  if (!reroll){
+    const who0 = kind==='tech' ? 'patch' : (hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)));
+    if (maybeIntro(who0, ()=>openDraftNow(kind,who0,false))) return;
+    return openDraftNow(kind,who0,false);
+  }
+  return openDraftNow(kind,hero,reroll);
+}
+function openDraftNow(kind, hero, reroll){
   const p=player; draftKind=kind;
   let who, line;
   if (kind==='tech'){
