@@ -35,11 +35,13 @@ function rdSpawnPlates(e){
     x:e.x, y:e.y, vx:0, vy:0, mx:0, my:0, flashT:0, stunT:0, spawnT:0, face:0, dead:false, drawFn:rdDrawPlate });
 }
 function rdDrawPlate(m){
-  ctx.save(); ctx.translate(m.x,m.y-12); ctx.rotate((m.owner.plateAng||0)+m.idx);
-  ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(-14,14,28,8);
-  ctx.fillStyle=m.flashT>0?'#ffffff':'#0d0d12'; ctx.strokeStyle=RD_COL; ctx.lineWidth=2.5; ctx.shadowColor=RD_COL; ctx.shadowBlur=10;
-  ctx.beginPath(); ctx.rect(-16,-10,32,20); ctx.fill(); ctx.stroke(); ctx.shadowBlur=0;
-  ctx.fillStyle=RD_COL; ctx.fillRect(-10,-2,20,4);
+  // Tall black slabs with crimson cracks and glow, standing upright (concept-art/villains/redactor.webp).
+  const bob=Math.sin(time*2+m.idx)*3;
+  ctx.save(); ctx.translate(m.x,m.y-26+bob);
+  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.beginPath(); ctx.ellipse(0,36-bob,12,4,0,0,PI2); ctx.fill();
+  ctx.shadowColor=RD_COL; ctx.shadowBlur=12; ctx.fillStyle=m.flashT>0?'#ffffff':'#0b0a0e'; ctx.strokeStyle=RD_COL; ctx.lineWidth=2.5;
+  ctx.beginPath(); ctx.rect(-10,-18,20,36); ctx.fill(); ctx.stroke(); ctx.shadowBlur=0;
+  ctx.strokeStyle='rgba(224,40,60,.75)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(-6,-12); ctx.lineTo(1,-2); ctx.lineTo(-3,6); ctx.moveTo(4,8); ctx.lineTo(7,14); ctx.stroke();
   ctx.restore();
 }
 // Called by killEnemy when a plate breaks.
@@ -112,16 +114,20 @@ registerBoss({
     ctx.fillStyle='rgba(0,0,0,.5)'; ctx.beginPath(); ctx.ellipse(e.x+5,e.y+e.r*0.75,e.r*1.3,e.r*0.55,0,0,PI2); ctx.fill();
     ctx.save(); ctx.translate(e.x,e.y); if (e.bstate==='EXPOSED') ctx.rotate(Math.sin(time*30)*0.05); ctx.rotate(e.face);
     const s=e.r/45; ctx.scale(s,s);
-    // long black coat
-    ctx.fillStyle=white?'#fff':'#0b0b10'; ctx.strokeStyle=COL.ink; ctx.lineWidth=4;
-    poly([[16,-22],[-6,-30],[-40,-24],[-50,0],[-40,24],[-6,30],[16,22]]); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle=stolen||c; ctx.lineWidth=2; ctx.shadowColor=stolen||c; ctx.shadowBlur=6+14*glow; ctx.globalAlpha=0.5+0.5*glow;
-    ctx.beginPath(); ctx.moveTo(-44,-10); ctx.lineTo(0,-6); ctx.moveTo(-44,10); ctx.lineTo(0,6); ctx.stroke(); ctx.globalAlpha=1; ctx.shadowBlur=0;
-    // hands: crimson energy (tinted with the stolen power's colour while he uses it)
-    for (const sd of [-1,1]){ ctx.fillStyle=stolen||c; ctx.shadowColor=stolen||c; ctx.shadowBlur=10+16*glow; ctx.beginPath(); ctx.arc(14,sd*28,6+3*glow,0,PI2); ctx.fill(); ctx.shadowBlur=0; }
-    // rectangular ivory mask with a crimson slit
-    ctx.fillStyle=white?'#fff':'#ece6d6'; ctx.beginPath(); ctx.roundRect(-4,-12,22,24,3); ctx.fill(); ctx.strokeStyle=COL.ink; ctx.lineWidth=3; ctx.stroke();
-    ctx.fillStyle=c; ctx.fillRect(12,-8,3,16);
+    // long black coat with white vertical panels and a crimson lining
+    ctx.fillStyle=white?'#fff':'#0a0a0e'; ctx.strokeStyle=COL.ink; ctx.lineWidth=4;
+    poly([[16,-24],[-6,-34],[-46,-30],[-58,0],[-46,30],[-6,34],[16,24]]); ctx.fill(); ctx.stroke();
+    ctx.fillStyle=white?'#fff':c; ctx.globalAlpha=0.75; poly([[-46,-30],[-58,0],[-52,-2],[-42,-24]]); ctx.fill(); poly([[-46,30],[-58,0],[-52,2],[-42,24]]); ctx.fill(); ctx.globalAlpha=1;
+    ctx.fillStyle=white?'#fff':'#ddd6c6'; ctx.fillRect(-40,-14,40,6); ctx.fillRect(-40,8,40,6);
+    // broad squared shoulders
+    ctx.fillStyle=white?'#fff':'#141418'; for (const sd of [-1,1]){ ctx.beginPath(); ctx.rect(-12,sd*24-8,26,16); ctx.fill(); ctx.stroke(); }
+    // hands: the right one holds a crimson cube of stolen power (tinted with the power he's using)
+    ctx.fillStyle=white?'#fff':'#e8e2d4'; ctx.beginPath(); ctx.arc(14,-30,5,0,PI2); ctx.fill(); ctx.stroke();
+    const oc=stolen||c; ctx.save(); ctx.translate(20,32); ctx.rotate(time*2); ctx.shadowColor=oc; ctx.shadowBlur=14+18*glow;
+    ctx.fillStyle=oc; ctx.fillRect(-7-2*glow,-7-2*glow,14+4*glow,14+4*glow); ctx.strokeStyle='#ffffff'; ctx.lineWidth=1.5; ctx.strokeRect(-4,-4,8,8); ctx.restore();
+    // tall rectangular ivory mask with a single crimson eye-slit
+    ctx.fillStyle=white?'#fff':'#ece6d6'; ctx.beginPath(); ctx.rect(-10,-11,30,22); ctx.fill(); ctx.strokeStyle=COL.ink; ctx.lineWidth=3; ctx.stroke();
+    ctx.fillStyle=c; ctx.shadowColor=c; ctx.shadowBlur=8+10*glow; ctx.fillRect(14,-9,4,8); ctx.shadowBlur=0;
     ctx.restore();
     if (e.bstate==='INTRO' || e.bstate==='PHASE_CHANGE'){ ctx.save(); ctx.strokeStyle=c; ctx.globalAlpha=0.4+0.3*Math.sin(time*10); ctx.lineWidth=3; ctx.setLineDash([8,8]); ctx.beginPath(); ctx.arc(e.x,e.y,e.r+24,0,PI2); ctx.stroke(); ctx.restore(); }
   },

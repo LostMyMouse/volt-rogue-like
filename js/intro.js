@@ -9,7 +9,7 @@ const CHARACTER_INTROS = {
   thorn:{ kind:'hero', flourish:'is on comms!', first:"Thorn. I used to be on the other side. Turns out I'm better at this one." },
   patch:{ kind:'hero', flourish:'is on comms!', first:"Patch. I build the gear, you break it. Try not to break yourself." },
 };
-const INTRO_ART = ['kilnheart','gravemark','bellwether','verdigris','glasswake','undertow']; // assets/intro/<id>.png; others fall back to their drawn bust
+const INTRO_ART = ['kilnheart','gravemark','bellwether','verdigris','glasswake','undertow','redactor']; // assets/intro/<id>.png; others fall back to their drawn bust
 
 function introFor(id){
   const b=BOSSES[id];

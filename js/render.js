@@ -139,7 +139,7 @@ function drawZones(){
     const k=z.t/z.dur, fade=Math.min(1,(z.dur-z.t)/0.4);
     ctx.save(); ctx.globalAlpha=fade;
     if (z.kind==='light'){
-      const g=ctx.createRadialGradient(z.x,z.y,0,z.x,z.y,z.r); g.addColorStop(0,'rgba(255,224,138,.32)'); g.addColorStop(1,'rgba(255,224,138,.05)');
+      const g=ctx.createRadialGradient(z.x,z.y,0,z.x,z.y,z.r); g.addColorStop(0,'rgba(255,241,208,.32)'); g.addColorStop(1,'rgba(255,241,208,.05)');
       ctx.fillStyle=g; ctx.beginPath(); ctx.arc(z.x,z.y,z.r,0,PI2); ctx.fill();
       ctx.strokeStyle=z.c; ctx.lineWidth=2; ctx.setLineDash([12,10]); ctx.lineDashOffset=-time*40; ctx.stroke(); ctx.setLineDash([]);
     } else if (z.kind==='thorns'){

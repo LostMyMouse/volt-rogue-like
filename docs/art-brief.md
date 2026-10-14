@@ -25,7 +25,7 @@ Match the approved concept art in `concept-art/` (start with `visual-language.we
 | UI text / ready-heal / power-upgrade | `#DDE8F5` / `#55E6C1` / `#B56CFF` |
 | Kilnheart furnace orange | `#FF7A1A` |
 | Gravemark purple | `#B56CFF` |
-| Heroes: Halo / Bastion / Echo / Thorn / Patch | `#FFE08A` / `#9FB0C8` / `#FF5CC8` / `#6AD46A` / `#55E6C1` |
+| Heroes: Halo / Bastion / Echo / Thorn / Patch | `#FFF1D0` (dawn white) / `#9FB0C8` / `#8B93FF` (periwinkle) / `#6AD46A` / `#55E6C1` |
 
 **Colour rule for readability:** enemy attacks use their villain's colour, and Volt's boons use hero colours. A hero's glow should never be confusable with a villain's attack colour in the same fight.
 

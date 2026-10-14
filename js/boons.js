@@ -8,11 +8,11 @@
 const RARITY = [ {name:'Common',c:COL.text,w:70}, {name:'Rare',c:COL.volt,w:24}, {name:'Epic',c:COL.boon,w:6} ];
 const SLOT_NAME = { strike:'Strike', power:'Power', dash:'Dash', overload:'Overload', passive:'Passive' };
 const HEROES = {
-  halo:{ c:'#ffe08a', first:"Rookie. The city's watching tonight, and so am I. Take this.",
+  halo:{ c:'#fff1d0', first:"Rookie. The city's watching tonight, and so am I. Take this.",
     lines:["Again? Fine. Make it count.","Light doesn't bend for anyone. Neither should you.","You're still standing. Good. Here."] },
   bastion:{ c:'#9fb0c8', first:"Volt, Bastion. You're on my roof, you play by my rules. Rule one: don't die.",
     lines:["Shields up, rookie.","Hold the line. Let them break on you.","Less flash, more footwork. Take this."] },
-  echo:{ c:'#ff5cc8', first:"Heard you were struggling. Loudly. Want help? Don't answer, I already know.",
+  echo:{ c:'#8b93ff', first:"Heard you were struggling. Loudly. Want help? Don't answer, I already know.",
     lines:["I read your next move. It was bad. Try this instead.","Stop thinking so loud and pick one.","Fine, I'll carry you. Again."] },
   thorn:{ c:'#6ad46a', first:"They don't trust me at the Fortress either. Guess we have that in common.",
     lines:["Nature doesn't rush. It just wins.","Let them come to you. Then don't let them leave.","Roots hold. So should you."] },
