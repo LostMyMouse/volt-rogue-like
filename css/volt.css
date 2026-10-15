@@ -288,3 +288,40 @@ body:not(.playing) .touch{display:none!important}
 body.touch-mode .hud-btns .chip{padding:9px 12px}
 body.touch-mode #btnTune{display:none}
 body.touch-mode .hub-prompt{bottom:calc(env(safe-area-inset-bottom,0px) + 28px);font-size:22px;padding:12px 20px}
+
+/* Training roof: Bastion's instructions under the HUD */
+.tut{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 92px);transform:translateX(-50%);width:min(560px,calc(100vw - 32px));box-sizing:border-box;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:rgba(4,7,14,.92);border:2px solid var(--heal);box-shadow:4px 4px 0 rgba(4,7,14,.7),0 0 20px rgba(85,230,193,.25);z-index:15}
+.tut.pop{animation:tutPop .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes tutPop{from{transform:translateX(-50%) scale(.92);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+.tut .portrait{width:56px;height:56px;flex:none}
+.tut-body{display:grid;gap:3px;min-width:0}
+.tut-body strong{font-family:var(--display);font-weight:900;font-size:24px;line-height:1;text-transform:uppercase;color:var(--heal)}
+.tut-body p{margin:0;font-size:14px;line-height:1.4;color:var(--text)}
+.tut-body kbd{font-family:var(--ui);font-size:12px;padding:1px 6px;background:var(--heal);color:var(--ink);border:1px solid var(--ink)}
+.tut-say{font-style:italic;color:var(--muted)!important;font-size:13px!important}
+.tut-skip{position:absolute;right:8px;top:-14px;pointer-events:auto}
+@media (max-height:480px){ .tut{top:calc(env(safe-area-inset-top,0px) + 84px);padding:8px 10px} .tut .portrait{width:42px;height:42px} .tut-body strong{font-size:18px} .tut-say{display:none} }
+/* Opening cutscene: slow pan over the art, letterbox bars, typewriter caption */
+.cutscene{position:fixed;inset:0;z-index:40;background:#000;overflow:hidden;cursor:pointer}
+.cs-img{position:absolute;inset:-6%;background:center/cover no-repeat;transform-origin:center}
+.cs-img.kb{animation:csPan 9s ease-out forwards}
+.cs-img.dim{filter:brightness(.38) saturate(.8)}
+@keyframes csPan{from{transform:scale(1.04) translate(1%,1%)}to{transform:scale(1.16) translate(-2%,-1.5%)}}
+.cs-bar{position:absolute;left:0;right:0;height:9vh;background:#000;z-index:2}
+.cs-bar.top{top:0} .cs-bar.bottom{bottom:0}
+.cs-figure{position:absolute;inset:9vh 0 24vh;display:flex;align-items:center;justify-content:center;z-index:1;pointer-events:none}
+.cs-figure.art img{max-height:100%;max-width:70vw;filter:drop-shadow(0 0 30px var(--c));animation:csRise .6s ease-out both}
+.cs-figure.row{gap:clamp(6px,2vw,20px);flex-wrap:wrap}
+.cs-figure.row span{display:grid;justify-items:center;gap:6px;animation:csRise .5s ease-out both}
+.cs-figure.row span:nth-child(2){animation-delay:.1s}.cs-figure.row span:nth-child(3){animation-delay:.2s}.cs-figure.row span:nth-child(4){animation-delay:.3s}.cs-figure.row span:nth-child(5){animation-delay:.4s}
+.cs-figure.row img{width:clamp(70px,15vw,170px);border:3px solid var(--c);box-shadow:0 0 22px var(--c);background:#0b111c}
+.cs-figure b,.cs-figure.solo b{font-family:var(--display);font-weight:900;font-size:clamp(14px,2vw,22px);letter-spacing:.06em;text-transform:uppercase;color:var(--c);text-shadow:2px 2px 0 #000}
+.cs-figure.solo{flex-direction:column;gap:10px}
+.cs-figure.solo img{width:clamp(140px,26vw,300px);border:4px solid var(--c);box-shadow:0 0 30px var(--c);background:#0b111c;animation:csRise .6s ease-out both}
+@keyframes csRise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.cs-caption{position:absolute;left:50%;bottom:calc(9vh + 18px);transform:translateX(-50%);width:min(820px,calc(100vw - 40px));box-sizing:border-box;z-index:3;padding:16px 20px;background:rgba(4,7,14,.88);border-left:5px solid var(--volt);display:grid;gap:6px}
+.cs-caption p{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(18px,2.6vw,30px);line-height:1.25;letter-spacing:.01em;color:var(--spark);min-height:1.25em}
+.cs-who{display:none;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--volt)}
+.cutscene.speaking .cs-who{display:block}
+.cs-count{justify-self:end;font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.cs-skip{position:absolute;right:16px;top:calc(9vh + 12px);z-index:4}

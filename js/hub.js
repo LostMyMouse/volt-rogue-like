@@ -38,7 +38,8 @@ const HUB_SPOTS = [
   {id:'gate', name:'Deploy Gate', verb:'Deploy', at:{x:742,y:805}, r:55, lx:742, ly:735, c:COL.volt},
   {id:'board', name:'Commendations', verb:'Read', at:{x:410,y:268}, r:55, lx:400, ly:110, c:COL.amber},
   {id:'trophies', name:'Trophy shelf', verb:'Look', at:{x:1280,y:275}, r:90, lx:1280, ly:150, c:COL.amber},
-  {id:'bunk', name:'Your bunk', verb:'Look', at:{x:478,y:650}, r:40, lx:250, ly:640, c:COL.amber},
+  {id:'bunk', name:'Your bunk', verb:'Remember', at:{x:478,y:650}, r:40, lx:250, ly:640, c:COL.amber},
+  {id:'training', name:'Training roof', verb:'Train', at:{x:1420,y:585}, r:45, lx:1250, ly:640, c:COL.heal},
 ];
 
 /* ---------- Dialogue ---------- */
@@ -166,7 +167,8 @@ function hubInteract(){
   if (state!=='hub' || !hubNear) return;
   if (hubNear.npc) return talkTo(hubNear.npc.id);
   const s=hubNear.spot, c=hubContext();
-  if (s.id==='gate'){ startGame(); return; }
+  if (s.id==='gate'){ if (save.tutorialDone) startGame(); else startTutorial(true); return; }
+  if (s.id==='training'){ startTutorial(false); return; }
   if (s.id==='terminal'){ state='hubmenu'; keys.clear(); openFortress(); return; }
   if (s.id==='armoury'){ state='hubmenu'; keys.clear(); openStyles(); return; }
   const n=(v,w)=>`${v} ${w}${v===1?'':'s'}`;
@@ -178,7 +180,8 @@ function hubInteract(){
     const got=Object.keys(c.beaten);
     openTalk(null,[got.length ? 'The trophy shelf: '+got.map(id=>`${SPEAKERS[id].name}${c.beaten[id]>1?' ×'+c.beaten[id]:''}`).join(', ')+'.' : "An empty shelf, waiting. Beat a villain and something of theirs ends up here."],s);
   } else if (s.id==='bunk'){
-    openTalk(null,["Your bunk. The Halo poster has been up since you were twelve. One day."],s);
+    // Lying back on the bunk replays how all this started.
+    playCutscene(()=>{ state='hub'; hubNear=null; });
   }
 }
 function talkTo(id){

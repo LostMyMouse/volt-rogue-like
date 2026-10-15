@@ -104,6 +104,7 @@ function doDash(){
   const mv=moveInput(); let dx=mv.x, dy=mv.y;
   if (!dx&&!dy){ dx=Math.cos(p.aim); dy=Math.sin(p.aim); }
   const m=Math.hypot(dx,dy); p.dashDir={x:dx/m,y:dy/m};
+  if (typeof tut!=='undefined' && tut) tut.dashes=(tut.dashes||0)+1;
   p.dashT=T.dashTime; p.dashCd=T.dashCooldown*R.dashCdMul+T.dashTime; p.iT=Math.max(p.iT,T.dashTime+0.06);
   p.charging=0; p.shield=false; { const so=STYLE(); so.onDash && so.onDash(); }
   if (has('flashstep')){ fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.25,r:120,c:HEROES.halo.c}); for (const e of liveEnemies()) if (!e.isBoss && Math.hypot(e.x-p.x,e.y-p.y)<120+e.r){ e.stunT=Math.max(e.stunT,val('flashstep')); if (e.state==='windup'||e.state==='charge'){ e.state=e.kind==='rusher'?'recover':'move'; e.timer=0.6; } } }

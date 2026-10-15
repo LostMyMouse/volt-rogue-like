@@ -73,6 +73,7 @@ function update(dt){
     const dx=p.x-e.x, dy=p.y-e.y, d=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx);
     e.mx=0; e.my=0;
     if (e.isBud){ updateBud(e,dt); continue; }
+    if (e.tutDummy){ e.vx=e.vy=0; continue; } // training dummy: stands still and takes hits
     if (e.isDecoy || e.isIce || e.isPlate){ e.flashT-=dt; continue; }
     if (isSpecBoss(e)) bossUpdate(e,dt);
     else if (e.stunT<=0){
@@ -168,5 +169,6 @@ function update(dt){
   if (roomPhase==='cleared'){ clearT-=dt; if (clearT<=0){ openExits(); roomPhase='exits'; } }
   else if (roomPhase==='exits') updateExits(dt);
   else if (roomPhase==='reward' && arrivalT>0){ arrivalT-=dt; if (arrivalT<=0) startWave(); }
+  if (roomPhase==='tutorial') updateTutorial(dt);
   updateCam(dt);
 }

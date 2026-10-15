@@ -61,6 +61,20 @@
   <div class="talk-body"><span class="talk-who" id="talkWho"></span><p id="talkLine"></p><span class="talk-next" id="talkNext">E · close</span></div>
 </div>
 
+<div class="tut" id="tut" hidden>
+  <div class="portrait" id="tutPortrait" role="img"></div>
+  <div class="tut-body"><span class="tag" id="tutStep">Training</span><strong id="tutTitle"></strong><p id="tutText"></p><p class="tut-say" id="tutSay"></p></div>
+  <button class="chip tut-skip" id="tutSkip" type="button">Skip training</button>
+</div>
+
+<div class="cutscene" id="cutscene" hidden>
+  <div class="cs-img" id="csImg"></div>
+  <div class="cs-figure" id="csFigure"></div>
+  <div class="cs-bar top"></div><div class="cs-bar bottom"></div>
+  <div class="cs-caption"><span class="cs-who">Volt</span><p id="csText"></p><span class="cs-count" id="csCount"></span></div>
+  <button class="chip cs-skip" id="csSkip" type="button">Skip</button>
+</div>
+
 <div class="banner" id="banner"></div>
 
 <div class="intro" id="introCard" hidden>
@@ -227,5 +241,7 @@
 <script src="js/render.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/hub.js"></script>
+<script src="js/cutscene.js"></script>
+<script src="js/tutorial.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/main.js"></script>

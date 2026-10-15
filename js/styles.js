@@ -254,6 +254,7 @@ function doPower(){
   if (state!=='play'||p.powerCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   if (p.suppressed){ texts.push({x:p.x,y:p.y-40,v:'SUPPRESSED',t:0,c:'#e0283c'}); return; }
   STYLE().powerPress();
+  if (typeof tut!=='undefined' && tut) tut.usedSpecial=true;
   if (p.powerCd>0 || p.charging) playerAnim('strike2');
 }
 function releasePower(){

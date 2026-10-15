@@ -1,0 +1,83 @@
+// Volt: Training roof. A short guided fight the first time you deploy (and any time from the Fortress
+// training corner): move, strike, Special, dash, parry, Overload, then clear the rest. Bastion talks you
+// through it. Finishing (or skipping) a first-time session goes straight into a real run.
+'use strict';
+
+const TUT_STEPS = [
+  { id:'move',   title:'Move',     kb:'Use <kbd>WASD</kbd> to move around the roof.', touch:'Drag anywhere on the left side of the screen to move.', say:"Let's see you move. Lap the roof." },
+  { id:'strike', title:'Strike',   kb:'<kbd>Left click</kbd> to Strike the training dummy. Hold it to keep swinging.', touch:'Tap <b>Strike</b> to hit the dummy. Hold it to keep swinging.', say:"Dummy's yours. Hit it like it owes you money." },
+  { id:'special',title:'Special',  kb:'<kbd>Right click</kbd> for your Special. Each style has a different one.', touch:'Tap <b>Special</b>. Each style has a different one.', say:"Now your Special. Every style's is different." },
+  { id:'dash',   title:'Dash',     kb:'<kbd>Space</kbd> to dash. You can\'t be hurt mid-dash.', touch:'Tap <b>Dash</b>. You can\'t be hurt mid-dash.', say:"Dash. You're untouchable for a split second. Use it." },
+  { id:'parry',  title:'Parry',    kb:'A white ring closes before an attack lands. Tap <kbd>Shift</kbd> as it closes to <b>parry</b>.', touch:'A white ring closes before an attack lands. Tap <b>Block</b> as it closes to <b>parry</b>.', say:"This one's slowed down. When the ring closes, block. Perfect timing is a parry." },
+  { id:'overload',title:'Overload',kb:'Overload is charged. Press <kbd>Q</kbd> to blast everything nearby.', touch:'Overload is charged. Tap <b>Ovld</b> to blast everything nearby.', say:"Overload's full. Light them up." },
+  { id:'clear',  title:'Finish them', kb:'Clear the roof.', touch:'Clear the roof.', say:"Last ones. Then you're on the clock for real." },
+];
+let tut=null;
+const inTutorial = () => !!tut;
+
+function startTutorial(first){
+  reset(); routeStart(); lastCaller=null; exits=[]; transit=null; powerHeld=false;
+  { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
+  leaveHub(); for (const id of ['#mStart','#mOver','#mPause','#mDraft','#mFortress','#mCity','#mStyle']) show(id,false);
+  buildRoom(); refreshSlotHud();
+  R.windMul=(R.windMul||1)*2.2; // everything winds up slowly while you learn
+  player.x=ARENA.w/2; player.y=ARENA.h*0.8;
+  tut={ i:-1, first, moved:0, lx:player.x, ly:player.y, hits:0, dashes:0, wasDash:false, lastHp:0 };
+  roomPhase='tutorial'; state='play';
+  banner('TRAINING ROOF'); show('#tut',true);
+  tutNext();
+}
+function tutSpawn(n,opt={}){
+  for (let i=0;i<n;i++){
+    const at={x:ARENA.w/2+(i-(n-1)/2)*140, y:ARENA.h*0.48}, e=makeEnemy('rusher',0.3+i*0.2,at);
+    if (opt.dummy){ e.tutDummy=true; e.hp=e.maxHp=99999; }
+    else { e.hp=e.maxHp=opt.hp||40; e.tutWeak=true; }
+    enemies.push(e);
+  }
+}
+function tutNext(){
+  tut.i++;
+  const s=TUT_STEPS[tut.i]; if (!s) return;
+  if (s.id==='dash') tut.dashes=0;
+  if (s.id==='special') tut.usedSpecial=false;
+  if (s.id==='strike'){ tutSpawn(1,{dummy:true}); tut.dummy=enemies[enemies.length-1]; tut.lastHp=tut.dummy.hp; }
+  if (s.id==='parry'){ for (const e of enemies) e.dead=true; enemies=[]; tutSpawn(1,{hp:60}); }
+  if (s.id==='overload'){ tutSpawn(3,{hp:30}); player.sig=100; }
+  $('#tutStep').textContent=`Training · ${tut.i+1} of ${TUT_STEPS.length}`;
+  $('#tutTitle').textContent=s.title;
+  $('#tutText').innerHTML=inputMode==='touch'?s.touch:s.kb;
+  $('#tutSay').textContent='“'+s.say+'”';
+  setPortrait($('#tutPortrait'),'bastion');
+  const el=$('#tut'); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop');
+}
+// Runs every frame during training (called from update).
+function updateTutorial(dt){
+  if (!tut) return;
+  const p=player, s=TUT_STEPS[tut.i];
+  if (p.hp<40) p.hp=Math.min(p.maxHp,p.hp+60); // nobody dies on the training roof
+  if (!s){ return; }
+  if (s.id==='move'){ tut.moved+=Math.hypot(p.x-tut.lx,p.y-tut.ly); if (tut.moved>500) return tutDone(); }
+  else if (s.id==='strike'){ if (tut.dummy.hp<tut.lastHp){ tut.hits++; tut.lastHp=tut.dummy.hp; } if (tut.hits>=4) return tutDone(); }
+  else if (s.id==='special'){ if (tut.usedSpecial) return tutDone(); }
+  else if (s.id==='dash'){ if (tut.dashes>=2) return tutDone(); }
+  else if (s.id==='parry'){ if ((run.parries||0)>=1) return tutDone(); if (!enemies.some(e=>!e.dead && !e.tutDummy)) tutSpawn(1,{hp:60}); }
+  else if (s.id==='overload'){ if (p.sig<100) return tutDone(); }
+  else if (s.id==='clear'){ if (!enemies.some(e=>!e.dead && !e.tutDummy)) return tutDone(); }
+  tut.lx=p.x; tut.ly=p.y;
+}
+function tutDone(){
+  const s=TUT_STEPS[tut.i];
+  texts.push({x:player.x,y:player.y-60,v:'NICE',t:0,big:true,c:COL.heal});
+  if (s.id==='overload'){ for (const e of enemies) if (e.tutDummy) e.dead=true; tutSpawn(3,{hp:40}); }
+  if (tut.i>=TUT_STEPS.length-1){ finishTutorial(); return; }
+  tutNext();
+}
+function finishTutorial(skipped){
+  if (!tut) return;
+  const first=tut.first; tut=null; show('#tut',false);
+  save.tutorialDone=1; writeSave();
+  if (!skipped) banner('TRAINING COMPLETE');
+  // First time: straight into a real run. Replays go back to the Fortress.
+  setTimeout(()=>{ if (first) startGame(); else enterHub(); }, skipped?0:1400);
+}
+$('#tutSkip').addEventListener('click', () => finishTutorial(true));

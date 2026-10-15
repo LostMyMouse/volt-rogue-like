@@ -155,7 +155,8 @@ function openTune(){
 }
 function closeTune(){ show('#mTune',false); if (tuneReturn==='play' && $('#mPause').hidden) state='play'; tuneReturn=null; }
 
-$('#btnStart').addEventListener('click', () => { goFullscreen(); enterHub(); });
+// First launch: the opening cutscene, then the Fortress.
+$('#btnStart').addEventListener('click', () => { goFullscreen(); if (!save.seenIntro) playCutscene(()=>enterHub()); else enterHub(); });
 function goFullscreen(){
   if (inputMode!=='touch') return;
   try { const el=document.documentElement, r=el.requestFullscreen&&el.requestFullscreen({navigationUI:'hide'}); if (r&&r.then) r.then(()=>{ try{ screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{}); }catch(e){} }).catch(()=>{}); } catch(e){}
