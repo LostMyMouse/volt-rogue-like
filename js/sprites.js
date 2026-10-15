@@ -348,6 +348,9 @@ function stickyFace(key,face){
   if (cur===undefined || Math.abs(angDiff(face,cur*Math.PI/2))>Math.PI/4+0.17) cur=((Math.round(face/(Math.PI/2))%4)+4)%4;
   memo.set(key,cur); return cur*Math.PI/2;
 }
+// Volt's side-view run only ever lifts the near leg, and its knee-ups land unevenly (frames 7, 0, then 3).
+// Until a proper alternating cycle is generated, replay it as stride, stride, knee-up twice per loop.
+const FRAME_ORDER = { 'volt/run/east':[1,2,3,5,6,7], 'volt/run/west':[1,2,3,5,6,7] };
 function animationFrame(c,elapsed){
   const f=Math.max(0,Math.floor(elapsed*c.fps));
   return c.loop?f%c.frames:Math.min(c.frames-1,f);
@@ -357,7 +360,9 @@ function drawAnimation(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
   const direction=['east','south','west','north'][((Math.round(face/(Math.PI/2))%4)+4)%4];
   const row=c.directions.length===1?0:c.directions.indexOf(direction);
   if (row<0) return false;
-  const f=frame===null?animationFrame(c,elapsed):clamp(Math.floor(frame),0,c.frames-1);
+  // Some clips replay their frames in a corrected order for one facing (see FRAME_ORDER).
+  const order=FRAME_ORDER[id+'/'+name+'/'+direction];
+  const f=order&&frame===null ? order[Math.floor(Math.max(0,elapsed)*c.fps)%order.length] : frame===null?animationFrame(c,elapsed):clamp(Math.floor(frame),0,c.frames-1);
   let sheet=c.img;
   if (tint){if (!c[tint]) c[tint]=tintSheet(c.img,tint==='white'?'#ffffff':COL.volt);sheet=c[tint];}
   const [w,h]=c.frame,[ax,ay]=c.anchor, off=c.offsets&&c.offsets[row]&&c.offsets[row][f]||[0,0];
