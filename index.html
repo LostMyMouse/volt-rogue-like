@@ -2,7 +2,11 @@
 <html lang="en">
 <meta charset="utf-8">
 <script>/* Some hosts serve this page at /folder with no trailing slash, which breaks relative paths. */ if (!/\/$|\.html?$/.test(location.pathname)) document.write('<base href="'+location.pathname+'/">');</script>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#080d18">
 <title>Volt</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +31,7 @@
 
 <div class="abilities" id="abilities">
   <div class="ab" id="abStrike"><i class="cd"></i><span class="key">Left click</span><b>Strike</b></div>
-  <div class="ab" id="abPower"><i class="cd"></i><span class="key">Right click</span><b>Power</b></div>
+  <div class="ab" id="abPower"><i class="cd"></i><span class="key">Right click</span><b>Special</b></div>
   <div class="ab" id="abDash"><i class="cd"></i><span class="key">Space</span><b>Dash</b></div>
   <div class="ab" id="abSig"><i class="charge"></i><span class="key">Q</span><b>Overload</b></div>
   <div class="ab" id="abBlock"><i class="cd"></i><span class="key">Shift</span><b>Block</b></div>
@@ -35,7 +39,7 @@
 
 <div class="touch" id="touch" hidden>
   <button class="tb t-strike" id="tStrike" type="button"><i class="cd"></i><span>Strike</span></button>
-  <button class="tb t-power" id="tPower" type="button"><i class="cd"></i><span>Power</span></button>
+  <button class="tb t-power" id="tPower" type="button"><i class="cd"></i><span>Spec</span></button>
   <button class="tb t-dash" id="tDash" type="button"><i class="cd"></i><span>Dash</span></button>
   <button class="tb t-sig" id="tSig" type="button"><i class="charge"></i><span>Ovld</span></button>
   <button class="tb t-block" id="tBlock" type="button"><i class="cd"></i><span>Block</span></button>
@@ -79,7 +83,7 @@
       <dt>WASD</dt><dd>Move</dd>
       <dt>Mouse</dt><dd>Aim</dd>
       <dt>Left click</dt><dd>Strike, hold to keep attacking</dd>
-      <dt>Right click</dt><dd>Power: depends on your style (hold to charge Arc Caster's Lance)</dd>
+      <dt>Right click</dt><dd>Special: depends on your style (hold to charge Arc Caster's Lance)</dd>
       <dt>Space</dt><dd>Dash, invulnerable while dashing</dd>
       <dt>Q</dt><dd>Overload when charged</dd>
       <dt>Shift</dt><dd>Block. Tap as the white ring closes to parry</dd>
@@ -88,9 +92,12 @@
     </dl>
     <dl class="controls" id="ctrlTouch" hidden>
       <dt>Left thumb</dt><dd>Drag anywhere on the left side to move</dd>
-      <dt>Buttons</dt><dd>Strike, Power, Dash and Overload. Attacks aim at the nearest enemy.</dd>
+      <dt>Buttons</dt><dd>Strike, Special, Dash, Overload and Block. Attacks aim at the nearest enemy.</dd>
+      <dt>Jump</dt><dd>Stand on a glowing jump point for a moment to leap</dd>
+      <dt>Talk</dt><dd>Tap the prompt at the bottom, then tap the box to continue</dd>
     </dl>
     <p class="hint">Attacks marked with a closing white ring can be parried: tap Block as the ring closes to take no damage and leave the attacker Exposed. Attacks with a jagged edge are supers: dodge them, never block.</p>
+    <p class="rotate-tip">Best played with your phone turned sideways.</p>
     <div class="row"><button class="btn primary" id="btnStart" type="button">Enter the Fortress</button></div>
   </div>
 </div>
@@ -102,7 +109,7 @@
       <div><blockquote id="draftLine"></blockquote><figcaption id="draftWho"></figcaption></div>
     </figure>
     <div class="cards" id="draftCards"></div>
-    <div class="row draft-foot"><p class="hint">Choose one: click, tap or press 1 to 3. One boon per slot; a new one replaces the old.</p><button class="btn" id="btnReroll" type="button" hidden>Reroll</button></div>
+    <div class="row draft-foot"><p class="hint">Choose one: click, tap or press 1 to 3. One power per slot; a new one replaces the old.</p><button class="btn" id="btnReroll" type="button" hidden>Reroll</button></div>
   </div>
 </div>
 
@@ -119,7 +126,7 @@
   <div class="panel style-panel" role="dialog" aria-labelledby="styleTitle">
     <span class="tag">Fortress armoury · combat styles</span>
     <h2 id="styleTitle">Choose your style</h2>
-    <p class="hint">A style replaces Strike and Power. Dash, Overload and every boon work with all of them. Beat Gravemark to earn Hero Licences and unlock new styles.</p>
+    <p class="hint">A style replaces Strike and Special. Dash, Overload and every power work with all of them. Beat Gravemark to earn Hero Licences and unlock new styles.</p>
     <div class="fort-total"><span class="tag">Hero Licences</span><strong>✦ <span id="styleLic">0</span></strong></div>
     <div class="style-list" id="styleList"></div>
     <div class="row"><button class="btn primary" id="btnStyleClose" type="button">Done</button></div>
@@ -163,7 +170,7 @@
       <div><span class="tag">Time</span><strong id="statTime">0:00</strong></div>
       <div><span class="tag">Hits taken</span><strong id="statHits">0</strong></div>
     </div>
-    <div class="record"><span class="tag">Boons this run</span><div class="boon-chips" id="resBoons"></div></div>
+    <div class="record"><span class="tag">Powers this run</span><div class="boon-chips" id="resBoons"></div></div>
     <p class="res-shards" id="resShards"></p>
     <figure class="quote" id="resQuote">
       <div class="portrait" id="resPortrait" role="img"></div>
@@ -212,6 +219,7 @@
 <script src="js/styles.js"></script>
 <script src="js/rooms.js"></script>
 <script src="js/route.js"></script>
+<script src="js/commend.js"></script>
 <script src="js/draft.js"></script>
 <script src="js/intro.js"></script>
 <script src="js/story.js"></script>

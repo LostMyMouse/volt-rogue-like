@@ -37,6 +37,7 @@ function onParry(ang,opt){
   fx.push({type:'shock',x:fx0,y:fy0,t:0,dur:.25,r:70,c:'#ffffff'});
   texts.push({x:p.x,y:p.y-46,v:'PARRY',t:0,big:true,c:'#ffffff'});
   playerAnim('parry');
+  if (run.parries>=10) commend('parry10');
 }
 // Called at the top of hurtPlayer. Returns {result, dmg}: result is 'parried' | 'blocked' | 'shattered' | 'hit'.
 function resolveBlock(dmg,ang,src,opt){

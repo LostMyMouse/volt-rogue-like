@@ -73,7 +73,7 @@ button{font:inherit;color:inherit}
 /* Modals */
 [hidden]{display:none !important}
 .scrim{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:rgba(4,7,14,.62);backdrop-filter:blur(2px);z-index:10}
-.panel{position:relative;width:100%;max-width:440px;max-height:calc(100% - 32px);overflow:auto;background:var(--panel);border:3px solid var(--ink);box-shadow:10px 10px 0 var(--ink),inset 0 0 0 1px #2a3a54;padding:22px 22px 20px;display:grid;gap:16px}
+.panel{position:relative;box-sizing:border-box;width:100%;max-width:440px;max-height:calc(100% - 32px);overflow:auto;background:var(--panel);border:3px solid var(--ink);box-shadow:10px 10px 0 var(--ink),inset 0 0 0 1px #2a3a54;padding:22px 22px 20px;display:grid;gap:16px}
 .panel::before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,var(--volt),var(--rim))}
 .panel h1,.panel h2{margin:0;font-family:var(--display);font-weight:900;line-height:.88;letter-spacing:.01em;text-wrap:balance}
 .panel h1{font-size:76px;color:var(--spark);text-shadow:4px 4px 0 var(--ink),0 0 26px rgba(38,191,255,.6);transform:skewX(-8deg);transform-origin:left}
@@ -258,10 +258,33 @@ body.in-hub .hud, body.in-hub .abilities, body.in-hub .touch, body.in-hub .bossb
 .talk-body{display:grid;gap:6px;min-width:0}
 .talk-who{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .talk-who b{color:var(--c)}
-.talk p{margin:0;font-size:16px;line-height:1.5;color:var(--text)}
+.talk p{margin:0;font-size:16px;line-height:1.5;color:var(--text);white-space:pre-line}
 .talk-next{justify-self:end;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--volt))}
 @media (max-width:600px){ .talk .portrait{width:60px;height:60px} .talk p{font-size:14px} .hub-hud strong{font-size:26px} }
 
 .talk.is-volt{flex-direction:row-reverse;text-align:right}
 .talk.is-volt .talk-body{justify-items:end}
 .talk.is-volt .talk-next{justify-self:start}
+
+/* Phones and tablets: touch controls only while you can act, menus fit the screen, short landscape screens compact. */
+body:not(.playing) .touch{display:none!important}
+.rotate-tip{display:none;margin:0;font-size:13px;color:var(--amber)}
+@media (orientation:portrait){ body.touch-mode .rotate-tip{display:block} }
+@media (max-height:480px){
+  .panel{padding:14px 16px;gap:10px;max-height:calc(100% - 16px)}
+  .scrim{padding:8px}
+  .panel h1{font-size:48px}
+  .gate{padding:10px} .gate strong{font-size:26px} .gate-art{width:110px;height:110px} .gate .card-desc{display:none}
+  .card{padding:10px} .card strong{font-size:20px}
+  .hero strong,.wave strong{font-size:24px}
+  .hub-hud strong{font-size:24px}
+  .talk{padding:10px 14px} .talk .portrait{width:64px;height:64px} .talk p{font-size:14px}
+  .intro-text{top:22%}
+  .controls{font-size:12px}
+  #mStart .panel > p:not(.rotate-tip), #mStart .hint{display:none}
+  .bossbar{top:calc(env(safe-area-inset-top,0px) + 86px);width:min(380px,50vw)}
+  .bossbar-name strong{font-size:18px}
+}
+body.touch-mode .hud-btns .chip{padding:9px 12px}
+body.touch-mode #btnTune{display:none}
+body.touch-mode .hub-prompt{bottom:calc(env(safe-area-inset-bottom,0px) + 28px);font-size:22px;padding:12px 20px}

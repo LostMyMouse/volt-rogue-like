@@ -172,7 +172,7 @@ function rewardIcon(r){
   const img=new Image(); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   return ICON_CACHE[key]=img;
 }
-function rewardStyle(r){ return r.type==='boon' ? {c:HEROES[r.hero].c, label:SPEAKERS[r.hero].name+' · boon'} : r.type==='boss' ? {c:KIND_COL[r.boss]||COL.boon, label:(SPEAKERS[r.boss]||{name:'Boss'}).name} : REWARD_STYLE[r.type]; }
+function rewardStyle(r){ return r.type==='boon' ? {c:HEROES[r.hero].c, label:SPEAKERS[r.hero].name+' · power'} : r.type==='boss' ? {c:KIND_COL[r.boss]||COL.boon, label:(SPEAKERS[r.boss]||{name:'Boss'}).name} : REWARD_STYLE[r.type]; }
 function drawExitPads(){
   for (const x of exits){
     const st=rewardStyle(x.reward), pop=Math.min(1,x.t/0.35), pulse=0.5+0.5*Math.sin(time*5+x.x);
@@ -210,9 +210,9 @@ function drawExitIcons(){
 // Saved in this browser only, under a volt- prefixed key.
 const META=[
   {id:'vitality', name:'Hero Conditioning', desc:'+10 max health per rank.', cost:[15,25,40,60]},
-  {id:'training', name:'Combat Drills', desc:'+5% Strike and Power damage per rank.', cost:[12,20,32,50]},
+  {id:'training', name:'Combat Drills', desc:'+5% Strike and Special damage per rank.', cost:[12,20,32,50]},
   {id:'laststand', name:'Last Stand', desc:'Once per rank each run, a lethal hit leaves you at 1 health with 2s of invulnerability.', cost:[40,80]},
-  {id:'rapport', name:'Rapport', desc:'Boons roll Rare and Epic more often.', cost:[20,35,55]},
+  {id:'rapport', name:'Rapport', desc:'Powers roll Rare and Epic more often.', cost:[20,35,55]},
   {id:'reroll', name:'Second Opinion', desc:'Reroll a comms offer once per rank each run.', cost:[25,50]},
   {id:'scavenger', name:'Scavenger', desc:'+1% health pack drop chance per rank.', cost:[18,30,45]},
 ];

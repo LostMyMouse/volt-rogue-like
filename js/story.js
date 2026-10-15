@@ -84,7 +84,7 @@ const STORY = {
   // Played on comms before a boon offer, at most once per hero per run.
   comms:{
     halo:[
-      {id:'hc_feed', when:c=>c.runs>=1, pages:[['',"Halo here."],['v',"Halo? Hi! I mean, hey. Hi. Volt here.",'pleased'],['',"I know. I'm watching your feed."],['v',"Cool. Cool cool cool. No pressure."],['',"All pressure. Take the boon.",'stern']]},
+      {id:'hc_feed', when:c=>c.runs>=1, pages:[['',"Halo here."],['v',"Halo? Hi! I mean, hey. Hi. Volt here.",'pleased'],['',"I know. I'm watching your feed."],['v',"Cool. Cool cool cool. No pressure."],['',"All pressure. Take the power.",'stern']]},
       {id:'hc_prove', when:c=>c.beatenAny, pages:[['',"You fight like you've got something to prove."],['v',"Don't I?"],['',"Not to me. To them. The ones watching from the windows."]]},
       {id:'hc_redactor', when:c=>c.seen('rd_halo1'), pages:[['',"Whatever he told you about me. Finish the fight first.",'stern'],['v',"And then you'll tell me?"],['',"...Then I'll tell you."]]},
     ],
@@ -93,7 +93,7 @@ const STORY = {
       {id:'bc_twice', when:c=>c.runs>=3, pages:[['',"I've sent a lot of rookies out that gate."],['v',"Is this a pep talk?"],['',"You're the first one I've sent gear to twice. Don't make it weird.",'stern'],['v',"Too late. It's weird.",'pleased']]},
     ],
     echo:[
-      {id:'ec_ask', when:c=>c.runs>=1, pages:[['',"Before you ask: no.",'pleased'],['v',"I wasn't going to ask anything."],['',"You were going to ask if I'm reading your mind."],['v',"...Are you?"],['',"Pick a boon.",'pleased']]},
+      {id:'ec_ask', when:c=>c.runs>=1, pages:[['',"Before you ask: no.",'pleased'],['v',"I wasn't going to ask anything."],['',"You were going to ask if I'm reading your mind."],['v',"...Are you?"],['',"Pick a power.",'pleased']]},
       {id:'ec_quiet', when:c=>c.runs>=4, pages:[['',"Can I tell you something weird?"],['v',"Always."],['',"Out there, your head goes really quiet. Focused. It's... nice.",'pleased'],['v',"Was that a compliment?"],['',"Absolutely not. Pick something.",'pleased']]},
     ],
     thorn:[

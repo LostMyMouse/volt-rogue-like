@@ -7,6 +7,7 @@ const last = {};
 function setVar(el,name,v){ const key=el.id+name, r=Math.round(v*100)/100; if (last[key]!==r){ last[key]=r; el.style.setProperty(name,r); } }
 function updateHud(){
   const p=player;
+  { const on=state==='play'; if (document.body.classList.contains('playing')!==on) document.body.classList.toggle('playing',on); }
   setVar(hud.hp,'--hp',clamp(p.hp/p.maxHp,0,1)); hud.hp.classList.toggle('low',p.hp/p.maxHp<0.3);
   const hpT=String(Math.ceil(p.hp)); if (hud.hpText.textContent!==hpT) hud.hpText.textContent=hpT;
   const showBoss=!!(boss && boss.spawnT<=0 && state!=='start'); if (hud.boss.hidden===showBoss) hud.boss.hidden=!showBoss;
@@ -41,7 +42,7 @@ function startGame(){
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
 function gameOver(){ state='over'; fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
-function winRun(){ state='over'; run.won=true; banner(run.route && curDistrict()==='redactor' ? 'THE CITY\'S POWER RETURNS' : 'CITY SECURED'); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },1600); }
+function winRun(){ state='over'; run.won=true; commendWin(); banner(run.route && curDistrict()==='redactor' ? 'THE CITY\'S POWER RETURNS' : 'CITY SECURED'); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },1600); }
 
 /* ---------- Run results ---------- */
 // Rank: reward progress and bosses, punish sloppiness. Roughly 330 for a clean win.
@@ -128,10 +129,10 @@ function fillResults(){
   $('#statKills').textContent=kills;
   const t=Math.floor(run.time); $('#statTime').textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;
   $('#statHits').textContent=run.hits+(run.parries?` · ${run.parries} parried`:'');
-  $('#resShards').textContent = `◆ ${run.shards} Renown Shards found this run · ${save.shards} banked for Fortress upgrades`+(run.licences?` · +${run.licences} Hero Licence${run.licences>1?'s':''} (${save.licences} to spend on styles)`:'');
+  $('#resShards').textContent = `◆ ${run.shards} Renown Shards found this run · ${save.shards} banked for Fortress upgrades`+(run.licences?` · +${run.licences} Hero Licence${run.licences>1?'s':''} (${(run.commends||[]).join(', ')}) · ${save.licences} to spend at the armoury`:'');
   const boons=$('#resBoons'); boons.innerHTML='';
   const owned=ownedList();
-  if (!owned.length){ const e=document.createElement('span'); e.className='hint'; e.textContent='No boons taken this run.'; boons.appendChild(e); }
+  if (!owned.length){ const e=document.createElement('span'); e.className='hint'; e.textContent='No powers taken this run.'; boons.appendChild(e); }
   for (const b of owned){ const c=document.createElement('span'); c.className='boon-chip'; c.textContent=b.name; c.style.setProperty('--c',b.c||COL.boon); boons.appendChild(c); }
   let pool;
   if (run.won) pool=QUOTES.won;
@@ -154,7 +155,11 @@ function openTune(){
 }
 function closeTune(){ show('#mTune',false); if (tuneReturn==='play' && $('#mPause').hidden) state='play'; tuneReturn=null; }
 
-$('#btnStart').addEventListener('click', () => enterHub());
+$('#btnStart').addEventListener('click', () => { goFullscreen(); enterHub(); });
+function goFullscreen(){
+  if (inputMode!=='touch') return;
+  try { const el=document.documentElement, r=el.requestFullscreen&&el.requestFullscreen({navigationUI:'hide'}); if (r&&r.then) r.then(()=>{ try{ screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{}); }catch(e){} }).catch(()=>{}); } catch(e){}
+}
 $('#introCard').addEventListener('pointerdown', ()=>dismissIntro());
 $('#btnStyleClose').addEventListener('click', closeStyles);
 $('#btnFortClose').addEventListener('click', closeFortress);

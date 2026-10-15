@@ -24,11 +24,11 @@ function openDraftNow(kind, hero, reroll){
   const p=player; draftKind=kind;
   let who, line;
   if (kind==='tech'){
-    who='patch'; const n=reroll?run.calls.patch:(run.calls.patch=(run.calls.patch||0)+1); line=reroll?"Different crate, same rules.":n===1?PATCH.first:pick(PATCH.lines);
+    who='patch'; const n=reroll?run.calls.patch:(run.calls.patch=(run.calls.patch||0)+1); line=reroll?"Different crate, same rules.":n===1?PATCH.first:commsLine('patch');
     draftCards=shuffle(TECH.slice()).slice(0,3).map(t=>({kind:'tech',id:t.id}));
   } else {
     who=hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)); lastCaller=who; draftHero=who;
-    const n=reroll?run.calls[who]:(run.calls[who]=(run.calls[who]||0)+1); line=reroll?"Fine. Something else, then.":n===1?HEROES[who].first:pick(HEROES[who].lines);
+    const n=reroll?run.calls[who]:(run.calls[who]=(run.calls[who]||0)+1); line=reroll?"Fine. Something else, then.":n===1?HEROES[who].first:commsLine(who);
     const pool=BOONS.filter(b=>b.hero===who && !(p.owned[b.id] && p.owned[b.id].level>=3));
     draftCards=shuffle(pool).slice(0,3).map(b=>{ const o=p.owned[b.id]; return {kind:'boon',id:b.id,rarity:o?o.rarity:rollRarity(),levelUp:!!o}; });
   }
@@ -76,12 +76,12 @@ function refreshSlotHud(){
 function fillBuild(el){
   el.innerHTML='';
   const list=ownedList();
-  if (!list.length){ el.innerHTML='<span class="hint">No boons yet. Clear a wave and someone will call in.</span>'; return; }
+  if (!list.length){ el.innerHTML='<span class="hint">No powers yet. Clear a wave and someone will call in.</span>'; return; }
   for (const b of list){ const c=document.createElement('span'); c.className='boon-chip'; c.textContent=(b.slot&&b.slot!=='tech'?SLOT_NAME[b.slot]+': ':'')+b.name; c.style.setProperty('--c',b.c); el.appendChild(c); }
 }
 
 function updateCam(dt){
-  cam.zoom=clamp(Math.min(W,H)/760,0.5,1.3);
+  cam.zoom = inputMode==='touch' ? clamp(Math.min(W,H)/540,0.62,1.3) : clamp(Math.min(W,H)/760,0.5,1.3);
   const p=player, lead=40;
   const tx=p.x+Math.cos(p.aim)*lead, ty=p.y+Math.sin(p.aim)*lead;
   const k=Math.min(1,6*dt); cam.x+=(tx-cam.x)*k; cam.y+=(ty-cam.y)*k;

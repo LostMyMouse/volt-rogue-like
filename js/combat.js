@@ -86,7 +86,6 @@ function killEnemy(e,ang){
   if (e.isBoss){
     bossKilled(e);
     boss=null; run.bossKills++; gainShards(Math.round(BOSSES[e.kind].shards*(isFinalVillain()?1.5:1)),e.x,e.y-80);
-    save.licences++; run.licences++; writeSave(); texts.push({x:e.x,y:e.y-120,v:'+1 HERO LICENCE',t:0,big:true,c:COL.spark});
     fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.6,r:340,c:KIND_COL[e.kind]});
     for (let i=0;i<5;i++) sparks(e.x,e.y,rand(PI2),14,i%2?KIND_COL[e.kind]:'#9aa0ad',700,Math.PI);
     flash=.3; hitStop=Math.max(hitStop,0.25); addShake(24);

@@ -2,7 +2,7 @@
 'use strict';
 
 /* ---------- Combat styles ---------- */
-// Like Hades' weapons: a style replaces Strike and Power. Dash and Overload are shared by every style.
+// Like Hades' weapons: a style replaces Strike and Special. Dash and Overload are shared by every style.
 // Boons hook the slot rather than the style (strike hits, heavy hits, power hits), so every boon works with every style.
 // Each style has one "heavy hit" that triggers heavy-hit boons (Radiant Strike, Bulwark Strike).
 const STYLE = () => STYLES[run.style] || STYLES.brawler;
@@ -32,7 +32,7 @@ function setPowerCd(s){ player.powerCd=s; player.powerCdMax=s; }
 
 const STYLES = {
   brawler: {
-    name:'Brawler', trainer:'Your own style', strikeLabel:'Strike', powerLabel:'Power', cost:0,
+    name:'Brawler', trainer:'Your own style', strikeLabel:'Strike', powerLabel:'Special', cost:0,
     strikeDesc:'Fast 3-hit combo. Swings knock enemy shots out of the air.', powerDesc:'Chain lightning that jumps between up to 4 enemies and stuns.',
     heavy:'The third hit of the combo.', strength:'All-rounder. Parries Needle shots.', weakness:'Has to fight up close.',
     strike(){
@@ -81,7 +81,7 @@ const STYLES = {
   },
 
   caster: {
-    name:'Arc Caster', trainer:'Volt, unleashed', strikeLabel:'Bolt', powerLabel:'Lance', cost:1, strikeSlow:0.75,
+    name:'Arc Caster', trainer:'Volt, unleashed', strikeLabel:'Bolt', powerLabel:'Lance', cost:2, strikeSlow:0.75,
     strikeDesc:'Rapid lightning bolts. Hold to keep firing.', powerDesc:'Hold to charge, release to fire a lance that pierces everything in a line.',
     heavy:'Every 4th bolt: bigger, pierces, staggers.', strength:'Fights from a safe distance. Shreds Needles.', weakness:'Low damage per hit, no parry. Rushers that reach you are a problem.',
     strike(){
@@ -109,7 +109,7 @@ const STYLES = {
   },
 
   titan: {
-    name:'Titan', trainer:'Trained by Bastion', strikeLabel:'Haymaker', powerLabel:'Pound', cost:1, move:0.9, strikeSlow:0.35,
+    name:'Titan', trainer:'Trained by Bastion', strikeLabel:'Haymaker', powerLabel:'Pound', cost:3, move:0.9, strikeSlow:0.35,
     strikeDesc:'Slow, enormous punches with huge knockback. Every hit breaks enemy wind-ups.', powerDesc:'Ground pound: a shockwave that stuns and throws back everything around you.',
     heavy:'Every Haymaker.', strength:'Crowd control. A parry from Titan leaves enemies Exposed for longer.', weakness:'Slow to swing and slow to recover. Missing is punished.',
     strike(){
@@ -135,7 +135,7 @@ const STYLES = {
   },
 
   speedster: {
-    name:'Speedster', trainer:'Trained by Halo', strikeLabel:'Flash', powerLabel:'Blitz', cost:2, move:1.15, strikeSlow:1, dmgTaken:1.25,
+    name:'Speedster', trainer:'Trained by Halo', strikeLabel:'Flash', powerLabel:'Blitz', cost:4, move:1.15, strikeSlow:1, dmgTaken:1.25,
     dmgMul(){ return 1+(player.mom||0); },
     strikeDesc:'Flash-step through the nearest enemy you aim at. Damage builds with Momentum.', powerDesc:'Blitz: a burst of afterimage strikes on everything nearby. Spends half your Momentum.',
     heavy:'Every 5th Flash.', strength:'Up to double damage at full Momentum, which builds while you keep moving.', weakness:'Fragile (take 25% more damage). Standing still drains Momentum.',
@@ -174,7 +174,7 @@ const STYLES = {
   },
 
   magnetar: {
-    name:'Magnetar', trainer:'Trained by Echo', strikeLabel:'Disc', powerLabel:'Pull', cost:2,
+    name:'Magnetar', trainer:'Trained by Echo', strikeLabel:'Disc', powerLabel:'Pull', cost:5,
     strikeDesc:'Throw a magnetic disc that ricochets between enemies, then flies back to you.', powerDesc:'Magnet Pull: yank nearby enemies together in front of you, stunning them briefly.',
     heavy:'The first enemy each throw hits.', strength:'Its blocks take no damage and reflect every shot.', weakness:'Nearly empty-handed until the disc comes back.',
     init(p){ p.disc={state:'held',x:p.x,y:p.y,vx:0,vy:0,t:0,bounces:0,hit:[],first:true}; },
@@ -301,7 +301,7 @@ function applyStyleHud(){
   hud.tb.s.querySelector('span').textContent=s.strikeLabel; hud.tb.p.querySelector('span').textContent=s.powerLabel;
 }
 
-/* Style select (Fortress armoury). Hero Licences come from beating Gravemark. */
+/* Style select (Fortress armoury). Hero Licences come from commendations (js/commend.js). */
 function styleUnlocked(id){ return save.unlocked.includes(id); }
 function fillStyles(){
   $('#styleLic').textContent=save.licences;

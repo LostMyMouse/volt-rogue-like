@@ -30,7 +30,7 @@ function startWave(){
     const id=curDistrict();
     // Bosses fight alone (no ordinary enemies) and open with a 1.5s intro. Gravemark's first meeting
     // (rooftop 10) is a lighter version of the final stand on rooftop 15.
-    boss=makeBoss(id,{x:ARENA.w/2,y:ARENA.h*0.35},{hpMul:villainHpMul(id)}); enemies.push(boss);
+    boss=makeBoss(id,{x:ARENA.w/2,y:ARENA.h*0.35},{hpMul:villainHpMul(id)}); enemies.push(boss); run.hitsAtBoss=run.hits;
     maybeIntro(id,null, isFinalVillain()?{flourish:'makes a final stand!'}:{});
   } else {
     // Rooms come in waves (Hades-style): 2, or 3 later in the run and on each district's last rooftop.

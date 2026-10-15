@@ -10,6 +10,7 @@ const stick = { id:null, ox:0, oy:0, x:0, y:0 };
 
 function setMode(m){
   inputMode = m;
+  document.body.classList.toggle('touch-mode', m==='touch');
   $('#touch').hidden = m !== 'touch';
   $('#abilities').style.visibility = m === 'touch' ? 'hidden' : 'visible';
   $('#ctrlKb').hidden = m === 'touch';

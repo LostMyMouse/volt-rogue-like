@@ -27,8 +27,8 @@ const TUNE_ROWS = [
   ['dashCooldown','Dash cooldown (s)',0.1,1.2,0.05,2],
   ['strikeDamage','Strike damage',4,30,1,0],
   ['strikeRange','Strike reach',50,130,2,0],
-  ['powerDamage','Power damage',6,40,1,0],
-  ['powerCooldown','Power cooldown (s)',0.3,3,0.1,1],
+  ['powerDamage','Special damage',6,40,1,0],
+  ['powerCooldown','Special cooldown (s)',0.3,3,0.1,1],
   ['parryWindow','Parry window (s, accessibility)',0.08,0.25,0.01,2],
   ['hitPause','Hit pause (s)',0,0.15,0.005,3],
   ['shake','Screen shake',0,2,0.1,1],
@@ -49,7 +49,7 @@ buildTune();
 /* ---------- Save (kept between runs, this browser only) ---------- */
 const SAVE_KEY='volt-save';
 function loadSave(){
-  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}, talk:{}, beaten:{}, last:null, story:{}, killedBy:{}, wins:0};
+  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}, talk:{}, beaten:{}, last:null, story:{}, killedBy:{}, wins:0, comm:{}};
   try { const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null'); if (s && s.v===1) return Object.assign(base,s); } catch(e){}
   return base;
 }

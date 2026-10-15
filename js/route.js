@@ -81,6 +81,7 @@ function beginDistrict(id){
 function districtCleared(){
   const n=nextAfterDistrict(), id=curDistrict();
   save.beaten=save.beaten||{}; save.beaten[id]=(save.beaten[id]||0)+1; writeSave(); // the Fortress trophy shelf and dialogue read this
+  commendVillain(id);
   run.districtsCleared=run.route.i+1;
   if (n.type==='end'){ winRun(); return; }
   roomPhase='done';

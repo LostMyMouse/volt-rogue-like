@@ -154,7 +154,7 @@ function updateHub(dt){
   }
 }
 function hubCam(dt){
-  cam.zoom=Math.max(clamp(Math.min(W,H)/820,0.45,1.25), W/HUB.w, H/HUB.h); // never show past the painting's edges
+  cam.zoom=Math.max(clamp(Math.min(W,H)/(inputMode==='touch'?560:820),0.45,1.25), W/HUB.w, H/HUB.h); // closer on phones; never past the painting's edges
   const k=Math.min(1,5*dt); cam.x+=(player.x-cam.x)*k; cam.y+=(player.y-60-cam.y)*k;
   const hw=W/2/cam.zoom, hh=H/2/cam.zoom;
   cam.x = hw*2>=HUB.w ? HUB.w/2 : clamp(cam.x,hw,HUB.w-hw);
@@ -172,7 +172,8 @@ function hubInteract(){
   const n=(v,w)=>`${v} ${w}${v===1?'':'s'}`;
   if (s.id==='board'){
     const beatenN=Object.values(c.beaten).reduce((a,b)=>a+b,0);
-    openTalk(null,[`Commendations, pinned up by Bastion: ${n(c.runs,'run')} logged, ${n(beatenN,'villain')} defeated, ${n(c.lic,'Hero Licence')} waiting at the armoury.`+(c.last?` Last run: ${c.last.won?'city secured':'down in '+n(c.last.districts||0,'district')+' cleared'}, rank ${c.last.rank}.`:'')],s);
+    const list=COMMENDATIONS.map(x=>`${(save.comm||{})[x.id]?'✦':'·'} ${x.name}: ${x.desc}`);
+    openTalk(null,[`Commendations, pinned up by Bastion: ${commendCount()} of ${COMMENDATIONS.length} earned. Each one is a Hero Licence for the armoury, and every completed run earns one more.`, list.slice(0,5).join('\n'), list.slice(5).join('\n'), `${n(c.runs,'run')} logged, ${n(beatenN,'villain')} defeated, ${n(c.lic,'Hero Licence')} waiting at the armoury.`+(c.last?` Last run: ${c.last.won?'city secured':'down in '+n(c.last.districts||0,'district')+' cleared'}, rank ${c.last.rank}.`:'')],s);
   } else if (s.id==='trophies'){
     const got=Object.keys(c.beaten);
     openTalk(null,[got.length ? 'The trophy shelf: '+got.map(id=>`${SPEAKERS[id].name}${c.beaten[id]>1?' ×'+c.beaten[id]:''}`).join(', ')+'.' : "An empty shelf, waiting. Beat a villain and something of theirs ends up here."],s);
@@ -201,7 +202,7 @@ function showTalkPage(){
   if (pg.who){ const sp=SPEAKERS[pg.who]; setPortrait(pt,pg.who,pg.expression||'neutral'); pt.hidden=false; el.style.setProperty('--c',sp.c); $('#talkWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`; }
   else { pt.hidden=true; el.style.setProperty('--c',talk.spot.c); $('#talkWho').innerHTML=`<b>${talk.spot.name}</b>`; }
   el.classList.toggle('is-volt', pg.who==='volt');
-  $('#talkLine').textContent=pg.text; $('#talkNext').textContent = talk.i<talk.pages.length-1 ? 'E · next' : 'E · close';
+  $('#talkLine').textContent=pg.text; const key=inputMode==='touch'?'Tap':'E'; $('#talkNext').textContent = key+(talk.i<talk.pages.length-1 ? ' · next' : ' · close');
 }
 function advanceTalk(){
   if ((state!=='hubtalk' && state!=='dialogue') || !talk || performance.now()-talk.t<250) return;
