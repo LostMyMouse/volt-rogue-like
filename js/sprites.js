@@ -200,10 +200,10 @@ function drawVoltSprite(p,scale){
   if (p.anim && at>((ANIMATION_DATA.volt[p.anim.name]?.frames||6)/(ANIMATION_DATA.volt[p.anim.name]?.fps||20))) p.anim=null;
   // Facing: dashing faces the dash, attacking or blocking faces the aim, running faces the run.
   const face = p.dashT>0 ? Math.atan2(p.dashDir.y,p.dashDir.x) : (p.anim||p.blockHeld||p.charging) ? p.aim : moving ? Math.atan2(p.vy,p.vx) : p.aim;
-  const clipName=p.dashT>0?'dash':p.anim?p.anim.name:p.blockHeld?'block':moving?'run':p.iT>0?'hurt':'idle';
+  const clipName=p.dashT>0?'dash':p.anim?p.anim.name:p.blockHeld?'block':moving?'run':hurtFlash>0.15?'hurt':'idle';
   const clip=animationClip('volt',clipName), clipReady=clip&&clip.ready;
   const elapsed=p.anim && clipName===p.anim.name?at:motionClock(p,clipName);
-  const body=(x,y,tint)=>drawAnimation('volt',clipName,x,y,face,sc,elapsed,null,tint)||drawTurn('volt',x,y,face,sc,tint==='white'?s.white:undefined);
+  const face4=stickyFace(p,face), body=(x,y,tint)=>drawAnimation('volt',clipName,x,y,face4,sc,elapsed,null,tint)||drawTurn('volt',x,y,face,sc,tint==='white'?s.white:undefined);
   let ox=0, oy=0;
   if (!clipReady && moving && p.dashT<=0) oy=-Math.abs(Math.sin(time*13))*3*sc;           // running bob
   else if (!clipReady && !moving) oy=-Math.sin(time*2.4)*0.8*sc;                          // breathing
@@ -234,7 +234,7 @@ function drawEnemySprite(e){
   const exposed=e.bstate==='EXPOSED'||e.state==='stagger';
   const bodyAlpha=decoy?0.65:1;
   const animation=enemyAnimation(e), clip=animationClip(id,animation.name), animated=clip&&clip.ready;
-  const body=(x,y,tint)=>drawAnimation(id,animation.name,x,y,face,sc,animation.elapsed,animation.frame,tint)||drawTurn(id,x,y,face,sc,tint==='white'?s.white:undefined);
+  const face4=stickyFace(e,face), body=(x,y,tint)=>drawAnimation(id,animation.name,x,y,face4,sc,animation.elapsed,animation.frame,tint)||drawTurn(id,x,y,face,sc,tint==='white'?s.white:undefined);
   let ox=0, oy=moving?-Math.abs(Math.sin(time*11))*(e.isBoss?0.7:1.5):0;
   if (!animated && wind){ ox-=Math.cos(face)*2; oy-=Math.sin(face)*2; }
   if (!animated && exposed) ox+=Math.sin(time*27)*2;
@@ -288,6 +288,8 @@ function enemySpriteTop(e){
   return id==='needle' ? e.y-10-s.frame*s.scale/2-3 : e.y+e.r*0.75-s.anchor[1]*s.scale-3;
 }
 function drawEnemyActor(e){
+  // Elite Rushers stand in a pulsing coral aura so they read as the bigger threat.
+  if (e.elite){ ctx.save(); ctx.globalAlpha=0.35+0.2*Math.sin(time*6); ctx.fillStyle=COL.threat; ctx.shadowColor=COL.threat; ctx.shadowBlur=18; ctx.beginPath(); ctx.ellipse(e.x,e.y+e.r*0.7,e.r*1.6,e.r*0.65,0,0,PI2); ctx.fill(); ctx.restore(); }
   // Buds, ice walls and Redactor plates own custom gameplay drawings; decoys use Glasswake's sprite.
   if (e.drawFn && !e.isDecoy && e.kind!=='decoy'){ e.drawFn(e); return; }
   if (drawEnemySprite(e)) return;
@@ -305,10 +307,46 @@ function animationClip(id,name){
   const key=id+'/'+name;
   if (!ANIMATION_CACHE.has(key)){
     const clip={...def,ready:false,img:new Image()}; ANIMATION_CACHE.set(key,clip);
-    clip.img.onload=()=>{clip.ready=clip.img.width===clip.frame[0]*clip.frames && clip.img.height===clip.frame[1]*clip.directions.length;};
+    clip.img.onload=()=>{clip.ready=clip.img.width===clip.frame[0]*clip.frames && clip.img.height===clip.frame[1]*clip.directions.length; if (clip.ready && IN_PLACE.has(name)) clip.offsets=registerFrames(clip);};
     clip.img.src=clip.file;
   }
   return ANIMATION_CACHE.get(key);
+}
+// In-place loops (standing, talking, walking on the spot) should never slide. The generated keyframes
+// drift sideways and up and down from frame to frame, so each frame is shifted to put its feet where the
+// clip's typical frame has them: the centre of the legs and the lowest pixel, so arms don't move the anchor.
+// Attacks, dashes and deaths keep their authored motion. Reading pixels fails from file://; then no shift.
+const IN_PLACE = new Set(['idle','talk','hover','walk','run','recovery','exposed','vents_open']);
+function registerFrames(c){
+  try {
+    const [w,h]=c.frame, cv=document.createElement('canvas'); cv.width=c.img.width; cv.height=c.img.height;
+    const g=cv.getContext('2d'); g.drawImage(c.img,0,0); const d=g.getImageData(0,0,cv.width,cv.height).data, out=[];
+    const on=(r,f,x,y)=>d[((r*h+y)*cv.width+f*w+x)*4+3]>60;
+    for (let r=0;r<c.directions.length;r++){
+      const feet=[];
+      for (let f=0;f<c.frames;f++){
+        let top=h, foot=-1;
+        for (let y=0;y<h;y++) for (let x=0;x<w;x++) if (on(r,f,x,y)){ if (y<top) top=y; if (y>foot) foot=y; }
+        if (foot<0){ feet.push(null); continue; }
+        const legTop=Math.floor(foot-Math.max(4,(foot-top)*0.22)); let sx=0,n=0;
+        for (let y=legTop;y<=foot;y++) for (let x=0;x<w;x++) if (on(r,f,x,y)){ sx+=x; n++; }
+        feet.push([sx/n,foot]);
+      }
+      const ok=feet.filter(Boolean), med=k=>{ const v=ok.map(q=>q[k]).sort((a,b)=>a-b); return v[Math.floor(v.length/2)]||0; };
+      const mx=med(0), my=med(1);
+      out.push(feet.map(q=>q?[Math.round(mx-q[0]), Math.round(my-q[1])]:[0,0]));
+    }
+    return out;
+  } catch(e){ return null; }
+}
+// Four-way facing with a little stickiness, so a character aiming near a diagonal doesn't flicker
+// between two views. Returns the snapped angle to draw with.
+const FACE_MEMO = new WeakMap(), FACE_MEMO_ID = new Map();
+function stickyFace(key,face){
+  const memo = typeof key==='object' ? FACE_MEMO : FACE_MEMO_ID;
+  let cur=memo.get(key);
+  if (cur===undefined || Math.abs(angDiff(face,cur*Math.PI/2))>Math.PI/4+0.17) cur=((Math.round(face/(Math.PI/2))%4)+4)%4;
+  memo.set(key,cur); return cur*Math.PI/2;
 }
 function animationFrame(c,elapsed){
   const f=Math.max(0,Math.floor(elapsed*c.fps));
@@ -322,9 +360,9 @@ function drawAnimation(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
   const f=frame===null?animationFrame(c,elapsed):clamp(Math.floor(frame),0,c.frames-1);
   let sheet=c.img;
   if (tint){if (!c[tint]) c[tint]=tintSheet(c.img,tint==='white'?'#ffffff':COL.volt);sheet=c[tint];}
-  const [w,h]=c.frame,[ax,ay]=c.anchor;
+  const [w,h]=c.frame,[ax,ay]=c.anchor, off=c.offsets&&c.offsets[row]&&c.offsets[row][f]||[0,0];
   const smooth=ctx.imageSmoothingEnabled;ctx.imageSmoothingEnabled=false;
-  ctx.drawImage(sheet,f*w,row*h,w,h,x-ax*scale,y-ay*scale,w*scale,h*scale);
+  ctx.drawImage(sheet,f*w,row*h,w,h,x+(off[0]-ax)*scale,y+(off[1]-ay)*scale,w*scale,h*scale);
   ctx.imageSmoothingEnabled=smooth;return true;
 }
 function motionClock(actor,token){
@@ -333,7 +371,7 @@ function motionClock(actor,token){
   return time-m.t0;
 }
 const BOSS_ANIMATION_ATTACKS={
-  kilnheart:{punch:'punch',punchHot:'punch',double:'punch',rush:'rush',slam:'slam'},
+  kilnheart:{punch:'punch',punchHot:'punch',double:'punch',rush:'rush',slam:'slam',erupt:'slam'},
   gravemark:{well:'well_cast',driver:'driver_fire',double:'driver_fire',orbit:'orbit_summon',orbit6:'orbit_summon',collapse:'collapse'},
   bellwether:{ring:'ring_emit',twin:'ring_emit',turning:'ring_emit',burst:'focused_burst',drop:'resonator_drop'},
   verdigris:{seed:'seed_throw',twin:'seed_throw',vine:'vine_sweep',thorns:'thorn_growth',acid:'acid_spray'},
@@ -346,7 +384,7 @@ function enemyAnimation(e){
   const id=e.isDecoy||e.kind==='decoy'?'glasswake':e.kind;
   let name='idle',frame=null;
   if (e.bstate){
-    name=({INTRO:'intro',PHASE_CHANGE:'phase_change',EXPOSED:'exposed',RECOVERY:'recovery',PAUSE:'recovery',DEAD:'death'})[e.bstate] || (Math.hypot(e.mx||0,e.my||0)>5?'walk':'idle');
+    name=({INTRO:'intro',PHASE_CHANGE:'phase_change',EXPOSED:'exposed',RECOVERY:'recovery',PAUSE:'recovery',DEAD:'death'})[e.bstate] || (Math.hypot(e.mx||0,e.my||0)>5 && (e.walkVisT=time+0.25), time<(e.walkVisT||0)?'walk':'idle');
     if (e.bstate==='RECOVERY' && e.vent>0 && id==='kilnheart') name='vents_open';
     if (e.bstate==='WINDUP'||e.bstate==='ACTIVE'){
       name=(BOSS_ANIMATION_ATTACKS[id]||{})[e.atk && e.atk.id] || 'idle';
@@ -381,7 +419,7 @@ function drawAnimatedNpc(id,x,y,face,options={}){
   if (n.override){const c=ANIMATION_DATA[id][n.override];if(time-n.overrideAt<c.frames/c.fps)name=n.override;else n.override=null;}
   if (name!==n.name){n.name=name;n.t0=time;}
   n.x=x;n.y=y;NPC_MOTION.set(id,n);
-  if (!drawAnimation(id,name,x,y,face,SPRITES[id].scale,time-n.t0))drawTurn(id,x,y,face);
+  if (!drawAnimation(id,name,x,y,stickyFace(id,face),SPRITES[id].scale,time-n.t0))drawTurn(id,x,y,face);
 }
 // Corpses are visual-only snapshots. No collision, damage, drops or encounter timing changes.
 const PREVIOUS_SPRITE_ACTORS=new Set();let SPRITE_CORPSES=[],SPRITE_LAST_TIME=-1;

@@ -15,11 +15,11 @@ registerBoss({
   id:'kilnheart', name:'Kilnheart', title:'Heat and pressure', color:'#ff7a1a',
   hp:1800, radius:0.9, speed:2.8, shards:30,
   phases:[0.6,0.3],
-  parryClass:{ kiln_punch:'parry', kiln_rush:'parry', kiln_shot:'parry', kiln_slam:'super', kiln_heat:'super' },
+  parryClass:{ kiln_punch:'parry', kiln_rush:'parry', kiln_shot:'parry', kiln_slam:'super', kiln_heat:'super', kiln_erupt:'super' },
   sequences:[
     ['punch','punch','rush'],
-    ['punchHot','slam','rush'],
-    ['punchHot','rush','slam','double'],
+    ['punchHot','erupt','slam','rush'],
+    ['punchHot','erupt','rush','slam','double'],
   ],
   attacks:{
     punch:    { recovery:1.1, steps:[ KILN_PUNCH ] },
@@ -27,6 +27,8 @@ registerBoss({
     rush:     { recovery:1.4, vent:true, steps:[ { prim:'charge', windup:1.1, creep:-0.9, width:2.0, length:9, speed:12, dmg:24, src:'kiln_rush' } ] },
     slam:     { recovery:1.3, vent:true, steps:[ { prim:'selfDisk', windup:1.0, active:0.15, radius:3.2, dmg:22, src:'kiln_slam',
                   shots:{ n:8, speed:6, r:0.18, dmg:12, src:'kiln_shot' } } ] },
+    // Phase 2+: the floor splits open under Volt. Can't be parried: read the circles and move.
+    erupt:    { label:'Eruption', recovery:1.0, steps:[ { prim:'disks', windup:1.0, active:0.15, n:3, radius:1.5, spread:2.6, dmg:18, src:'kiln_erupt' } ] },
     double:   { recovery:1.5, steps:[ {...KILN_PUNCH, dmg:18}, {...KILN_PUNCH, windup:0.75, dmg:18, after:kilnHeat} ] },
   },
   // Between attacks: close to 3 units of Volt, then stop. She doesn't chase through wind-up or recovery.
@@ -47,7 +49,7 @@ registerBoss({
     "Pressure finds every crack, rookie. You're all cracks.",
     "Run back to your Fortress. Tell them the furnace is still lit.",
   ],
-  cause:{ kiln_punch:"Kilnheart's Furnace Punch", kiln_rush:"Kilnheart's Boiler Rush", kiln_slam:"Kilnheart's Pressure Slam", kiln_shot:"a Pressure Slam ember", kiln_heat:"Kilnheart's heated floor" },
+  cause:{ kiln_erupt:"Kilnheart's Eruption", kiln_punch:"Kilnheart's Furnace Punch", kiln_rush:"Kilnheart's Boiler Rush", kiln_slam:"Kilnheart's Pressure Slam", kiln_shot:"a Pressure Slam ember", kiln_heat:"Kilnheart's heated floor" },
   advice:{
     kiln_punch:[['bastion',"Kilnheart telegraphs every punch. When the white ring closes, block it and make her pay."]],
     kiln_rush:[['echo',"She charges in a straight line. Step sideways, not backwards. Or parry it and watch her fold."]],

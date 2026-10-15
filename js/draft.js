@@ -95,4 +95,5 @@ function updateFx(dt){
   for (const q of particles){ q.life-=dt; q.x+=q.vx*dt; q.y+=q.vy*dt; q.vx*=Math.pow(.02,dt); q.vy*=Math.pow(.02,dt); }
   particles=particles.filter(q=>q.life>0);
   for (const t of texts) t.t+=dt; texts=texts.filter(t=>t.t<.75);
+  if (typeof vfxUpdate==='function') vfxUpdate(dt);
 }

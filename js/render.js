@@ -135,6 +135,7 @@ function drawObstacle(b){
   }
 }
 function drawIceWall(w){
+  if (typeof drawIceCrystals==='function'){ drawIceCrystals(w); return; }
   const g=w.seg, s=w.owner && w.owner.atk ? null : null, len=3*U, th=0.7*U, age=run.time-w.born, fade=Math.min(1,(w.dur-age)/0.4), hurt=1-w.hp/w.maxHp;
   ctx.save(); ctx.globalAlpha=Math.max(0,fade); ctx.translate(g.x,g.y); ctx.rotate(g.ang);
   ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(-len/2+6,-th/2+8,len,th);
@@ -316,6 +317,7 @@ const VECTOR = {
   },
 };
 function drawBullet(b){
+  if (typeof vfxBullet==='function' && vfxBullet(b)) return;
   if (b.kind==='rock' || b.kind==='rubble'){
     // Stone projectiles: grey rock with the owner's glow; friendly (reflected) ones glow blue.
     const c=b.friendly?COL.volt:(b.c||COL.boon);
@@ -460,13 +462,15 @@ function drawFx(){
   }
   ctx.globalAlpha=1;
 }
+// Live attack effects sit on the floor layer, under the actors.
+function drawBossActiveFx(){ if (typeof vfxDrawActive!=='function') return; for (const e of enemies) if (isSpecBoss(e) && e.bstate==='ACTIVE' && e.atk && e.atk.step) vfxDrawActive(e,e.atk,e.atk.step); }
 function render(){
   if (inHub()){ renderHub(); return; }
   ctx.setTransform(DPR,0,0,DPR,0,0);
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
   const sx=(Math.random()*2-1)*shakeAmt, sy=(Math.random()*2-1)*shakeAmt;
   ctx.save(); ctx.translate(W/2+sx,H/2+sy); ctx.scale(cam.zoom,cam.zoom); ctx.translate(-cam.x,-cam.y);
-  drawCity(); drawFloor(); drawDecals(); drawExitPads(); drawZones(); drawBossHazards(); drawTelegraphs(); drawActors(); drawStyleFx(); drawBlockFx(); drawGlints(); drawFrontWall(); drawBars(); drawExitIcons(); drawFx(); drawBossHitboxes();
+  drawCity(); drawFloor(); drawDecals(); drawExitPads(); drawZones(); drawBossHazards(); drawTelegraphs(); drawBossActiveFx(); if (typeof vfxDrawGround==='function') vfxDrawGround(); drawActors(); if (typeof vfxDraw==='function') vfxDraw(); drawStyleFx(); drawBlockFx(); drawGlints(); drawFrontWall(); drawBars(); drawExitIcons(); drawFx(); drawBossHitboxes();
   ctx.restore();
   drawExitPointers(); drawTransitOverlay();
   if (flash>0){ ctx.fillStyle=`rgba(38,191,255,${flash*0.7})`; ctx.fillRect(0,0,W,H); }

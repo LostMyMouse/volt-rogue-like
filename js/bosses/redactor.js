@@ -57,7 +57,7 @@ function rdPlateBroken(m){
 
 registerBoss({
   id:'redactor', name:'The Redactor', title:'Architect of the drain', color:RD_COL,
-  hp:5400, radius:0.9, speed:2.5, shards:60,
+  hp:7000, radius:0.9, speed:2.5, shards:60,
   phases:[0.7,0.4],
   parryClass:{ redact_lanes:'super', redact_verdict:'super' },
   sequences:[
@@ -66,9 +66,9 @@ registerBoss({
     ['verdict','stolen','lanes','stolen','field','lanes'],
   ],
   attacks:{
-    lanes:  { recovery:1.1, steps:[ RD_LANES ] },
-    field:  { recovery:0.9, steps:[ { prim:'placeNull', windup:1.2, radius:4.5, dur:4, src:'redact_null' } ] },
-    verdict:{ recovery:1.6, waitFor:rdClearForBigAttack, steps:[
+    lanes:  { recovery:0.8, steps:[ RD_LANES ] },
+    field:  { recovery:0.7, steps:[ { prim:'placeNull', windup:1.2, radius:4.5, dur:4, src:'redact_null' } ] },
+    verdict:{ recovery:1.2, waitFor:rdClearForBigAttack, steps:[
       { prim:'annulus', windup:1.5, active:0.2, rIn:2, rOut:10, gap:65, gaps:2, dmg:24, src:'redact_verdict', pause:0.5 }, RD_LANES ] },
   },
   // 'stolen' entries in the sequence resolve to the next copied power from this run's list.
@@ -77,7 +77,7 @@ registerBoss({
     const list=rdStolenList(); if (!list.length) return this.attacks.lanes;
     const src=list[(e.stolenI||0)%list.length]; e.stolenI=(e.stolenI||0)+1;
     const st=RD_STOLEN[src];
-    return { label:st.label, stolenFrom:src, recovery:st.recovery, waitFor:rdClearForBigAttack, steps:st.steps().map(s=>({...s, color:BOSSES[src].color})) };
+    return { label:st.label, stolenFrom:src, recovery:st.recovery*0.75, waitFor:rdClearForBigAttack, steps:st.steps().map(s=>({...s, color:BOSSES[src].color})) };
   },
   onPhaseStart(e){
     rdSpawnPlates(e);

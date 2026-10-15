@@ -91,7 +91,7 @@ function bossWindup(e,dt){
     if (e.stateT>=a.lockAt) a.locked=true;
   }
   e.face=a.aim;
-  if (e.stateT>=a.windup){ (BOSS_PRIMS[a.step.prim].activate||(()=>{}))(e,a); bossSetState(e,'ACTIVE'); }
+  if (e.stateT>=a.windup){ (BOSS_PRIMS[a.step.prim].activate||(()=>{}))(e,a); bossSetState(e,'ACTIVE'); if (typeof vfxOnActivate==='function') vfxOnActivate(e,a); }
 }
 function bossActive(e,dt){
   const a=e.atk;
@@ -495,7 +495,8 @@ function drawBossTelegraph(e){
   const def=BOSSES[e.kind], a=e.atk;
   if (!a || !a.step || !(e.bstate==='WINDUP'||e.bstate==='ACTIVE')) return;
   const s=a.step, c=s.color||def.color, isSuper=BOSS_PARRY[s.src]!=='parry';
-  const k=e.bstate==='ACTIVE'?1:clamp(e.stateT/a.windup,0,1), pulse=e.bstate==='ACTIVE';
+  // While live, attacks with a drawn effect (js/vfx.js) skip the flat fill and show the effect instead.
+  const k=e.bstate==='ACTIVE'?1:clamp(e.stateT/a.windup,0,1), pulse=e.bstate==='ACTIVE' && !(typeof vfxOwnsActive==='function' && vfxOwnsActive(s));
   const ox=a.origin.x, oy=a.origin.y;
   if (s.prim==='sector'){
     const R=s.radius*U, half=s.arc*DEG/2, ap=sectorApex(a);
@@ -531,7 +532,7 @@ function drawBossTelegraph(e){
   } else if (s.prim==='refract'){
     if (e.bstate==='ACTIVE'){ const emit=[{x:e.x,y:e.y}].concat((a.decoys||[]).filter(d=>!d.dead));
       for (const em of emit){ ctx.save(); ctx.translate(em.x,em.y); ctx.rotate(a.aim);
-        drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-s.width*U/2,s.length*U,s.width*U); }, c, a.firing?1:clamp(a.activeT/s.warn,0,1), true, a.firing, ()=>{ ctx.beginPath(); ctx.moveTo(0,-s.width*U/2-5); for (let x=0;x<=s.length*U;x+=14) ctx.lineTo(x,-s.width*U/2-((x/14)%2?9:5)); ctx.stroke(); });
+        drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-s.width*U/2,s.length*U,s.width*U); }, c, a.firing?1:clamp(a.activeT/s.warn,0,1), true, a.firing && pulse!==false && !(typeof vfxOwnsActive==='function' && vfxOwnsActive(s)), ()=>{ ctx.beginPath(); ctx.moveTo(0,-s.width*U/2-5); for (let x=0;x<=s.length*U;x+=14) ctx.lineTo(x,-s.width*U/2-((x/14)%2?9:5)); ctx.stroke(); });
         ctx.restore(); } }
   } else if (s.prim==='jet'){
     const L=s.length*U, Wd=s.width*U;
@@ -541,7 +542,7 @@ function drawBossTelegraph(e){
       const ta=a.aim+a.dir*s.sweep*DEG*0.6; ctx.lineWidth=4; ctx.beginPath(); ctx.arc(ox,oy,L*0.55,a.aim,ta,a.dir<0); ctx.stroke(); ctx.restore();
       ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.aim); drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-Wd/2,beamReach(ox,oy,a.aim,L),Wd); }, c, k, isSuper, false, ()=>{}); ctx.restore();
     } else {
-      ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.beamAng||a.aim); drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-Wd/2,a.beamLen||L,Wd); }, c, 1, isSuper, true, ()=>{}); ctx.restore();
+      ctx.save(); ctx.translate(ox,oy); ctx.rotate(a.beamAng||a.aim); drawFootprint(()=>{ ctx.beginPath(); ctx.rect(0,-Wd/2,a.beamLen||L,Wd); }, c, 1, isSuper, pulse, ()=>{}); ctx.restore();
     }
   } else if (s.prim==='iceWall' && e.bstate==='WINDUP'){
     for (const g of a.segs){ ctx.save(); ctx.translate(g.x,g.y); ctx.rotate(g.ang); ctx.strokeStyle=c; ctx.globalAlpha=0.4+0.5*k; ctx.lineWidth=2; ctx.setLineDash([6,6]);
@@ -572,6 +573,7 @@ function drawBossTelegraph(e){
     }
   }
 }
+// (effects for live attacks are drawn by vfxDrawActive, called from render after the telegraphs)
 // Rings: during the wind-up, show the safe lanes (white) running out from the boss and which way they'll turn.
 // While active, draw each expanding band with the gaps cut out and a jagged edge (super).
 function drawRingTelegraph(e,a,s,c,k){

@@ -15,11 +15,12 @@ function spawnPoint(){
 }
 // Ordinary enemies scale with how many rooftops this run has crossed (capped so late districts stay fair).
 const diffStep = () => Math.min(wave,18);
-const waveHp = () => T.enemyHealth*(1+(diffStep()-1)*0.04);
+const waveHp = () => T.enemyHealth*(1+(diffStep()-1)*0.06);
 function makeEnemy(kind,delay,at){
   const {x,y}=at||spawnPoint();
   const base={kind,x,y,vx:0,vy:0,mx:0,my:0,flashT:0,stunT:0,spawnT:delay,face:Math.atan2(player.y-y,player.x-x),dead:false};
-  if (kind==='rusher'){ const hp=44*waveHp(); return Object.assign(base,{r:17,hp,maxHp:hp,state:'chase',timer:rand(.4,1)}); }
+  // From the second district on, some Rushers are elites: twice the health, a harder swing, a visible aura.
+  if (kind==='rusher'){ const elite=run.route && run.route.i>=1 && Math.random()<0.15+0.08*run.route.i, hp=44*waveHp()*(elite?2:1); return Object.assign(base,{r:elite?20:17,hp,maxHp:hp,state:'chase',timer:rand(.4,1),elite}); }
   const hp=30*waveHp(); return Object.assign(base,{r:14,hp,maxHp:hp,state:'move',timer:rand(1,2),strafe:Math.random()<.5?1:-1,bob:rand(PI2)});
 }
 function startWave(){
@@ -32,11 +33,17 @@ function startWave(){
     boss=makeBoss(id,{x:ARENA.w/2,y:ARENA.h*0.35},{hpMul:villainHpMul(id)}); enemies.push(boss);
     maybeIntro(id,null, isFinalVillain()?{flourish:'makes a final stand!'}:{});
   } else {
-    const w=diffStep();
-    add('rusher',2+Math.floor(w*0.6));
-    add('needle',w>=2?1+Math.floor((w-2)/3):0);
-    banner(isBossRoom()?'':'ROOFTOP '+run.route.room);
+    // Rooms come in waves (Hades-style): 2, or 3 later in the run and on each district's last rooftop.
+    run.wavesLeft = 1 + ((run.route.i>=2 || run.route.room>=roomsIn(curDistrict())) ? 1 : 0);
+    spawnRoomWave();
+    banner('ROOFTOP '+run.route.room);
   }
+}
+function spawnRoomWave(){
+  const w=diffStep(); let i=0;
+  const add=(k,n)=>{ for (let j=0;j<n;j++) enemies.push(makeEnemy(k,0.8+i++*0.18)); };
+  add('rusher',2+Math.floor(w*0.45));
+  add('needle',w>=2?1+Math.floor((w-2)/4):0);
 }
 
 /* ---------- Update ---------- */
@@ -80,7 +87,7 @@ function update(dt){
           if (e.timer<=0){ e.state='swing'; e.timer=RUSH.swingT; e.hitDone=false; sparks(e.x,e.y,e.lungeA,6,COL.threat,380,.9); }
         } else if (e.state==='swing'){
           const s=RUSH.step*T.enemySpeed; e.mx=Math.cos(e.lungeA)*s; e.my=Math.sin(e.lungeA)*s; e.timer-=dt;
-          if (!e.hitDone && d<RUSH.reach+p.r && (d<e.r+p.r+4 || Math.abs(angDiff(a,e.lungeA))<RUSH.arc/2)){ if (hurtPlayer(12,e.lungeA,'rusher',{attacker:e})) e.hitDone=true; }
+          if (!e.hitDone && d<RUSH.reach+p.r && (d<e.r+p.r+4 || Math.abs(angDiff(a,e.lungeA))<RUSH.arc/2)){ if (hurtPlayer(e.elite?17:12,e.lungeA,'rusher',{attacker:e})) e.hitDone=true; }
           if (e.timer<=0){ e.state='recover'; e.timer=0.6; }
         } else {
           e.timer-=dt; if (e.timer<=0){ e.state='chase'; e.timer=rand(.4,1); }
@@ -150,6 +157,8 @@ function update(dt){
   updateBossHazards(dt);
   updateIceWalls(dt);
 
+  // The next wave drops in as the last enemy of this one is still standing.
+  if (roomPhase==='fight' && run.wavesLeft>0 && !isBossRoom() && enemies.filter(e=>!e.dead).length<=1){ run.wavesLeft--; spawnRoomWave(); banner('WAVE INCOMING',true); }
   if (roomPhase==='fight' && !enemies.length){
     waveClearing=true; run.roomsCleared=(run.roomsCleared||0)+1;
     if (isBossRoom()){ roomPhase='done'; banner('DISTRICT CLEAR',true); districtCleared(); return; }
