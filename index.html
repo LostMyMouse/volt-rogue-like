@@ -71,7 +71,7 @@
   <div class="cs-img" id="csImg"></div>
   <div class="cs-figure" id="csFigure"></div>
   <div class="cs-bar top"></div><div class="cs-bar bottom"></div>
-  <div class="cs-caption"><span class="cs-who">Volt</span><p id="csText"></p><span class="cs-count" id="csCount"></span></div>
+  <div class="cs-caption" id="csCaption"><span class="cs-tag" id="csTag" hidden></span><span class="cs-who" id="csWho" hidden></span><p id="csText"></p><span class="cs-count" id="csCount"></span></div>
   <button class="chip cs-skip" id="csSkip" type="button">Skip</button>
 </div>
 
@@ -88,9 +88,31 @@
   <span class="intro-skip">Click or press any key</span>
 </div>
 
-<div class="scrim" id="mStart">
+<div class="splash" id="splash">
+  <div class="splash-bg"></div>
+  <div class="splash-art" role="img" aria-label="Volt charging into battle as Gravemark and the Redactor loom over the city"></div>
+  <nav class="splash-menu" aria-label="Main menu">
+    <button class="btn primary" id="btnStart" type="button">Start Game</button>
+    <button class="btn" id="btnNew" type="button" hidden>New Game</button>
+    <button class="btn" id="btnHow" type="button">How to Play</button>
+    <button class="btn" id="btnSettings" type="button">Settings</button>
+    <p class="splash-meta" id="splashMeta"></p>
+  </nav>
+  <span class="splash-press" id="splashPress">Press Enter</span>
+</div>
+
+<div class="scrim" id="mConfirm" hidden>
+  <div class="panel" role="dialog" aria-labelledby="confirmTitle">
+    <span class="tag">New game</span>
+    <h2 id="confirmTitle">Start over?</h2>
+    <p class="hint">This erases your save in this browser: Renown Shards, upgrades, Hero Licences, unlocked styles and story progress.</p>
+    <div class="row"><button class="btn primary" id="btnConfirmNew" type="button">Erase and start</button><button class="btn" id="btnConfirmBack" type="button">Back</button></div>
+  </div>
+</div>
+
+<div class="scrim" id="mStart" hidden>
   <div class="panel" role="dialog" aria-labelledby="startTitle">
-    <span class="tag">Rookie run · Rooftop</span>
+    <span class="tag">How to play</span>
     <h1 id="startTitle">VOLT</h1>
     <p>The Redactor's villains hold the city, district by district. Choose which district to liberate next, leap across its rooftops (each jump point shows what's waiting there), then face its villain. Clear your districts, then take Gravemark's roof. Parry attacks marked with a closing white ring; dodge the ones with a jagged edge.</p>
     <dl class="controls" id="ctrlKb">
@@ -112,7 +134,7 @@
     </dl>
     <p class="hint">Attacks marked with a closing white ring can be parried: tap Block as the ring closes to take no damage and leave the attacker Exposed. Attacks with a jagged edge are supers: dodge them, never block.</p>
     <p class="rotate-tip">Best played with your phone turned sideways.</p>
-    <div class="row"><button class="btn primary" id="btnStart" type="button">Enter the Fortress</button></div>
+    <div class="row"><button class="btn primary" id="btnHowBack" type="button">Back</button></div>
   </div>
 </div>
 

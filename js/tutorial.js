@@ -4,12 +4,12 @@
 'use strict';
 
 const TUT_STEPS = [
-  { id:'move',   title:'Move',     kb:'Use <kbd>WASD</kbd> to move around the roof.', touch:'Drag anywhere on the left side of the screen to move.', say:"Let's see you move. Lap the roof." },
-  { id:'strike', title:'Strike',   kb:'<kbd>Left click</kbd> to Strike the training dummy. Hold it to keep swinging.', touch:'Tap <b>Strike</b> to hit the dummy. Hold it to keep swinging.', say:"Dummy's yours. Hit it like it owes you money." },
-  { id:'special',title:'Special',  kb:'<kbd>Right click</kbd> for your Special. Each style has a different one.', touch:'Tap <b>Special</b>. Each style has a different one.', say:"Now your Special. Every style's is different." },
-  { id:'dash',   title:'Dash',     kb:'<kbd>Space</kbd> to dash. You can\'t be hurt mid-dash.', touch:'Tap <b>Dash</b>. You can\'t be hurt mid-dash.', say:"Dash. You're untouchable for a split second. Use it." },
-  { id:'parry',  title:'Parry',    kb:'A white ring closes before an attack lands. Tap <kbd>Shift</kbd> as it closes to <b>parry</b>.', touch:'A white ring closes before an attack lands. Tap <b>Block</b> as it closes to <b>parry</b>.', say:"This one's slowed down. When the ring closes, block. Perfect timing is a parry." },
-  { id:'overload',title:'Overload',kb:'Overload is charged. Press <kbd>Q</kbd> to blast everything nearby.', touch:'Overload is charged. Tap <b>Ovld</b> to blast everything nearby.', say:"Overload's full. Light them up." },
+  { id:'move',   title:'Move',     kb:'Use <kbd>WASD</kbd> to move around the roof.', touch:'Drag anywhere on the left side of the screen to move.', say:"Let's see you move. And no climbing anything." },
+  { id:'strike', title:'Strike',   kb:'<kbd>Left click</kbd> to Strike the training dummy. Hold it to keep swinging.', touch:'Tap <b>Strike</b> to hit the dummy. Hold it to keep swinging.', say:"That dummy's survived forty rookies. Ruin its streak." },
+  { id:'special',title:'Special',  kb:'<kbd>Right click</kbd> for your Special. Each style has a different one.', touch:'Tap <b>Special</b>. Each style has a different one.', say:"Now your Special. Every style's is different. Let's find out what yours does." },
+  { id:'dash',   title:'Dash',     kb:'<kbd>Space</kbd> to dash. You can\'t be hurt mid-dash.', touch:'Tap <b>Dash</b>. You can\'t be hurt mid-dash.', say:"Dash. You're untouchable for half a second. Make the half second count." },
+  { id:'parry',  title:'Parry',    kb:'A white ring closes before an attack lands. Tap <kbd>Shift</kbd> as it closes to <b>parry</b>.', touch:'A white ring closes before an attack lands. Tap <b>Block</b> as it closes to <b>parry</b>.', say:"Slow one coming. When the ring closes, block. Nail the timing and they'll regret it." },
+  { id:'overload',title:'Overload',kb:'Overload is charged. Press <kbd>Q</kbd> to blast everything nearby.', touch:'Overload is charged. Tap <b>Ovld</b> to blast everything nearby.', say:"Overload's full. Light them up. Not the table." },
   { id:'clear',  title:'Finish them', kb:'Clear the roof.', touch:'Clear the roof.', say:"Last ones. Then you're on the clock for real." },
 ];
 let tut=null;

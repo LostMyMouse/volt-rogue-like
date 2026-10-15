@@ -111,7 +111,7 @@ const inHub = () => state==='hub' || state==='hubtalk' || state==='hubmenu';
 
 function enterHub(){
   reset(); powerHeld=false; transit=null; exits=[];
-  for (const id of ['#mStart','#mOver','#mPause','#mDraft','#mFortress','#mCity','#mStyle']) show(id,false);
+  for (const id of ['#splash','#mStart','#mOver','#mPause','#mDraft','#mFortress','#mCity','#mStyle']) show(id,false);
   document.body.classList.add('in-hub');
   player.x=HUB.spawn.x; player.y=HUB.spawn.y; player.aim=-Math.PI/2;
   cam.x=player.x; cam.y=player.y-120;

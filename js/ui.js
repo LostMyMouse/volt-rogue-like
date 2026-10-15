@@ -36,7 +36,7 @@ function startGame(){
   reset(); lastCaller=null; routeStart(); exits=[]; roomPhase='reward'; arrivalT=0; transit=null; powerHeld=false;
   { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
   save.runs++; writeSave(); leaveHub();
-  show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
+  show('#splash',false); show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
   openCityMap();
 }
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
@@ -155,8 +155,34 @@ function openTune(){
 }
 function closeTune(){ show('#mTune',false); if (tuneReturn==='play' && $('#mPause').hidden) state='play'; tuneReturn=null; }
 
-// First launch: the opening cutscene, then the Fortress.
-$('#btnStart').addEventListener('click', () => { goFullscreen(); if (!save.seenIntro) playCutscene(()=>enterHub()); else enterHub(); });
+/* ---------- Title screen ---------- */
+// The key art with the main menu. Start/Continue is the primary action; New Game asks before wiping a save.
+const hasSave = () => save.runs>0 || !!save.seenIntro;
+function refreshSplash(){
+  const any=hasSave(), beaten=Object.keys(save.beaten||{}).length;
+  $('#btnStart').textContent = any ? 'Continue' : 'Start Game';
+  $('#btnNew').hidden = !any;
+  $('#splashMeta').textContent = any ? `${save.runs} run${save.runs===1?'':'s'} · ${beaten} villain${beaten===1?'':'s'} beaten · ◆ ${save.shards} · ✦ ${save.licences}` : '';
+  $('#splashPress').textContent = inputMode==='touch' ? 'Tap to begin' : 'Press Enter';
+}
+function startFromSplash(){
+  goFullscreen(); show('#splash',false);
+  // First launch: the opening cutscene, then the Fortress.
+  if (!save.seenIntro) playCutscene(()=>enterHub()); else enterHub();
+}
+function newGame(){
+  try { localStorage.removeItem(SAVE_KEY); } catch(e){}
+  const fresh=loadSave(); for (const k of Object.keys(save)) delete save[k]; Object.assign(save,fresh); writeSave();
+  show('#mConfirm',false); startFromSplash();
+}
+$('#btnStart').addEventListener('click', startFromSplash);
+$('#btnNew').addEventListener('click', () => { show('#mConfirm',true); $('#btnConfirmBack').focus(); });
+$('#btnConfirmNew').addEventListener('click', newGame);
+$('#btnConfirmBack').addEventListener('click', () => { show('#mConfirm',false); $('#btnNew').focus(); });
+$('#btnHow').addEventListener('click', () => { show('#mStart',true); $('#btnHowBack').focus(); });
+$('#btnHowBack').addEventListener('click', () => { show('#mStart',false); $('#btnHow').focus(); });
+$('#btnSettings').addEventListener('click', openTune);
+refreshSplash();
 function goFullscreen(){
   if (inputMode!=='touch') return;
   try { const el=document.documentElement, r=el.requestFullscreen&&el.requestFullscreen({navigationUI:'hide'}); if (r&&r.then) r.then(()=>{ try{ screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{}); }catch(e){} }).catch(()=>{}); } catch(e){}
