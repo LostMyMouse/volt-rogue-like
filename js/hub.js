@@ -20,12 +20,14 @@ const HUB_FLOOR = [
 const HUB_BLOCK = [[575,365,905,585]]; // the command table
 
 // Heroes stand at their stations. Placeholder holo-projections until their sprites exist.
+// `face` is where they look when you're not nearby (radians, 0 = east): Halo watches the city,
+// Bastion the map, Patch the terminal. Up close, they turn to you.
 const HUB_NPCS = [
-  {id:'halo', x:755, y:215},
-  {id:'bastion', x:548, y:470},
-  {id:'patch', x:430, y:520},
-  {id:'thorn', x:325, y:272},
-  {id:'echo', x:1040, y:565},
+  {id:'halo', x:755, y:215, face:-Math.PI/2},
+  {id:'bastion', x:548, y:470, face:0},
+  {id:'patch', x:430, y:520, face:Math.PI*0.85},
+  {id:'thorn', x:325, y:272, face:Math.PI},
+  {id:'echo', x:1040, y:565, face:Math.PI/2},
 ];
 // Things to use. `at` is where the player stands; `lx,ly` is where the marker floats.
 const HUB_SPOTS = [
@@ -197,6 +199,7 @@ function hubMenuClosed(){ if (state==='hubmenu'){ state='hub'; hubNear=null; ref
 const BUST_IMG = {};
 for (const n of HUB_NPCS){ const i=new Image(); i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${PORTRAIT_SVG[n.id]||BUST}</svg>`); BUST_IMG[n.id]=i; }
 function drawHubNpc(n){
+  if (npcSpriteReady(n.id)) return drawHubNpcSprite(n);
   const c=SPEAKERS[n.id].c, near=hubNear&&hubNear.npc===n, pulse=0.5+0.5*Math.sin(time*2.2+n.x), fy=n.y-62+Math.sin(time*1.6+n.x)*3;
   ctx.save();
   // floor emitter and light column: a comms hologram until the hero sprites exist
@@ -212,6 +215,20 @@ function drawHubNpc(n){
   ctx.restore();
   ctx.font='700 13px "Chakra Petch", sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.lineWidth=4; ctx.strokeStyle=COL.ink; ctx.strokeText(SPEAKERS[n.id].name.toUpperCase(),n.x,fy-42); ctx.fillStyle=c; ctx.fillText(SPEAKERS[n.id].name.toUpperCase(),n.x,fy-42);
+  ctx.restore();
+}
+function drawHubNpcSprite(n){
+  const c=SPEAKERS[n.id].c, near=hubNear&&hubNear.npc===n, d=Math.hypot(player.x-n.x,player.y-n.y);
+  const face = d<170 ? Math.atan2(player.y-n.y,player.x-n.x) : n.face;
+  ctx.save();
+  ctx.globalAlpha=near?0.9:0.45; ctx.strokeStyle=c; ctx.lineWidth=near?3:2; ctx.beginPath(); ctx.ellipse(n.x,n.y,26,10,0,0,PI2); ctx.stroke();
+  ctx.globalAlpha=0.5; ctx.fillStyle='#000'; ctx.beginPath(); ctx.ellipse(n.x,n.y,20,7,0,0,PI2); ctx.fill(); ctx.globalAlpha=1;
+  drawNpcSprite(n.id,n.x,n.y,face);
+  if (near || d<220){
+    const y=n.y-92; ctx.globalAlpha=near?1:0.7;
+    ctx.font='700 13px "Chakra Petch", sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.lineWidth=4; ctx.strokeStyle=COL.ink; ctx.strokeText(SPEAKERS[n.id].name.toUpperCase(),n.x,y); ctx.fillStyle=c; ctx.fillText(SPEAKERS[n.id].name.toUpperCase(),n.x,y);
+  }
   ctx.restore();
 }
 function drawHubSpot(s){
@@ -231,7 +248,7 @@ function renderHub(){
   const hg=ctx.createRadialGradient(742,445,10,742,445,170); hg.addColorStop(0,COL.volt); hg.addColorStop(1,'rgba(38,191,255,0)'); ctx.fillStyle=hg; ctx.fillRect(560,270,370,350); ctx.restore();
   for (const s of HUB_SPOTS) drawHubSpot(s);
   const list=HUB_NPCS.map(n=>({y:n.y,f:()=>drawHubNpc(n)}));
-  list.push({y:player.y,f:()=>{ if (drawVoltSprite(player,1.35)) return; ctx.save(); ctx.translate(player.x,player.y); ctx.scale(1.4,1.4); ctx.translate(-player.x,-player.y); VECTOR.volt(player); ctx.restore(); }}); // drawn larger to match the painting's scale
+  list.push({y:player.y,f:()=>{ if (drawVoltSprite(player,1.5)) return; ctx.save(); ctx.translate(player.x,player.y); ctx.scale(1.4,1.4); ctx.translate(-player.x,-player.y); VECTOR.volt(player); ctx.restore(); }}); // drawn larger to match the painting's scale
   list.sort((a,b)=>a.y-b.y); for (const it of list) it.f();
   drawFx();
   ctx.restore();

@@ -370,3 +370,19 @@ The first Volt batch (`assets/sprites/volt/`) is wired in and works: sheet forma
 - **Missing signature features:** the spiky swept hair above the visor, and the white forearm and shin fins. Keep the white collar, blue rails and angular visor; they read well.
 - **Figure size:** the figure fills about 58 of 96 px. Fill about 80 px of the frame height so detail survives.
 - **Idle visor flicker:** in idle frames 3–5 the visor goes dark blue. Keep it consistently bright.
+
+## Hero sprites pass 1 (2026-10-15)
+
+Halo, Bastion, Echo, Thorn and Patch turnarounds (64 px, 8 directions, static) are in `assets/sprites/<id>/` and stand at their Fortress stations. Their heroic proportions are the **reference for the whole cast**: Volt should be regenerated to match them. Notes for pass 2:
+
+- **Standing poses for NPCs.** Bastion and Echo are in mid-action poses (lunging, crouched). Hub characters need a relaxed standing base pose; keep action poses for combat animations.
+- **Thorn's camera** is shallower than the others (noted by the generator too); match the high top-down view.
+- **Patch's drone** appears in some directions only. Remove it from the body sprite; it can be a separate layer.
+- **Ground line:** the feet sit at different heights per direction (45–62 px). The game measures each frame, but a shared ground line is cleaner.
+- Still needed: idle and talk loops, pleased/stern reactions, 256² portraits and intro-card art.
+
+## Volt pass 2 (2026-10-15)
+
+The chibi Volt animations were retired. Volt is now the hero-matched turnaround in `assets/sprites/volt/volt_rotations.png` (64 px, 8 directions, same format as the heroes). Until animation sheets exist, motion is code-driven in `js/sprites.js`: a run bob, a lunge on strikes, blue afterimages on dash and a white flash on parry and dash.
+
+**Next animation batch for Volt** (generate against the new turnaround, 64 px base frames, larger transparent canvas only if a pose clips, same ground line): idle (6), run (8), strike1–3 (4/4/6), dash (4), block (3, hold last), parry (5). Use the same south-first, clockwise direction order as the turnaround, one row per direction.
