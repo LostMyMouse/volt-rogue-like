@@ -93,7 +93,7 @@
   <div class="splash-art" role="img" aria-label="Volt charging into battle as Gravemark and the Redactor loom over the city"></div>
   <nav class="splash-menu" aria-label="Main menu">
     <button class="btn primary" id="btnStart" type="button">Start Game</button>
-    <button class="btn" id="btnNew" type="button" hidden>New Game</button>
+    <button class="btn" id="btnSlots" type="button">Save Slots</button>
     <button class="btn" id="btnHow" type="button">How to Play</button>
     <button class="btn" id="btnSettings" type="button">Settings</button>
     <p class="splash-meta" id="splashMeta"></p>
@@ -101,12 +101,23 @@
   <span class="splash-press" id="splashPress">Press Enter</span>
 </div>
 
+<div class="scrim" id="mSlots" hidden>
+  <div class="panel slots-panel" role="dialog" aria-labelledby="slotsTitle">
+    <span class="tag">Saved in this browser · export to keep a copy</span>
+    <h2 id="slotsTitle">Save slots</h2>
+    <div class="slot-list" id="slotList"></div>
+    <p class="hint" id="slotMsg"></p>
+    <div class="row"><button class="btn primary" id="btnSlotsBack" type="button">Back</button></div>
+    <input type="file" id="slotFile" accept=".json,application/json" hidden>
+  </div>
+</div>
+
 <div class="scrim" id="mConfirm" hidden>
   <div class="panel" role="dialog" aria-labelledby="confirmTitle">
-    <span class="tag">New game</span>
-    <h2 id="confirmTitle">Start over?</h2>
-    <p class="hint">This erases your save in this browser: Renown Shards, upgrades, Hero Licences, unlocked styles and story progress.</p>
-    <div class="row"><button class="btn primary" id="btnConfirmNew" type="button">Erase and start</button><button class="btn" id="btnConfirmBack" type="button">Back</button></div>
+    <span class="tag" id="confirmTag">Are you sure?</span>
+    <h2 id="confirmTitle">Erase this slot?</h2>
+    <p class="hint" id="confirmText"></p>
+    <div class="row"><button class="btn primary" id="btnConfirmOk" type="button">Erase</button><button class="btn" id="btnConfirmBack" type="button">Back</button></div>
   </div>
 </div>
 

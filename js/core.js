@@ -47,12 +47,24 @@ function buildTune(){
 buildTune();
 
 /* ---------- Save (kept between runs, this browser only) ---------- */
-const SAVE_KEY='volt-save';
+// Three save slots (volt-save-1..3). volt-slot remembers which one Continue loads. A save from before slots
+// existed moves into slot 1.
+const SLOT_COUNT=3;
+let activeSlot=1;
+try { activeSlot=clamp(+localStorage.getItem('volt-slot')||1,1,SLOT_COUNT);
+  const old=localStorage.getItem('volt-save'); if (old && !localStorage.getItem('volt-save-1')){ localStorage.setItem('volt-save-1',old); localStorage.removeItem('volt-save'); } } catch(e){}
+let SAVE_KEY='volt-save-'+activeSlot;
 function loadSave(){
   const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}, talk:{}, beaten:{}, last:null, story:{}, killedBy:{}, wins:0, comm:{}};
   try { const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null'); if (s && s.v===1) return Object.assign(base,s); } catch(e){}
   return base;
 }
 const save=loadSave();
-function writeSave(){ try{ localStorage.setItem(SAVE_KEY,JSON.stringify(save)); }catch(e){} }
+function writeSave(){ save.updated=Date.now(); try{ localStorage.setItem(SAVE_KEY,JSON.stringify(save)); }catch(e){} }
+function readSlot(n){ try { const s=JSON.parse(localStorage.getItem('volt-save-'+n)||'null'); return s && s.v===1 ? s : null; } catch(e){ return null; } }
+// Switch to slot n: the shared save object is refilled in place, so everything holding it stays valid.
+function useSlot(n){
+  activeSlot=n; SAVE_KEY='volt-save-'+n; try{ localStorage.setItem('volt-slot',n); }catch(e){}
+  const fresh=loadSave(); for (const k of Object.keys(save)) delete save[k]; Object.assign(save,fresh);
+}
 function metaRank(id){ return save.meta[id]||0; }

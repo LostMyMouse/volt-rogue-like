@@ -356,4 +356,19 @@ body.touch-mode .hub-prompt{bottom:calc(env(safe-area-inset-bottom,0px) + 28px);
   .splash-menu .btn{font-size:20px;padding:10px 16px}
 }
 @media (max-height:480px) and (orientation:landscape){ .splash{grid-template-columns:minmax(0,1fr) minmax(220px,300px)} .splash-menu{gap:8px} .splash-menu .btn{font-size:18px;padding:8px 14px} .splash-press{display:none} }
-#mStart,#mConfirm,#mTune{z-index:36}
+#mStart,#mSlots,#mTune{z-index:36} #mConfirm{z-index:37}
+
+/* Save slots */
+.slots-panel{max-width:640px}
+.slot-list{display:grid;gap:10px}
+.slot-card{display:grid;gap:6px;padding:12px 14px;background:var(--ink);border:2px solid #2a3a54}
+.slot-card.active{border-color:var(--volt);box-shadow:0 0 16px rgba(38,191,255,.25)}
+.slot-card.empty p{color:var(--muted)}
+.slot-head{display:flex;align-items:center;gap:10px}
+.slot-head strong{font-family:var(--display);font-weight:900;font-size:24px;text-transform:uppercase}
+.slot-badge{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px;background:var(--volt);color:var(--ink)}
+.slot-card p{margin:0;font-size:13px;color:var(--text)}
+.slot-when{font-size:11px;color:var(--muted)}
+.slot-btns{display:flex;flex-wrap:wrap;gap:8px}
+.slot-btns .btn{font-size:15px;padding:6px 12px}
+.slot-btns .btn:disabled{opacity:.35;cursor:default}

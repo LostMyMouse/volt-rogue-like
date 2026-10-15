@@ -156,29 +156,68 @@ function openTune(){
 function closeTune(){ show('#mTune',false); if (tuneReturn==='play' && $('#mPause').hidden) state='play'; tuneReturn=null; }
 
 /* ---------- Title screen ---------- */
-// The key art with the main menu. Start/Continue is the primary action; New Game asks before wiping a save.
+// The key art with the main menu. Start/Continue plays the active slot; Save Slots manages all three.
 const hasSave = () => save.runs>0 || !!save.seenIntro;
+const slotSummary = s => { const b=Object.keys(s.beaten||{}).length; return `${s.runs} run${s.runs===1?'':'s'} · ${b} villain${b===1?'':'s'} beaten · ◆ ${s.shards} · ✦ ${s.licences}`; };
 function refreshSplash(){
-  const any=hasSave(), beaten=Object.keys(save.beaten||{}).length;
+  const any=hasSave();
   $('#btnStart').textContent = any ? 'Continue' : 'Start Game';
-  $('#btnNew').hidden = !any;
-  $('#splashMeta').textContent = any ? `${save.runs} run${save.runs===1?'':'s'} · ${beaten} villain${beaten===1?'':'s'} beaten · ◆ ${save.shards} · ✦ ${save.licences}` : '';
+  $('#splashMeta').textContent = any ? `Slot ${activeSlot} · ${slotSummary(save)}` : '';
   $('#splashPress').textContent = inputMode==='touch' ? 'Tap to begin' : 'Press Enter';
 }
 function startFromSplash(){
-  goFullscreen(); show('#splash',false);
+  goFullscreen(); show('#splash',false); show('#mSlots',false);
   // First launch: the opening cutscene, then the Fortress.
   if (!save.seenIntro) playCutscene(()=>enterHub()); else enterHub();
 }
-function newGame(){
-  try { localStorage.removeItem(SAVE_KEY); } catch(e){}
-  const fresh=loadSave(); for (const k of Object.keys(save)) delete save[k]; Object.assign(save,fresh); writeSave();
-  show('#mConfirm',false); startFromSplash();
+let confirmOk=null;
+function askConfirm(tag,title,text,ok,run){ $('#confirmTag').textContent=tag; $('#confirmTitle').textContent=title; $('#confirmText').textContent=text; $('#btnConfirmOk').textContent=ok; confirmOk=run; show('#mConfirm',true); $('#btnConfirmBack').focus(); }
+$('#btnConfirmOk').addEventListener('click', () => { show('#mConfirm',false); const r=confirmOk; confirmOk=null; r && r(); });
+$('#btnConfirmBack').addEventListener('click', () => { show('#mConfirm',false); confirmOk=null; });
+
+/* ---------- Save slots ---------- */
+function fillSlots(msg){
+  const list=$('#slotList'); list.innerHTML=''; $('#slotMsg').textContent=msg||'';
+  for (let n=1;n<=SLOT_COUNT;n++){
+    const s=readSlot(n), used=!!(s && (s.runs>0 || s.seenIntro)), act=n===activeSlot;
+    const when = used && s.updated ? new Date(s.updated).toLocaleDateString(undefined,{day:'numeric',month:'short'})+' · '+new Date(s.updated).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}) : '';
+    const card=document.createElement('div'); card.className='slot-card'+(act?' active':'')+(used?'':' empty');
+    card.innerHTML=`<div class="slot-head"><strong>Slot ${n}</strong>${act?'<span class="slot-badge">Current</span>':''}</div>
+      <p>${used?slotSummary(s):'Empty'}</p>${when?`<span class="slot-when">Last played ${when}</span>`:''}
+      <div class="slot-btns"></div>`;
+    const btns=card.querySelector('.slot-btns'), add=(label,cls,fn,dis)=>{ const b=document.createElement('button'); b.type='button'; b.className='btn '+cls; b.textContent=label; b.disabled=!!dis; b.addEventListener('click',fn); btns.appendChild(b); };
+    add(used?'Play':'New game','primary',()=>{ useSlot(n); refreshSplash(); startFromSplash(); });
+    add('Export','',()=>exportSlot(n),!used);
+    add('Import','',()=>importSlot(n));
+    add('Erase','',()=>askConfirm('Slot '+n,'Erase this slot?','This permanently deletes slot '+n+': shards, upgrades, licences, styles and story progress. Export it first if you might want it back.','Erase',()=>{ try{ localStorage.removeItem('volt-save-'+n); }catch(e){} if (n===activeSlot) useSlot(n); refreshSplash(); fillSlots('Slot '+n+' erased.'); }),!used);
+    list.appendChild(card);
+  }
 }
+function exportSlot(n){
+  const s=readSlot(n); if (!s) return;
+  const blob=new Blob([JSON.stringify({game:'volt', format:1, slot:n, exported:new Date().toISOString(), save:s},null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`volt-slot${n}-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  fillSlots('Slot '+n+' exported. Keep the file somewhere safe; Import loads it back on any device.');
+}
+let importTarget=1;
+function importSlot(n){ importTarget=n; const f=$('#slotFile'); f.value=''; f.click(); }
+$('#slotFile').addEventListener('change', e => {
+  const file=e.target.files && e.target.files[0]; if (!file) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    let data; try { data=JSON.parse(r.result); } catch(err){ fillSlots("That file isn't a Volt save."); return; }
+    const s=data && data.game==='volt' ? data.save : null;
+    if (!s || s.v!==1 || typeof s.runs!=='number'){ fillSlots("That file isn't a Volt save."); return; }
+    const put=()=>{ try{ localStorage.setItem('volt-save-'+importTarget,JSON.stringify(s)); }catch(err){} if (importTarget===activeSlot) useSlot(importTarget); refreshSplash(); fillSlots('Imported into slot '+importTarget+'.'); };
+    const cur=readSlot(importTarget);
+    if (cur && (cur.runs>0 || cur.seenIntro)) askConfirm('Slot '+importTarget,'Replace this slot?','Slot '+importTarget+' already has a save. Importing replaces it.','Replace',put); else put();
+  };
+  r.readAsText(file);
+});
 $('#btnStart').addEventListener('click', startFromSplash);
-$('#btnNew').addEventListener('click', () => { show('#mConfirm',true); $('#btnConfirmBack').focus(); });
-$('#btnConfirmNew').addEventListener('click', newGame);
-$('#btnConfirmBack').addEventListener('click', () => { show('#mConfirm',false); $('#btnNew').focus(); });
+$('#btnSlots').addEventListener('click', () => { fillSlots(); show('#mSlots',true); $('#btnSlotsBack').focus(); });
+$('#btnSlotsBack').addEventListener('click', () => { show('#mSlots',false); $('#btnSlots').focus(); });
 $('#btnHow').addEventListener('click', () => { show('#mStart',true); $('#btnHowBack').focus(); });
 $('#btnHowBack').addEventListener('click', () => { show('#mStart',false); $('#btnHow').focus(); });
 $('#btnSettings').addEventListener('click', openTune);
