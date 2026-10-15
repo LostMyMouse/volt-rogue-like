@@ -20,6 +20,8 @@ function frame(now){
   } else if (state==='transit'){
     time+=dt; updateTransit(dt); updateFx(dt); updateCam(dt);
     shakeAmt-=shakeAmt*Math.min(1,10*dt); flash=Math.max(0,flash-dt*1.6); hurtFlash=Math.max(0,hurtFlash-dt*1.4);
+  } else if (state==='cutscene'){
+    time+=dt; updateCinematic(dt);
   } else if (inHub()){
     time+=dt; if (state==='hub') updateHub(dt); updateFx(dt); hubCam(dt);
   } else if (state==='start' || state==='over'){

@@ -1,77 +1,171 @@
-// Volt: The opening cutscene, written as a cold open: the Redactor's broadcast, the heroes arguing in the
-// Fortress (each gets a name card the first time they speak), and Volt crashing the meeting. Plays the
-// first time you enter the Fortress; replay it from Volt's bunk. Click, tap or press a key to continue
-// (the first press finishes a line that is still typing); Skip ends it.
+// Volt: The opening cold open, staged live with the game's own renderer: animated sprites, effects and a
+// moving camera, under letterbox bars with the dialogue on top. Plays the first time you enter the Fortress;
+// replay it from Volt's bunk. Click, tap or press a key to continue (the first press finishes a line that
+// is still typing); Skip ends it.
 'use strict';
 
-const CS_ROOF='assets/arena/rooftop.webp', CS_FORT='assets/fortress/hub.jpg';
-// who: speaker id; expr: portrait expression; card: a name-card intro with a tagline; art/row: a big figure.
+const CS_VILLAINS = [
+  {id:'kilnheart', x:330, y:330, el:'fire'}, {id:'bellwether', x:540, y:310, el:'sound'}, {id:'undertow', x:750, y:300, el:'water'},
+  {id:'verdigris', x:960, y:310, el:'acid'}, {id:'glasswake', x:1170, y:330, el:'glass'},
+];
+const CS_REDACTOR_IMG = new Image(); CS_REDACTOR_IMG.src='assets/intro/redactor.png';
+const VOLT_LAND = {x:850, y:228};
+
+// Each beat: where the camera goes, what happens as it starts, and the line spoken.
 const CUTSCENE = [
-  { bg:CS_ROOF, dim:true, art:'assets/intro/redactor.png', c:'#e0283c', who:'redactor', expr:'pleased', tag:'Every screen in the city', text:"Good evening. This is a courtesy notice regarding your heroes' powers." },
-  { bg:CS_ROOF, dim:true, art:'assets/intro/redactor.png', c:'#e0283c', who:'redactor', expr:'pleased', text:"They've been reviewed. Most of them failed." },
-  { bg:CS_ROOF, dim:true, row:['kilnheart','bellwether','verdigris','glasswake','undertow'], who:'redactor', text:"My associates will be managing your districts from now on. Please direct all complaints to no one." },
-  { bg:CS_ROOF, dim:true, art:'assets/intro/gravemark.png', c:'#b56cff', who:'gravemark', expr:'stern', text:"And any heroes who object can take it up with me. On the roof." },
-  { bg:CS_ROOF, dim:true, art:'assets/intro/redactor.png', c:'#e0283c', who:'redactor', text:"Have a quiet night. You won't have a choice." },
+  { scene:'roof', cam:{x:750,y:150,z:0.85}, go:c=>{ c.screen=1; c.glitch=0.6; addShake(4); },
+    who:'redactor', expr:'pleased', tag:'Every screen in the city', text:"Good evening. This is a courtesy notice regarding your heroes' powers." },
+  { cam:{x:750,y:130,z:1.05}, go:c=>{ c.glitch=1.2; c.flash=0.5; c.flashC='#e0283c'; addShake(10); },
+    who:'redactor', expr:'pleased', text:"They've been reviewed. Most of them failed." },
+  { cam:{x:750,y:300,z:0.78}, go:c=>{ CS_VILLAINS.forEach((v,i)=>c.later(0.35+i*0.45,()=>csArrive(c,v))); },
+    who:'redactor', text:"My associates will be managing your districts from now on. Please direct all complaints to no one." },
+  { cam:{x:750,y:470,z:1.15}, go:c=>{ c.later(0.25,()=>{ c.actors.push({id:'gravemark', x:750, y:540, anim:'intro', t0:time, drop:1}); }); c.later(0.55,()=>{ addShake(22); c.flash=0.35; c.flashC='#b56cff'; VFX_FX.push({type:'burst',el:'stone',x:750,y:540,R:150,t:0,dur:0.8,seed:rand(PI2)}); vfxBurstParticles('stone',750,540,150,2); }); },
+    who:'gravemark', expr:'stern', text:"And any heroes who object can take it up with me. On the roof." },
+  { cam:{x:750,y:150,z:0.9}, go:c=>{ c.glitch=0.8; },
+    who:'redactor', text:"Have a quiet night. You won't have a choice." },
 
-  { bg:CS_FORT, card:'bastion', tagline:'Runs the Fortress. Hates surprises.', who:'bastion', expr:'stern', tag:'The Fortress · ten minutes later', text:"Four districts dark. Half my roster drained. Somebody give me good news." },
-  { bg:CS_FORT, card:'patch', tagline:'Engineer. Comms. Coffee.', who:'patch', text:"Good news: the coffee machine survived." },
-  { bg:CS_FORT, dim:true, who:'bastion', expr:'stern', text:"Patch." },
-  { bg:CS_FORT, dim:true, who:'patch', expr:'pleased', text:"Bad news: so did the Redactor." },
-  { bg:CS_FORT, card:'echo', tagline:'Psychic. Usually right. Insufferable about it.', who:'echo', text:"Can we skip to the part where I'm right? We need more people." },
-  { bg:CS_FORT, card:'thorn', tagline:'Ex-villain. Still earning trust.', who:'thorn', text:"People who aren't scared of him. That's a short list." },
-  { bg:CS_FORT, card:'halo', tagline:"The world's number one hero. For now.", who:'halo', expr:'stern', text:"Then we make it longer." },
-
-  { bg:CS_FORT, dim:true, who:'patch', text:"Uh. Small thing. Someone's climbing the outside of the Fortress." },
-  { bg:CS_FORT, dim:true, who:'bastion', expr:'stern', text:"Nobody climbs a sixty-storey wall." },
-  { bg:CS_ROOF, card:'volt', tagline:'Rookie hero. Very, very new.', who:'volt', expr:'pleased', text:"Hi! Sorry. Your front door has, like, nine locks." },
-  { bg:CS_FORT, dim:true, portrait:'volt', who:'volt', text:"I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help." },
-  { bg:CS_FORT, dim:true, portrait:'echo', who:'echo', expr:'pleased', text:"Oh, I like them." },
-  { bg:CS_FORT, dim:true, portrait:'halo', who:'halo', text:"You're bleeding." },
-  { bg:CS_FORT, dim:true, portrait:'volt', who:'volt', text:"The wall had opinions." },
-  { bg:CS_FORT, dim:true, portrait:'halo', who:'halo', text:"Bastion. Give the rookie a run." },
-  { bg:CS_FORT, dim:true, portrait:'bastion', who:'bastion', expr:'stern', text:"Training roof. Now. And don't touch my table." },
-  { bg:CS_FORT, dim:true, portrait:'volt', who:'volt', expr:'pleased', text:"What table?" },
+  { scene:'fort', cam:{x:742,y:330,z:1.15}, go:c=>{ c.flash=1; c.flashC='#000000'; c.screen=0; }, focus:'bastion', card:'bastion', tagline:'Runs the Fortress. Hates surprises.',
+    who:'bastion', expr:'stern', tag:'The Fortress · ten minutes later', text:"Four districts dark. Half my roster drained. Somebody give me good news." },
+  { cam:{x:260,y:520,z:1.3}, focus:'patch', card:'patch', tagline:'Engineer. Comms. Coffee.', who:'patch', text:"Good news: the coffee machine survived." },
+  { cam:{x:742,y:330,z:1.3}, focus:'bastion', who:'bastion', expr:'stern', text:"Patch." },
+  { cam:{x:260,y:520,z:1.35}, focus:'patch', who:'patch', expr:'pleased', text:"Bad news: so did the Redactor." },
+  { cam:{x:1150,y:640,z:1.3}, focus:'echo', card:'echo', tagline:'Psychic. Usually right. Insufferable about it.', who:'echo', text:"Can we skip to the part where I'm right? We need more people." },
+  { cam:{x:260,y:250,z:1.3}, focus:'thorn', card:'thorn', tagline:'Ex-villain. Still earning trust.', who:'thorn', text:"People who aren't scared of him. That's a short list." },
+  { cam:{x:760,y:190,z:1.45}, focus:'halo', card:'halo', tagline:"The world's number one hero. For now.", who:'halo', expr:'stern', text:"Then we make it longer." },
+  { cam:{x:742,y:420,z:0.95}, go:c=>{ c.alarm=1; }, focus:'patch', who:'patch', text:"Uh. Small thing. Someone's climbing the outside of the Fortress." },
+  { cam:{x:742,y:360,z:1.1}, focus:'bastion', who:'bastion', expr:'stern', text:"Nobody climbs a sixty-storey wall." },
+  { cam:{x:820,y:200,z:1.5}, go:c=>{ c.alarm=0; c.volt={x:VOLT_LAND.x, t0:time}; c.later(0.7,()=>{ c.flash=0.6; c.flashC='#26bfff'; addShake(12); bolts.push({pts:[{x:VOLT_LAND.x,y:VOLT_LAND.y-160},{x:VOLT_LAND.x+20,y:VOLT_LAND.y-60},{x:VOLT_LAND.x,y:VOLT_LAND.y}],t:0,dur:0.3}); for (let i=0;i<20;i++) vfxEmit('ember',VOLT_LAND.x,VOLT_LAND.y,{vx:rand(-260,260),vy:rand(-120,120),vz:rand(60,220),g:600,life:.5,size:3,c:'#7fe0ff'}); }); },
+    focus:'volt', card:'volt', tagline:'Rookie hero. Very, very new.', who:'volt', expr:'pleased', text:"Hi! Sorry. Your front door has, like, nine locks." },
+  { cam:{x:800,y:230,z:1.25}, focus:'volt', who:'volt', text:"I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help." },
+  { cam:{x:1000,y:420,z:0.9}, focus:'echo', who:'echo', expr:'pleased', text:"Oh, I like them." },
+  { cam:{x:800,y:210,z:1.5}, focus:'halo', who:'halo', text:"You're bleeding." },
+  { cam:{x:830,y:220,z:1.55}, focus:'volt', who:'volt', text:"The wall had opinions." },
+  { cam:{x:790,y:215,z:1.4}, focus:'halo', who:'halo', text:"Bastion. Give the rookie a run." },
+  { cam:{x:742,y:330,z:1.25}, focus:'bastion', who:'bastion', expr:'stern', text:"Training roof. Now. And don't touch my table." },
+  { cam:{x:830,y:220,z:1.6}, focus:'volt', who:'volt', expr:'pleased', text:"What table?" },
 ];
 
+function csArrive(c,v){
+  c.actors.push({id:v.id, x:v.x, y:v.y, anim:'intro', t0:time});
+  VFX_FX.push({type:'burst', el:v.el, x:v.x, y:v.y, R:80, t:0, dur:0.7, seed:rand(PI2)});
+  vfxBurstParticles(v.el, v.x, v.y, 80, 1.2); addShake(5);
+}
 const portraitSrc = (id,expr) => expr && expr!=='neutral' ? `assets/portraits/${id}/${expr}-256.png` : `assets/portraits/${id}.png`;
+
 let cut=null;
 function playCutscene(done){
   if (window.__volt && window.__volt.noIntro){ done && done(); return; }
-  cut={i:-1, done, typing:null};
+  cut={ i:-1, done, typing:null, scene:'roof', cam:{x:750,y:150,z:0.7}, camTo:{x:750,y:150,z:0.85}, actors:[], screen:0, glitch:0, flash:0, flashC:'#fff', alarm:0, volt:null, focus:null, timers:[],
+    later(t,fn){ this.timers.push({at:time+t, fn}); }, rain:Array.from({length:110},()=>({x:Math.random(),y:Math.random(),s:rand(0.6,1.2)})) };
+  VFX_P=[]; VFX_FX=[]; bolts=[];
   state='cutscene'; keys.clear(); stick.id=null;
-  show('#cutscene',true); nextCutPanel();
+  show('#splash',false); show('#cutscene',true); document.body.classList.add('in-cut'); nextCutPanel();
 }
 function nextCutPanel(){
   if (!cut) return;
-  const el=$('#cutscene');
   if (cut.typing){ clearInterval(cut.typing); cut.typing=null; $('#csText').textContent=CUTSCENE[cut.i].text; return; } // first tap finishes the line
   if (++cut.i>=CUTSCENE.length){ endCutscene(); return; }
-  const p=CUTSCENE[cut.i], prev=CUTSCENE[cut.i-1], img=$('#csImg'), fig=$('#csFigure');
-  // Only restart the slow pan when the location changes, so a conversation feels like one continuous shot.
-  if (!prev || prev.bg!==p.bg){ img.style.backgroundImage=`url(${p.bg})`; img.classList.remove('kb'); void img.offsetWidth; img.classList.add('kb'); }
-  img.classList.toggle('dim',!!p.dim || !!p.card);
-  fig.innerHTML=''; fig.className='cs-figure';
-  if (p.card){
-    const sp=SPEAKERS[p.card]; fig.classList.add('namecard'); fig.style.setProperty('--c',sp.c);
-    fig.innerHTML=`<img src="${portraitSrc(p.card,p.expr)}" alt=""><div class="cs-card"><span>${p.card==='volt'?'Introducing':'Meet'}</span><b>${sp.name}</b><i>${p.tagline}</i></div>`;
-  } else if (p.art){ fig.classList.add('art'); fig.style.setProperty('--c',p.c||COL.volt); fig.innerHTML=`<img src="${p.art}" alt="">`; }
-  else if (p.row){ fig.classList.add('row'); fig.innerHTML=p.row.map(id=>`<span style="--c:${SPEAKERS[id].c}"><img src="assets/portraits/${id}.png" alt=""><b>${SPEAKERS[id].name}</b></span>`).join(''); }
-  else if (p.portrait){ fig.classList.add('solo'); fig.style.setProperty('--c',SPEAKERS[p.portrait].c); fig.innerHTML=`<img src="${portraitSrc(p.portrait,p.expr)}" alt="">`; }
-  // Caption: who's talking, in their colour, with a small location tag when the scene changes.
+  const p=CUTSCENE[cut.i];
+  // A new location drops anything still pending from the last one (e.g. villain arrivals if you clicked fast).
+  if (p.scene && p.scene!==cut.scene){ cut.scene=p.scene; cut.actors=[]; cut.timers=[]; VFX_P=[]; VFX_FX=[]; bolts=[]; cut.cam=Object.assign({},p.cam,{z:p.cam.z*0.85}); }
+  if (p.cam) cut.camTo=p.cam;
+  cut.focus=p.focus||null;
+  p.go && p.go(cut);
+  // A name card the first time each character speaks.
+  const card=$('#csCard');
+  if (p.card){ const sp=SPEAKERS[p.card]; card.style.setProperty('--c',sp.c); card.innerHTML=`<img src="${portraitSrc(p.card,p.expr)}" alt=""><div><span>${p.card==='volt'?'Introducing':'Meet'}</span><b>${sp.name}</b><i>${p.tagline}</i></div>`; card.hidden=false; card.classList.remove('in'); void card.offsetWidth; card.classList.add('in'); }
+  else card.hidden=true;
   const sp=p.who && SPEAKERS[p.who], cap=$('#csCaption');
   cap.style.setProperty('--c', sp ? sp.c : COL.volt);
   $('#csWho').textContent = sp ? sp.name : ''; $('#csWho').hidden=!sp;
   $('#csTag').textContent = p.tag||''; $('#csTag').hidden=!p.tag;
-  el.classList.toggle('villain', !!sp && sp.role==='Villain');
+  const pt=$('#csPortrait'); if (sp){ pt.src=portraitSrc(p.who,p.expr); pt.hidden=false; } else pt.hidden=true;
+  $('#cutscene').classList.toggle('villain', !!sp && sp.role==='Villain');
   const t=$('#csText'); t.textContent=''; let n=0;
   cut.typing=setInterval(()=>{ n+=2; t.textContent=p.text.slice(0,n); if (n>=p.text.length){ clearInterval(cut.typing); cut.typing=null; } }, 26);
   $('#csCount').textContent=`${cut.i+1} / ${CUTSCENE.length}`;
 }
 function endCutscene(){
   if (!cut) return;
-  clearInterval(cut.typing); const done=cut.done; cut=null;
-  show('#cutscene',false); save.seenIntro=1; writeSave();
+  clearInterval(cut.typing); const done=cut.done; cut=null; VFX_P=[]; VFX_FX=[]; bolts=[]; shakeAmt=0;
+  show('#cutscene',false); document.body.classList.remove('in-cut'); save.seenIntro=1; writeSave();
   done && done();
+}
+
+/* ---------- Per-frame staging ---------- */
+function updateCinematic(dt){
+  if (!cut) return;
+  const c=cut, k=Math.min(1,2.2*dt);
+  for (const key of ['x','y','z']) c.cam[key]+=(c.camTo[key]-c.cam[key])*k;
+  c.glitch=Math.max(0,c.glitch-dt); c.flash=Math.max(0,c.flash-dt*1.8);
+  for (const tm of c.timers) if (time>=tm.at && !tm.done){ tm.done=true; tm.fn(); }
+  c.timers=c.timers.filter(t=>!t.done);
+  vfxUpdate(dt);
+  for (const b of bolts) b.t+=dt; bolts=bolts.filter(b=>b.t<b.dur);
+  shakeAmt-=shakeAmt*Math.min(1,8*dt);
+  if (c.scene==='roof' && c.screen && Math.random()<dt*0.6) c.glitch=Math.max(c.glitch,0.15); // the signal stutters now and then
+}
+function renderCinematic(){
+  const c=cut; if (!c) return;
+  ctx.setTransform(DPR,0,0,DPR,0,0); ctx.fillStyle='#04070e'; ctx.fillRect(0,0,W,H);
+  const base = c.scene==='roof' ? Math.min(W/1250,H/700) : Math.min(W/1000,H/720);
+  const z=base*c.cam.z, sx=(Math.random()*2-1)*shakeAmt, sy=(Math.random()*2-1)*shakeAmt;
+  ctx.save(); ctx.translate(W/2+sx,H/2+sy); ctx.scale(z,z); ctx.translate(-c.cam.x,-c.cam.y);
+  if (c.scene==='roof'){
+    drawCity(); if (roofPainted()) drawPaintedRoof();
+    if (c.screen) drawBroadcast(c);
+    vfxDrawGround();
+    const list=c.actors.map(a=>({y:a.y,f:()=>{
+      let y=a.y; if (a.drop){ const t=time-a.t0; y=a.y-Math.max(0,1-t/0.3)*600; }
+      drawShadow(a.x,a.y,26);
+      const name = time-a.t0 < 1.4 && ANIMATION_DATA[a.id] && ANIMATION_DATA[a.id][a.anim] ? a.anim : 'idle';
+      if (!drawAnimation(a.id,name,a.x,y+14,Math.PI/2,SPRITES[a.id]?SPRITES[a.id].scale:1.4,time-a.t0)) drawTurn(a.id,a.x,y+14,Math.PI/2);
+    }}));
+    list.sort((p,q)=>p.y-q.y); for (const it of list) it.f();
+  } else {
+    if (hubImg.complete) ctx.drawImage(hubImg,0,0,HUB.w,HUB.h);
+    // The heroes at their stations; whoever is speaking gestures, and once Volt lands they all look at the rookie.
+    const list=HUB_NPCS.map(n=>({y:n.y,f:()=>{
+      const talking=c.focus===n.id && CUTSCENE[c.i] && CUTSCENE[c.i].who===n.id;
+      const face = c.volt && time-c.volt.t0>0.8 ? Math.atan2(VOLT_LAND.y-n.y,VOLT_LAND.x-n.x) : n.face;
+      ctx.globalAlpha=0.5; ctx.fillStyle='#000'; ctx.beginPath(); ctx.ellipse(n.x,n.y,20,7,0,0,PI2); ctx.fill(); ctx.globalAlpha=1;
+      if (!drawAnimation(n.id,talking?'talk':'idle',n.x,n.y,stickyFace('cs_'+n.id,face),SPRITES[n.id].scale,time)) drawTurn(n.id,n.x,n.y,face);
+    }}));
+    if (c.volt){ const v=c.volt, t=time-v.t0, rise=Math.min(1,t/0.7), y=VOLT_LAND.y+260*(1-rise)*(1-rise) - Math.sin(rise*Math.PI)*40;
+      list.push({y:VOLT_LAND.y,f:()=>{
+        if (t<0.7) for (let i=0;i<2;i++) vfxEmit('ember',v.x+rand(-12,12),y+rand(-10,20),{vz:rand(10,60),g:-20,life:.35,size:2,c:'#7fe0ff'});
+        ctx.globalAlpha=0.5; ctx.fillStyle='#000'; ctx.beginPath(); ctx.ellipse(v.x,VOLT_LAND.y,18,6,0,0,PI2); ctx.fill(); ctx.globalAlpha=1;
+        if (!drawAnimation('volt',t<0.7?'dash':'idle',v.x,y,stickyFace('cs_volt',t<0.7?-Math.PI/2:Math.PI/2),1.5,t)) drawTurn('volt',v.x,y,Math.PI/2,1.5);
+      }}); }
+    list.sort((p,q)=>p.y-q.y); for (const it of list) it.f();
+  }
+  vfxDraw(); drawFx();
+  ctx.restore();
+  // Screen-space weather and lighting.
+  if (c.scene==='roof'){
+    ctx.save(); ctx.strokeStyle='rgba(180,210,255,.28)'; ctx.lineWidth=1.2;
+    for (const r of c.rain){ const x=((r.x*W+time*90*r.s)%W+W)%W, y=((r.y*H+time*900*r.s)%H+H)%H; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-4*r.s,y-16*r.s); ctx.stroke(); }
+    ctx.restore();
+  }
+  if (c.alarm){ ctx.fillStyle=`rgba(224,40,60,${0.18+0.14*Math.sin(time*9)})`; ctx.fillRect(0,0,W,H); }
+  const vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.3,W/2,H/2,Math.max(W,H)*0.75); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.6)'); ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+  if (c.flash>0){ ctx.globalAlpha=Math.min(1,c.flash); ctx.fillStyle=c.flashC; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1; }
+}
+// The Redactor's face on a hologram screen above the city: red tint, scanlines and torn signal slices.
+function drawBroadcast(c){
+  const w=560, h=360, x=750-w/2, y=-170, im=CS_REDACTOR_IMG;
+  ctx.save();
+  ctx.shadowColor='#e0283c'; ctx.shadowBlur=40; ctx.fillStyle='rgba(20,4,8,.88)'; ctx.fillRect(x,y,w,h); ctx.shadowBlur=0;
+  if (im.complete && im.naturalWidth){
+    const ih=h-20, iw=ih*im.naturalWidth/im.naturalHeight, ix=750-iw/2, iy=y+10, slices=c.glitch>0?12:1;
+    for (let i=0;i<slices;i++){ const sy=i/slices, off=c.glitch>0?(Math.random()-0.5)*60*c.glitch:0;
+      ctx.drawImage(im,0,sy*im.naturalHeight,im.naturalWidth,im.naturalHeight/slices,ix+off,iy+sy*ih,iw,ih/slices); }
+  }
+  ctx.fillStyle='rgba(224,40,60,.16)'; ctx.fillRect(x,y,w,h);
+  ctx.fillStyle='rgba(0,0,0,.25)'; for (let sy=y;sy<y+h;sy+=4) ctx.fillRect(x,sy,w,1.5);
+  ctx.strokeStyle='#e0283c'; ctx.lineWidth=3; ctx.strokeRect(x,y,w,h);
+  ctx.fillStyle='#e0283c'; ctx.font='700 14px "Chakra Petch", sans-serif'; ctx.textAlign='left'; ctx.fillText('● LIVE · CITYWIDE BROADCAST',x+10,y+h+20);
+  ctx.restore();
 }
 $('#cutscene').addEventListener('pointerdown', e => { if (e.target.id==='csSkip') return; nextCutPanel(); });
 $('#csSkip').addEventListener('click', endCutscene);

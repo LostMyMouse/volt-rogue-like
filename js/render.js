@@ -465,6 +465,7 @@ function drawFx(){
 // Live attack effects sit on the floor layer, under the actors.
 function drawBossActiveFx(){ if (typeof vfxDrawActive!=='function') return; for (const e of enemies) if (isSpecBoss(e) && e.bstate==='ACTIVE' && e.atk && e.atk.step) vfxDrawActive(e,e.atk,e.atk.step); }
 function render(){
+  if (state==='cutscene' && typeof cut!=='undefined' && cut){ renderCinematic(); return; }
   if (inHub()){ renderHub(); return; }
   ctx.setTransform(DPR,0,0,DPR,0,0);
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
