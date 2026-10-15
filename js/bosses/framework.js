@@ -462,7 +462,14 @@ function bossGlint(e){
     if (e.bstate==='ACTIVE' && !a.hit) return travel;
     return -1;
   }
-  if (s.prim!=='sector') return -1; // projectile attacks glint on the projectile itself
+  // Thrown lanes (Mass Driver) glint through the wind-up too: up close the rock lands the moment it spawns,
+  // so the cue has to start before the throw for the parry to be possible.
+  if (s.prim==='lane'){
+    if (e.bstate!=='WINDUP') return -1; // once thrown, the rock itself glints
+    const travel=Math.max(0,(Math.hypot(p.x-e.x,p.y-e.y)-e.r-p.r-s.width*U)/(s.speed*U*T.enemySpeed));
+    return a.windup-e.stateT+travel;
+  }
+  if (s.prim!=='sector') return -1; // other projectile attacks glint on the projectile itself
   if (e.bstate==='WINDUP') return a.windup-e.stateT;
   if (e.bstate==='ACTIVE' && !a.hit) return 0;
   return -1;
