@@ -1,0 +1,341 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_idle.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "walk": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_walk.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "intro": {
+    "fps": 2.6666666666666665,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_intro.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "recovery": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_recovery.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "exposed": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_exposed.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "phase_change": {
+    "fps": 3.3333333333333335,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_phase_change.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_hurt.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "death": {
+    "fps": 1.6,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_death.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "well_cast": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/gravemark/gravemark_well_cast.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "driver_fire": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/gravemark/gravemark_driver_fire.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "orbit_summon": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/gravemark/gravemark_orbit_summon.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "collapse": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/gravemark/gravemark_collapse.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "run": {
+    "fps": 14,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/volt/volt_run.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 8,
+    "source_keyframes": 8,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/volt/volt_idle.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      1
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "block": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": true,
+    "file": "assets/sprites/volt/volt_block.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 3,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "parry": {
+    "fps": 20,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 1,
+    "file": "assets/sprites/volt/volt_parry.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 5,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      1,
+      2,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "dash": {
+    "fps": 24,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/volt/volt_dash.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "strike1": {
+    "fps": 20,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/volt/volt_strike1.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "strike2": {
+    "fps": 20,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/volt/volt_strike2.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "strike3": {
+    "fps": 20,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 3,
+    "file": "assets/sprites/volt/volt_strike3.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      1,
+      2,
+      2,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/volt/volt_hurt.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 3,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      3
+    ],
+    "mirrored_directions": {
+      "west": "east"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "volt": {
+    "frame": 64,
+    "anchor": [
+      32,
+      60
+    ],
+    "order": [
+      "south",
+      "south-east",
+      "east",
+      "north-east",
+      "north",
+      "north-west",
+      "west",
+      "south-west"
+    ],
+    "cols": 8,
+    "file": "assets/sprites/volt/volt_rotations.png",
+    "scale": 1.25,
+    "source_uuid": "761f34eb-fbe4-4f43-96d8-41f11e120351"
+  }
+}

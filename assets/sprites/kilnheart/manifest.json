@@ -1,0 +1,19 @@
+{
+  "kilnheart": {
+    "frame": 96,
+    "anchor": [
+      48,
+      92
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/kilnheart/kilnheart_rotations.png",
+    "scale": 1.4,
+    "source_uuid": "1eca168a-56e2-4dc5-a83a-b2b34aa34641"
+  }
+}

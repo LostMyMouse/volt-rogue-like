@@ -1,0 +1,342 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_idle.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "walk": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_walk.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "intro": {
+    "fps": 2.6666666666666665,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_intro.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "recovery": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_recovery.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "exposed": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_exposed.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "phase_change": {
+    "fps": 3.3333333333333335,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_phase_change.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_hurt.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "death": {
+    "fps": 1.6,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/glasswake/glasswake_death.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "prism_lanes": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/glasswake/glasswake_prism_lanes.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "mirror_step": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/glasswake/glasswake_mirror_step.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "shard_lunge": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/glasswake/glasswake_shard_lunge.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "refraction": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/glasswake/glasswake_refraction.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}

@@ -22,7 +22,19 @@ function drawCity(){
 const WALL = 24;
 const floorBlots = Array.from({length:70},()=>({x:rand(0,ARENA.w),y:rand(0,ARENA.h),r:rand(30,110),dark:Math.random()<.8,a:rand(.02,.05)}));
 const facadeWins = Array.from({length:46},(_,i)=>({x:20+i*32+rand(-4,4),y:rand(40,110),lit:Math.random()<.45,c:Math.random()<.8?'#f2a24a':'#8a6cf0'}));
+// The painted rooftop: its floor maps onto the arena at ROOF.k world units per painting pixel,
+// with painting pixel (ox,oy) at the arena's top-left corner. Each district gets a colour grade.
+const ROOF = { k:1.124, ox:110, oy:178, img:new Image() };
+ROOF.img.src='assets/arena/rooftop.webp';
+const roofPainted = () => ROOF.img.complete && ROOF.img.naturalWidth>0;
+function drawPaintedRoof(){
+  const k=ROOF.k, im=ROOF.img;
+  ctx.drawImage(im, -ROOF.ox*k, -ROOF.oy*k, im.naturalWidth*k, im.naturalHeight*k);
+  const d=run && run.route && curDistrict(), c=d && KIND_COL[d];
+  if (c){ ctx.save(); ctx.globalCompositeOperation='soft-light'; ctx.globalAlpha=0.22; ctx.fillStyle=c; ctx.fillRect(-ROOF.ox*k, -ROOF.oy*k, im.naturalWidth*k, im.naturalHeight*k); ctx.restore(); }
+}
 function drawFloor(){
+  if (roofPainted()){ drawPaintedRoof(); return; }
   ctx.fillStyle='rgba(0,0,0,.55)'; ctx.fillRect(18,26,ARENA.w,ARENA.h);
   ctx.fillStyle=floorTint; ctx.fillRect(0,0,ARENA.w,ARENA.h);
   for (const s of floorBlots){ ctx.fillStyle=s.dark?`rgba(4,7,14,${s.a*1.6})`:`rgba(110,140,190,${s.a})`; ctx.beginPath(); ctx.ellipse(s.x,s.y,s.r,s.r*0.7,s.x,0,PI2); ctx.fill(); }
@@ -44,6 +56,7 @@ function drawFloor(){
   ctx.strokeStyle='rgba(66,81,106,.9)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(-WALL+2,ARENA.h); ctx.lineTo(-WALL+2,-38); ctx.lineTo(ARENA.w+WALL-2,-38); ctx.stroke();
 }
 function drawFrontWall(){
+  if (roofPainted()) return; // the painting has its own front parapet
   const y=ARENA.h-6;
   ctx.fillStyle='#121a28'; ctx.fillRect(-WALL,y+26,ARENA.w+WALL*2,150);
   for (const w of facadeWins){ ctx.fillStyle=w.lit?w.c:'#0c121d'; ctx.globalAlpha=w.lit?.55:1; ctx.fillRect(w.x,y+26+w.y,14,20); }
@@ -74,6 +87,7 @@ function box3(x,y,w,h,ht,top,front){
   ctx.strokeStyle='rgba(66,81,106,.95)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(x+3,y+h-ht-3); ctx.lineTo(x+3,y-ht+3); ctx.lineTo(x+w-3,y-ht+3); ctx.stroke();
 }
 function drawObstacle(b){
+  if (b.painted && roofPainted()) return; // already in the painting; only its collision is live
   if (b.kind==='ice'){ if (b.drawSeg) drawIceWall(b.wall); return; }
   ctx.fillStyle='rgba(0,0,0,.45)';
   if (b.circle){ ctx.beginPath(); ctx.ellipse(b.cx+14,b.cy+10,b.rad*1.05,b.rad*0.62,0,0,PI2); ctx.fill(); }
@@ -180,7 +194,7 @@ function drawTelegraphs(){
     if (isSpecBoss(e)) drawBossTelegraph(e);
   }
 }
-/* Actors. Each kind has a vector drawer; sprites will slot in ahead of these later. */
+/* Actors. Pixel sprites render first; vector drawers remain load-failure fallbacks. */
 function drawShadow(x,y,r){ ctx.fillStyle='rgba(0,0,0,.45)'; ctx.beginPath(); ctx.ellipse(x+4,y+r*0.8,r*1.05,r*0.45,0,0,PI2); ctx.fill(); }
 function poly(pts){ ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]); for (let i=1;i<pts.length;i++) ctx.lineTo(pts[i][0],pts[i][1]); ctx.closePath(); }
 const rockShape = () => Array.from({length:6},(_,i)=>{ const a=i/6*PI2+rand(-.3,.3), r=rand(.7,1.1); return [Math.cos(a)*r,Math.sin(a)*r]; });
@@ -357,9 +371,9 @@ function drawPack(k){
 }
 function drawActors(){
   // Depth sort by feet y so things lower on screen draw on top (3/4 view).
-  const list=[];
+  const list=animationDeathActors();
   for (const b of obstacles) list.push({y:obstacleDepth(b),f:()=>drawObstacle(b)});
-  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>(e.drawFn?e.drawFn(e):isSpecBoss(e)?BOSSES[e.kind].draw(e):VECTOR[e.kind](e))});
+  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>drawEnemyActor(e)});
   for (const b of bullets) list.push({y:b.y,f:()=>drawBullet(b)});
   for (const k of packs) list.push({y:k.y,f:()=>drawPack(k)});
   if (state!=='over' || player.hp>0) list.push({y:player.y,f:drawPlayer});
@@ -376,11 +390,11 @@ function drawBars(){
       if (e.rootT>0){ ctx.strokeStyle=HEROES.thorn.c; ctx.lineWidth=3; ctx.beginPath(); ctx.ellipse(e.x,e.y+e.r*0.6,e.r*1.3,e.r*0.55,0,0,PI2); ctx.stroke();
         for (let i=0;i<4;i++){ const a=i*1.57+0.4; ctx.beginPath(); ctx.moveTo(e.x+Math.cos(a)*e.r*1.3,e.y+e.r*0.6+Math.sin(a)*e.r*0.55); ctx.quadraticCurveTo(e.x+Math.cos(a)*e.r,e.y,e.x+Math.cos(a)*e.r*0.5,e.y-e.r*0.3); ctx.stroke(); } }
       if (e.exposedT>0){ ctx.save(); ctx.strokeStyle='#ffffff'; ctx.globalAlpha=0.5+0.4*Math.sin(time*20); ctx.lineWidth=3; ctx.setLineDash([6,5]); ctx.beginPath(); ctx.arc(e.x,e.y,e.r+10,0,PI2); ctx.stroke(); ctx.restore(); }
-      if (e.markT>0){ const y=e.y-e.r-(e.isBoss?70:30); ctx.save(); ctx.translate(e.x,y); ctx.rotate(time*3); ctx.strokeStyle=HEROES.echo.c; ctx.lineWidth=2.5; ctx.shadowColor=HEROES.echo.c; ctx.shadowBlur=10; ctx.strokeRect(-6,-6,12,12); ctx.restore(); }
-      if (e.poison){ ctx.fillStyle=HEROES.thorn.c; for (let i=0;i<e.poison.stacks;i++){ ctx.beginPath(); ctx.arc(e.x-8+i*8,e.y-e.r-(e.isBoss?58:22)+Math.sin(time*6+i)*2,3,0,PI2); ctx.fill(); } }
+      if (e.markT>0){ const top=enemySpriteTop(e), y=top===null?e.y-e.r-(e.isBoss?70:30):top-12; ctx.save(); ctx.translate(e.x,y); ctx.rotate(time*3); ctx.strokeStyle=HEROES.echo.c; ctx.lineWidth=2.5; ctx.shadowColor=HEROES.echo.c; ctx.shadowBlur=10; ctx.strokeRect(-6,-6,12,12); ctx.restore(); }
+      if (e.poison){ const top=enemySpriteTop(e), iconY=top===null?e.y-e.r-(e.isBoss?58:22):top-6; ctx.fillStyle=HEROES.thorn.c; for (let i=0;i<e.poison.stacks;i++){ ctx.beginPath(); ctx.arc(e.x-8+i*8,iconY+Math.sin(time*6+i)*2,3,0,PI2); ctx.fill(); } }
     }
     if (e.spawnT<=0 && !e.isBoss && e.hp<e.maxHp){
-      const w=34, x=e.x-w/2, y=e.y-e.r-(e.kind==='needle'?30:18);
+      const top=enemySpriteTop(e), w=34, x=e.x-w/2, y=top===null?e.y-e.r-(e.kind==='needle'?30:18):top-8;
       ctx.fillStyle=COL.ink; ctx.fillRect(x-2,y-2,w+4,7);
       ctx.fillStyle=KIND_COL[e.kind]; ctx.fillRect(x,y,w*clamp(e.hp/e.maxHp,0,1),3);
     }

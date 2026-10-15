@@ -1,0 +1,19 @@
+{
+  "rusher": {
+    "frame": 64,
+    "anchor": [
+      32,
+      60
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/rusher/rusher_rotations.png",
+    "scale": 1.25,
+    "source_uuid": "cb38bff0-8d8a-4a08-885e-ca46878617ba"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "redactor": {
+    "frame": 128,
+    "anchor": [
+      64,
+      124
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/redactor/redactor_rotations.png",
+    "scale": 1.35,
+    "source_uuid": "5545a075-09d2-4fa3-a529-8b836b23f04a"
+  }
+}

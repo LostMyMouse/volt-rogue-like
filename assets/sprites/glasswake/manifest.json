@@ -1,0 +1,19 @@
+{
+  "glasswake": {
+    "frame": 96,
+    "anchor": [
+      48,
+      92
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/glasswake/glasswake_rotations.png",
+    "scale": 1.4,
+    "source_uuid": "c6e9dc18-8575-4c8f-9285-2364c68501f3"
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_idle.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "walk": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_walk.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "intro": {
+    "fps": 2.6666666666666665,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_intro.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "recovery": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_recovery.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "exposed": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_exposed.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "phase_change": {
+    "fps": 3.3333333333333335,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_phase_change.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_hurt.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "death": {
+    "fps": 1.6,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_death.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "ring_emit": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/bellwether/bellwether_ring_emit.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "focused_burst": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/bellwether/bellwether_focused_burst.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "resonator_drop": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/bellwether/bellwether_resonator_drop.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "resonate": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/bellwether/bellwether_resonate.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}

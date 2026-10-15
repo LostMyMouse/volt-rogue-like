@@ -252,7 +252,7 @@ body.in-hub .hud, body.in-hub .abilities, body.in-hub .touch, body.in-hub .bossb
 .hub-prompt > *{transform:skewX(8deg)}
 .hub-prompt kbd{font-family:var(--ui);font-size:13px;padding:2px 7px;background:var(--c,var(--volt));color:var(--ink);border:2px solid var(--ink)}
 .talk{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);transform:translateX(-50%);width:min(720px,calc(100vw - 32px));box-sizing:border-box;display:flex;gap:16px;align-items:flex-start;padding:16px 18px;background:var(--ink);border:3px solid var(--c,var(--volt));box-shadow:6px 6px 0 rgba(4,7,14,.8),0 0 30px color-mix(in srgb,var(--c,var(--volt)) 30%,transparent);cursor:pointer;z-index:20}
-.talk::before{content:"FORTRESS";position:absolute;top:-10px;left:14px;padding:0 6px;background:var(--ink);font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--c,var(--volt))}
+.talk::before{content:attr(data-label);text-transform:uppercase;position:absolute;top:-10px;left:14px;padding:0 6px;background:var(--ink);font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--c,var(--volt))}
 .talk .portrait{width:88px;height:88px}
 .talk .portrait[hidden]{display:none}
 .talk-body{display:grid;gap:6px;min-width:0}
@@ -261,3 +261,7 @@ body.in-hub .hud, body.in-hub .abilities, body.in-hub .touch, body.in-hub .bossb
 .talk p{margin:0;font-size:16px;line-height:1.5;color:var(--text)}
 .talk-next{justify-self:end;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c,var(--volt))}
 @media (max-width:600px){ .talk .portrait{width:60px;height:60px} .talk p{font-size:14px} .hub-hud strong{font-size:26px} }
+
+.talk.is-volt{flex-direction:row-reverse;text-align:right}
+.talk.is-volt .talk-body{justify-items:end}
+.talk.is-volt .talk-next{justify-self:start}

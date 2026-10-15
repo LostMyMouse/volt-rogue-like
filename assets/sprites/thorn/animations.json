@@ -1,0 +1,120 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/thorn/thorn_idle.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      1
+    ]
+  },
+  "talk": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/thorn/thorn_talk.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      1
+    ]
+  },
+  "react_pleased": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/thorn/thorn_react_pleased.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 5,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      2,
+      3
+    ]
+  },
+  "react_stern": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/thorn/thorn_react_stern.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 5,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      2,
+      3
+    ]
+  }
+}

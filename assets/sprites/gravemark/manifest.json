@@ -1,0 +1,19 @@
+{
+  "gravemark": {
+    "frame": 128,
+    "anchor": [
+      64,
+      124
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/gravemark/gravemark_rotations.png",
+    "scale": 1.35,
+    "source_uuid": "dece711f-f9ba-4f75-a2fd-f7d8e729b379"
+  }
+}

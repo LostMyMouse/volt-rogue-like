@@ -1,0 +1,16 @@
+{
+  "needle": {
+    "frame": 64,
+    "anchor": [
+      32,
+      32
+    ],
+    "order": [
+      "south"
+    ],
+    "cols": 1,
+    "file": "assets/sprites/needle/needle_rotations.png",
+    "scale": 1,
+    "source_uuid": "e03a090f-de07-4c5e-a7ba-94299cfe2988"
+  }
+}

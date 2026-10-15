@@ -18,7 +18,17 @@ const REWARD_STYLE = {
 let exits=[], roomPhase='reward', clearT=0, arrivalT=0, transit=null;
 const weighted = list => { const tot=list.reduce((a,[,w])=>a+w,0); let r=Math.random()*tot; for (const [v,w] of list){ if ((r-=w)<0) return v; } return list[0][0]; };
 
-// The first rooftop and Gravemark's arenas use the concept-art layout; everything else is shuffled props.
+// Every rooftop is the painted arena (assets/arena/rooftop.webp), so collision follows its props:
+// water tower top-left, crate and stair hut top-right, AC units in the bottom corners.
+const PAINTED_LAYOUT = [
+  {x:100,y:-40,w:170,h:170,ht:0,kind:'tower',circle:true,painted:true},
+  {x:1046,y:-10,w:68,h:36,ht:0,kind:'box',painted:true},
+  {x:1190,y:-10,w:150,h:72,ht:0,kind:'hut',painted:true},
+  {x:1330,y:-10,w:110,h:150,ht:0,kind:'box',painted:true},
+  {x:0,y:600,w:225,h:160,ht:0,kind:'ac',painted:true},
+  {x:1300,y:585,w:200,h:185,ht:0,kind:'vent',painted:true},
+];
+// The older vector layouts, used only if the painting fails to load.
 const CONCEPT_LAYOUT = [
   {x:70,y:60,w:200,h:200,ht:120,kind:'tower',circle:true},
   {x:1210,y:40,w:220,h:170,ht:110,kind:'hut'},
@@ -46,8 +56,7 @@ function randomLayout(){
   return out;
 }
 function buildRoom(){
-  const concept = isBossRoom() || (run.route.i===0 && run.route.room===1);
-  obstacles = finishObstacles(concept ? CONCEPT_LAYOUT.map(b=>Object.assign({},b)) : randomLayout());
+  obstacles = finishObstacles(PAINTED_LAYOUT.map(b=>Object.assign({},b)));
   floorTint = DISTRICTS[curDistrict()] ? DISTRICTS[curDistrict()].tint : pick(FLOOR_TINTS);
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }

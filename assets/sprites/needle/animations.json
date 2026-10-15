@@ -1,0 +1,131 @@
+{
+  "hover": {
+    "fps": 16,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/needle/needle_hover.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      64
+    ],
+    "directions": [
+      "south"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "charge": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/needle/needle_charge.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      64
+    ],
+    "directions": [
+      "south"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      0,
+      1,
+      2,
+      3,
+      3
+    ]
+  },
+  "fire": {
+    "fps": 20,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 1,
+    "file": "assets/sprites/needle/needle_fire.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      64
+    ],
+    "directions": [
+      "south"
+    ],
+    "frames": 3,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      3
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/needle/needle_hurt.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      64
+    ],
+    "directions": [
+      "south"
+    ],
+    "frames": 2,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      2
+    ]
+  },
+  "death": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/needle/needle_death.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      64
+    ],
+    "directions": [
+      "south"
+    ],
+    "frames": 8,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      2,
+      3,
+      3
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "verdigris": {
+    "frame": 96,
+    "anchor": [
+      48,
+      92
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/verdigris/verdigris_rotations.png",
+    "scale": 1.4,
+    "source_uuid": "323ed0f0-0fe9-4a9d-b08b-f20bcace2667"
+  }
+}

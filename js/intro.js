@@ -9,6 +9,22 @@ const CHARACTER_INTROS = {
   thorn:{ kind:'hero', flourish:'is on comms!', first:"Thorn. I used to be on the other side. Turns out I'm better at this one." },
   patch:{ kind:'hero', flourish:'is on comms!', first:"Patch. I build the gear, you break it. Try not to break yourself." },
 };
+// Volt answers every intro card, like Zagreus does in Hades. Villains get a first-meeting reply and
+// a pool for rematches; heroes get one reply for their one-time introduction.
+const VOLT_REPLIES = {
+  kilnheart:{ first:"Then I'll just have to turn you off.", repeat:["I brought a bigger extinguisher.","Cool off, Kilnheart.","Let's see who burns out first."] },
+  bellwether:{ first:"Funny. I was about to say the same about your music.", repeat:["Same song again? Change the record.","I'm cutting the power to the speakers.","Time for the last track."] },
+  verdigris:{ first:"Then I'll scrape every roof clean.", repeat:["Weeding time.","Your garden's getting pruned.","Pest control, Verdigris. That's me."] },
+  glasswake:{ first:"Then I'll just hit all of you.", repeat:["Smash enough mirrors and you find the real one.","Seven years' bad luck? I'll risk it.","I can see straight enough."] },
+  undertow:{ first:"Good thing I don't plan on standing still.", repeat:["I've been practising holding my breath.","Electricity and water. You sure about this?","Tide's turning, Undertow."] },
+  gravemark:{ first:"Carve it big. You'll want everyone to read it.", repeat:["Rocks don't remember. I do.","Back on your roof. Miss me?","Let's see which of us cracks first."] },
+  redactor:{ first:"Revoke this.", repeat:["My file's still open.","You can't edit me out.","Let's finish this."] },
+  halo:"Halo? THE Halo? ...I won't let you down.",
+  bastion:"Then I'll hold the roof. Thanks, Bastion.",
+  echo:"Do you, though?",
+  thorn:"Glad you switched sides.",
+  patch:"No promises.",
+};
 const INTRO_ART = ['kilnheart','gravemark','bellwether','verdigris','glasswake','undertow','redactor']; // assets/intro/<id>.png; others fall back to their drawn bust
 
 function introFor(id){
@@ -20,17 +36,25 @@ function introFor(id){
 function maybeIntro(id, done, opt={}){
   const info=introFor(id); if (!info) return false;
   const met=save.met||(save.met={heroes:[],villains:{}});
-  let line;
+  let pages;
   if (info.kind==='hero'){
     if (met.heroes.includes(id)) return false; // heroes are introduced once, ever
-    met.heroes.push(id); line=info.first;
+    met.heroes.push(id); pages = STORY.first[id] ? storyPages(id,STORY.first[id]) : [{who:id, text:info.first}, {who:'volt', text:VOLT_REPLIES[id]}];
   } else {
+    // The next story conversation with this villain (js/story.js); once those run out, a short exchange.
+    pages=nextStory('encounter',id);
     const n=met.villains[id]||0; met.villains[id]=n+1;
-    line = n===0 ? info.first : pick(info.repeat);
+    if (!pages){
+      const r=VOLT_REPLIES[id];
+      pages=[{who:id, text: n===0 ? info.first : pick(info.repeat)}];
+      if (r) pages.push({who:'volt', text: n===0 ? r.first : pick(r.repeat)});
+    }
   }
   writeSave();
   const sp=SPEAKERS[id];
-  showIntro({ id, name:sp.name, c:sp.c, tag:(info.kind==='hero'?'Hero · ':'Villain · ')+(info.kind==='hero'?sp.role:info.title), flourish:opt.flourish||info.flourish, line }, done);
+  // The card announces them; then they talk in the dialogue box.
+  showIntro({ id, name:sp.name, c:sp.c, tag:(info.kind==='hero'?'Hero · ':'Villain · ')+(info.kind==='hero'?sp.role:info.title), flourish:opt.flourish||info.flourish },
+    () => runDialogue(pages, info.kind==='hero'?'Comms':'Encounter', done));
   return true;
 }
 
@@ -42,12 +66,12 @@ function showIntro(card, done){
   if (player){ player.blockHeld=false; player.charging=0; }
   el.style.setProperty('--c',card.c);
   $('#introTag').textContent=card.tag; $('#introName').textContent=card.name;
-  $('#introSub').textContent=card.flourish; $('#introLine').textContent='“'+card.line+'”';
+  $('#introSub').textContent=card.flourish;
   if (INTRO_ART.includes(card.id)){ art.innerHTML=''; art.style.backgroundImage=`url(assets/intro/${card.id}.png)`; art.classList.remove('bust'); }
   else { art.style.backgroundImage=''; art.classList.add('bust'); art.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[card.id]||BUST}</svg>`; }
   el.classList.remove('in','out'); el.hidden=false; void el.offsetWidth; el.classList.add('in');
   introDone=done; introStart=performance.now();
-  clearTimeout(introTimer); introTimer=setTimeout(()=>dismissIntro(true),5200);
+  clearTimeout(introTimer); introTimer=setTimeout(()=>dismissIntro(true),2800);
 }
 function dismissIntro(force){
   if (state!=='intro') return;

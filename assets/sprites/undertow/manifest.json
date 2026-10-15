@@ -1,0 +1,19 @@
+{
+  "undertow": {
+    "frame": 128,
+    "anchor": [
+      64,
+      124
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/undertow/undertow_rotations.png",
+    "scale": 1.35,
+    "source_uuid": "dc418e62-02b8-448d-bac5-9a8926b68e6f"
+  }
+}

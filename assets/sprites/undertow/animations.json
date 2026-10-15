@@ -1,0 +1,342 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_idle.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "walk": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_walk.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "intro": {
+    "fps": 2.6666666666666665,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_intro.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "recovery": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_recovery.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "exposed": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_exposed.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "phase_change": {
+    "fps": 3.3333333333333335,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_phase_change.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_hurt.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "death": {
+    "fps": 1.6,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/undertow/undertow_death.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "pressure_jet": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/undertow/undertow_pressure_jet.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "ice_divide": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/undertow/undertow_ice_divide.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "depth_charge": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/undertow/undertow_depth_charge.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "glacier_hook": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/undertow/undertow_glacier_hook.png",
+    "frame": [
+      256,
+      256
+    ],
+    "anchor": [
+      128,
+      240
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}

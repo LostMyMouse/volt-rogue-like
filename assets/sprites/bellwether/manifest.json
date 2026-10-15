@@ -1,0 +1,19 @@
+{
+  "bellwether": {
+    "frame": 96,
+    "anchor": [
+      48,
+      92
+    ],
+    "order": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "cols": 4,
+    "file": "assets/sprites/bellwether/bellwether_rotations.png",
+    "scale": 1.4,
+    "source_uuid": "72df04f3-6538-4804-834c-653e13a236af"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_idle.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "run": {
+    "fps": 12,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_run.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 8,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3,
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "windup": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_windup.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      1,
+      2,
+      2,
+      3
+    ]
+  },
+  "swing": {
+    "fps": 24,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/rusher/rusher_swing.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "recover": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_recover.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "exposed": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_exposed.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 6,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      1
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_hurt.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 2,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      2
+    ]
+  },
+  "death": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/rusher/rusher_death.png",
+    "frame": [
+      128,
+      128
+    ],
+    "anchor": [
+      64,
+      112
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 8,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      2,
+      3,
+      3
+    ]
+  }
+}

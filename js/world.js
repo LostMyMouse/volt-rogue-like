@@ -2,7 +2,7 @@
 'use strict';
 
 /* ---------- World ---------- */
-const ARENA = { w:1500, h:1000 };
+const ARENA = { w:1500, h:790 }; // matches the floor of the painted rooftop (assets/arena/rooftop.webp)
 // Layout follows concept-art/rooftop.webp: water tower top-left, stair hut top-right, AC units bottom corners.
 // x,y,w,h is the floor footprint (collision); ht is how tall it stands in the 3/4 view.
 let obstacles = [

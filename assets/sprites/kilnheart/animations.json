@@ -1,0 +1,341 @@
+{
+  "idle": {
+    "fps": 8,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_idle.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "walk": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_walk.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "intro": {
+    "fps": 2.6666666666666665,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_intro.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "recovery": {
+    "fps": 8,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_recovery.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "exposed": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_exposed.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "phase_change": {
+    "fps": 3.3333333333333335,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_phase_change.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "hurt": {
+    "fps": 16,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_hurt.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "death": {
+    "fps": 1.6,
+    "loop": false,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_death.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "punch": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/kilnheart/kilnheart_punch.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "rush": {
+    "fps": 10,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/kilnheart/kilnheart_rush.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "slam": {
+    "fps": 12,
+    "loop": false,
+    "hold_last": false,
+    "key_frame": 2,
+    "file": "assets/sprites/kilnheart/kilnheart_slam.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "vents_open": {
+    "fps": 10,
+    "loop": true,
+    "hold_last": false,
+    "file": "assets/sprites/kilnheart/kilnheart_vents_open.png",
+    "frame": [
+      192,
+      192
+    ],
+    "anchor": [
+      96,
+      176
+    ],
+    "directions": [
+      "south",
+      "east",
+      "north",
+      "west"
+    ],
+    "frames": 4,
+    "source_keyframes": 4,
+    "frame_map": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}

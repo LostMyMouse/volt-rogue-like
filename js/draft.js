@@ -13,6 +13,9 @@ function openDraft(kind='boon', hero=null, reroll=false){
   if (!reroll){
     const who0 = kind==='tech' ? 'patch' : (hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)));
     if (maybeIntro(who0, ()=>openDraftNow(kind,who0,false))) return;
+    // A hero with something new to say talks first (once per hero per run), then offers boons.
+    const told=run.story||(run.story={});
+    if (!told[who0]){ const pages=nextStory('comms',who0); if (pages){ told[who0]=true; runDialogue(pages,'Comms',()=>openDraftNow(kind,who0,false)); return; } }
     return openDraftNow(kind,who0,false);
   }
   return openDraftNow(kind,hero,reroll);

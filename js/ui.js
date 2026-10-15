@@ -53,7 +53,7 @@ const RANKS = [
   {r:'D', min:-1e9,title:'Sidekick Material',    c:COL.threat},
 ];
 const CAUSE = { rusher:"a Rusher's pipe", needle:'a Needle drone shot' }; // bosses add theirs in their definitions
-// Speakers are placeholders until the roster has portraits and voices (see plan: Halo, Bastion, Echo, Thorn).
+// Dialogue speakers use the full illustrated portrait roster.
 const SPEAKERS = {
   halo:{name:'Halo', role:"The world's #1 hero", c:'#fff1d0'},
   bastion:{name:'Bastion', role:'Fortress commander', c:'#9fb0c8'},
@@ -67,6 +67,7 @@ const SPEAKERS = {
   undertow:{name:'Undertow', role:'Villain', c:'#7fd8ff'},
   redactor:{name:'The Redactor', role:'Villain', c:'#e0283c'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
+  volt:{name:'Volt', role:'Rookie hero', c:COL.volt},
 };
 const QUOTES = {
   won: [['halo',"District by district, and Gravemark in the dirt. The city noticed tonight. So did I."],['bastion',"Clean work, rookie. Don't let it go to your head. The next roof won't be so kind."],['echo',"Okay. Fine. That was impressive. Don't tell anyone I said that."]],
@@ -85,6 +86,7 @@ function causeText(src){ if (CAUSE[src]) return CAUSE[src]; for (const id in BOS
 // (Gravemark uses a crop of its concept sheet).
 const BUST = '<path d="M6 64 C8 46 20 40 32 40 C44 40 56 46 58 64 Z" fill="#0b111c"/><circle cx="32" cy="27" r="12" fill="#0b111c"/>';
 const PORTRAIT_SVG = {
+  volt: `<path d="M6 64 C8 46 20 40 32 40 C44 40 56 46 58 64 Z" fill="#0b111c"/><path d="M14 46 L24 40 L32 50 L40 40 L50 46 L42 52 L32 56 L22 52 Z" fill="#f4fbff"/><path d="M27 56 L25 64 M37 56 L39 64" stroke="#26bfff" stroke-width="2.5"/><path d="M20 23 L18 8 L25 15 L27 4 L32 13 L37 3 L39 14 L46 8 L44 23 Z" fill="#161c28" stroke="#f4fbff" stroke-width="1"/><path d="M21 29 C21 20 26 17 32 17 C38 17 43 20 43 29 C43 36 38 40 32 40 C26 40 21 36 21 29 Z" fill="#161c28"/><path d="M22 26 L42 26 L38 32 L32 30 L26 32 Z" fill="#26bfff"/>`,
   halo: `<circle cx="32" cy="14" r="13" fill="none" stroke="#fff6d6" stroke-width="3"/>${BUST}<path d="M22 27 h20" stroke="#fff1d0" stroke-width="3"/><path d="M14 52 L32 44 L50 52" stroke="#fff1d0" stroke-width="3" fill="none"/>`,
   bastion: `<path d="M2 64 C4 42 16 38 32 38 C48 38 60 42 62 64 Z" fill="#0b111c"/><rect x="18" y="13" width="28" height="27" rx="4" fill="#0b111c"/><rect x="22" y="23" width="20" height="5" fill="#9fb0c8"/><path d="M6 50 h52" stroke="#9fb0c8" stroke-width="3"/>`,
   echo: `<path d="M17 36 C14 20 20 11 32 11 C44 11 50 20 47 36 Z" fill="#0b111c"/>${BUST}<path d="M24 26 h16" stroke="#8b93ff" stroke-width="3"/><path d="M47 20 a9 9 0 0 1 0 13 M51 16 a15 15 0 0 1 0 21" stroke="#8b93ff" stroke-width="2.5" fill="none"/>`,
@@ -94,16 +96,19 @@ const PORTRAIT_SVG = {
   thorn: `${BUST}<path d="M20 20 L16 8 L25 16 L28 4 L33 15 L39 5 L40 16 L49 9 L44 21" fill="#0b111c" stroke="#6ad46a" stroke-width="2"/><circle cx="27" cy="28" r="2" fill="#6ad46a"/><circle cx="37" cy="28" r="2" fill="#6ad46a"/><path d="M18 52 l6 -6 l2 8 M46 52 l-6 -6 l-2 8" stroke="#6ad46a" stroke-width="2.5" fill="none"/>`,
 };
 // Add an id here when its PNG lands in assets/portraits/.
-const PORTRAIT_FILES = ['gravemark','kilnheart','bellwether','verdigris','glasswake','undertow','redactor'];
-function setPortrait(el,who){
-  const sp=SPEAKERS[who];
-  el.innerHTML=''; el.style.backgroundImage=''; el.className='portrait';
-  el.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[who]||BUST}</svg>`;
-  el.setAttribute('aria-label',sp.name);
-  if (!PORTRAIT_FILES.includes(who)) return;
+const PORTRAIT_FILES = ["halo", "bastion", "echo", "thorn", "patch", "gravemark", "kilnheart", "bellwether", "verdigris", "glasswake", "undertow", "redactor", "volt"];
+const PORTRAIT_EXPRESSIONS = ['neutral','pleased','stern'];
+function setPortrait(el,who,expression='neutral'){
+  const sp=SPEAKERS[who]; if(!sp || !el)return;
+  if(!PORTRAIT_EXPRESSIONS.includes(expression))expression='neutral';
+  const token=who+':'+expression;el.dataset.portrait=token;
+  el.innerHTML='';el.style.backgroundImage='';el.style.backgroundColor='transparent';el.style.backgroundSize='contain';el.style.clipPath='none';el.className='portrait';
+  el.setAttribute('aria-label',sp.name+' — '+expression);
+  if(!PORTRAIT_FILES.includes(who)){el.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[who]||BUST}</svg>`;return;}
   const img=new Image();
-  img.onload=()=>{ el.innerHTML=''; el.style.backgroundImage=`url(${img.src})`; el.classList.add('has-img'); };
-  img.src=`assets/portraits/${who}.png`;
+  img.onload=()=>{if(el.dataset.portrait!==token)return;el.innerHTML='';el.style.backgroundImage=`url(${img.src})`;el.classList.add('has-img');};
+  img.onerror=()=>{if(el.dataset.portrait===token)el.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[who]||BUST}</svg>`;};
+  img.src=expression==='neutral'?`assets/portraits/${who}.png`:`assets/portraits/${who}/${expression}-256.png`;
 }
 // Rooftops plus villain rooms in a full run with the villains built so far.
 function routeLength(){ const p=Math.min(DISTRICT_PICKS,builtPool().length); return p*(ROOMS_PER_DISTRICT+1)+(BOSSES.gravemark?ROOMS_PER_DISTRICT+1:0)+(BOSSES.redactor?3:0) || 15; }
@@ -135,8 +140,11 @@ function fillResults(){
   else { const adv=QUOTES[run.lastHit] || bossAdvice(run.lastHit); pool = (adv && Math.random()<0.65) ? adv : QUOTES.mid; }
   const [who,line]=pick(pool), sp=SPEAKERS[who];
   const q=$('#resQuote'); q.classList.toggle('villain',sp.role==='Villain'); q.style.setProperty('--c',sp.c);
-  save.last={won:run.won, cause:run.lastHit, districts:run.districtsCleared||0, rank:rk.r}; writeSave();
-  setPortrait($('#resPortrait'),who); $('#resLine').textContent=line; $('#resWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;
+  save.last={won:run.won, cause:run.lastHit, districts:run.districtsCleared||0, rank:rk.r};
+  if (run.won) save.wins=(save.wins||0)+1;
+  else { const v=villainOf(run.lastHit); if (v){ save.killedBy=save.killedBy||{}; save.killedBy[v]=(save.killedBy[v]||0)+1; } }
+  writeSave();
+  setPortrait($('#resPortrait'),who,sp.role==='Villain'?'pleased':run.won||rk.r==='S'||rk.r==='A'?'pleased':'stern'); $('#resLine').textContent=line; $('#resWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;
 }
 let tuneReturn=null;
 function openTune(){
