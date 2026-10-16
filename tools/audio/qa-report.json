@@ -1,0 +1,1266 @@
+[
+ {
+  "who": "redactor",
+  "text": "Good evening. This is a courtesy notice regarding your heroes' powers.",
+  "heard": "Good evening. This is a courtesy notice regarding your hero's powers",
+  "sim": 0.91,
+  "wps": 2.38,
+  "max_gap": 0.72,
+  "missing": [
+   "heroes'"
+  ],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "They've been reviewed. Most of them failed.",
+  "heard": "Hmm, it's been reviewed. Most of them failed",
+  "sim": 0.8,
+  "wps": 2.52,
+  "max_gap": 0.78,
+  "missing": [
+   "they've"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "redactor",
+  "text": "My associates will be managing your districts from now on. Please direct all complaints to no one.",
+  "heard": "Hmm, my associates will be managing your district from now on. Please direct all complaints to no one",
+  "sim": 0.91,
+  "wps": 2.61,
+  "max_gap": 0.8,
+  "missing": [
+   "districts"
+  ],
+  "flags": []
+ },
+ {
+  "who": "gravemark",
+  "text": "And any heroes who object can take it up with me. On the roof.",
+  "heard": "And any heroes who object can take it up with me on the roof",
+  "sim": 1.0,
+  "wps": 1.84,
+  "max_gap": 0.88,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Have a quiet night. You won't have a choice.",
+  "heard": "Have a quiet night. You won't have a choice",
+  "sim": 1.0,
+  "wps": 3.41,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "bastion",
+  "text": "Four districts dark. Half my roster drained. Somebody give me good news.",
+  "heard": "Four districts dark. Half my roster drained. Somebody give me good news",
+  "sim": 1.0,
+  "wps": 1.76,
+  "max_gap": 0.68,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "patch",
+  "text": "Good news: the coffee machine survived.",
+  "heard": "Good news, the coffee machine survived",
+  "sim": 1.0,
+  "wps": 2.27,
+  "max_gap": 0.38,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Patch.",
+  "heard": "Patch",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "patch",
+  "text": "Bad news: so did the Redactor.",
+  "heard": "Bad news, so did the redactor",
+  "sim": 1.0,
+  "wps": 2.61,
+  "max_gap": 0.42,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "echo",
+  "text": "Can we skip to the part where I'm right? We need more people.",
+  "heard": "Um, can we skip to the part where I'm right? We need more people",
+  "sim": 0.96,
+  "wps": 3.78,
+  "max_gap": 0.68,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "thorn",
+  "text": "People who aren't scared of him. That's a short list.",
+  "heard": "People who aren't scared of him. That's a short list",
+  "sim": 1.0,
+  "wps": 3.18,
+  "max_gap": 0.84,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "Then we make it longer.",
+  "heard": "Then we make it longer",
+  "sim": 1.0,
+  "wps": 4.63,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "patch",
+  "text": "Uh. Small thing. Someone's climbing the outside of the Fortress.",
+  "heard": "Uh, small thing. Someone's climbing the outside of the fortress",
+  "sim": 1.0,
+  "wps": 2.06,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Nobody climbs a sixty-storey wall.",
+  "heard": "Nobody climbs a 60-story wall",
+  "sim": 0.67,
+  "wps": 2.07,
+  "max_gap": 0.22,
+  "missing": [
+   "sixty",
+   "storey"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Hi! Sorry. Your front door has, like, nine locks.",
+  "heard": "Hi. Sorry. Your front door has like nine locks",
+  "sim": 1.0,
+  "wps": 1.65,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help.",
+  "heard": "I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I wanna help",
+  "sim": 0.9,
+  "wps": 2.19,
+  "max_gap": 0.94,
+  "missing": [
+   "want",
+   "to"
+  ],
+  "flags": []
+ },
+ {
+  "who": "echo",
+  "text": "Oh, I like them.",
+  "heard": "Oh, I like them",
+  "sim": 1.0,
+  "wps": 3.45,
+  "max_gap": 0.42,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "You're bleeding.",
+  "heard": "You're bleeding",
+  "sim": 1.0,
+  "wps": 3.03,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "The wall had opinions.",
+  "heard": "The wall had opinions",
+  "sim": 1.0,
+  "wps": 3.17,
+  "max_gap": 0.12,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "Bastion. Give the rookie a run.",
+  "heard": "Bastian, give the rookie a run",
+  "sim": 0.83,
+  "wps": 2.52,
+  "max_gap": 0.66,
+  "missing": [
+   "bastion"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "bastion",
+  "text": "Training roof. Now. And don't touch my table.",
+  "heard": "Training roof. Now. And don't touch my table",
+  "sim": 1.0,
+  "wps": 1.69,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "What table?",
+  "heard": "What table?",
+  "sim": 1.0,
+  "wps": 4.17,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "Halo on comms. So you're the rookie everyone keeps talking about.",
+  "heard": "Halo on comms. So you're the rookie everyone keeps talking about?",
+  "sim": 1.0,
+  "wps": 2.74,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Halo? THE Halo? Okay. Okay. Be cool. I'm being cool.",
+  "heard": "Halo. The Halo? Okay. Okay. Be cool. I am being cool",
+  "sim": 0.86,
+  "wps": 1.54,
+  "max_gap": 0.84,
+  "missing": [
+   "i'm"
+  ],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "You're narrating.",
+  "heard": "You're narrating",
+  "sim": 1.0,
+  "wps": 1.89,
+  "max_gap": 0.14,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "...Yep.",
+  "heard": "Mm, mm, yep",
+  "sim": 0.5,
+  "wps": 1.15,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "bastion",
+  "text": "Bastion. I hold this city's line. Tonight, I'm holding yours.",
+  "heard": "Bastion, I hold this city's line. Tonight, I'm holding yours",
+  "sim": 1.0,
+  "wps": 1.45,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Cool. Great. I'll hold... a different line.",
+  "heard": "Cool. Great. I'll hold a different line",
+  "sim": 1.0,
+  "wps": 1.55,
+  "max_gap": 1.02,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Just hold still and take the gear.",
+  "heard": "Just hold still and take the gear",
+  "sim": 1.0,
+  "wps": 3.54,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "echo",
+  "text": "Echo. And before you say anything, I already know how tonight ends.",
+  "heard": "Echo. And before you say anything, I already know how tonight ends",
+  "sim": 1.0,
+  "wps": 2.07,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Do you, though?",
+  "heard": "Do you, though?",
+  "sim": 1.0,
+  "wps": 2.83,
+  "max_gap": 0.44,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "echo",
+  "text": "...Mostly.",
+  "heard": "Um, mostly",
+  "sim": 0.67,
+  "wps": 1.61,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "thorn",
+  "text": "Thorn. I used to be on the other side.",
+  "heard": "Thorn, I used to be on the other side",
+  "sim": 1.0,
+  "wps": 3.57,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Glad you switched.",
+  "heard": "Glad you switched",
+  "sim": 1.0,
+  "wps": 3.66,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "thorn",
+  "text": "Some days, so am I.",
+  "heard": "Some days, so am I",
+  "sim": 1.0,
+  "wps": 3.25,
+  "max_gap": 0.48,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "patch",
+  "text": "Patch. I build the gear. You break the gear.",
+  "heard": "Patch: I build the gear. You break the gear",
+  "sim": 1.0,
+  "wps": 2.34,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'll try to break it less.",
+  "heard": "I'll try to break it less",
+  "sim": 1.0,
+  "wps": 5.56,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "patch",
+  "text": "You won't. But I appreciate the lie.",
+  "heard": "You won't. But I appreciate the lie",
+  "sim": 1.0,
+  "wps": 2.63,
+  "max_gap": 0.56,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "kilnheart",
+  "text": "Whoa, whoa. Hold up. You're the new kid? They sent the new kid?",
+  "heard": "Whoa, whoa. Hold up. You're the new kid. They sent the new kid",
+  "sim": 1.0,
+  "wps": 2.05,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I prefer 'rookie'. Sounds more official.",
+  "heard": "I prefer rookie. Sounds more official",
+  "sim": 0.83,
+  "wps": 2.54,
+  "max_gap": 0.64,
+  "missing": [
+   "'rookie'"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "kilnheart",
+  "text": "Kid, I've been running furnaces since before you had teeth. You know what happens to things that get too close to the fire?",
+  "heard": "Kid, I've been running furnaces since before you had teeth. You know what happens to things that get too close to the fire",
+  "sim": 1.0,
+  "wps": 3.07,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "They... get warm?",
+  "heard": "They get warm",
+  "sim": 1.0,
+  "wps": 1.92,
+  "max_gap": 0.82,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "kilnheart",
+  "text": "They get warm.",
+  "heard": "They get warm",
+  "sim": 1.0,
+  "wps": 3.41,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bellwether",
+  "text": "Oh, finally. An audience.",
+  "heard": "Oh, finally. An audience",
+  "sim": 1.0,
+  "wps": 1.45,
+  "max_gap": 0.62,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'm here to stop you.",
+  "heard": "I'm here to stop you",
+  "sim": 1.0,
+  "wps": 4.9,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "bellwether",
+  "text": "Everyone says that before the first song. Nobody says it after the encore.",
+  "heard": "Everyone says that before the first song. Nobody says it after the encore",
+  "sim": 1.0,
+  "wps": 2.54,
+  "max_gap": 0.66,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Is it a long set?",
+  "heard": "Is it a long set?",
+  "sim": 1.0,
+  "wps": 4.55,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "bellwether",
+  "text": "Darling, it's a residency.",
+  "heard": "Darling, it's a residency",
+  "sim": 1.0,
+  "wps": 1.96,
+  "max_gap": 0.52,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "verdigris",
+  "text": "Mind the vines. They bite. Well. They don't bite. They just never let go.",
+  "heard": "Mind the vines. They bite. Well, they don't bite. They just never let go",
+  "sim": 1.0,
+  "wps": 1.54,
+  "max_gap": 1.48,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "That's somehow worse.",
+  "heard": "That's somehow worse",
+  "sim": 1.0,
+  "wps": 2.17,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "verdigris",
+  "text": "Everything on this roof is slowly becoming mine. The pipes. The rails. You, if you stand still long enough.",
+  "heard": "Everything on this roof is slowly becoming mine. The pipes, the rails. You, if you stand still long enough",
+  "sim": 1.0,
+  "wps": 1.13,
+  "max_gap": 2.24,
+  "missing": [],
+  "flags": [
+   "long pause"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Noted. Moving a lot. Got it.",
+  "heard": "Noted. Moving a lot. Got it",
+  "sim": 1.0,
+  "wps": 2.07,
+  "max_gap": 0.68,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "glasswake",
+  "text": "Hi. Over here. No, over here. No, you know what? Pick one. I'll wait.",
+  "heard": "Hi. Over here. No, over here. No, you know what? Pick one. I'll wait",
+  "sim": 1.0,
+  "wps": 1.7,
+  "max_gap": 0.92,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "How about I just hit all of you?",
+  "heard": "How about I just hit all of you?",
+  "sim": 1.0,
+  "wps": 6.56,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "glasswake",
+  "text": "Ooh. Bold. Wrong, but bold.",
+  "heard": "Oh, bold. Wrong, but bold",
+  "sim": 0.8,
+  "wps": 1.48,
+  "max_gap": 0.62,
+  "missing": [
+   "ooh"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "undertow",
+  "text": "Picked a bad night to go swimming, rookie.",
+  "heard": "Picked a bad night to go swimming, rookie",
+  "sim": 1.0,
+  "wps": 4.04,
+  "max_gap": 0.44,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "I didn't really pick it. I kind of just... landed here.",
+  "heard": "I didn't really pick it. I kind of just landed here",
+  "sim": 1.0,
+  "wps": 3.02,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "undertow",
+  "text": "Story of this whole district. Nobody chooses the docks. The docks choose you.",
+  "heard": "Story of this whole district. Nobody chooses the docks. The docks choose you",
+  "sim": 1.0,
+  "wps": 2.3,
+  "max_gap": 1.24,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "gravemark",
+  "text": "Another one.",
+  "heard": "Another one",
+  "sim": 1.0,
+  "wps": 1.82,
+  "max_gap": 0.18,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Another... what?",
+  "heard": "Another. What?",
+  "sim": 1.0,
+  "wps": 1.1,
+  "max_gap": 1.08,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "gravemark",
+  "text": "Another small, loud hero on my roof. I have carved forty-one names. Yours will be forty-two.",
+  "heard": "Another small, loud hero on my roof. I have carved forty-one names. Yours will be forty-two",
+  "sim": 1.0,
+  "wps": 1.27,
+  "max_gap": 1.44,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Can you at least spell it right? It's V-O-L-T.",
+  "heard": "Can you at least spell it right? It's V-O-L-T",
+  "sim": 1.0,
+  "wps": 2.56,
+  "max_gap": 1.14,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "gravemark",
+  "text": "...I will consider it.",
+  "heard": "You stone. I will consider it",
+  "sim": 0.8,
+  "wps": 1.86,
+  "max_gap": 0.88,
+  "missing": [],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "redactor",
+  "text": "Ah. Volt. Rookie. No licence on file. One complaint pending.",
+  "heard": "Ah, Volt. Rookie. No license on file. One complaint pending",
+  "sim": 0.9,
+  "wps": 1.5,
+  "max_gap": 0.76,
+  "missing": [
+   "licence"
+  ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Complaint? From who?",
+  "heard": "Complaint? From whom?",
+  "sim": 0.67,
+  "wps": 1.67,
+  "max_gap": 0.62,
+  "missing": [
+   "who"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "redactor",
+  "text": "Me. You're in my building.",
+  "heard": "Me? You're in my building",
+  "sim": 1.0,
+  "wps": 2.5,
+  "max_gap": 0.84,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Powers are a privilege, and I'm here to process your revocation.",
+  "heard": "Powers are a privilege, and I'm here to process your revocation",
+  "sim": 1.0,
+  "wps": 2.7,
+  "max_gap": 0.56,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Yeah, I'm going to have to decline.",
+  "heard": "Yeah, I'm going to have to decline",
+  "sim": 1.0,
+  "wps": 3.37,
+  "max_gap": 0.5,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "That isn't one of the options.",
+  "heard": "And that isn't one of the options",
+  "sim": 0.92,
+  "wps": 4.22,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "bastion",
+  "text": "Let's see you move. And no climbing anything.",
+  "heard": "Let's see you move. And no climbing anything",
+  "sim": 1.0,
+  "wps": 2.13,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "That dummy's survived forty rookies. Ruin its streak.",
+  "heard": "That dummy's survived 40 rookies. Ruin its streak",
+  "sim": 0.88,
+  "wps": 1.97,
+  "max_gap": 0.64,
+  "missing": [
+   "forty"
+  ],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Now your Special. Every style's is different. Let's find out what yours does.",
+  "heard": "Now you're special. Every Styles is different. Let's find out what yours does",
+  "sim": 0.85,
+  "wps": 1.89,
+  "max_gap": 0.7,
+  "missing": [
+   "your",
+   "style's"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "bastion",
+  "text": "Dash. You're untouchable for half a second. Make the half second count.",
+  "heard": "Dash, you're untouchable for half a second. Make the half second count",
+  "sim": 1.0,
+  "wps": 1.95,
+  "max_gap": 0.76,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Slow one coming. When the ring closes, block. Nail the timing and they'll regret it.",
+  "heard": "Slow one coming. When the ring closes, block. Nail the timing and they'll regret it",
+  "sim": 1.0,
+  "wps": 1.91,
+  "max_gap": 0.76,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Overload's full. Light them up. Not the table.",
+  "heard": "Overloads full. Light them up. Not the table",
+  "sim": 0.88,
+  "wps": 1.83,
+  "max_gap": 0.64,
+  "missing": [
+   "overload's"
+  ],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Last ones. Then you're on the clock for real.",
+  "heard": "Last ones. Then you're on the clock for real",
+  "sim": 1.0,
+  "wps": 2.73,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "You must be the rookie.",
+  "heard": "You must be the rookie",
+  "sim": 1.0,
+  "wps": 4.9,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",
+  "heard": "Hi. Yes, that's me, Vault. Huge fan. I mean, uh, hi",
+  "sim": 0.86,
+  "wps": 1.54,
+  "max_gap": 0.88,
+  "missing": [
+   "volt"
+  ],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "Bastion says you asked to join the roster. I didn't vote for you.",
+  "heard": "Bastian says you asked to join the roster. I didn't vote for you",
+  "sim": 0.92,
+  "wps": 3.32,
+  "max_gap": 0.64,
+  "missing": [
+   "bastion"
+  ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Oh. Okay. That's... fair.",
+  "heard": "Oh, okay. Um, that's fair",
+  "sim": 0.89,
+  "wps": 1.27,
+  "max_gap": 0.94,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "Prove me wrong.",
+  "heard": "Prove me wrong",
+  "sim": 1.0,
+  "wps": 4.17,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "So. You're Volt.",
+  "heard": "So your vault",
+  "sim": 0.33,
+  "wps": 1.49,
+  "max_gap": 0.76,
+  "missing": [
+   "you're",
+   "volt"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "That's me! Hi. Nice table.",
+  "heard": "That's me. Hi. Nice table",
+  "sim": 1.0,
+  "wps": 1.92,
+  "max_gap": 0.66,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Don't touch my table.",
+  "heard": "Don't touch my table",
+  "sim": 1.0,
+  "wps": 1.9,
+  "max_gap": 0.18,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I wasn't going to\u2014",
+  "heard": "I wasn't going to",
+  "sim": 1.0,
+  "wps": 5.56,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Workshop's left. Armoury's right. Gate's at the bottom. My table is in the middle. Don't touch it.",
+  "heard": "Workshops left. Armory's right. Gates at the bottom. My table is in the middle. Don't touch it",
+  "sim": 0.82,
+  "wps": 1.91,
+  "max_gap": 0.8,
+  "missing": [
+   "workshop's",
+   "armoury's",
+   "gate's"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "echo",
+  "text": "Oh, great. The new one.",
+  "heard": "Oh, great. The new one",
+  "sim": 1.0,
+  "wps": 2.87,
+  "max_gap": 0.54,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Hi! I'm Vol\u2014",
+  "heard": "Hi, I'm Boris",
+  "sim": 0.67,
+  "wps": 1.85,
+  "max_gap": 0.7,
+  "missing": [
+   "vol"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "echo",
+  "text": "Volt. I know. I read your file. I read everyone's file.",
+  "heard": "Um, Volt. I know. I read your file. I read everyone's file",
+  "sim": 0.96,
+  "wps": 2.2,
+  "max_gap": 0.68,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "You read minds. That's not reading a file.",
+  "heard": "You read minds. That's not reading a file",
+  "sim": 1.0,
+  "wps": 2.47,
+  "max_gap": 0.74,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "echo",
+  "text": "Potato, potahto.",
+  "heard": "Potato. Potato",
+  "sim": 0.5,
+  "wps": 1.27,
+  "max_gap": 0.46,
+  "missing": [
+   "potahto"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "thorn",
+  "text": "...",
+  "heard": "Esserunum",
+  "sim": 0.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Hi. I'm\u2014",
+  "heard": "Hi, I'm",
+  "sim": 1.0,
+  "wps": 1.75,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "thorn",
+  "text": "Thorn. And yes. I was one of them.",
+  "heard": "Thorn. And yes, I was one of them",
+  "sim": 1.0,
+  "wps": 2.53,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I wasn't going to ask.",
+  "heard": "I wasn't gonna ask",
+  "sim": 0.67,
+  "wps": 4.26,
+  "max_gap": 0.12,
+  "missing": [
+   "going",
+   "to"
+  ],
+  "flags": [
+   "wording/pronunciation",
+   "too fast"
+  ]
+ },
+ {
+  "who": "thorn",
+  "text": "Everyone asks. Mind the ferns.",
+  "heard": "Everyone asks, \"Mind the ferns.\"",
+  "sim": 1.0,
+  "wps": 2.23,
+  "max_gap": 0.12,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "patch",
+  "text": "Patch. Comms, gear, coffee.",
+  "heard": "Patch. Comms. Gear. Coffee",
+  "sim": 1.0,
+  "wps": 1.2,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "In that order?",
+  "heard": "In that order?",
+  "sim": 1.0,
+  "wps": 5.17,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "patch",
+  "text": "Depends on the night. The terminal's for upgrades. Shards go in, a better you comes out.",
+  "heard": "Depends on the night. The terminals for upgrades. Shards go in, a better you comes out",
+  "sim": 0.94,
+  "wps": 2.31,
+  "max_gap": 0.68,
+  "missing": [
+   "terminal's"
+  ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "A better me?",
+  "heard": "A better me?",
+  "sim": 1.0,
+  "wps": 5.56,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "patch",
+  "text": "A slightly better you. Let's be realistic.",
+  "heard": "A slightly better you? Let's be realistic",
+  "sim": 1.0,
+  "wps": 2.2,
+  "max_gap": 0.62,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Nice!",
+  "heard": "Nice",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Got it!",
+  "heard": "Got it",
+  "sim": 1.0,
+  "wps": 5.56,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Not today!",
+  "heard": "Not today",
+  "sim": 1.0,
+  "wps": 3.03,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Ow.",
+  "heard": "How?",
+  "sim": 0.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [
+   "ow"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Okay, ow!",
+  "heard": "Okay. Ow",
+  "sim": 1.0,
+  "wps": 1.79,
+  "max_gap": 0.5,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "That's gonna bruise.",
+  "heard": "That's gonna bruise",
+  "sim": 1.0,
+  "wps": 2.46,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'm fine. I'm fine!",
+  "heard": "I'm fine. I'm fine",
+  "sim": 1.0,
+  "wps": 2.17,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Overload!",
+  "heard": "Overload",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Light 'em up!",
+  "heard": "Light 'em up",
+  "sim": 1.0,
+  "wps": 4.55,
+  "max_gap": 0.12,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Yes! Did everyone see that?",
+  "heard": "Yes. Did everyone see that?",
+  "sim": 1.0,
+  "wps": 2.63,
+  "max_gap": 0.62,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "One district back!",
+  "heard": "One district back",
+  "sim": 1.0,
+  "wps": 3.12,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Not... yet...",
+  "heard": "Not yet",
+  "sim": 1.0,
+  "wps": 1.23,
+  "max_gap": 0.84,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Here we go!",
+  "heard": "Here we go",
+  "sim": 1.0,
+  "wps": 5.17,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Let's do this.",
+  "heard": "Let's do this",
+  "sim": 1.0,
+  "wps": 3.85,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ }
+]

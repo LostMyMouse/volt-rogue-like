@@ -55,8 +55,8 @@ if os.path.exists(os.path.join(HERE, 'designed.json')):
 
 # Pacing: a slower speaking speed per character, plus pauses after sentences and on trailing dots, so lines
 # breathe. File names still hash the original text, so the game finds them unchanged.
-SPEED = {'volt':0.92,'echo':0.92,'halo':0.86,'bastion':0.88,'thorn':0.85,'patch':0.88,'kilnheart':0.88,'bellwether':0.88,
-         'verdigris':0.8,'glasswake':0.9,'undertow':0.88,'gravemark':0.75,'redactor':0.84}
+SPEED = {'volt':0.88,'echo':0.92,'halo':0.72,'bastion':0.88,'thorn':0.76,'patch':0.88,'kilnheart':0.88,'bellwether':0.88,
+         'verdigris':0.8,'glasswake':0.9,'undertow':0.8,'gravemark':0.75,'redactor':0.75}
 import re
 def pace(text):
     t = re.sub(r'\.\.\.\s*', '... <break time="0.6s" /> ', text)
@@ -64,16 +64,28 @@ def pace(text):
     t = re.sub(r'([,;:—])\s+', r'\1 <break time="0.15s" /> ', t)
     return t.strip()
 
+# What the voice actually says when the script needs help to be spoken right (the file still keys on the
+# script text). Lines that are only silence or ellipses aren't voiced at all.
+SAY = {
+  "Hi! I'm Vol—": "Hi! I'm Volt—", "Potato, potahto.": "Po-tay-to. Po-tah-to.", "Ow.": "Oww!",
+  "...Yep.": "Yep.", "...I will consider it.": "I will... consider it.", "So. You're Volt.": "So. You are Volt.",
+  "They've been reviewed. Most of them failed.": "They have been reviewed. Most of them... failed.",
+  "Complaint? From who?": "A complaint? From who?",
+  "Ah. Volt. Rookie. No licence on file. One complaint pending.": "Ah. Volt... Rookie. No licence on file. One complaint, pending.",
+  "Have a quiet night. You won't have a choice.": "Have a quiet night... You won't have a choice.",
+}
+SILENT = lambda t: not re.sub(r'[.\s…]', '', t)
+
 def voice_lines(lines):
     done = 0
     for ln in lines:
         who, text = ln['who'], ln['text']
-        if who not in VOICES: continue
+        if who not in VOICES or SILENT(text): continue
         fn = os.path.join(OUT_VO, f"{who}_{fnv(who + '|' + text)}.mp3")
         if os.path.exists(fn): continue
         vid, stab, style = VOICES[who]
         n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
-                 {'text': pace(text), 'model_id': 'eleven_multilingual_v2', 'voice_settings': {'stability': stab, 'similarity_boost': 0.75, 'style': style, 'use_speaker_boost': True, 'speed': SPEED.get(who, 0.9)}}, fn)
+                 {'text': pace(SAY.get(text, text)), 'model_id': 'eleven_multilingual_v2', 'voice_settings': {'stability': stab, 'similarity_boost': 0.75, 'style': style, 'use_speaker_boost': True, 'speed': SPEED.get(who, 0.9)}}, fn)
         done += 1; print('voice', who, n, text[:50])
     return done
 
