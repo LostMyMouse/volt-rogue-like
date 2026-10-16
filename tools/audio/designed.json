@@ -1,13 +1,8 @@
 {
  "volt": {
-  "voice_id": "UfU4MayF5sixHnvZy0Oy",
-  "take": 1,
-  "previews": [
-   "s53MMZtddmCzWaVB6DWk",
-   "UfU4MayF5sixHnvZy0Oy",
-   "u5YclkmG9kERD6azfQwS"
-  ],
-  "replaced": "AS76NweK1BrzCSoeZ1eO"
+  "voice_id": "GsfuR3Wo2BACoxELWyEF",
+  "source": "library: Cooper - Nervous, Dramatic and Timid",
+  "replaced": "UfU4MayF5sixHnvZy0Oy"
  },
  "echo": {
   "voice_id": "Y5YV8HtWsJXkknTppIP7",

@@ -77,6 +77,17 @@ SAY = {
 }
 SILENT = lambda t: not re.sub(r'[.\s…]', '', t)
 
+# Volt uses ElevenLabs v3, which takes emotion cues in brackets and paces "..." itself (no break tags).
+V3 = {'volt'}
+V3_TAGS = {
+  "I'm Volt. I'm a hero. Well... rookie hero. I saw the broadcast, and I want to help.": "I'm Volt. I'm a hero. Well... rookie hero. [hopeful] I saw the broadcast, and I want to help.",
+  "Hi! Sorry. Your front door has, like, nine locks.": "[nervous] Hi! Sorry. Your front door has, like, nine locks.",
+  "Halo? THE Halo? Okay. Okay. Be cool. I'm being cool.": "[starstruck] Halo? THE Halo? [nervous] Okay. Okay. Be cool. I'm being cool.",
+  "Ow.": "[pained] Ow.", "Okay, ow!": "[pained] Okay, ow!", "That's gonna bruise.": "[wincing] That's gonna bruise.",
+  "Not... yet...": "[exhausted] Not... yet...", "Yes! Did everyone see that?": "[excited] Yes! Did everyone see that?",
+  "One district back!": "[excited] One district back!", "Nice!": "[excited] Nice!", "Hi. Yes. That's me. Volt. Huge fan. I mean, hi.": "[nervous] Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",
+}
+
 def voice_lines(lines):
     done = 0
     for ln in lines:
@@ -85,6 +96,10 @@ def voice_lines(lines):
         fn = os.path.join(OUT_VO, f"{who}_{fnv(who + '|' + text)}.mp3")
         if os.path.exists(fn): continue
         vid, stab, style = VOICES[who]
+        if who in V3:
+            n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
+                     {'text': V3_TAGS.get(text, SAY.get(text, text)), 'model_id': 'eleven_v3', 'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8}}, fn)
+            done += 1; print('voice', who, n, text[:50]); continue
         n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
                  {'text': pace(SAY.get(text, text), who), 'model_id': 'eleven_multilingual_v2', 'voice_settings': {'stability': stab, 'similarity_boost': 0.75, 'style': style, 'use_speaker_boost': True, 'speed': SPEED.get(who, 0.9)}}, fn)
         done += 1; print('voice', who, n, text[:50])
