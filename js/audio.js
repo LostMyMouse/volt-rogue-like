@@ -16,7 +16,7 @@ function audioUnlock(){
     try {
       const C=window.AudioContext||window.webkitAudioContext; AUDIO.ctx=new C();
       for (const b of ['music','sfx','voice']){ const g=AUDIO.ctx.createGain(); g.connect(AUDIO.ctx.destination); AUDIO.buses[b]=g; }
-      audioVolumes(); AUDIO.ctx.resume && AUDIO.ctx.resume();
+      audioVolumes(); AUDIO.ctx.resume && AUDIO.ctx.resume(); voiceFxInit(AUDIO.ctx);
     } catch(e){ AUDIO.html=true; }
   }
   for (const n of ['strike1','strike2','strike3','dash','hurt','enemyhit','ui_select','ui_move','parry','block']) loadBuf('sfx/'+n);
@@ -93,10 +93,10 @@ function playVoice(who, text){
   stopVoice();
   if (!AUDIO.unlocked || !who || !text) return false;
   const key=voiceKey(who,text); if (!VOICED.has(key)) return false;
-  const rate = who==='gravemark' ? 0.86 : 1; // the golem speaks lower and slower
+  const rate = who==='gravemark' ? 0.86 : 1; // without Web Audio effects, the golem at least speaks lower and slower
   const v={playing:true}; AUDIO.voice=v;
   if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onended=()=>v.playing=false; a.play().catch(()=>{}); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
-  const p=loadBuf('voice/'+key); p && p.then(buf=>{ if (!buf || AUDIO.voice!==v) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; s.playbackRate.value=rate; s.connect(AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start(); v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
+  const p=loadBuf('voice/'+key); p && p.then(buf=>{ if (!buf || AUDIO.voice!==v) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start(); v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
   return true;
 }
 function stopVoice(){ if (AUDIO.voice && AUDIO.voice.stop) AUDIO.voice.stop(); if (AUDIO.voice) AUDIO.voice.playing=false; }

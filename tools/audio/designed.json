@@ -45,19 +45,21 @@
   ]
  },
  "verdigris": {
-  "take": 0,
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "take": 1,
   "previews": [
-   "f09arAjvG7s0KuHjUXj9",
-   "dX0O1rTytpsoRUeNHiGE",
-   "CqTgJpNmoZrYYHDvnrUv"
+   "AbOMyTTIZBxCfUtmPcIL",
+   "5PhA4LJ8zKeDCb1ZxraK",
+   "TChY9e3dlfG7JJRZqBDE"
   ]
  },
  "undertow": {
-  "take": 0,
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "take": 2,
   "previews": [
-   "rkZNMkbt1gMXMe0Rp27U",
-   "WYvHjR7VCYhgUOYk5lCk",
-   "VNqCxFvlCUxf2ZY04q2p"
+   "aVNjaMGUJsWjmTY7i0Qd",
+   "uUcsh4egnXAIWRD9xItH",
+   "urczK0YCwtnTeJkvb4PB"
   ]
  },
  "gravemark": {
@@ -69,21 +71,9 @@
    "cHjVlze8nWzZeHDjM83m"
   ]
  },
- "verdigris2": {
-  "previews": [
-   "AbOMyTTIZBxCfUtmPcIL",
-   "5PhA4LJ8zKeDCb1ZxraK",
-   "TChY9e3dlfG7JJRZqBDE"
-  ]
- },
- "undertow2": {
-  "previews": [
-   "aVNjaMGUJsWjmTY7i0Qd",
-   "uUcsh4egnXAIWRD9xItH",
-   "urczK0YCwtnTeJkvb4PB"
-  ]
- },
- "redactor2": {
+ "redactor": {
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "take": 2,
   "previews": [
    "u7jrlN8yJ2VQUt7ORaKd",
    "tNSyhkWGg8LiU2Wht7Kj",
