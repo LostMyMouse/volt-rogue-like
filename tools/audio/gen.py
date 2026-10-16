@@ -55,12 +55,12 @@ if os.path.exists(os.path.join(HERE, 'designed.json')):
 
 # Pacing: a slower speaking speed per character, plus pauses after sentences and on trailing dots, so lines
 # breathe. File names still hash the original text, so the game finds them unchanged.
-SPEED = {'volt':0.95,'echo':0.92,'halo':0.72,'bastion':0.88,'thorn':0.76,'patch':0.88,'kilnheart':0.88,'bellwether':0.88,
+SPEED = {'volt':0.85,'echo':0.92,'halo':0.72,'bastion':0.88,'thorn':0.76,'patch':0.88,'kilnheart':0.88,'bellwether':0.88,
          'verdigris':0.8,'glasswake':0.9,'undertow':0.8,'gravemark':0.75,'redactor':0.75}
 import re
 def pace(text, who=''):
     # Volt babbles: short gaps. Everyone else gets a beat between sentences. Commas pause on their own.
-    gap = '0.15s' if who == 'volt' else '0.3s'
+    gap = '0.25s' if who == 'volt' else '0.3s'
     t = re.sub(r'\.\.\.\s*', '... <break time="0.5s" /> ', text)
     t = re.sub(r'(?<!\.)([.!?])\s+(?=\S)', r'\1 <break time="%s" /> ' % gap, t)
     return t.strip()

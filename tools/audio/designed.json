@@ -1,12 +1,13 @@
 {
  "volt": {
-  "voice_id": "AS76NweK1BrzCSoeZ1eO",
+  "voice_id": "UfU4MayF5sixHnvZy0Oy",
   "take": 1,
   "previews": [
-   "wDDWC7WfJ1pBxLK8kwjh",
-   "AS76NweK1BrzCSoeZ1eO",
-   "cB4LwifdN6BKoNYEvDnA"
-  ]
+   "s53MMZtddmCzWaVB6DWk",
+   "UfU4MayF5sixHnvZy0Oy",
+   "u5YclkmG9kERD6azfQwS"
+  ],
+  "replaced": "AS76NweK1BrzCSoeZ1eO"
  },
  "echo": {
   "voice_id": "Y5YV8HtWsJXkknTppIP7",
@@ -79,13 +80,5 @@
    "tNSyhkWGg8LiU2Wht7Kj",
    "L3YenFTIrljaqm205FWd"
   ]
- },
- "volt3": {
-  "previews": [
-   "s53MMZtddmCzWaVB6DWk",
-   "UfU4MayF5sixHnvZy0Oy",
-   "u5YclkmG9kERD6azfQwS"
-  ],
-  "desc": "A young adult superhero rookie with an androgynous, gender-neutral voice. Natural, grounded, conversational delivery with steady, even intonation: earnest and friendly with a little nervous energy, but never sing-song, never over-animated, no exaggerated pitch swings. Clear, mid-range, American."
  }
 }
