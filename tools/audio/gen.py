@@ -49,6 +49,7 @@ VOICES = {
 # Designed voices (design.py) replace the premade stand-ins for the characters they were made for.
 if os.path.exists(os.path.join(HERE, 'designed.json')):
     for who, d in json.load(open(os.path.join(HERE, 'designed.json'))).items():
+        if 'voice_id' not in d or who.endswith('2'): continue  # takes still waiting for a pick
         stab, style = {'volt':(0.35,0.5),'echo':(0.4,0.5),'bastion':(0.55,0.35),'kilnheart':(0.45,0.5),'bellwether':(0.3,0.7),'verdigris':(0.55,0.4),'undertow':(0.5,0.4),'gravemark':(0.75,0.25)}.get(who,(0.5,0.4))
         VOICES[who] = (d['voice_id'], stab, style)
 

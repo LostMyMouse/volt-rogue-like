@@ -13,6 +13,13 @@ def api(path, body):
     except urllib.error.HTTPError as e: return {'error': e.code, 'detail': e.read()[:400].decode('utf-8', 'replace')}
 
 CAST = {
+ 'verdigris2': ("An ethereal, ghostly, androgynous voice that sounds like it drifts out of overgrown ruins. Breathy, airy and whispering, with an echoing, otherworldly quality. Slow, soft and unnervingly sweet, deeply creepy, like a haunted garden speaking.",
+          "Mind the vines. They bite. Well. They don't bite. They just never let go. Everything on this roof is slowly becoming mine. Stand still long enough, and so will you."),
+ 'undertow2': ("An angry, furious, bitter man in his forties, a dockworker abandoned by the city. Rough, raw, growling and aggressive, barely holding his rage in, spitting words with contempt. Loud and intimidating.",
+          "Picked a bad night to go swimming, rookie. The city left us to drown! Nobody answered the call. Out here, sorry doesn't float, and neither will you."),
+ 'redactor2': ("The main supervillain: a cold, commanding, deeply menacing man. Deep, smooth and resonant, with icy, perfect politeness that hides total contempt, like a calm corporate executive who decides who lives. Quiet, controlled and chilling, every word deliberate. Theatrical villain gravitas.",
+          "Good evening. This is a courtesy notice regarding your heroes' powers. They've been reviewed. Most of them failed. Have a quiet night. You won't have a choice."),
+
  'volt': ("A young adult superhero rookie with an androgynous, gender-neutral voice, neither clearly male nor female. Bright, eager, quick-talking and a little nervous, with comic timing. Warm, earnest, slightly breathless. American.",
           "Hi! Sorry. Your front door has, like, nine locks. I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help. What table?"),
  'echo': ("A smug, sharp-tongued young adult psychic with an androgynous, gender-neutral voice. Dry, quick, teasing and sarcastic, always sounding like they already know the answer. Cool and confident. American.",
@@ -32,7 +39,7 @@ CAST = {
 }
 pick = json.load(open(os.path.join(HERE, 'picks.json'))) if os.path.exists(os.path.join(HERE, 'picks.json')) else {}
 designed = json.load(open(os.path.join(HERE, 'designed.json'))) if os.path.exists(os.path.join(HERE, 'designed.json')) else {}
-only = sys.argv[1:]
+only = [a for a in sys.argv[1:] if not a.startswith('--')]; PREVIEW_ONLY = '--previews' in sys.argv
 for who, (desc, text) in CAST.items():
     if only and who not in only: continue
     if who in designed and not only: continue
@@ -41,6 +48,8 @@ for who, (desc, text) in CAST.items():
     ids = []
     for i, p in enumerate(r['previews']):
         open(os.path.join(AUD, f'{who}_{i}.mp3'), 'wb').write(base64.b64decode(p['audio_base_64'])); ids.append(p['generated_voice_id'])
+    if PREVIEW_ONLY:
+        designed.setdefault(who, {})['previews'] = ids; json.dump(designed, open(os.path.join(HERE, 'designed.json'), 'w'), indent=1); print(who, 'previews saved'); continue
     k = pick.get(who, 0)
     v = api('/v1/text-to-voice/create-voice-from-preview', {'voice_name': f'Volt · {who.title()}', 'voice_description': desc, 'generated_voice_id': ids[k]})
     if 'voice_id' not in v: print(who, 'create fail', v); continue
