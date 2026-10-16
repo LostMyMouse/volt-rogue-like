@@ -8,7 +8,8 @@ const CS_VILLAINS = [
   {id:'kilnheart', x:330, y:330, el:'fire'}, {id:'bellwether', x:540, y:310, el:'sound'}, {id:'undertow', x:750, y:300, el:'water'},
   {id:'verdigris', x:960, y:310, el:'acid'}, {id:'glasswake', x:1170, y:330, el:'glass'},
 ];
-const CS_REDACTOR_IMG = new Image(); CS_REDACTOR_IMG.src='assets/intro/redactor.png';
+// The broadcast uses a dedicated head-and-shoulders cut-out when it exists, else the intro art.
+const CS_REDACTOR_IMG = new Image(); CS_REDACTOR_IMG.onerror=()=>{ CS_REDACTOR_IMG.onerror=null; CS_REDACTOR_IMG.src='assets/intro/redactor.png'; }; CS_REDACTOR_IMG.src='assets/intro/redactor_broadcast.png';
 const VOLT_LAND = {x:850, y:228};
 
 // Each beat: where the camera goes, what happens as it starts, and the line spoken.

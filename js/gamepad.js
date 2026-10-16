@@ -20,7 +20,7 @@ function rumble(strong=0.5, weak=0.3, ms=90){
 }
 
 /* ---------- Menus: spatial navigation over the buttons of whichever panel is on top ---------- */
-const MENU_LAYERS = ['#mConfirm','#mTune','#mSlots','#mStart','#mStyle','#mFortress','#mPause','#mDraft','#mCity','#mOver','#splash'];
+const MENU_LAYERS = ['#mConfirm','#mTune','#mCodex','#mSlots','#mStart','#mStyle','#mFortress','#mPause','#mDraft','#mCity','#mOver','#splash'];
 function menuLayer(){ for (const id of MENU_LAYERS){ const el=$(id); if (el && !el.hidden && getComputedStyle(el).display!=='none') return el; } return null; }
 function menuItems(layer){
   return [...layer.querySelectorAll('button, input[type=range]')].filter(b=>!b.disabled && !b.hidden && b.offsetParent!==null && b.getAttribute('aria-disabled')!=='true' || (b.classList.contains('style-card') && b.offsetParent!==null));

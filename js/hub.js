@@ -38,7 +38,7 @@ const HUB_SPOTS = [
   {id:'gate', name:'Deploy Gate', verb:'Deploy', at:{x:742,y:805}, r:55, lx:742, ly:735, c:COL.volt},
   {id:'board', name:'Commendations', verb:'Read', at:{x:410,y:268}, r:55, lx:400, ly:110, c:COL.amber},
   {id:'trophies', name:'Trophy shelf', verb:'Look', at:{x:1280,y:275}, r:90, lx:1280, ly:150, c:COL.amber},
-  {id:'bunk', name:'Your bunk', verb:'Remember', at:{x:478,y:650}, r:40, lx:250, ly:640, c:COL.amber},
+  {id:'bunk', name:"Volt's notebook", verb:'Read', at:{x:478,y:650}, r:40, lx:250, ly:640, c:COL.amber},
   {id:'training', name:'Training roof', verb:'Train', at:{x:1420,y:585}, r:45, lx:1250, ly:640, c:COL.heal},
 ];
 
@@ -180,8 +180,7 @@ function hubInteract(){
     const got=Object.keys(c.beaten);
     openTalk(null,[got.length ? 'The trophy shelf: '+got.map(id=>`${SPEAKERS[id].name}${c.beaten[id]>1?' ×'+c.beaten[id]:''}`).join(', ')+'.' : "An empty shelf, waiting. Beat a villain and something of theirs ends up here."],s);
   } else if (s.id==='bunk'){
-    // Lying back on the bunk replays how all this started.
-    playCutscene(()=>{ state='hub'; hubNear=null; });
+    openCodex('hub'); // Volt's notebook (and a replay of the opening) live on the bunk
   }
 }
 function talkTo(id){

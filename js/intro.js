@@ -25,7 +25,10 @@ const VOLT_REPLIES = {
   thorn:"Glad you switched sides.",
   patch:"No promises.",
 };
-const INTRO_ART = ['kilnheart','gravemark','bellwether','verdigris','glasswake','undertow','redactor']; // assets/intro/<id>.png; others fall back to their drawn bust
+// Intro art is detected rather than listed: any assets/intro/<id>.png that loads is used, so new cut-outs
+// (heroes, Volt) work the moment they're added. Characters without one fall back to their drawn bust.
+const INTRO_ART = [];
+for (const id of ['volt','halo','bastion','echo','thorn','patch','kilnheart','gravemark','bellwether','verdigris','glasswake','undertow','redactor']){ const im=new Image(); im.onload=()=>INTRO_ART.push(id); im.src=`assets/intro/${id}.png`; }
 
 function introFor(id){
   const b=BOSSES[id];

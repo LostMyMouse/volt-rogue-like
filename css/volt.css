@@ -379,7 +379,7 @@ body.touch-mode .hub-prompt{bottom:calc(env(safe-area-inset-bottom,0px) + 28px);
 .cs-portrait{width:76px;height:76px;flex:none;object-fit:cover;border:2px solid var(--c);background:#0b111c;box-shadow:0 0 14px color-mix(in srgb,var(--c) 50%,transparent)}
 .cs-caption .cs-tag{top:-26px;left:0}
 .cs-card{position:absolute;left:clamp(16px,4vw,60px);top:calc(9vh + 20px);z-index:3;display:flex;gap:14px;align-items:center;pointer-events:none}
-.cs-card img{width:clamp(80px,11vw,130px);border:3px solid var(--c);box-shadow:0 0 26px var(--c);background:#0b111c}
+.cs-card img{width:clamp(110px,15vw,190px);filter:drop-shadow(0 0 2px #000) drop-shadow(0 0 18px var(--c))} /* portraits are cut-outs: no box behind them */
 .cs-card span{display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .cs-card b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(40px,6.5vw,90px);line-height:.85;text-transform:uppercase;color:#fff;-webkit-text-stroke:2px var(--ink);text-shadow:5px 5px 0 var(--ink),0 0 30px var(--c);transform:skewX(-8deg)}
 .cs-card i{display:block;font-style:normal;font-size:clamp(12px,1.4vw,16px);color:var(--c);max-width:24ch;text-shadow:1px 1px 0 #000}
@@ -401,3 +401,25 @@ body.pad-mode canvas{cursor:none}
 .rotate span{color:var(--muted)}
 @keyframes rotHint{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
 @media (orientation:portrait) and (pointer:coarse){ .rotate{display:grid} }
+
+/* Volt's notebook */
+.codex-panel{max-width:860px;width:100%}
+.codex-body{display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;min-height:0}
+.codex-tabs{display:grid;gap:4px;align-content:start;max-height:min(56vh,520px);overflow:auto;padding-right:4px}
+.codex-group{margin-top:6px}
+.codex-tab{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:5px 8px;border:2px solid transparent;background:var(--ink);font-weight:700;font-size:13px;color:var(--text);position:relative}
+.codex-tab img{width:30px;height:30px;object-fit:cover}
+.codex-tab.sel,.codex-tab:hover,.codex-tab:focus-visible{border-color:var(--c);color:var(--c)}
+.codex-tab:disabled{opacity:.4;cursor:default}
+.codex-tab i{position:absolute;right:6px;font-style:normal;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:1px 5px;background:var(--amber);color:var(--ink)}
+.codex-q{width:30px;text-align:center;font-family:var(--display);font-size:20px;color:var(--muted)}
+.codex-page{max-height:min(56vh,520px);overflow:auto;padding:14px 16px;background:#f2ead6;color:#1d1a14;border-left:5px solid var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);background-image:repeating-linear-gradient(transparent 0 27px,rgba(60,90,160,.18) 27px 28px)}
+.codex-head{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.codex-head img{width:76px;height:76px;object-fit:cover;filter:drop-shadow(0 0 6px var(--c))}
+.codex-head h3{margin:0;font-family:var(--display);font-weight:900;font-size:34px;line-height:1;text-transform:uppercase;color:#14110c}
+.codex-head .tag{color:#5a5240}
+.codex-panel .codex-page p{margin:0 0 12px;font-size:15px;line-height:28px;color:#1d1a14;font-family:var(--ui)}
+.codex-panel .codex-page p.codex-locked{color:#7a7060;font-style:italic}
+.codex-locked{font-style:italic;color:#7a7060}
+@media (max-width:700px),(max-height:480px){ .codex-body{grid-template-columns:150px minmax(0,1fr)} .codex-tabs,.codex-page{max-height:58vh} .codex-page p{font-size:13px;line-height:24px} .codex-head img{width:52px;height:52px} .codex-head h3{font-size:26px} }
+.cs-card div{background:radial-gradient(ellipse at left center,rgba(4,7,14,.75),rgba(4,7,14,0) 75%);padding:6px 18px 6px 8px}

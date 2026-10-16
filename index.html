@@ -203,6 +203,15 @@
   </div>
 </div>
 
+<div class="scrim" id="mCodex" hidden>
+  <div class="panel codex-panel" role="dialog" aria-labelledby="codexTitle">
+    <span class="tag">Written by Volt · do not read, Echo</span>
+    <h2 id="codexTitle">Volt's notebook</h2>
+    <div class="codex-body"><nav class="codex-tabs" id="codexTabs" aria-label="People"></nav><article class="codex-page" id="codexPage"></article></div>
+    <div class="row"><button class="btn primary" id="btnCodexClose" type="button">Close</button><button class="btn" id="btnCodexReplay" type="button">Replay the opening</button></div>
+  </div>
+</div>
+
 <div class="scrim" id="mPause" hidden>
   <div class="panel" role="dialog" aria-labelledby="pauseTitle">
     <span class="tag">Paused</span>
@@ -210,6 +219,7 @@
     <div class="record"><span class="tag">Your build</span><div class="boon-chips" id="pauseBuild"></div></div>
     <div class="row">
       <button class="btn primary" id="btnResume" type="button">Resume</button>
+      <button class="btn" id="btnPauseCodex" type="button">Notebook</button>
       <button class="btn" id="btnPauseTune" type="button">Tune</button>
       <button class="btn" id="btnRestart" type="button">Restart</button>
     </div>
@@ -289,5 +299,6 @@
 <script src="js/hub.js"></script>
 <script src="js/cutscene.js"></script>
 <script src="js/tutorial.js"></script>
+<script src="js/codex.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/main.js"></script>

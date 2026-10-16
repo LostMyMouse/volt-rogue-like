@@ -31,6 +31,7 @@ addEventListener('keydown', e => {
   if (k===' ') e.preventDefault();
   if (e.repeat) return;
   if (!e.__pad && inputMode !== 'kb') setMode('kb');
+  if (k==='escape' && !$('#mCodex').hidden){ closeCodex(); return; }
   if (state==='cutscene'){ if (k==='escape') endCutscene(); else nextCutPanel(); return; }
   if (state==='hubtalk' || state==='dialogue'){ if (k==='e'||k===' '||k==='enter'||k==='escape') advanceTalk(); return; }
   if (state==='hubmenu' && k==='escape'){ if (!$('#mFortress').hidden) closeFortress(); else if (!$('#mStyle').hidden) closeStyles(); return; }

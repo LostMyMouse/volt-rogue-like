@@ -116,7 +116,7 @@ Black suit, white swept collar with forearm and shin fins, two glowing blue rail
 | Arc Caster | lance_charge (loop) / lance_fire | 4 / 5 | 12 / 20 | Charge-up loop, then a big piercing fire. |
 | Titan | haymaker | 8 | 14 | Big wind-up, then the punch. Hit on frame 5, with a long recovery. |
 | Titan | pound | 8 | 14 | Leap, then slam the ground. Impact on frame 5. |
-| Speedster | flash | 3 | 24 | A blur strike as he teleports through the target. |
+| Speedster | flash | 3 | 24 | A blur strike as Volt teleports through the target. |
 | Speedster | blitz | 8 | 24 | Spinning afterimage barrage. |
 | Magnetar | disc_throw / disc_catch | 4 / 3 | 20 | Throw on frame 2. |
 | Magnetar | jab (empty-handed) | 3 | 18 | |
@@ -357,7 +357,7 @@ Hero NPCs then need walk, idle and talk loops at 96 × 96.
 ## 11. Tips for AI-generated sprites
 
 - **Lock the camera first:** generate one reference turnaround per character at the game's three-quarter angle, then generate every animation against it. Mismatched angles are the most common thing that breaks a sprite set.
-- **Silhouette test:** shrink a frame to 96 px tall. If you can't tell which way Volt is facing or what he's doing, simplify it.
+- **Silhouette test:** shrink a frame to 96 px tall. If you can't tell which way Volt is facing or what they're doing, simplify it.
 - **Same light, same outline weight** across everything: top-left light, and an ink outline about 3 px at final size.
 - **Keep effects off the character sheets** where possible (sparks, trails, glows). The game layers its own effects, and baked-in ones double up.
 - **Transparent backgrounds** throughout. If a tool only outputs solid backgrounds, a flat magenta (`#FF00FF`) background is the next best thing, and I can key it out.
@@ -386,3 +386,7 @@ Halo, Bastion, Echo, Thorn and Patch turnarounds (64 px, 8 directions, static) a
 The chibi Volt animations were retired. Volt is now the hero-matched turnaround in `assets/sprites/volt/volt_rotations.png` (64 px, 8 directions, same format as the heroes). Until animation sheets exist, motion is code-driven in `js/sprites.js`: a run bob, a lunge on strikes, blue afterimages on dash and a white flash on parry and dash.
 
 **Next animation batch for Volt** (generate against the new turnaround, 64 px base frames, larger transparent canvas only if a pose clips, same ground line): idle (6), run (8), strike1–3 (4/4/6), dash (4), block (3, hold last), parry (5). Use the same south-first, clockwise direction order as the turnaround, one row per direction.
+
+
+## Volt is gender-neutral (2026-10-16)
+In every asset, Volt has an androgynous athletic build, the face hidden behind the visor, and no clearly male or female features. In writing, Volt is "Volt", "the rookie" or "they".
