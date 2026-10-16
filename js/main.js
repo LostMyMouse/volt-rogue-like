@@ -9,9 +9,12 @@ bindTouch('#tBlock', pressBlock, releaseBlock);
 bindTouch('#tSig', doSig);
 reset(); run.route={order:['kilnheart'],i:0,room:1,picks:0}; buildRoom(); run.route={order:[],i:-1,room:0,picks:0};
 
+const PORTRAIT_TOUCH = matchMedia('(orientation: portrait) and (pointer: coarse)');
 let lastT=performance.now();
 function frame(now){
   const dt=Math.min(0.033,(now-lastT)/1000); lastT=now;
+  pollPads(dt);
+  if (state==='play' && PORTRAIT_TOUCH.matches) openPause(); // the rotate prompt is up: freeze the fight
   if (state==='play'){
     time+=dt;
     if (hitStop>0) hitStop-=dt; else update(dt);

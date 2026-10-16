@@ -389,3 +389,15 @@ body.touch-mode .hub-prompt{bottom:calc(env(safe-area-inset-bottom,0px) + 28px);
 @media (max-width:600px){ .cs-portrait{width:52px;height:52px} }
 
 body.in-cut .hud, body.in-cut .abilities, body.in-cut .touch, body.in-cut .bossbar, body.in-cut .hub-hud{display:none!important}
+
+/* Controller: a clear focus ring on whatever the D-pad has selected */
+body.pad-mode button:focus, body.pad-mode input:focus{outline:3px solid var(--volt)!important;outline-offset:3px;box-shadow:0 0 18px rgba(38,191,255,.6)!important}
+body.pad-mode canvas{cursor:none}
+/* Phones and tablets in portrait: ask for landscape and freeze behind the prompt */
+.rotate{display:none;position:fixed;inset:0;z-index:100;background:#04070e;place-items:center;text-align:center;color:var(--spark)}
+.rotate div{display:grid;gap:10px;justify-items:center;padding:24px}
+.rotate b{font-size:64px;line-height:1;color:var(--volt);animation:rotHint 1.8s ease-in-out infinite}
+.rotate strong{font-family:var(--display);font-weight:900;font-size:30px;text-transform:uppercase}
+.rotate span{color:var(--muted)}
+@keyframes rotHint{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+@media (orientation:portrait) and (pointer:coarse){ .rotate{display:grid} }

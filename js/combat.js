@@ -38,6 +38,7 @@ function banner(text, warn){ const b=$('#banner'); b.textContent=text; b.classLi
 function updateAim(mv){
   const p=player;
   if (inputMode==='kb' && mouse.active){ const w=screenToWorld(mouse.x,mouse.y); p.aim=Math.atan2(w.y-p.y,w.x-p.x); }
+  else if (inputMode==='pad' && PAD.aim!==null) p.aim=PAD.aim; // right stick
   else { const t=nearestEnemy(p.x,p.y,360); if (t) p.aim=Math.atan2(t.y-p.y,t.x-p.x); else if (mv.x||mv.y) p.aim=Math.atan2(mv.y,mv.x); }
 }
 function damageEnemy(e,dmg,ang,knock,stun,opt={}){
@@ -135,6 +136,7 @@ function doSig(){
 function hurtPlayer(dmg,ang,src,opt={}){
   const p=player; if (p.iT>0||state!=='play') return false;
   const so=STYLE(), blk=resolveBlock(dmg,ang,src,opt);
+  rumble(blk.result==='parried'?0.2:0.7, blk.result==='parried'?0.8:0.4, blk.result==='parried'?60:140);
   if (blk.result==='parried') return 'parried';
   dmg=blk.dmg*R.dmgTakenMul*(so.dmgTaken||1);
   if (blk.result==='blocked'){

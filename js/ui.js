@@ -163,7 +163,7 @@ function refreshSplash(){
   const any=hasSave();
   $('#btnStart').textContent = any ? 'Continue' : 'Start Game';
   $('#splashMeta').textContent = any ? `Slot ${activeSlot} · ${slotSummary(save)}` : '';
-  $('#splashPress').textContent = inputMode==='touch' ? 'Tap to begin' : 'Press Enter';
+  $('#splashPress').textContent = inputMode==='touch' ? 'Tap to begin' : inputMode==='pad' ? 'Press A' : 'Press Enter';
 }
 function startFromSplash(){
   goFullscreen(); show('#splash',false); show('#mSlots',false);

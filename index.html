@@ -55,7 +55,7 @@
   <div class="hub-wallet"><span id="hubShards">◆ 0</span><span id="hubLic">✦ 0</span></div>
   <p class="hub-hint" id="hubHint">WASD to move · E to interact · The Deploy Gate starts a run</p>
 </div>
-<button class="hub-prompt" id="hubPrompt" type="button" hidden><kbd>E</kbd><span id="hubPromptText"></span></button>
+<button class="hub-prompt" id="hubPrompt" type="button" hidden><kbd id="hubPromptKey">E</kbd><span id="hubPromptText"></span></button>
 <div class="talk" id="hubTalk" hidden>
   <div class="portrait" id="talkPortrait" role="img"></div>
   <div class="talk-body"><span class="talk-who" id="talkWho"></span><p id="talkLine"></p><span class="talk-next" id="talkNext">E · close</span></div>
@@ -73,6 +73,8 @@
   <div class="cs-caption" id="csCaption"><img class="cs-portrait" id="csPortrait" alt="" hidden><div class="cs-lines"><span class="cs-tag" id="csTag" hidden></span><span class="cs-who" id="csWho" hidden></span><p id="csText"></p><span class="cs-count" id="csCount"></span></div></div>
   <button class="chip cs-skip" id="csSkip" type="button">Skip</button>
 </div>
+
+<div class="rotate" id="rotate"><div><b>⟲</b><strong>Turn your device sideways</strong><span>Volt is played in landscape.</span></div></div>
 
 <div class="banner" id="banner"></div>
 
@@ -135,6 +137,17 @@
       <dt>Shift</dt><dd>Block. Tap as the white ring closes to parry</dd>
       <dt>Esc</dt><dd>Pause and tune</dd>
       <dt>E</dt><dd>Jump to the next rooftop</dd>
+    </dl>
+    <dl class="controls" id="ctrlPad" hidden>
+      <dt>Left stick</dt><dd>Move (D-pad works too)</dd>
+      <dt>Right stick</dt><dd>Aim. Leave it alone to auto-aim at the nearest enemy</dd>
+      <dt>X / □</dt><dd>Strike, hold to keep attacking</dd>
+      <dt>Y / △</dt><dd>Special (hold to charge Arc Caster's Lance)</dd>
+      <dt>A / ✕</dt><dd>Dash, invulnerable while dashing</dd>
+      <dt>RB / R1</dt><dd>Block. Tap as the white ring closes to parry</dd>
+      <dt>LB / L1 or RT</dt><dd>Overload when charged</dd>
+      <dt>B / ○</dt><dd>Jump to the next rooftop · talk and use things in the Fortress</dd>
+      <dt>Start</dt><dd>Pause</dd>
     </dl>
     <dl class="controls" id="ctrlTouch" hidden>
       <dt>Left thumb</dt><dd>Drag anywhere on the left side to move</dd>
@@ -249,6 +262,7 @@
 <script src="js/core.js"></script>
 <script src="js/world.js"></script>
 <script src="js/input.js"></script>
+<script src="js/gamepad.js"></script>
 <script src="js/combat.js"></script>
 <script src="js/update.js"></script>
 <script src="js/bosses/framework.js"></script>

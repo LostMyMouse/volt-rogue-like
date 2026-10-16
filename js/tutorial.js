@@ -3,6 +3,7 @@
 // through it. Finishing (or skipping) a first-time session goes straight into a real run.
 'use strict';
 
+const TUT_PAD = {"move": "Use the <kbd>left stick</kbd> to move around the roof.", "strike": "Press <kbd>X</kbd> to Strike the training dummy. Hold it to keep swinging.", "special": "Press <kbd>Y</kbd> for your Special. Each style has a different one.", "dash": "Press <kbd>A</kbd> to dash. You can't be hurt mid-dash.", "parry": "A white ring closes before an attack lands. Tap <kbd>RB</kbd> as it closes to <b>parry</b>.", "overload": "Overload is charged. Press <kbd>LB</kbd> to blast everything nearby.", "clear": "Clear the roof."};
 const TUT_STEPS = [
   { id:'move',   title:'Move',     kb:'Use <kbd>WASD</kbd> to move around the roof.', touch:'Drag anywhere on the left side of the screen to move.', say:"Let's see you move. And no climbing anything." },
   { id:'strike', title:'Strike',   kb:'<kbd>Left click</kbd> to Strike the training dummy. Hold it to keep swinging.', touch:'Tap <b>Strike</b> to hit the dummy. Hold it to keep swinging.', say:"That dummy's survived forty rookies. Ruin its streak." },
@@ -45,7 +46,7 @@ function tutNext(){
   if (s.id==='overload'){ tutSpawn(3,{hp:30}); player.sig=100; }
   $('#tutStep').textContent=`Training · ${tut.i+1} of ${TUT_STEPS.length}`;
   $('#tutTitle').textContent=s.title;
-  $('#tutText').innerHTML=inputMode==='touch'?s.touch:s.kb;
+  $('#tutText').innerHTML=inputMode==='touch'?s.touch:inputMode==='pad'?TUT_PAD[s.id]:s.kb;
   $('#tutSay').textContent='“'+s.say+'”';
   setPortrait($('#tutPortrait'),'bastion');
   const el=$('#tut'); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop');

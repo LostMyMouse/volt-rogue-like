@@ -205,7 +205,7 @@ function showTalkPage(){
   if (pg.who){ const sp=SPEAKERS[pg.who]; setPortrait(pt,pg.who,pg.expression||'neutral'); pt.hidden=false; el.style.setProperty('--c',sp.c); $('#talkWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`; }
   else { pt.hidden=true; el.style.setProperty('--c',talk.spot.c); $('#talkWho').innerHTML=`<b>${talk.spot.name}</b>`; }
   el.classList.toggle('is-volt', pg.who==='volt');
-  $('#talkLine').textContent=pg.text; const key=inputMode==='touch'?'Tap':'E'; $('#talkNext').textContent = key+(talk.i<talk.pages.length-1 ? ' · next' : ' · close');
+  $('#talkLine').textContent=pg.text; const key=inputMode==='touch'?'Tap':inputMode==='pad'?'A':'E'; $('#talkNext').textContent = key+(talk.i<talk.pages.length-1 ? ' · next' : ' · close');
 }
 function advanceTalk(){
   if ((state!=='hubtalk' && state!=='dialogue') || !talk || performance.now()-talk.t<250) return;
