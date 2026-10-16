@@ -37,13 +37,13 @@ const CUTSCENE = [
   { cam:{x:742,y:360,z:1.1}, focus:'bastion', who:'bastion', expr:'stern', text:"Nobody climbs a sixty-storey wall." },
   { cam:{x:820,y:200,z:1.5}, go:c=>{ c.alarm=0; c.volt={x:VOLT_LAND.x, t0:time}; c.later(0.7,()=>{ c.flash=0.6; c.flashC='#26bfff'; addShake(12); sfx('lightning'); sfx('land'); bolts.push({pts:[{x:VOLT_LAND.x,y:VOLT_LAND.y-160},{x:VOLT_LAND.x+20,y:VOLT_LAND.y-60},{x:VOLT_LAND.x,y:VOLT_LAND.y}],t:0,dur:0.3}); for (let i=0;i<20;i++) vfxEmit('ember',VOLT_LAND.x,VOLT_LAND.y,{vx:rand(-260,260),vy:rand(-120,120),vz:rand(60,220),g:600,life:.5,size:3,c:'#7fe0ff'}); }); },
     focus:'volt', card:'volt', tagline:'Rookie hero. Very, very new.', who:'volt', expr:'pleased', text:"Hi! Sorry. Your front door has, like, nine locks." },
-  { cam:{x:800,y:230,z:1.25}, focus:'volt', who:'volt', text:"I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help." },
+  { cam:{x:800,y:230,z:1.25}, focus:'volt', who:'volt', text:"I'm Volt. I'm a hero. Well... rookie hero. I saw the broadcast, and I want to help." },
   { cam:{x:1000,y:420,z:0.9}, focus:'echo', who:'echo', expr:'pleased', text:"Oh, I like them." },
   { cam:{x:800,y:210,z:1.5}, focus:'halo', who:'halo', text:"You're bleeding." },
   { cam:{x:830,y:220,z:1.55}, focus:'volt', who:'volt', text:"The wall had opinions." },
   { cam:{x:790,y:215,z:1.4}, focus:'halo', who:'halo', text:"Bastion. Give the rookie a run." },
-  { cam:{x:742,y:330,z:1.25}, focus:'bastion', who:'bastion', expr:'stern', text:"Training roof. Now. And don't touch my table." },
-  { cam:{x:830,y:220,z:1.6}, focus:'volt', who:'volt', expr:'pleased', text:"What table?" },
+  { cam:{x:742,y:330,z:1.25}, focus:'bastion', who:'bastion', expr:'stern', text:"Training roof. Now. Let's see what you've actually got." },
+  { cam:{x:830,y:220,z:1.6}, focus:'volt', who:'volt', expr:'pleased', text:"Right now? I just climbed sixty floors." },
 ];
 
 function csArrive(c,v){
