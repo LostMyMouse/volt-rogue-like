@@ -161,9 +161,9 @@ const hasSave = () => save.runs>0 || !!save.seenIntro;
 const slotSummary = s => { const b=Object.keys(s.beaten||{}).length; return `${s.runs} run${s.runs===1?'':'s'} · ${b} villain${b===1?'':'s'} beaten · ◆ ${s.shards} · ✦ ${s.licences}`; };
 function refreshSplash(){
   const any=hasSave();
-  $('#btnStart').textContent = any ? 'Continue' : 'Start Game';
+  $('#btnStart span').textContent = any ? 'Continue' : 'Start Game';
   $('#splashMeta').textContent = any ? `Slot ${activeSlot} · ${slotSummary(save)}` : '';
-  $('#splashPress').textContent = inputMode==='touch' ? 'Tap to begin' : inputMode==='pad' ? 'Press A' : 'Press Enter';
+  $('#splashPressWord').textContent = inputMode==='touch' ? 'Tap' : 'Press'; $('#splashKey').textContent = inputMode==='touch' ? 'Start' : inputMode==='pad' ? 'A' : 'Enter';
 }
 function startFromSplash(){
   goFullscreen(); show('#splash',false); show('#mSlots',false);

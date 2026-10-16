@@ -153,20 +153,54 @@ function renderCinematic(){
   const vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.3,W/2,H/2,Math.max(W,H)*0.75); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.6)'); ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
   if (c.flash>0){ ctx.globalAlpha=Math.min(1,c.flash); ctx.fillStyle=c.flashC; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1; }
 }
-// The Redactor's face on a hologram screen above the city: red tint, scanlines and torn signal slices.
+// The broadcast: a whole studio feed composed off-screen (crimson set, emblem, header, name strip, ticker,
+// the Redactor as a cut-out in front), then put on the hologram screen with scanlines and torn-signal slices
+// applied to the entire picture, so it reads as one hijacked transmission.
+const BC = { w:560, h:340, cv:null, ticker:"ALL HERO POWERS UNDER REVIEW  ·  DISTRICTS NOW UNDER NEW MANAGEMENT  ·  PLEASE DIRECT COMPLAINTS TO NO ONE  ·  REMAIN INDOORS  ·  HAVE A QUIET NIGHT  ·  " };
+function composeBroadcast(){
+  if (!BC.cv){ BC.cv=document.createElement('canvas'); BC.cv.width=BC.w; BC.cv.height=BC.h; }
+  const g=BC.cv.getContext('2d'), W2=BC.w, H2=BC.h, im=CS_REDACTOR_IMG;
+  // studio set
+  const bg=g.createLinearGradient(0,0,0,H2); bg.addColorStop(0,'#2a0509'); bg.addColorStop(0.6,'#12030a'); bg.addColorStop(1,'#050207'); g.fillStyle=bg; g.fillRect(0,0,W2,H2);
+  g.strokeStyle='rgba(224,40,60,.12)'; g.lineWidth=1; for (let x=-H2;x<W2;x+=28){ g.beginPath(); g.moveTo(x,H2); g.lineTo(x+H2*0.6,0); g.stroke(); }
+  // the emblem behind him: stacked redaction bars with a red seam
+  g.save(); g.translate(W2/2,H2*0.44); g.globalAlpha=0.55;
+  for (let k=0;k<5;k++){ const ww=220-k*18, y=-90+k*38; g.fillStyle='#000'; g.fillRect(-ww/2,y,ww,26); g.fillStyle='#e0283c'; g.fillRect(-ww/2,y+24,ww,2); }
+  g.globalAlpha=0.9; g.fillStyle='#e0283c'; g.fillRect(-3,-104,6,200); g.restore();
+  const glow=g.createRadialGradient(W2/2,H2*0.5,10,W2/2,H2*0.5,W2*0.5); glow.addColorStop(0,'rgba(224,40,60,.28)'); glow.addColorStop(1,'rgba(224,40,60,0)'); g.fillStyle=glow; g.fillRect(0,0,W2,H2);
+  // the anchor himself, a transparent cut-out
+  if (im.complete && im.naturalWidth){ const ih=H2*0.98, iw=ih*im.naturalWidth/im.naturalHeight; g.drawImage(im,W2/2-iw/2,H2-ih,iw,ih); }
+  // header bar
+  g.fillStyle='rgba(5,2,7,.85)'; g.fillRect(0,0,W2,30); g.fillStyle='#e0283c'; g.fillRect(0,30,W2,2);
+  g.fillStyle='#e0283c'; g.beginPath(); g.arc(18,15,6,0,PI2); g.globalAlpha=0.5+0.5*Math.sin(time*6); g.fill(); g.globalAlpha=1;
+  g.font='700 13px "Chakra Petch", sans-serif'; g.textBaseline='middle'; g.fillStyle='#fff'; g.fillText('LIVE',30,15);
+  g.fillStyle='#ffd6db'; g.fillText('CITYWIDE NOTICE  ·  ALL CHANNELS',78,15);
+  g.textAlign='right'; g.fillStyle='#e0283c'; g.fillText('CH ▮▮',W2-12,15); g.textAlign='left';
+  // name strip (lower third)
+  const ly=H2-78; g.fillStyle='#e0283c'; g.fillRect(16,ly,8,40); g.fillStyle='rgba(5,2,7,.9)'; g.fillRect(24,ly,300,40);
+  g.font='900 22px "Big Shoulders Display", Impact, sans-serif'; g.fillStyle='#fff'; g.fillText('THE REDACTOR',34,ly+15);
+  g.font='700 11px "Chakra Petch", sans-serif'; g.fillStyle='#ff9aa6'; g.fillText('ARCHITECT OF THE DRAIN  ·  POWER REVIEW BOARD',34,ly+31);
+  // ticker
+  g.fillStyle='#e0283c'; g.fillRect(0,H2-28,W2,28); g.fillStyle='#000'; g.fillRect(0,H2-28,86,28);
+  g.font='700 12px "Chakra Petch", sans-serif'; g.fillStyle='#fff'; g.fillText('BULLETIN',12,H2-14);
+  g.save(); g.beginPath(); g.rect(86,H2-28,W2-86,28); g.clip(); g.fillStyle='#160306';
+  const tw=g.measureText(BC.ticker).width, off=(time*70)%tw; for (let x=86-off;x<W2;x+=tw) g.fillText(BC.ticker,x+8,H2-14); g.restore();
+  // whole-picture scanlines
+  g.fillStyle='rgba(0,0,0,.22)'; for (let y=0;y<H2;y+=3) g.fillRect(0,y,W2,1);
+  return BC.cv;
+}
 function drawBroadcast(c){
-  const w=560, h=360, x=750-w/2, y=-170, im=CS_REDACTOR_IMG;
+  const w=BC.w, h=BC.h, x=750-w/2, y=-160, pic=composeBroadcast();
   ctx.save();
-  ctx.shadowColor='#e0283c'; ctx.shadowBlur=40; ctx.fillStyle='rgba(20,4,8,.88)'; ctx.fillRect(x,y,w,h); ctx.shadowBlur=0;
-  if (im.complete && im.naturalWidth){
-    const ih=h-20, iw=ih*im.naturalWidth/im.naturalHeight, ix=750-iw/2, iy=y+10, slices=c.glitch>0?12:1;
-    for (let i=0;i<slices;i++){ const sy=i/slices, off=c.glitch>0?(Math.random()-0.5)*60*c.glitch:0;
-      ctx.drawImage(im,0,sy*im.naturalHeight,im.naturalWidth,im.naturalHeight/slices,ix+off,iy+sy*ih,iw,ih/slices); }
-  }
-  ctx.fillStyle='rgba(224,40,60,.16)'; ctx.fillRect(x,y,w,h);
-  ctx.fillStyle='rgba(0,0,0,.25)'; for (let sy=y;sy<y+h;sy+=4) ctx.fillRect(x,sy,w,1.5);
-  ctx.strokeStyle='#e0283c'; ctx.lineWidth=3; ctx.strokeRect(x,y,w,h);
-  ctx.fillStyle='#e0283c'; ctx.font='700 14px "Chakra Petch", sans-serif'; ctx.textAlign='left'; ctx.fillText('● LIVE · CITYWIDE BROADCAST',x+10,y+h+20);
+  ctx.shadowColor='#e0283c'; ctx.shadowBlur=46; ctx.fillStyle='#050207'; ctx.fillRect(x-6,y-6,w+12,h+12); ctx.shadowBlur=0;
+  // torn-signal slices shift the whole broadcast sideways while the feed glitches
+  const slices=c.glitch>0?14:1;
+  for (let i=0;i<slices;i++){ const sy=i/slices, off=c.glitch>0?(Math.random()-0.5)*70*c.glitch:0;
+    ctx.drawImage(pic,0,sy*h,w,h/slices,x+off,y+sy*h,w,h/slices); }
+  if (c.glitch>0.4){ ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=0.25; ctx.drawImage(pic,x+6,y); ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over'; } // colour split
+  // bezel and the screen glare
+  ctx.strokeStyle='#e0283c'; ctx.lineWidth=3; ctx.strokeRect(x-6,y-6,w+12,h+12);
+  const gl=ctx.createLinearGradient(x,y,x+w,y+h); gl.addColorStop(0,'rgba(255,255,255,.07)'); gl.addColorStop(0.4,'rgba(255,255,255,0)'); ctx.fillStyle=gl; ctx.fillRect(x,y,w,h);
   ctx.restore();
 }
 $('#cutscene').addEventListener('pointerdown', e => { if (e.target.id==='csSkip') return; nextCutPanel(); });
