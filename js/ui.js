@@ -41,7 +41,7 @@ function startGame(){
 }
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
-function gameOver(){ state='over'; fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
+function gameOver(){ state='over'; playVoice('volt',"Not... yet..."); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
 function winRun(){ state='over'; run.won=true; commendWin(); banner(run.route && curDistrict()==='redactor' ? 'THE CITY\'S POWER RETURNS' : 'CITY SECURED'); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },1600); }
 
 /* ---------- Run results ---------- */

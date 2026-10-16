@@ -63,6 +63,7 @@ function maybeIntro(id, done, opt={}){
 
 let introDone=null, introStart=0, introTimer=null;
 function showIntro(card, done){
+  sfx(card.tag && card.tag.startsWith('Hero')?'intro_hero':'intro_villain',{vary:false});
   const el=$('#introCard'), art=$('#introArt');
   if (window.__volt && window.__volt.noIntro){ done && done(); return; }
   state='intro'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; powerHeld=false;

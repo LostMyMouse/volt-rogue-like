@@ -1,0 +1,174 @@
+{
+ "strike1": [
+  "fast whooshing punch landing with a sharp electric zap crackle, video game combat hit, very short",
+  0.5
+ ],
+ "strike2": [
+  "quick snappy punch impact with a spark of electricity, crisp, video game hit, very short",
+  0.5
+ ],
+ "strike3": [
+  "heavy finishing punch, big thud with a loud electric crack and burst, video game combat, short",
+  0.8
+ ],
+ "special": [
+  "chain lightning zap arcing between targets, crackling electric burst, sci-fi",
+  0.9
+ ],
+ "dash": [
+  "fast airy whoosh with a faint electric buzz, quick dodge dash, video game",
+  0.5
+ ],
+ "block": [
+  "solid metallic shield block clang, energy barrier absorbing a hit, short",
+  0.5
+ ],
+ "parry": [
+  "bright satisfying parry, sharp metallic ting with a reverberating shimmer and slow-motion whoosh, video game",
+  1.0
+ ],
+ "guardbreak": [
+  "energy shield shattering, glass-like crack and fizzle, heavy, short",
+  0.8
+ ],
+ "hurt": [
+  "player taking a hit, dull heavy body impact thud with a pained grunt, video game, short",
+  0.5
+ ],
+ "enemyhit": [
+  "punch hitting a body, meaty thump, short, video game",
+  0.5
+ ],
+ "enemydie": [
+  "enemy defeated, electric knockout zap and body falling thud, short",
+  0.7
+ ],
+ "bosshit": [
+  "heavy impact on armour, deep metallic clunk, short",
+  0.5
+ ],
+ "bossdown": [
+  "huge boss defeated, massive explosion boom with electric discharge and debris, cinematic",
+  2.5
+ ],
+ "overload": [
+  "massive electric overload blast, thunderclap shockwave with crackling electricity, epic",
+  1.6
+ ],
+ "heal": [
+  "healing pickup, soft bright chime with a warm sparkle",
+  0.7
+ ],
+ "shard": [
+  "crystal shard pickup, glassy magical twinkle chime",
+  0.7
+ ],
+ "ui_move": [
+  "soft short UI tick click, futuristic menu",
+  0.5
+ ],
+ "ui_select": [
+  "confident futuristic UI confirm blip, short",
+  0.5
+ ],
+ "ui_back": [
+  "soft futuristic UI cancel blip, lower pitch, short",
+  0.5
+ ],
+ "power_pick": [
+  "power-up acquired, rising electric shimmer with a heroic chime",
+  1.2
+ ],
+ "jump": [
+  "superhero leaping into the air, strong whoosh rising, wind rush",
+  0.9
+ ],
+ "land": [
+  "superhero landing on a rooftop, heavy thud with concrete crunch and electric crackle",
+  0.8
+ ],
+ "wave": [
+  "warning alarm stinger, two short urgent synth beeps",
+  0.8
+ ],
+ "clear": [
+  "victory stinger, short bright synth brass hit, area cleared",
+  1.5
+ ],
+ "intro_villain": [
+  "dramatic villain entrance stinger, deep brass hit with cymbal swell, cinematic",
+  2.0
+ ],
+ "intro_hero": [
+  "heroic radio comms open, short static crackle then a bright synth chime",
+  1.2
+ ],
+ "telegraph": [
+  "ominous rising charge-up whoosh, attack warning, short",
+  0.7
+ ],
+ "fire": [
+  "fiery explosion burst, roaring flames whoosh",
+  1.0
+ ],
+ "water": [
+  "powerful water geyser splash burst",
+  1.0
+ ],
+ "ice": [
+  "ice crystals forming and cracking, sharp frosty crunch",
+  0.9
+ ],
+ "sound": [
+  "deep bass sonic boom pulse from a giant speaker, wub",
+  0.9
+ ],
+ "acid": [
+  "acid splash sizzling and bubbling, corrosive hiss",
+  1.0
+ ],
+ "glass": [
+  "glass shattering into shards, bright crystal crash",
+  0.9
+ ],
+ "stone": [
+  "heavy stone slam, rocks crumbling and rumbling ground impact",
+  1.0
+ ],
+ "redact": [
+  "glitchy digital static burst, data corruption crackle, ominous",
+  0.9
+ ],
+ "beam": [
+  "sustained energy beam blast firing, laser hum",
+  1.2
+ ],
+ "broadcast": [
+  "hijacked TV broadcast signal, glitchy static and distorted electronic hum",
+  2.5
+ ],
+ "alarm": [
+  "base intruder alarm siren, pulsing",
+  2.5
+ ],
+ "lightning": [
+  "close lightning strike thunder crack, electric",
+  1.5
+ ],
+ "gate": [
+  "heavy blast door opening, hydraulic hiss and metal clunk",
+  2.0
+ ],
+ "typewriter": [
+  "single soft futuristic text blip, very short",
+  0.5
+ ],
+ "rain_loop": [
+  "steady night rain falling on a city rooftop, distant traffic, ambience, seamless loop",
+  20
+ ],
+ "fortress_loop": [
+  "quiet high-tech headquarters ambience at night, soft computer hums, distant rain on windows, seamless loop",
+  20
+ ]
+}

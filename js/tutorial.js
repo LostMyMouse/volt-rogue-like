@@ -47,7 +47,7 @@ function tutNext(){
   $('#tutStep').textContent=`Training · ${tut.i+1} of ${TUT_STEPS.length}`;
   $('#tutTitle').textContent=s.title;
   $('#tutText').innerHTML=inputMode==='touch'?s.touch:inputMode==='pad'?TUT_PAD[s.id]:s.kb;
-  $('#tutSay').textContent='“'+s.say+'”';
+  $('#tutSay').textContent='“'+s.say+'”'; playVoice('bastion', s.say);
   setPortrait($('#tutPortrait'),'bastion');
   const el=$('#tut'); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop');
 }

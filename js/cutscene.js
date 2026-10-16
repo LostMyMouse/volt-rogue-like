@@ -14,13 +14,13 @@ const VOLT_LAND = {x:850, y:228};
 
 // Each beat: where the camera goes, what happens as it starts, and the line spoken.
 const CUTSCENE = [
-  { scene:'roof', cam:{x:750,y:150,z:0.85}, go:c=>{ c.screen=1; c.glitch=0.6; addShake(4); },
+  { scene:'roof', cam:{x:750,y:150,z:0.85}, go:c=>{ c.screen=1; c.glitch=0.6; addShake(4); sfx('broadcast',{vary:false}); },
     who:'redactor', expr:'pleased', tag:'Every screen in the city', text:"Good evening. This is a courtesy notice regarding your heroes' powers." },
-  { cam:{x:750,y:130,z:1.05}, go:c=>{ c.glitch=1.2; c.flash=0.5; c.flashC='#e0283c'; addShake(10); },
+  { cam:{x:750,y:130,z:1.05}, go:c=>{ c.glitch=1.2; c.flash=0.5; c.flashC='#e0283c'; addShake(10); sfx('redact'); },
     who:'redactor', expr:'pleased', text:"They've been reviewed. Most of them failed." },
   { cam:{x:750,y:300,z:0.78}, go:c=>{ CS_VILLAINS.forEach((v,i)=>c.later(0.35+i*0.45,()=>csArrive(c,v))); },
     who:'redactor', text:"My associates will be managing your districts from now on. Please direct all complaints to no one." },
-  { cam:{x:750,y:470,z:1.15}, go:c=>{ c.later(0.25,()=>{ c.actors.push({id:'gravemark', x:750, y:540, anim:'intro', t0:time, drop:1}); }); c.later(0.55,()=>{ addShake(22); c.flash=0.35; c.flashC='#b56cff'; VFX_FX.push({type:'burst',el:'stone',x:750,y:540,R:150,t:0,dur:0.8,seed:rand(PI2)}); vfxBurstParticles('stone',750,540,150,2); }); },
+  { cam:{x:750,y:470,z:1.15}, go:c=>{ c.later(0.25,()=>{ c.actors.push({id:'gravemark', x:750, y:540, anim:'intro', t0:time, drop:1}); }); c.later(0.55,()=>{ addShake(22); c.flash=0.35; c.flashC='#b56cff'; sfx('stone'); VFX_FX.push({type:'burst',el:'stone',x:750,y:540,R:150,t:0,dur:0.8,seed:rand(PI2)}); vfxBurstParticles('stone',750,540,150,2); }); },
     who:'gravemark', expr:'stern', text:"And any heroes who object can take it up with me. On the roof." },
   { cam:{x:750,y:150,z:0.9}, go:c=>{ c.glitch=0.8; },
     who:'redactor', text:"Have a quiet night. You won't have a choice." },
@@ -33,9 +33,9 @@ const CUTSCENE = [
   { cam:{x:1150,y:640,z:1.3}, focus:'echo', card:'echo', tagline:'Psychic. Usually right. Insufferable about it.', who:'echo', text:"Can we skip to the part where I'm right? We need more people." },
   { cam:{x:260,y:250,z:1.3}, focus:'thorn', card:'thorn', tagline:'Ex-villain. Still earning trust.', who:'thorn', text:"People who aren't scared of him. That's a short list." },
   { cam:{x:760,y:190,z:1.45}, focus:'halo', card:'halo', tagline:"The world's number one hero. For now.", who:'halo', expr:'stern', text:"Then we make it longer." },
-  { cam:{x:742,y:420,z:0.95}, go:c=>{ c.alarm=1; }, focus:'patch', who:'patch', text:"Uh. Small thing. Someone's climbing the outside of the Fortress." },
+  { cam:{x:742,y:420,z:0.95}, go:c=>{ c.alarm=1; sfx('alarm',{vary:false}); }, focus:'patch', who:'patch', text:"Uh. Small thing. Someone's climbing the outside of the Fortress." },
   { cam:{x:742,y:360,z:1.1}, focus:'bastion', who:'bastion', expr:'stern', text:"Nobody climbs a sixty-storey wall." },
-  { cam:{x:820,y:200,z:1.5}, go:c=>{ c.alarm=0; c.volt={x:VOLT_LAND.x, t0:time}; c.later(0.7,()=>{ c.flash=0.6; c.flashC='#26bfff'; addShake(12); bolts.push({pts:[{x:VOLT_LAND.x,y:VOLT_LAND.y-160},{x:VOLT_LAND.x+20,y:VOLT_LAND.y-60},{x:VOLT_LAND.x,y:VOLT_LAND.y}],t:0,dur:0.3}); for (let i=0;i<20;i++) vfxEmit('ember',VOLT_LAND.x,VOLT_LAND.y,{vx:rand(-260,260),vy:rand(-120,120),vz:rand(60,220),g:600,life:.5,size:3,c:'#7fe0ff'}); }); },
+  { cam:{x:820,y:200,z:1.5}, go:c=>{ c.alarm=0; c.volt={x:VOLT_LAND.x, t0:time}; c.later(0.7,()=>{ c.flash=0.6; c.flashC='#26bfff'; addShake(12); sfx('lightning'); sfx('land'); bolts.push({pts:[{x:VOLT_LAND.x,y:VOLT_LAND.y-160},{x:VOLT_LAND.x+20,y:VOLT_LAND.y-60},{x:VOLT_LAND.x,y:VOLT_LAND.y}],t:0,dur:0.3}); for (let i=0;i<20;i++) vfxEmit('ember',VOLT_LAND.x,VOLT_LAND.y,{vx:rand(-260,260),vy:rand(-120,120),vz:rand(60,220),g:600,life:.5,size:3,c:'#7fe0ff'}); }); },
     focus:'volt', card:'volt', tagline:'Rookie hero. Very, very new.', who:'volt', expr:'pleased', text:"Hi! Sorry. Your front door has, like, nine locks." },
   { cam:{x:800,y:230,z:1.25}, focus:'volt', who:'volt', text:"I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help." },
   { cam:{x:1000,y:420,z:0.9}, focus:'echo', who:'echo', expr:'pleased', text:"Oh, I like them." },
@@ -49,7 +49,7 @@ const CUTSCENE = [
 function csArrive(c,v){
   c.actors.push({id:v.id, x:v.x, y:v.y, anim:'intro', t0:time});
   VFX_FX.push({type:'burst', el:v.el, x:v.x, y:v.y, R:80, t:0, dur:0.7, seed:rand(PI2)});
-  vfxBurstParticles(v.el, v.x, v.y, 80, 1.2); addShake(5);
+  vfxBurstParticles(v.el, v.x, v.y, 80, 1.2); addShake(5); sfx(v.el,{gap:0});
 }
 const portraitSrc = (id,expr) => expr && expr!=='neutral' ? `assets/portraits/${id}/${expr}-256.png` : `assets/portraits/${id}.png`;
 
@@ -82,13 +82,14 @@ function nextCutPanel(){
   $('#csTag').textContent = p.tag||''; $('#csTag').hidden=!p.tag;
   const pt=$('#csPortrait'); if (sp){ pt.src=portraitSrc(p.who,p.expr); pt.hidden=false; } else pt.hidden=true;
   $('#cutscene').classList.toggle('villain', !!sp && sp.role==='Villain');
+  playVoice(p.who, p.text);
   const t=$('#csText'); t.textContent=''; let n=0;
   cut.typing=setInterval(()=>{ n+=2; t.textContent=p.text.slice(0,n); if (n>=p.text.length){ clearInterval(cut.typing); cut.typing=null; } }, 26);
   $('#csCount').textContent=`${cut.i+1} / ${CUTSCENE.length}`;
 }
 function endCutscene(){
   if (!cut) return;
-  clearInterval(cut.typing); const done=cut.done; cut=null; VFX_P=[]; VFX_FX=[]; bolts=[]; shakeAmt=0;
+  clearInterval(cut.typing); stopVoice(); const done=cut.done; cut=null; VFX_P=[]; VFX_FX=[]; bolts=[]; shakeAmt=0;
   show('#cutscene',false); document.body.classList.remove('in-cut'); save.seenIntro=1; writeSave();
   done && done();
 }

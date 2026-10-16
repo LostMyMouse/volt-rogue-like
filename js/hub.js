@@ -167,7 +167,7 @@ function hubInteract(){
   if (state!=='hub' || !hubNear) return;
   if (hubNear.npc) return talkTo(hubNear.npc.id);
   const s=hubNear.spot, c=hubContext();
-  if (s.id==='gate'){ if (save.tutorialDone) startGame(); else startTutorial(true); return; }
+  if (s.id==='gate'){ sfx('gate'); if (save.tutorialDone) startGame(); else startTutorial(true); return; }
   if (s.id==='training'){ startTutorial(false); return; }
   if (s.id==='terminal'){ state='hubmenu'; keys.clear(); openFortress(); return; }
   if (s.id==='armoury'){ state='hubmenu'; keys.clear(); openStyles(); return; }
@@ -204,13 +204,13 @@ function showTalkPage(){
   if (pg.who){ const sp=SPEAKERS[pg.who]; setPortrait(pt,pg.who,pg.expression||'neutral'); pt.hidden=false; el.style.setProperty('--c',sp.c); $('#talkWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`; }
   else { pt.hidden=true; el.style.setProperty('--c',talk.spot.c); $('#talkWho').innerHTML=`<b>${talk.spot.name}</b>`; }
   el.classList.toggle('is-volt', pg.who==='volt');
-  $('#talkLine').textContent=pg.text; const key=inputMode==='touch'?'Tap':inputMode==='pad'?'A':'E'; $('#talkNext').textContent = key+(talk.i<talk.pages.length-1 ? ' · next' : ' · close');
+  $('#talkLine').textContent=pg.text; playVoice(pg.who, pg.text); const key=inputMode==='touch'?'Tap':inputMode==='pad'?'A':'E'; $('#talkNext').textContent = key+(talk.i<talk.pages.length-1 ? ' · next' : ' · close');
 }
 function advanceTalk(){
   if ((state!=='hubtalk' && state!=='dialogue') || !talk || performance.now()-talk.t<250) return;
   talk.t=performance.now();
   if (++talk.i<talk.pages.length){ showTalkPage(); return; }
-  const done=talk.done; show('#hubTalk',false); talk=null;
+  const done=talk.done; show('#hubTalk',false); talk=null; stopVoice();
   if (done){ done(); return; }
   state='hub'; hubNear=null; // the prompt reappears next frame
 }

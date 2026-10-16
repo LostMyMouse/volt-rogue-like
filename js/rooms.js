@@ -89,6 +89,7 @@ function updateExits(dt){
 }
 function jumpTo(x){
   if (!x || state!=='play') return;
+  sfx('jump');
   state='transit'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null;
   const out={top:[0,-1],left:[-1,0],right:[1,0]}[x.side];
   transit={t:0, ex:x, from:{x:player.x,y:player.y}, to:{x:x.x+out[0]*160, y:x.y+out[1]*160}, swapped:false};
@@ -122,7 +123,7 @@ function updateTransit(dt){
   }
 }
 function arrive(reward){
-  roomPhase='reward';
+  roomPhase='reward'; sfx('land');
   if (reward.type==='district'){ banner(DISTRICTS[curDistrict()].name.toUpperCase()); openDraft('boon'); }
   else if (reward.type==='boon') openDraft('boon',reward.hero);
   else if (reward.type==='tech') openDraft('tech');
@@ -217,7 +218,7 @@ const META=[
   {id:'scavenger', name:'Scavenger', desc:'+1% health pack drop chance per rank.', cost:[18,30,45]},
 ];
 function gainShards(n,x,y){
-  run.shards+=n; save.shards+=n; writeSave();
+  run.shards+=n; save.shards+=n; writeSave(); sfx('shard');
   texts.push({x,y,v:'+'+n+' ◆',t:0,big:true,c:COL.boon});
 }
 function buyMeta(id){

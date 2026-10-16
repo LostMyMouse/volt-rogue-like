@@ -59,7 +59,7 @@ function openDraftNow(kind, hero, reroll){
 function rerollDraft(){ if (state!=='draft' || run.rerolls<=0) return; run.rerolls--; openDraft(draftKind,draftHero,true); }
 function pickCard(i){
   if (state!=='draft' || !draftCards[i]) return;
-  const c=draftCards[i];
+  const c=draftCards[i]; sfx('power_pick');
   if (c.kind==='tech') takeTech(c.id); else takeBoon(c.id,c.rarity);
   const name=c.kind==='tech'?TECH.find(x=>x.id===c.id).name:BOON_BY_ID[c.id].name;
   show('#mDraft',false); state='play'; draftCards=[];

@@ -149,7 +149,7 @@ function update(dt){
   for (const k of packs){
     k.t+=dt;
     if (k.t>0.4 && p.hp<p.maxHp && Math.hypot(p.x-k.x,p.y-k.y)<p.r+16){
-      k.dead=true; const h=Math.min(PACK.heal,p.maxHp-p.hp); p.hp+=h;
+      k.dead=true; const h=Math.min(PACK.heal,p.maxHp-p.hp); p.hp+=h; sfx('heal');
       texts.push({x:p.x,y:p.y-28,v:'+'+Math.round(h),t:0,c:COL.heal}); sparks(k.x,k.y,-Math.PI/2,10,COL.heal,300,Math.PI);
     }
   }
@@ -159,12 +159,12 @@ function update(dt){
   updateIceWalls(dt);
 
   // The next wave drops in as the last enemy of this one is still standing.
-  if (roomPhase==='fight' && run.wavesLeft>0 && !isBossRoom() && enemies.filter(e=>!e.dead).length<=1){ run.wavesLeft--; spawnRoomWave(); banner('WAVE INCOMING',true); }
+  if (roomPhase==='fight' && run.wavesLeft>0 && !isBossRoom() && enemies.filter(e=>!e.dead).length<=1){ run.wavesLeft--; spawnRoomWave(); banner('WAVE INCOMING',true); sfx('wave'); }
   if (roomPhase==='fight' && !enemies.length){
     waveClearing=true; run.roomsCleared=(run.roomsCleared||0)+1;
-    if (isBossRoom()){ roomPhase='done'; banner('DISTRICT CLEAR',true); districtCleared(); return; }
+    if (isBossRoom()){ roomPhase='done'; banner('DISTRICT CLEAR',true); sfx('clear'); setTimeout(()=>bark('district',0.8),2600); districtCleared(); return; }
     roomPhase='cleared'; clearT=0.9;
-    banner('CLEAR',true);
+    banner('CLEAR',true); sfx('clear',{vol:0.6});
   }
   if (roomPhase==='cleared'){ clearT-=dt; if (clearT<=0){ openExits(); roomPhase='exits'; } }
   else if (roomPhase==='exits') updateExits(dt);

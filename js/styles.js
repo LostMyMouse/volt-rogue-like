@@ -246,7 +246,7 @@ function stainAtColor(x,y,r,c){ decals.push({x,y,r,pts:Array.from({length:9},()=
 function doStrike(){
   const p=player; if (state!=='play'||p.strikeCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   STYLE().strike();
-  if (p.strikeCd>0) playerAnim(['strike1','strike2','strike3'][(p.combo||0)%3]);
+  if (p.strikeCd>0){ const n=(p.combo||0)%3; playerAnim(['strike1','strike2','strike3'][n]); sfx(['strike1','strike2','strike3'][n],{vol:0.8}); }
 }
 let powerHeld=false;
 function doPower(){
@@ -254,6 +254,7 @@ function doPower(){
   if (state!=='play'||p.powerCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   if (p.suppressed){ texts.push({x:p.x,y:p.y-40,v:'SUPPRESSED',t:0,c:'#e0283c'}); return; }
   STYLE().powerPress();
+  if (p.powerCd>0 || p.charging) sfx('special');
   if (typeof tut!=='undefined' && tut) tut.usedSpecial=true;
   if (p.powerCd>0 || p.charging) playerAnim('strike2');
 }

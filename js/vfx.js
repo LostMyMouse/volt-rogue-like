@@ -223,6 +223,7 @@ const vfxOwnsActive = s => !!(s && VFX_ACTIVE_PRIMS.has(s.prim) && EL(s.src));
 // Called the moment an attack goes live.
 function vfxOnActivate(e,a){
   const s=a.step, el=EL(s.src); if (!el) return;
+  sfx(s.prim==='jet'||s.prim==='beams'?(el==='water'?'water':'beam'):s.prim==='iceWall'?'ice':el,{vol:0.85,gap:80});
   const add=(o)=>VFX_FX.push(Object.assign({t:0,el,seed:rand(PI2)},o));
   if (s.prim==='disks'){ for (const sp of diskSpots(a)){ add({type:'burst',x:sp.x,y:sp.y,R:s.radius*U,dur:el==='water'?0.75:0.55}); vfxBurstParticles(el,sp.x,sp.y,s.radius*U); } }
   else if (s.prim==='selfDisk'){ add({type:'burst',x:a.origin.x,y:a.origin.y,R:s.radius*U,dur:0.6}); vfxBurstParticles(el,a.origin.x,a.origin.y,s.radius*U,1.6); }

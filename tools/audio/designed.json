@@ -1,0 +1,74 @@
+{
+ "volt": {
+  "voice_id": "wDDWC7WfJ1pBxLK8kwjh",
+  "take": 0,
+  "previews": [
+   "wDDWC7WfJ1pBxLK8kwjh",
+   "AS76NweK1BrzCSoeZ1eO",
+   "cB4LwifdN6BKoNYEvDnA"
+  ]
+ },
+ "echo": {
+  "voice_id": "ds3hyeEUXIRE3RY4TPgO",
+  "take": 0,
+  "previews": [
+   "ds3hyeEUXIRE3RY4TPgO",
+   "4kzdwW8rwXS4wi6xXK2u",
+   "Y5YV8HtWsJXkknTppIP7"
+  ]
+ },
+ "bastion": {
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "take": 0,
+  "previews": [
+   "SRAtZ2ZOED030czOR8WQ",
+   "YYKdYyfPDc93CICmHMbF",
+   "HVvUlkSG0bz22bxRddbp"
+  ]
+ },
+ "kilnheart": {
+  "voice_id": "baYOFxyfxoheLyNmDMgM",
+  "take": 0,
+  "previews": [
+   "baYOFxyfxoheLyNmDMgM",
+   "yWRPuhQv7d5rFyrtj0GI",
+   "AsbJu8rOEDFWPbdWPnND"
+  ]
+ },
+ "bellwether": {
+  "voice_id": "f6NgTcvqvJ4x51XKsgSb",
+  "take": 0,
+  "previews": [
+   "f6NgTcvqvJ4x51XKsgSb",
+   "OQeggN6ewOZnZESLiSDE",
+   "AJuNP3sFJckEVT7VAAqm"
+  ]
+ },
+ "verdigris": {
+  "voice_id": "f09arAjvG7s0KuHjUXj9",
+  "take": 0,
+  "previews": [
+   "f09arAjvG7s0KuHjUXj9",
+   "dX0O1rTytpsoRUeNHiGE",
+   "CqTgJpNmoZrYYHDvnrUv"
+  ]
+ },
+ "undertow": {
+  "voice_id": "rkZNMkbt1gMXMe0Rp27U",
+  "take": 0,
+  "previews": [
+   "rkZNMkbt1gMXMe0Rp27U",
+   "WYvHjR7VCYhgUOYk5lCk",
+   "VNqCxFvlCUxf2ZY04q2p"
+  ]
+ },
+ "gravemark": {
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "take": 0,
+  "previews": [
+   "UrBeqP9db3vlQVM3Tmfu",
+   "HkC69DPB7l3DuoaEsr3A",
+   "cHjVlze8nWzZeHDjM83m"
+  ]
+ }
+}

@@ -13,7 +13,7 @@ const PORTRAIT_TOUCH = matchMedia('(orientation: portrait) and (pointer: coarse)
 let lastT=performance.now();
 function frame(now){
   const dt=Math.min(0.033,(now-lastT)/1000); lastT=now;
-  pollPads(dt);
+  pollPads(dt); audioTick(dt);
   if (state==='play' && PORTRAIT_TOUCH.matches) openPause(); // the rotate prompt is up: freeze the fight
   if (state==='play'){
     time+=dt;

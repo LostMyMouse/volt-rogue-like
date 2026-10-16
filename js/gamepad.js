@@ -25,7 +25,7 @@ function menuLayer(){ for (const id of MENU_LAYERS){ const el=$(id); if (el && !
 function menuItems(layer){
   return [...layer.querySelectorAll('button, input[type=range]')].filter(b=>!b.disabled && !b.hidden && b.offsetParent!==null && b.getAttribute('aria-disabled')!=='true' || (b.classList.contains('style-card') && b.offsetParent!==null));
 }
-function focusItem(el){ if (!el) return; el.focus({preventScroll:false}); el.scrollIntoView({block:'nearest'}); }
+function focusItem(el){ if (!el) return; sfx('ui_move',{vol:0.5,max:0.15}); el.focus({preventScroll:false}); el.scrollIntoView({block:'nearest'}); }
 function menuMove(dx,dy){
   const layer=menuLayer(); if (!layer) return;
   const items=menuItems(layer); if (!items.length) return;
