@@ -102,7 +102,7 @@ function fillCodex(){
   }
   const e=CODEX.find(x=>x.id===codexSel), sp=SPEAKERS[e.id], n=codexUnlocked(e), page=$('#codexPage');
   page.style.setProperty('--c', sp.c);
-  page.innerHTML = `<div class="codex-head"><img src="assets/portraits/${e.id}.png" alt=""><div><span class="tag">${e.id==='volt'?'Rookie hero':sp.role}</span><h3>${sp.name}</h3></div></div>`
+  page.innerHTML = `<div class="codex-head"><img src="assets/portraits/${e.id}.png" alt=""><div><span class="tag">${e.id==='volt'?`Rookie hero · ${sp.pronouns}`:sp.role}</span><h3>${sp.name}</h3></div></div>`
     + e.notes.map((nt,i)=> i<n ? `<p>${nt.text}</p>` : i===n ? `<p class="codex-locked">More to write here. ${e.group==='Villains'?'Keep fighting them.':e.id==='volt'?'Keep going.':'Keep talking to them.'}</p>` : '').join('');
 }
 $('#btnCodexClose').addEventListener('click', closeCodex);

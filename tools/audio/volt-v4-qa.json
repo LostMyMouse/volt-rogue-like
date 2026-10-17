@@ -1,0 +1,495 @@
+[
+ {
+  "who": "volt",
+  "text": "Hi! Sorry. Your front door has, like, nine locks.",
+  "heard": "Hi. Sorry. Your front door has like nine locks",
+  "sim": 1.0,
+  "wps": 2.33,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'm Volt. I'm a hero. Well... rookie hero. I saw the broadcast, and I want to help.",
+  "heard": "I'm Volt. I'm a hero. Well, rookie hero. I saw the broadcast, and I want to help",
+  "sim": 1.0,
+  "wps": 2.5,
+  "max_gap": 0.74,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "echo",
+  "text": "Oh, I like him.",
+  "heard": "Oh, I like him",
+  "sim": 1.0,
+  "wps": 5.41,
+  "max_gap": 0.14,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "The wall had opinions.",
+  "heard": "The wall had opinions.",
+  "sim": 1.0,
+  "wps": 2.78,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Right now? I just climbed sixty floors.",
+  "heard": "Right now? I just climbed 60 floors",
+  "sim": 0.86,
+  "wps": 2.55,
+  "max_gap": 0.52,
+  "missing": [
+   "sixty"
+  ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Halo? THE Halo? Okay. Okay. Be cool. I'm being cool.",
+  "heard": "Halo? The Halo? Okay, okay, be cool. I'm being cool",
+  "sim": 1.0,
+  "wps": 1.68,
+  "max_gap": 0.84,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "...Yep.",
+  "heard": "Yep",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Cool. Great. I'll hold... a different line.",
+  "heard": "Cool. Great. I'll hold a different line",
+  "sim": 1.0,
+  "wps": 2.07,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Do you, though?",
+  "heard": "Do you though?",
+  "sim": 1.0,
+  "wps": 5.36,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Glad you switched.",
+  "heard": "Glad you switched",
+  "sim": 1.0,
+  "wps": 3.49,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'll try to break it less.",
+  "heard": "I'll try to break it less",
+  "sim": 1.0,
+  "wps": 4.92,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "I prefer 'rookie'. Sounds more official.",
+  "heard": "I prefer rookie. Sounds more official",
+  "sim": 0.83,
+  "wps": 2.36,
+  "max_gap": 0.62,
+  "missing": [
+   "'rookie'"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "They... get warm?",
+  "heard": "They get warm?",
+  "sim": 1.0,
+  "wps": 1.81,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'm here to stop you.",
+  "heard": "I'm here to stop you",
+  "sim": 1.0,
+  "wps": 4.72,
+  "max_gap": 0.12,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Is it a long set?",
+  "heard": "Is it a long set?",
+  "sim": 1.0,
+  "wps": 5.81,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "That's somehow worse.",
+  "heard": "That's somehow worse",
+  "sim": 1.0,
+  "wps": 2.31,
+  "max_gap": 0.2,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Noted. Moving a lot. Got it.",
+  "heard": "Noted. Moving a lot. Got it",
+  "sim": 1.0,
+  "wps": 2.46,
+  "max_gap": 0.58,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "How about I just hit all of you?",
+  "heard": "How about I just hit all of you?",
+  "sim": 1.0,
+  "wps": 4.6,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "I didn't really pick it. I kind of just... landed here.",
+  "heard": "I didn't really pick it. I kinda just landed here",
+  "sim": 0.86,
+  "wps": 2.69,
+  "max_gap": 0.64,
+  "missing": [
+   "kind",
+   "of"
+  ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Another... what?",
+  "heard": "Another what?",
+  "sim": 1.0,
+  "wps": 1.61,
+  "max_gap": 0.56,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Can you at least spell it right? It's V-O-L-T.",
+  "heard": "Can you at least spell it right? It's V-O-L-T",
+  "sim": 1.0,
+  "wps": 2.17,
+  "max_gap": 0.52,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Complaint? From who?",
+  "heard": "A complaint? From who?",
+  "sim": 0.86,
+  "wps": 2.6,
+  "max_gap": 0.48,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Yeah, I'm going to have to decline.",
+  "heard": "Yeah, I'm going to have to decline",
+  "sim": 1.0,
+  "wps": 3.33,
+  "max_gap": 0.52,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",
+  "heard": "Hi. Yes, that's me, Volt. Huge fan. I mean, hi",
+  "sim": 1.0,
+  "wps": 1.82,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Oh. Okay. That's... fair.",
+  "heard": "Oh, okay. That's fair",
+  "sim": 1.0,
+  "wps": 1.46,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "That's me! Hi. Nice table.",
+  "heard": "That's me. Hi. Nice table",
+  "sim": 1.0,
+  "wps": 2.16,
+  "max_gap": 0.54,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I wasn't going to\u2014",
+  "heard": "I wasn't going to",
+  "sim": 1.0,
+  "wps": 4.26,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Hi! I'm Vol\u2014",
+  "heard": "Hi, I'm Volt",
+  "sim": 0.67,
+  "wps": 2.38,
+  "max_gap": 0.44,
+  "missing": [
+   "vol"
+  ],
+  "flags": [
+   "wording/pronunciation"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "You read minds. That's not reading a file.",
+  "heard": "You read minds. That's not reading a file",
+  "sim": 1.0,
+  "wps": 3.08,
+  "max_gap": 0.42,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Hi. I'm\u2014",
+  "heard": "Hi, I'm",
+  "sim": 1.0,
+  "wps": 2.08,
+  "max_gap": 0.5,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I wasn't going to ask.",
+  "heard": "I wasn't going to ask",
+  "sim": 1.0,
+  "wps": 4.39,
+  "max_gap": 0.12,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "In that order?",
+  "heard": "In that order?",
+  "sim": 1.0,
+  "wps": 4.69,
+  "max_gap": 0.08,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "A better me?",
+  "heard": "A better me?",
+  "sim": 1.0,
+  "wps": 4.41,
+  "max_gap": 0.18,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Nice!",
+  "heard": "Nice!",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Got it!",
+  "heard": "Got it",
+  "sim": 1.0,
+  "wps": 5.56,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Not today!",
+  "heard": "Not today",
+  "sim": 1.0,
+  "wps": 3.23,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Ow.",
+  "heard": "Ow!",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Okay, ow!",
+  "heard": "Okay. Ow!",
+  "sim": 1.0,
+  "wps": 1.54,
+  "max_gap": 0.42,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "That's gonna bruise.",
+  "heard": "That's gonna bruise",
+  "sim": 1.0,
+  "wps": 2.59,
+  "max_gap": 0.06,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "I'm fine. I'm fine!",
+  "heard": "I'm fine. I'm fine!",
+  "sim": 1.0,
+  "wps": 2.22,
+  "max_gap": 0.54,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Overload!",
+  "heard": "Overload!",
+  "sim": 1.0,
+  "wps": 0,
+  "max_gap": 0,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Light 'em up!",
+  "heard": "Light 'em up",
+  "sim": 1.0,
+  "wps": 5.36,
+  "max_gap": 0.12,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Yes! Did everyone see that?",
+  "heard": "Yes! Did everyone see that?",
+  "sim": 1.0,
+  "wps": 2.87,
+  "max_gap": 0.36,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "One district back!",
+  "heard": "One district back",
+  "sim": 1.0,
+  "wps": 2.83,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Not... yet...",
+  "heard": "Not yet",
+  "sim": 1.0,
+  "wps": 1.47,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Here we go!",
+  "heard": "Here we go",
+  "sim": 1.0,
+  "wps": 5.0,
+  "max_gap": 0.04,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Let's do this.",
+  "heard": "Let's do this!",
+  "sim": 1.0,
+  "wps": 4.05,
+  "max_gap": 0.1,
+  "missing": [],
+  "flags": []
+ }
+]

@@ -68,7 +68,7 @@ const SPEAKERS = {
   undertow:{name:'Undertow', role:'Villain', c:'#7fd8ff'},
   redactor:{name:'The Redactor', role:'Villain', c:'#e0283c'},
   patch:{name:'Patch', role:'Fortress engineer', c:COL.heal},
-  volt:{name:'Volt', role:'Rookie hero', c:COL.volt},
+  volt:{name:'Volt', role:'Rookie hero', gender:'male', pronouns:'he/him', c:COL.volt},
 };
 const QUOTES = {
   won: [['halo',"District by district, and Gravemark in the dirt. The city noticed tonight. So did I."],['bastion',"Clean work, rookie. Don't let it go to your head. The next roof won't be so kind."],['echo',"Okay. Fine. That was impressive. Don't tell anyone I said that."]],
