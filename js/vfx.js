@@ -6,6 +6,8 @@
 'use strict';
 
 const ELEMENTS = {
+  electric:{core:'#ffffff',mid:'#26bfff',deep:'#124b80',glow:'#7fe0ff'},
+  threat:{core:'#fff1dd',mid:'#ff5a45',deep:'#55202b',glow:'#ff5a45'},
   water: { core:'#effcff', mid:'#58ccff', deep:'#1a5fa8', glow:'#7fd8ff' },
   ice:   { core:'#ffffff', mid:'#bfeeff', deep:'#5aa9d6', glow:'#cff4ff' },
   fire:  { core:'#fff2b8', mid:'#ff9a2e', deep:'#b8360c', glow:'#ff7a1a' },
@@ -70,8 +72,28 @@ function vfxUpdate(dt){
     else vfxEmit('ember',x,y,{vz:rand(20,90),g:-40,life:rand(.5,.9),size:rand(2,3),c:ELEMENTS.fire.mid});
   }
 }
+// A shared hand-inked accent for every cast/punch: angular speed strokes and printed halftone dots.
+// Kept local to the attacker so the existing telegraph boundaries and safe gaps remain readable.
+function comicAttack(x,y,aim,r,el='electric'){
+  if(VFX_FX.length>140)VFX_FX.splice(0,VFX_FX.length-120);
+  VFX_FX.push({type:'comic',x,y,aim,R:r,el,t:0,dur:.28,seed:rand(PI2)});
+}
+function drawComicAttack(f){
+  const k=clamp(f.t/f.dur,0,1),E=ELEMENTS[f.el]||ELEMENTS.electric;
+  ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.aim||0);ctx.globalAlpha=(1-k)*.85;
+  ctx.lineJoin='miter';ctx.lineCap='butt';
+  for(let i=0;i<7;i++){
+    const a=-1.0+i/6*2,r=f.R*(.55+.12*(i%3)),outer=r+(14+14*(i%2))*(.5+k);
+    ctx.beginPath();ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r*.75);ctx.lineTo(Math.cos(a-.045)*outer,Math.sin(a-.045)*outer*.75);ctx.lineTo(Math.cos(a+.045)*outer,Math.sin(a+.045)*outer*.75);ctx.closePath();
+    ctx.fillStyle=E.core;ctx.strokeStyle=COL.ink;ctx.lineWidth=3;ctx.stroke();ctx.fill();
+    ctx.strokeStyle=E.mid;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r*.75);ctx.lineTo(Math.cos(a)*(outer-4),Math.sin(a)*(outer-4)*.75);ctx.stroke();
+  }
+  ctx.fillStyle=E.mid;ctx.globalAlpha=(1-k)*.35;
+  for(let i=0;i<15;i++){const a=f.seed+i*2.399,r=f.R*(.25+.04*i);ctx.beginPath();ctx.arc(Math.cos(a)*r,Math.sin(a)*r*.65,1.2+(i%3)*.55,0,PI2);ctx.fill();}
+  ctx.restore();
+}
 // Ground effects (splashes, scorch, swipes) draw under the characters; particles draw over them.
-function vfxDrawGround(){ for (const f of VFX_FX) drawFxEffect(f); }
+function vfxDrawGround(){ for (const f of VFX_FX) if(f.type==='comic')drawComicAttack(f);else drawFxEffect(f); }
 function vfxDraw(){
   for (const q of VFX_P){
     const k=clamp(q.life/q.max,0,1), x=q.x, y=q.y-q.z;
@@ -223,6 +245,7 @@ const vfxOwnsActive = s => !!(s && VFX_ACTIVE_PRIMS.has(s.prim) && EL(s.src));
 // Called the moment an attack goes live.
 function vfxOnActivate(e,a){
   const s=a.step, el=EL(s.src); if (!el) return;
+  comicAttack(e.x,e.y,a.aim,Math.min(90,e.r+25),el);
   sfx(s.prim==='jet'||s.prim==='beams'?(el==='water'?'water':'beam'):s.prim==='iceWall'?'ice':el,{vol:0.85,gap:80});
   const add=(o)=>VFX_FX.push(Object.assign({t:0,el,seed:rand(PI2)},o));
   if (s.prim==='disks'){ for (const sp of diskSpots(a)){ add({type:'burst',x:sp.x,y:sp.y,R:s.radius*U,dur:el==='water'?0.75:0.55}); vfxBurstParticles(el,sp.x,sp.y,s.radius*U); } }

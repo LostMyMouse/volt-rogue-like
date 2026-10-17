@@ -4,8 +4,14 @@
 const $ = s => document.querySelector(s);
 const cv = $('#game'), ctx = cv.getContext('2d');
 let W = 0, H = 0, DPR = 1;
-function resize(){ DPR = Math.min(window.devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR); }
+function resize(){ DPR = Math.min(window.devicePixelRatio || 1, 3); W = innerWidth; H = innerHeight; cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR); }
 addEventListener('resize', resize); resize();
+function combatViewport(){
+  const training=typeof tut!=='undefined'&&tut&&typeof inputMode!=='undefined'&&inputMode==='touch';
+  if(!training)return {x:0,y:0,w:W,h:H,cx:W/2,cy:H/2};
+  const panel=$('#tut'),top=Math.min(H*.38,panel.getBoundingClientRect().bottom+10),bottom=20;
+  return {x:0,y:top,w:W,h:H-top-bottom,cx:W*.42,cy:top+(H-top-bottom)/2};
+}
 
 const PI2 = Math.PI*2;
 const clamp = (v,a,b) => v<a?a:v>b?b:v;

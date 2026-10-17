@@ -1,0 +1,63 @@
+{
+  "tool": "Built-in Imagegen",
+  "shared_prompt": "Use case: stylized-concept. Production in-game sprite atlas with genuine transparent alpha background. Crisp hand-inked COMIC BOOK cel illustration, broad readable shapes, clean anti-aliased edges, detailed costume, NOT pixel art, no dithering. EXACTLY EIGHT COLUMNS by FOUR ROWS with equal square cells, landscape 2:1 canvas, around 3072x1536. One complete full body per cell, SAME character, same costume, same scale and lighting. Row 1 SOUTH/front, row 2 EAST/right profile, row 3 NORTH/back, row 4 WEST/left profile. Steep three-quarter TOP-DOWN camera matches top-down action game in every tile. Feet on 90% cell baseline, character occupies 72% cell height with clear gutters; every limb stays in its tile. Columns: 1 neutral ready stance; 2 walk/run left leg forward; 3 walk/run right leg forward; 4 attack windup; 5 full attack extension or power cast; 6 defensive braced stance; 7 hurt recoil; 8 low advancing dash/lunge. Keep all tiles separated with generous transparent margins. No text, grid lines, labels, floor, scenery, shadow blobs, or glow clouds. Reference image defines identity, palette, anatomy and costume; preserve those, draw full body. Original game character.",
+  "characters": [
+    {
+      "id": "halo",
+      "description": "A tall athletic Black woman hero with close-cropped silver hair, high white collar, ivory-and-gold fitted superhero suit, restrained radiant gold halo ring. Calm commanding presence."
+    },
+    {
+      "id": "bastion",
+      "description": "A broad muscular older man military hero, short grey hair, stern weathered face, heavy olive-grey tactical armour, huge reinforced gauntlets, dull steel-blue accents."
+    },
+    {
+      "id": "echo",
+      "description": "An androgynous young adult psychic hero, slim athletic build, black asymmetrical undercut with violet streak, luminous violet circular ear comm, dark fitted suit with high white collar and purple lining."
+    },
+    {
+      "id": "thorn",
+      "description": "A tall lean adult man former villain, shoulder-length brown hair, short beard, layered dark-green organic armour, restrained ivy growing over one shoulder, leaf-green luminous details."
+    },
+    {
+      "id": "patch",
+      "description": "An athletic adult woman engineer with medium brown skin, black curly hair tied back, amber goggles on head, large grey teal headset, blue-grey utility coveralls, orange harness, tool belt."
+    },
+    {
+      "id": "kilnheart",
+      "description": "A powerful stocky middle-aged woman foundry villain, dark hair tied up, orange glowing safety visor, heavy dark industrial furnace armour, shoulder vents and massive mechanical forearm gauntlets glowing molten orange."
+    },
+    {
+      "id": "bellwether",
+      "description": "A tall Black woman sonic diva villain with close-cropped hair, gold earrings, black and gold stage armour with large speaker modules on shoulders, confident commanding posture."
+    },
+    {
+      "id": "verdigris",
+      "description": "An eerie androgynous plant-and-corroded-copper armoured villain, full angular pointed copper mask with slit acid-green eyes, layered ragged leaf cloak, tendrils, controlled acid-green details."
+    },
+    {
+      "id": "glasswake",
+      "description": "An athletic woman mirror villain, swept asymmetrical white hair with pink ends, black angular full eye visor with magenta slits, black geometric bodysuit with polished glass shards and vivid magenta trim."
+    },
+    {
+      "id": "undertow",
+      "description": "A broad muscular middle-aged male dockworker villain, wet messy black hair, rugged angry face, enormous deep-sea industrial pressure suit and cyan circular valves, ice gauntlets."
+    },
+    {
+      "id": "gravemark",
+      "description": "A huge ancient humanoid stone golem, angular charcoal rock plates, broad massive shoulders with floating stone arcs, narrow vertical purple face slit, restrained purple fissures. Heavy stone anatomy."
+    },
+    {
+      "id": "redactor",
+      "description": "A tall slender male main villain in tailored black angular long coat with crimson lining, bone-white faceless rectangular mask with one thin vertical red slit, elegant gloved hands, floating black rectangular shield slabs behind shoulders. Human quiet menace."
+    },
+    {
+      "id": "rusher",
+      "description": "A lean threatening hooded street fighter in dark charcoal fitted armour, red-orange angular hood, faceless dark mask and coral-orange sleeve details, carries a short metal pipe. Generic mob enemy."
+    },
+    {
+      "id": "needle",
+      "description": "A compact hovering hostile drone, angular black and dark-brass wing panels, central glowing amber optic, twin slim needle cannons. No human body, no legs. Mechanical silhouette."
+    }
+  ],
+  "volt_prompt": "Volt: original young adult male electric hero; black/silver crest, blue visor, black electric-blue and white suit. Eight columns by four directions; idle, two runs, windup, strike, block, hurt, dash. See shared prompt for technical specification."
+}

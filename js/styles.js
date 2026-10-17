@@ -246,7 +246,7 @@ function stainAtColor(x,y,r,c){ decals.push({x,y,r,pts:Array.from({length:9},()=
 function doStrike(){
   const p=player; if (state!=='play'||p.strikeCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   STYLE().strike();
-  if (p.strikeCd>0){ const n=(p.combo||0)%3; playerAnim(['strike1','strike2','strike3'][n]); sfx(['strike1','strike2','strike3'][n],{vol:0.8}); }
+  if (p.strikeCd>0){ const n=(p.combo||0)%3; playerAnim(['strike1','strike2','strike3'][n]); sfx(['strike1','strike2','strike3'][n],{vol:0.8}); comicAttack(p.x,p.y,p.aim,42+n*8); }
 }
 let powerHeld=false;
 function doPower(){
@@ -256,7 +256,7 @@ function doPower(){
   STYLE().powerPress();
   if (p.powerCd>0 || p.charging) sfx('special');
   if (typeof tut!=='undefined' && tut) tut.usedSpecial=true;
-  if (p.powerCd>0 || p.charging) playerAnim('strike2');
+  if (p.powerCd>0 || p.charging){ playerAnim('strike2'); comicAttack(p.x,p.y,p.aim,72); }
 }
 function releasePower(){
   powerHeld=false;

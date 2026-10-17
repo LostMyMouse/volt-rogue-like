@@ -69,11 +69,12 @@ function update(dt){
   for (const e of enemies){
     if (e.dead) continue;
     if (e.spawnT>0){ e.spawnT-=dt; continue; }
-    e.flashT-=dt; e.stunT-=dt; tickStatus(e,dt); if (e.dead) continue;
+    e.flashT-=dt; e.stunT-=dt; tickStatus(e,dt); tickComposure(e,dt); if (e.dead) continue;
     const dx=p.x-e.x, dy=p.y-e.y, d=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx);
     e.mx=0; e.my=0;
     if (e.isBud){ updateBud(e,dt); continue; }
     if (e.tutDummy){ e.vx=e.vy=0; continue; } // training dummy: stands still and takes hits
+    if (typeof tut!=='undefined' && tut && e.tutWeak && tut.age<tut.readyAt){ e.vx=e.vy=0; continue; }
     if (e.isDecoy || e.isIce || e.isPlate){ e.flashT-=dt; continue; }
     if (isSpecBoss(e)) bossUpdate(e,dt);
     else if (e.stunT<=0){
@@ -85,11 +86,11 @@ function update(dt){
         } else if (e.state==='windup'){
           // Tracks the player until the last 0.18s, then commits: that's the dodge window.
           e.timer-=dt; if (e.timer>0.18){ e.lungeA=a; e.face=a; }
-          if (e.timer<=0){ e.state='swing'; e.timer=RUSH.swingT; e.hitDone=false; sparks(e.x,e.y,e.lungeA,6,COL.threat,380,.9); }
+          if (e.timer<=0){ e.state='swing'; e.timer=RUSH.swingT; e.hitDone=false; sparks(e.x,e.y,e.lungeA,6,COL.threat,380,.9); comicAttack(e.x,e.y,e.lungeA,45,'threat'); }
         } else if (e.state==='swing'){
           const s=RUSH.step*T.enemySpeed; e.mx=Math.cos(e.lungeA)*s; e.my=Math.sin(e.lungeA)*s; e.timer-=dt;
           if (!e.hitDone && d<RUSH.reach+p.r && (d<e.r+p.r+4 || Math.abs(angDiff(a,e.lungeA))<RUSH.arc/2)){ if (hurtPlayer(e.elite?17:12,e.lungeA,'rusher',{attacker:e})) e.hitDone=true; }
-          if (e.timer<=0){ e.state='recover'; e.timer=0.6; }
+          if (e.timer<=0){ e.state='recover'; e.timer=e.tutWeak?2.4:0.6; }
         } else {
           e.timer-=dt; if (e.timer<=0){ e.state='chase'; e.timer=rand(.4,1); }
         }
@@ -105,7 +106,8 @@ function update(dt){
           e.mx*=0.15; e.my*=0.15; e.timer-=dt; e.aimD=d;
           if (e.timer<=0){
             const s=330*T.enemySpeed, fa=e.face;
-            bullets.push({x:e.x+Math.cos(fa)*16,y:e.y+Math.sin(fa)*16,vx:Math.cos(fa)*s,vy:Math.sin(fa)*s,r:7,dead:false,t:0});
+            bullets.push({x:e.x+Math.cos(fa)*16,y:e.y+Math.sin(fa)*16,vx:Math.cos(fa)*s,vy:Math.sin(fa)*s,r:7,dead:false,t:0,owner:e,src:'needle'});
+            comicAttack(e.x,e.y,fa,35,'sound');
             sparks(e.x+Math.cos(fa)*16,e.y+Math.sin(fa)*16,fa,5,COL.amber,300,.4);
             e.state='move'; e.timer=rand(1.6,2.8);
           }

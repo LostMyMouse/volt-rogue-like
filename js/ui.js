@@ -107,9 +107,11 @@ function setPortrait(el,who,expression='neutral'){
   el.setAttribute('aria-label',sp.name+' — '+expression);
   if(!PORTRAIT_FILES.includes(who)){el.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[who]||BUST}</svg>`;return;}
   const img=new Image();
-  img.onload=()=>{if(el.dataset.portrait!==token)return;el.innerHTML='';el.style.backgroundImage=`url(${img.src})`;el.classList.add('has-img');};
-  img.onerror=()=>{if(el.dataset.portrait===token)el.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[who]||BUST}</svg>`;};
-  img.src=expression==='neutral'?`assets/portraits/${who}.png`:`assets/portraits/${who}/${expression}-256.png`;
+  img.alt=sp.name;img.decoding='async';img.className='comms-portrait-art';
+  const base=`assets/portraits/${who}.png?v=2026-10-18`;
+  img.onload=()=>{if(el.dataset.portrait!==token)return;el.replaceChildren(img);el.classList.add('has-img');};
+  img.onerror=()=>{if(el.dataset.portrait!==token)return;if(img.getAttribute('src')!==base){img.src=base;return;}el.textContent=sp.name;};
+  img.src=expression==='neutral'?base:`assets/portraits/${who}/${expression}-256.png?v=2026-10-18`;
 }
 // Rooftops plus villain rooms in a full run with the villains built so far.
 function routeLength(){ const p=Math.min(DISTRICT_PICKS,builtPool().length); return p*(ROOMS_PER_DISTRICT+1)+(BOSSES.gravemark?ROOMS_PER_DISTRICT+1:0)+(BOSSES.redactor?3:0) || 15; }
@@ -166,6 +168,8 @@ function refreshSplash(){
   $('#splashPressWord').textContent = inputMode==='touch' ? 'Tap' : 'Press'; $('#splashKey').textContent = inputMode==='touch' ? 'Start' : inputMode==='pad' ? 'A' : 'Enter';
 }
 function startFromSplash(){
+  if(state!=='start')return;
+  audioUnlock();
   goFullscreen(); show('#splash',false); show('#mSlots',false);
   // First launch: the opening cutscene, then the Fortress.
   if (!save.seenIntro) playCutscene(()=>enterHub()); else enterHub();
@@ -215,12 +219,19 @@ $('#slotFile').addEventListener('change', e => {
   };
   r.readAsText(file);
 });
-$('#btnStart').addEventListener('click', startFromSplash);
-$('#btnSlots').addEventListener('click', () => { fillSlots(); show('#mSlots',true); $('#btnSlotsBack').focus(); });
+function bindMenuAction(id,action){
+  const el=$(id);let start=null,lastTouch=-Infinity;
+  el.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.pointerType==='pen')start={id:e.pointerId,x:e.clientX,y:e.clientY};});
+  el.addEventListener('pointercancel',()=>{start=null;});
+  el.addEventListener('pointerup',e=>{if(!start||e.pointerId!==start.id)return;const tap=Math.hypot(e.clientX-start.x,e.clientY-start.y)<14;start=null;if(tap){e.preventDefault();lastTouch=performance.now();audioUnlock();action();}});
+  el.addEventListener('click',()=>{if(performance.now()-lastTouch<500)return;audioUnlock();action();});
+}
+bindMenuAction('#btnStart',startFromSplash);
+bindMenuAction('#btnSlots', () => { fillSlots(); show('#mSlots',true); $('#btnSlotsBack').focus(); });
 $('#btnSlotsBack').addEventListener('click', () => { show('#mSlots',false); $('#btnSlots').focus(); });
-$('#btnHow').addEventListener('click', () => { show('#mStart',true); $('#btnHowBack').focus(); });
+bindMenuAction('#btnHow', () => { show('#mStart',true); $('#btnHowBack').focus(); });
 $('#btnHowBack').addEventListener('click', () => { show('#mStart',false); $('#btnHow').focus(); });
-$('#btnSettings').addEventListener('click', openTune);
+bindMenuAction('#btnSettings', openTune);
 refreshSplash();
 function goFullscreen(){
   if (inputMode!=='touch') return;

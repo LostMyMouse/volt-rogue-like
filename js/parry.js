@@ -19,8 +19,8 @@ function releaseBlock(){
   // Tapping without catching anything is a whiff: a short lockout so Block can't be spammed.
   if (!p.blockUsed && p.blockT<BLOCK.whiffT) p.blockLock=Math.max(p.blockLock,BLOCK.whiffLock);
 }
-function exposeEnemy(e){
-  const dur=BLOCK.exposed*(run.style==='titan'?1.4:1);
+function exposeEnemy(e,duration){
+  const dur=Math.max(duration??BLOCK.exposed*(run.style==='titan'?1.4:1),e.exposedT||0);
   e.exposedT=dur;
   if (isSpecBoss(e)) bossExposed(e,dur);
   else { e.stunT=Math.max(e.stunT,dur*0.8); e.state=e.kind==='rusher'?'recover':'move'; e.timer=dur; }
@@ -30,7 +30,8 @@ function onParry(ang,opt){
   const p=player;
   p.blockUsed=true; p.parries=(p.parries||0)+1; run.parries=(run.parries||0)+1;
   p.iT=Math.max(p.iT,0.25); p.dashCd=0; p.sig=Math.min(100,p.sig+BLOCK.sig);
-  if (opt.attacker && !opt.attacker.dead) exposeEnemy(opt.attacker);
+  const attacker=opt.attacker || (opt.bullet && opt.bullet.owner);
+  if (attacker && !attacker.dead){ exposeEnemy(attacker); damageComposure(attacker,attacker.isBoss?COMPOSURE.bossParry:COMPOSURE.parry,'parry'); }
   hitStop=Math.max(hitStop,0.14); flash=Math.max(flash,0.12); addShake(8);
   const fx0=p.x-Math.cos(ang)*24, fy0=p.y-Math.sin(ang)*24;
   sparks(fx0,fy0,ang+Math.PI,18,'#ffffff',620,1.0); sparks(fx0,fy0,ang+Math.PI,10,COL.volt,480,1.4);

@@ -1,6 +1,6 @@
 // Volt: Voice effects. Each character's lines run through a small Web Audio chain that suits them: Verdigris
 // is pitched down with a monstrous sub-voice and a ghostly reverb, Gravemark is a deep stone cavern, the
-// Redactor carries a sinister undertone (and sounds like a TV broadcast in the cold open), Undertow is inside
+// Redactor retains a close, human voice (and sounds like a TV broadcast in the cold open), Undertow is inside
 // a diving helmet, Glasswake is a chorus of reflections, and heroes calling in during a run sound like radio.
 // The pitch shifter is a small AudioWorklet (two crossfading delay taps), so pitch changes without slowing
 // the line down. Without Web Audio (file://), lines play dry.
@@ -8,8 +8,8 @@
 
 const VOICE_FX = {
   verdigris: { pitch:0.86, layers:[{pitch:0.55, gain:0.7, lp:1600}, {pitch:1.5, gain:0.12, delay:0.03, hp:2500}], reverb:{t:3.4, wet:0.5}, lowshelf:{f:200, g:4} },
-  gravemark: { pitch:0.74, rate:0.93, layers:[{pitch:0.5, gain:0.35, lp:900}], reverb:{t:2.8, wet:0.38}, lowshelf:{f:160, g:7} },
-  redactor:  { pitch:0.96, layers:[{pitch:0.66, gain:0.3, lp:2200}], reverb:{t:1.3, wet:0.18} },
+  gravemark: { pitch:0.8, layers:[{pitch:0.5, gain:0.32, lp:900}], reverb:{t:1.8, wet:0.22}, lowshelf:{f:160, g:6} },
+  redactor:  { reverb:{t:0.65, wet:0.07} },
   undertow:  { comb:{d:0.011, fb:0.42}, peak:{f:950, q:1.3, g:5}, reverb:{t:0.7, wet:0.14} },
   kilnheart: { comb:{d:0.006, fb:0.28}, drive:0.18 },
   glasswake: { layers:[{pitch:1.04, gain:0.4, delay:0.028}, {pitch:0.96, gain:0.4, delay:0.05}], highshelf:{f:4500, g:4}, reverb:{t:1.5, wet:0.22} },
@@ -17,7 +17,7 @@ const VOICE_FX = {
   echo:      { echo:{d:0.17, fb:0.28, wet:0.28}, reverb:{t:1.6, wet:0.18} },
 };
 const RADIO = { bp:[380,3100], drive:0.35, gain:1.3 };      // heroes on comms mid-run
-const BROADCAST = { bp:[300,3400], drive:0.5, gain:1.25 };  // the Redactor's hijacked screens
+const BROADCAST = { bp:[180,5500], drive:0.08, gain:1.05 };  // the Redactor's hijacked screens
 const HERO_IDS = ['halo','bastion','echo','thorn','patch'];
 
 const PITCH_WORKLET = `

@@ -81,6 +81,11 @@ function fillBuild(el){
 }
 
 function updateCam(dt){
+  if(typeof tut!=='undefined'&&tut&&inputMode==='touch'){
+    const v=combatViewport(),target=enemies.find(e=>!e.dead&&e.tutWeak),cx=target?(player.x+target.x)/2:player.x,cy=target?(player.y+target.y)/2-25:player.y-30;
+    const span=target?Math.abs(player.y-target.y)+190:240;
+    cam.zoom=clamp(Math.min(v.h/span,v.w/600),.35,.9);cam.x=cx;cam.y=cy;return;
+  }
   cam.zoom = inputMode==='touch' ? clamp(Math.min(W,H)/540,0.62,1.3) : clamp(Math.min(W,H)/760,0.5,1.3);
   const p=player, lead=40;
   const tx=p.x+Math.cos(p.aim)*lead, ty=p.y+Math.sin(p.aim)*lead;

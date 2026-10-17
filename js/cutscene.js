@@ -15,15 +15,15 @@ const VOLT_LAND = {x:850, y:228};
 // Each beat: where the camera goes, what happens as it starts, and the line spoken.
 const CUTSCENE = [
   { scene:'roof', cam:{x:750,y:150,z:0.85}, go:c=>{ c.screen=1; c.glitch=0.6; addShake(4); sfx('broadcast',{vary:false}); },
-    who:'redactor', expr:'pleased', tag:'Every screen in the city', text:"Good evening. This is a courtesy notice regarding your heroes' powers." },
+    who:'redactor', expr:'pleased', tag:'Every screen in the city', text:"Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary." },
   { cam:{x:750,y:130,z:1.05}, go:c=>{ c.glitch=1.2; c.flash=0.5; c.flashC='#e0283c'; addShake(10); sfx('redact'); },
-    who:'redactor', expr:'pleased', text:"They've been reviewed. Most of them failed." },
+    who:'redactor', expr:'pleased', text:"Their powers are gone. Do listen carefully. I would hate to repeat the demonstration." },
   { cam:{x:750,y:300,z:0.78}, go:c=>{ CS_VILLAINS.forEach((v,i)=>c.later(0.35+i*0.45,()=>csArrive(c,v))); },
-    who:'redactor', text:"My associates will be managing your districts from now on. Please direct all complaints to no one." },
+    who:'redactor', text:"My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish." },
   { cam:{x:750,y:470,z:1.15}, go:c=>{ c.later(0.25,()=>{ c.actors.push({id:'gravemark', x:750, y:540, anim:'intro', t0:time, drop:1}); }); c.later(0.55,()=>{ addShake(22); c.flash=0.35; c.flashC='#b56cff'; sfx('stone'); VFX_FX.push({type:'burst',el:'stone',x:750,y:540,R:150,t:0,dur:0.8,seed:rand(PI2)}); vfxBurstParticles('stone',750,540,150,2); }); },
     who:'gravemark', expr:'stern', text:"And any heroes who object can take it up with me. On the roof." },
   { cam:{x:750,y:150,z:0.9}, go:c=>{ c.glitch=0.8; },
-    who:'redactor', text:"Have a quiet night. You won't have a choice." },
+    who:'redactor', text:"Sleep well. I know how much safer you feel when someone else is watching." },
 
   { scene:'fort', cam:{x:742,y:330,z:1.15}, go:c=>{ c.flash=1; c.flashC='#000000'; c.screen=0; }, focus:'bastion', card:'bastion', tagline:'Runs the Fortress. Hates surprises.',
     who:'bastion', expr:'stern', tag:'The Fortress · ten minutes later', text:"Four districts dark. Half my roster drained. Somebody give me good news." },

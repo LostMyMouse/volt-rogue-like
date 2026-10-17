@@ -447,6 +447,6 @@ function animationDeathActors(){
     ctx.restore();
   }}));
 }
-// Decode common motion first; all remaining clips load on demand.
-for(const id of Object.keys(ANIMATION_DATA))for(const name of ['idle','run','walk','hover'])animationClip(id,name);
+// Detailed atlases decode on demand. Only warm Volt's legacy idle while the first atlas loads.
+animationClip('volt','idle');
 

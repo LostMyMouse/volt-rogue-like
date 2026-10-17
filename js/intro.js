@@ -52,6 +52,7 @@ function maybeIntro(id, done, opt={}){
       pages=[{who:id, text: n===0 ? info.first : pick(info.repeat)}];
       if (r) pages.push({who:'volt', text: n===0 ? r.first : pick(r.repeat)});
     }
+    const remembered=rivalMemory(id);if(remembered)pages.unshift(remembered);
   }
   writeSave();
   const sp=SPEAKERS[id];
