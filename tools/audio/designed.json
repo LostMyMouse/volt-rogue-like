@@ -1,8 +1,18 @@
 {
  "volt": {
-  "voice_id": "GsfuR3Wo2BACoxELWyEF",
-  "source": "library: Cooper - Nervous, Dramatic and Timid",
-  "replaced": "UfU4MayF5sixHnvZy0Oy"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "take": 0,
+  "previews": [
+   "RmtUVKbwMJFKYraSJIVs",
+   "lw7geKevm7wSoPTUW4m1",
+   "XS5BCc56dP4jVneeiABh"
+  ],
+  "gender": "male",
+  "pronouns": "he/him",
+  "design_model": "eleven_ttv_v3",
+  "speech_model": "eleven_v4",
+  "source": "Voice Design: youthful American male rookie",
+  "replaced": "GsfuR3Wo2BACoxELWyEF"
  },
  "echo": {
   "voice_id": "Y5YV8HtWsJXkknTppIP7",

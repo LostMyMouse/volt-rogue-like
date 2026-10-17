@@ -26,7 +26,8 @@ function audioVolumes(){ if (!AUDIO.ctx) return; const v=VOL(); for (const b in 
 
 function loadBuf(path){
   if (AUDIO.buffers[path] || AUDIO.loading[path] || !AUDIO.ctx) return AUDIO.loading[path];
-  AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; return buf; }).catch(()=>null);
+  const revision = path.startsWith('voice/') ? `?v=${VOICE_REVISION}` : '';
+  AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3${revision}`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; return buf; }).catch(()=>null);
   return AUDIO.loading[path];
 }
 // One-shot sound. vol and rate vary slightly so repeated hits don't sound machine-gunned.
@@ -95,7 +96,7 @@ function playVoice(who, text){
   const key=voiceKey(who,text); if (!VOICED.has(key)) return false;
   const rate = who==='gravemark' ? 0.86 : 1; // without Web Audio effects, the golem at least speaks lower and slower
   const v={playing:true}; AUDIO.voice=v;
-  if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onended=()=>v.playing=false; a.play().catch(()=>{}); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
+  if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3?v=${VOICE_REVISION}`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onended=()=>v.playing=false; a.play().catch(()=>{}); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
   const p=loadBuf('voice/'+key); p && p.then(buf=>{ if (!buf || AUDIO.voice!==v) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start(); v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
   return true;
 }

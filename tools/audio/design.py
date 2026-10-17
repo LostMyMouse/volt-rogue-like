@@ -4,7 +4,7 @@
 # voice ids in designed.json for gen.py.
 import json, os, base64, sys, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__)); KEY = os.environ.get('ELEVENLABS_API_KEY') or open(os.path.join(HERE, '.key')).read().strip()  # never commit the key
-GAME = '/Users/jamesrowe/Documents/Volt Roguelike'; AUD = os.path.join(GAME, 'voice-audition'); os.makedirs(AUD, exist_ok=True)
+GAME = os.path.abspath(os.path.join(HERE, '..', '..')); AUD = os.path.join(GAME, 'voice-audition'); os.makedirs(AUD, exist_ok=True)
 
 def api(path, body):
     req = urllib.request.Request('https://api.elevenlabs.io' + path, data=json.dumps(body).encode(), headers={'xi-api-key': KEY, 'Content-Type': 'application/json'})
@@ -20,7 +20,7 @@ CAST = {
  'redactor2': ("The main supervillain: a cold, commanding, deeply menacing man. Deep, smooth and resonant, with icy, perfect politeness that hides total contempt, like a calm corporate executive who decides who lives. Quiet, controlled and chilling, every word deliberate. Theatrical villain gravitas.",
           "Good evening. This is a courtesy notice regarding your heroes' powers. They've been reviewed. Most of them failed. Have a quiet night. You won't have a choice."),
 
- 'volt': ("A young adult superhero rookie with an androgynous, gender-neutral voice, neither clearly male nor female. Bright, eager, quick-talking and a little nervous, with comic timing. Warm, earnest, slightly breathless. American.",
+ 'volt': ("A young adult man in his early twenties, an American rookie superhero. Clearly masculine, youthful mid-range tenor with warm chest resonance and a lightly textured edge. Bright, earnest and quick-witted, speaking with nervous charm, natural comic timing and sudden bursts of brave confidence. Conversational, agile and energetic, with a relaxed American accent. Natural studio-quality dialogue recording.",
           "Hi! Sorry. Your front door has, like, nine locks. I'm Volt. I'm a hero. Rookie hero. I saw the broadcast, and I want to help. What table?"),
  'echo': ("A smug, sharp-tongued young adult psychic with an androgynous, gender-neutral voice. Dry, quick, teasing and sarcastic, always sounding like they already know the answer. Cool and confident. American.",
           "Before you ask: no. You were going to ask if I'm reading your mind. Can we skip to the part where I'm right? We need more people."),
@@ -43,7 +43,7 @@ only = [a for a in sys.argv[1:] if not a.startswith('--')]; PREVIEW_ONLY = '--pr
 for who, (desc, text) in CAST.items():
     if only and who not in only: continue
     if who in designed and not only: continue
-    r = api('/v1/text-to-voice/create-previews', {'voice_description': desc, 'text': text})
+    r = api('/v1/text-to-voice/design', {'voice_description': desc, 'text': text, 'model_id': 'eleven_ttv_v3'})
     if 'previews' not in r: print(who, 'preview fail', r); continue
     ids = []
     for i, p in enumerate(r['previews']):
@@ -51,8 +51,8 @@ for who, (desc, text) in CAST.items():
     if PREVIEW_ONLY:
         designed.setdefault(who, {})['previews'] = ids; json.dump(designed, open(os.path.join(HERE, 'designed.json'), 'w'), indent=1); print(who, 'previews saved'); continue
     k = pick.get(who, 0)
-    v = api('/v1/text-to-voice/create-voice-from-preview', {'voice_name': f'Volt · {who.title()}', 'voice_description': desc, 'generated_voice_id': ids[k]})
+    v = api('/v1/text-to-voice', {'voice_name': f'Volt · {who.title()}', 'voice_description': desc, 'generated_voice_id': ids[k], **({'labels': {'gender': 'male', 'age': 'young', 'accent': 'american'}} if who == 'volt' else {})})
     if 'voice_id' not in v: print(who, 'create fail', v); continue
-    designed[who] = {'voice_id': v['voice_id'], 'take': k, 'previews': ids}
+    designed[who] = {'voice_id': v['voice_id'], 'take': k, 'previews': ids, 'description': desc, 'design_model': 'eleven_ttv_v3'}
     json.dump(designed, open(os.path.join(HERE, 'designed.json'), 'w'), indent=1)
     print(who, 'ok', v['voice_id'], 'take', k)

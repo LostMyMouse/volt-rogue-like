@@ -357,7 +357,7 @@ Hero NPCs then need walk, idle and talk loops at 96 × 96.
 ## 11. Tips for AI-generated sprites
 
 - **Lock the camera first:** generate one reference turnaround per character at the game's three-quarter angle, then generate every animation against it. Mismatched angles are the most common thing that breaks a sprite set.
-- **Silhouette test:** shrink a frame to 96 px tall. If you can't tell which way Volt is facing or what they're doing, simplify it.
+- **Silhouette test:** shrink a frame to 96 px tall. If you can't tell which way Volt is facing or what he's doing, simplify it.
 - **Same light, same outline weight** across everything: top-left light, and an ink outline about 3 px at final size.
 - **Keep effects off the character sheets** where possible (sparks, trails, glows). The game layers its own effects, and baked-in ones double up.
 - **Transparent backgrounds** throughout. If a tool only outputs solid backgrounds, a flat magenta (`#FF00FF`) background is the next best thing, and I can key it out.
@@ -388,5 +388,5 @@ The chibi Volt animations were retired. Volt is now the hero-matched turnaround 
 **Next animation batch for Volt** (generate against the new turnaround, 64 px base frames, larger transparent canvas only if a pose clips, same ground line): idle (6), run (8), strike1–3 (4/4/6), dash (4), block (3, hold last), parry (5). Use the same south-first, clockwise direction order as the turnaround, one row per direction.
 
 
-## Volt is gender-neutral (2026-10-16)
-In every asset, Volt has an androgynous athletic build, the face hidden behind the visor, and no clearly male or female features. In writing, Volt is "Volt", "the rookie" or "they".
+## Volt is male (2026-10-17)
+Volt is a young adult man with a lean, athletic masculine build and his face hidden behind the visor. In writing, Volt uses he/him pronouns. Keep his youthful proportions, swept hair, electric-blue suit, white collar and fins. His voice is a youthful American male tenor: energetic, earnest, quick-witted and occasionally nervous, with warm chest resonance. See `voice-direction.md` for recording settings.

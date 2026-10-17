@@ -16,7 +16,7 @@ What the game needs instead is **cut-out characters**: the figure only, on a ful
 Zip them in that folder structure and send them over. Keep the file names exactly as above.
 
 ## Rules for every image
-- **Volt is gender-neutral.** Keep Volt's build androgynous and the face hidden behind the visor in every image.
+- **Volt is male (he/him).** Keep Volt's build youthful, masculine and athletic and the face hidden behind the visor in every image.
 - **Transparent background. Nothing behind the character:** no scene, sky, floor, frame, gradient, glow box, vignette or shadow on the ground.
 - **One character, the whole figure in frame.** Nothing cropped at the edges except where stated (the broadcast bust), with a small empty margin all round.
 - **Portrait canvas, 1024 × 1536 px** (the broadcast bust: 1024 × 1024).
@@ -36,7 +36,7 @@ ChatGPT previews sometimes show a grey-and-white checkerboard that is actually p
 > Create a single character illustration for a game intro card. Match the attached reference images exactly for the character's face, costume, colours and proportions. Style: comic-book ink and paint, thick black ink outlines, painterly cel shading, light from the top-left with a rim light in the character's signature colour, grounded heroic adult proportions (not chibi). Full body, the whole figure in frame with a small margin, dynamic intro pose. **Transparent background (real PNG alpha)**: no scene, no floor, no frame, no glow box, no ground shadow, no text. Portrait canvas 1024 × 1536.
 
 ### Character lines
-**Volt**, signature colour electric blue `#26BFFF`. Volt is gender-neutral: an androgynous athletic build, face fully hidden by the visor, never clearly male or female. Mid-leap toward the viewer, one fist crackling with blue lightning, white swept collar and fins, angular glowing visor, spiky crest. Eager, slightly reckless.
+**Volt**, signature colour electric blue `#26BFFF`. Volt is a young adult man (he/him): a lean, athletic masculine build, face fully hidden by the visor. Mid-leap toward the viewer, one fist crackling with blue lightning, white swept collar and fins, angular glowing visor, spiky crest. Eager, slightly reckless.
 
 **Halo** (dawn white `#FFF1D0`): standing tall, looking back over one shoulder, a halo ring of light behind her head. Calm, composed, distant.
 

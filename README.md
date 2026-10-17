@@ -1,6 +1,6 @@
 # volt-rogue-like
 
-A top-down action roguelite about Volt, a rookie superhero trying to prove they can become the world's greatest hero. The Redactor's villains hold the city district by district: pick your route on the city map, cross each district's rooftops, and take down its villain.
+A top-down action roguelite about Volt, a young male rookie superhero trying to prove he can become the world's greatest hero. The Redactor's villains hold the city district by district: pick your route on the city map, cross each district's rooftops, and take down its villain.
 
 ## Play
 

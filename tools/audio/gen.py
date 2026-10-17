@@ -5,7 +5,7 @@ import json, os, sys, urllib.request, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 KEY = os.environ.get('ELEVENLABS_API_KEY') or open(os.path.join(HERE, '.key')).read().strip()  # never commit the key
-GAME = '/Users/jamesrowe/Documents/Volt Roguelike'
+GAME = os.path.abspath(os.path.join(HERE, '..', '..'))
 OUT_SFX = os.path.join(GAME, 'assets/audio/sfx'); OUT_VO = os.path.join(GAME, 'assets/audio/voice'); OUT_MUS = os.path.join(GAME, 'assets/audio/music')
 for d in (OUT_SFX, OUT_VO, OUT_MUS): os.makedirs(d, exist_ok=True)
 
@@ -14,7 +14,8 @@ def post(url, body, out):
     for attempt in range(3):
         try:
             with urllib.request.urlopen(req, timeout=180) as r: data = r.read()
-            open(out, 'wb').write(data); return len(data)
+            tmp = out + '.tmp'
+            open(tmp, 'wb').write(data); os.replace(tmp, out); return len(data)
         except urllib.error.HTTPError as e:
             msg = e.read()[:300]
             if e.code == 429: time.sleep(5); continue
@@ -77,9 +78,10 @@ SAY = {
 }
 SILENT = lambda t: not re.sub(r'[.\s…]', '', t)
 
-# Volt uses ElevenLabs v3, which takes emotion cues in brackets and paces "..." itself (no break tags).
-V3 = {'volt'}
-V3_TAGS = {
+# Volt uses Eleven v4 with emotion cues and natural punctuation (no SSML break tags).
+EXPRESSIVE_MODELS = {'volt': 'eleven_v4'}
+PERFORMANCE_TAGS = {
+  "...Yep.": "[matter-of-fact] Yep.",
   "I'm Volt. I'm a hero. Well... rookie hero. I saw the broadcast, and I want to help.": "I'm Volt. I'm a hero. Well... rookie hero. [hopeful] I saw the broadcast, and I want to help.",
   "Hi! Sorry. Your front door has, like, nine locks.": "[nervous] Hi! Sorry. Your front door has, like, nine locks.",
   "Halo? THE Halo? Okay. Okay. Be cool. I'm being cool.": "[starstruck] Halo? THE Halo? [nervous] Okay. Okay. Be cool. I'm being cool.",
@@ -88,21 +90,21 @@ V3_TAGS = {
   "One district back!": "[excited] One district back!", "Nice!": "[excited] Nice!", "Hi. Yes. That's me. Volt. Huge fan. I mean, hi.": "[nervous] Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",
 }
 
-def voice_lines(lines):
+def voice_lines(lines, only=None, force=False):
     done = 0
     for ln in lines:
         who, text = ln['who'], ln['text']
-        if who not in VOICES or SILENT(text): continue
+        if who not in VOICES or SILENT(text) or (only and who not in only): continue
         fn = os.path.join(OUT_VO, f"{who}_{fnv(who + '|' + text)}.mp3")
-        if os.path.exists(fn): continue
+        if os.path.exists(fn) and not force: continue
         vid, stab, style = VOICES[who]
-        if who in V3:
+        if who in EXPRESSIVE_MODELS:
             n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
-                     {'text': V3_TAGS.get(text, SAY.get(text, text)), 'model_id': 'eleven_v3', 'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8}}, fn)
-            done += 1; print('voice', who, n, text[:50]); continue
+                     {'text': PERFORMANCE_TAGS.get(text, SAY.get(text, text)), 'model_id': EXPRESSIVE_MODELS[who], 'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8}}, fn)
+            done += bool(n); print('voice', who, n, text[:50]); continue
         n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
                  {'text': pace(SAY.get(text, text), who), 'model_id': 'eleven_multilingual_v2', 'voice_settings': {'stability': stab, 'similarity_boost': 0.75, 'style': style, 'use_speaker_boost': True, 'speed': SPEED.get(who, 0.9)}}, fn)
-        done += 1; print('voice', who, n, text[:50])
+        done += bool(n); print('voice', who, n, text[:50])
     return done
 
 SFX = json.load(open(os.path.join(HERE, 'sfx.json')))
@@ -121,4 +123,5 @@ if __name__ == '__main__':
     if 'voice' in what:
         lines = json.loads(open(os.path.join(HERE, 'lines.json')).read().splitlines()[0])['out']
         lines += json.load(open(os.path.join(HERE, 'barks.json')))
-        print('voiced', voice_lines(lines))
+        only = {a.split('=', 1)[1] for a in what if a.startswith('--only=')}
+        print('voiced', voice_lines(lines, only=only, force='--force' in what))
