@@ -100,4 +100,4 @@ function moveInput(){
   if (m<0.15 && stick.id!==null && !keys.size){ x=0; y=0; }
   return {x,y};
 }
-function screenToWorld(sx,sy){ return { x:(sx-W/2)/cam.zoom+cam.x, y:(sy-H/2)/cam.zoom+cam.y }; }
+function screenToWorld(sx,sy){ const view=combatViewport(); return { x:(sx-view.cx)/cam.zoom+cam.x, y:(sy-view.cy)/cam.zoom+cam.y }; }

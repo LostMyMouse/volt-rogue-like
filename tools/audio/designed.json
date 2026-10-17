@@ -21,7 +21,8 @@
    "ds3hyeEUXIRE3RY4TPgO",
    "4kzdwW8rwXS4wi6xXK2u",
    "Y5YV8HtWsJXkknTppIP7"
-  ]
+  ],
+  "speech_model": "eleven_v4"
  },
  "bastion": {
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
@@ -30,7 +31,8 @@
    "SRAtZ2ZOED030czOR8WQ",
    "YYKdYyfPDc93CICmHMbF",
    "HVvUlkSG0bz22bxRddbp"
-  ]
+  ],
+  "speech_model": "eleven_v4"
  },
  "kilnheart": {
   "voice_id": "yWRPuhQv7d5rFyrtj0GI",
@@ -39,7 +41,8 @@
    "baYOFxyfxoheLyNmDMgM",
    "yWRPuhQv7d5rFyrtj0GI",
    "AsbJu8rOEDFWPbdWPnND"
-  ]
+  ],
+  "speech_model": "eleven_v4"
  },
  "bellwether": {
   "voice_id": "AJuNP3sFJckEVT7VAAqm",
@@ -48,7 +51,8 @@
    "f6NgTcvqvJ4x51XKsgSb",
    "OQeggN6ewOZnZESLiSDE",
    "AJuNP3sFJckEVT7VAAqm"
-  ]
+  ],
+  "speech_model": "eleven_v4"
  },
  "verdigris": {
   "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
@@ -57,7 +61,8 @@
    "AbOMyTTIZBxCfUtmPcIL",
    "5PhA4LJ8zKeDCb1ZxraK",
    "TChY9e3dlfG7JJRZqBDE"
-  ]
+  ],
+  "speech_model": "eleven_v4"
  },
  "undertow": {
   "voice_id": "urczK0YCwtnTeJkvb4PB",
@@ -66,7 +71,8 @@
    "aVNjaMGUJsWjmTY7i0Qd",
    "uUcsh4egnXAIWRD9xItH",
    "urczK0YCwtnTeJkvb4PB"
-  ]
+  ],
+  "speech_model": "eleven_v4"
  },
  "gravemark": {
   "voice_id": "UrBeqP9db3vlQVM3Tmfu",
@@ -75,7 +81,9 @@
    "UrBeqP9db3vlQVM3Tmfu",
    "HkC69DPB7l3DuoaEsr3A",
    "cHjVlze8nWzZeHDjM83m"
-  ]
+  ],
+  "speech_model": "eleven_v4",
+  "delivery": "Gigantic stone resonance with natural speaking pace, no playback slowdown"
  },
  "redactor": {
   "voice_id": "L3YenFTIrljaqm205FWd",
@@ -84,6 +92,8 @@
    "u7jrlN8yJ2VQUt7ORaKd",
    "tNSyhkWGg8LiU2Wht7Kj",
    "L3YenFTIrljaqm205FWd"
-  ]
+  ],
+  "speech_model": "eleven_v4",
+  "source": "Retained custom Redactor casting, directed with Eleven v4"
  }
 }

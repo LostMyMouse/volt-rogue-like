@@ -1,0 +1,300 @@
+[
+ {
+  "who": "redactor",
+  "text": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary.",
+  "heard": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary",
+  "sim": 1.0,
+  "wps": 2.78,
+  "max_gap": 0.66,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Their powers are gone. Do listen carefully. I would hate to repeat the demonstration.",
+  "heard": "Their powers are gone. Do listen carefully. I would hate to repeat the demonstration",
+  "sim": 1.0,
+  "wps": 2.7,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish.",
+  "heard": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish",
+  "sim": 1.0,
+  "wps": 2.87,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Sleep well. I know how much safer you feel when someone else is watching.",
+  "heard": "Sleep well. I know how much safer you feel when someone else is watching",
+  "sim": 1.0,
+  "wps": 3.48,
+  "max_gap": 0.8,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "redactor",
+  "text": "Ah, Volt. Such a promising file. And one complaint I would like to discuss in person.",
+  "heard": "Ah, Volt. Such a promising file and one complaint I would like to discuss in person",
+  "sim": 1.0,
+  "wps": 2.63,
+  "max_gap": 0.68,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Mine. You have mistaken my patience for permission to enter.",
+  "heard": "Mine. You have mistaken my patience for permission to enter",
+  "sim": 1.0,
+  "wps": 2.69,
+  "max_gap": 0.74,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "You think the lightning makes you brave. I shall remove it, and we can meet the person underneath.",
+  "heard": "You think the lightning makes you brave. I shall remove it, and we can meet the person underneath",
+  "sim": 1.0,
+  "wps": 3.16,
+  "max_gap": 0.84,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Of course you are. They all ask to keep something.",
+  "heard": "Of course you are. They all ask to keep something",
+  "sim": 1.0,
+  "wps": 3.45,
+  "max_gap": 0.62,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "redactor",
+  "text": "A small question, Volt. Before we begin. Indulge me.",
+  "heard": "A small question, Volt, before we begin. Indulge me",
+  "sim": 1.0,
+  "wps": 2.34,
+  "max_gap": 0.56,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Does Halo still stand on that balcony every night? Watching the city. Never looking down.",
+  "heard": "Does Halo still stand on that balcony every night, watching the city, never looking down?",
+  "sim": 1.0,
+  "wps": 2.7,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Ask her who stood beside her. Watch her face when you do.",
+  "heard": "Ask her who stood beside her. Watch her face when you do",
+  "sim": 1.0,
+  "wps": 3.49,
+  "max_gap": 0.82,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "redactor",
+  "text": "You are breathing rather well, considering how we left things. Someone has been taking care of you.",
+  "heard": "You are breathing rather well, considering how we left things. Someone has been taking care of you.",
+  "sim": 1.0,
+  "wps": 3.15,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "I shall remember that. Someone ought to.",
+  "heard": "I shall remember that. Someone ought to",
+  "sim": 1.0,
+  "wps": 2.82,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Persistence is not a power, Volt. It is simply fear that has not recognised itself yet.",
+  "heard": "Persistence is not a power, Volt. It is simply fear that has not recognized itself yet",
+  "sim": 0.94,
+  "wps": 2.96,
+  "max_gap": 0.64,
+  "missing": [
+   "recognised"
+  ],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "For the moment. I prefer to let a habit establish itself before I correct it.",
+  "heard": "For the moment. I prefer to let a habit establish itself before I correct it",
+  "sim": 1.0,
+  "wps": 3.3,
+  "max_gap": 0.8,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "I flagged your little victory. I have spent the interval learning exactly where you break.",
+  "heard": "I flagged your little victory. I have spent the interval learning exactly where you break",
+  "sim": 1.0,
+  "wps": 3.04,
+  "max_gap": 0.76,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "With pleasure. This time, I shall be thorough.",
+  "heard": "With pleasure. This time I shall be thorough",
+  "sim": 1.0,
+  "wps": 2.42,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "She has not told you. How considerate. She always did know what people could bear.",
+  "heard": "She has not told you. How considerate. She always did know what people could bear",
+  "sim": 1.0,
+  "wps": 3.0,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Halo and I were partners. Then the tower fell. There was time to make one choice. She made it while I was still calling her name.",
+  "heard": "Halo and I were partners. Then the tower fell. There was time to make one choice. She made it while I was still calling her name",
+  "sim": 1.0,
+  "wps": 3.18,
+  "max_gap": 0.78,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "The city was saved. I was left beneath it. She found the distinction quite manageable.",
+  "heard": "The city was saved. I was left beneath it. She found the distinction quite manageable.",
+  "sim": 1.0,
+  "wps": 2.76,
+  "max_gap": 0.74,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Redacted. There are things even she does not get to keep.",
+  "heard": "Redacted. There are things even she does not get to keep",
+  "sim": 1.0,
+  "wps": 3.02,
+  "max_gap": 0.82,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Because power lets a person decide who is worth saving. I have been on the other side of that decision.",
+  "heard": "Because power lets a person decide who is worth saving. I have been on the other side of that decision",
+  "sim": 1.0,
+  "wps": 3.29,
+  "max_gap": 0.96,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Take it away, and the choosing stops. Every life is equally fragile. Even hers.",
+  "heard": "Take it away and the choosing stops. Every life is equally fragile, even hers",
+  "sim": 1.0,
+  "wps": 2.31,
+  "max_gap": 0.8,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Yes. You understand me perfectly.",
+  "heard": "Yes, you understand me perfectly",
+  "sim": 1.0,
+  "wps": 2.02,
+  "max_gap": 0.64,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Halo. I wondered how long you could bear to listen.",
+  "heard": "Halo. I wondered how long you could bear to listen",
+  "sim": 1.0,
+  "wps": 3.01,
+  "max_gap": 0.8,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Of course. There is always someone else to save while I am speaking.",
+  "heard": "Of course, there is always someone else to save while I am speaking",
+  "sim": 1.0,
+  "wps": 3.23,
+  "max_gap": 0.72,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Twice you have left this room alive. You are beginning to mistake a pattern for a promise.",
+  "heard": "Twice you have left this room alive. You are beginning to mistake a pattern for a promise",
+  "sim": 1.0,
+  "wps": 3.31,
+  "max_gap": 0.68,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "redactor",
+  "text": "Some rooms must be kept exactly as they were. She understands why.",
+  "heard": "Some rooms must be kept exactly as they were. She understands why",
+  "sim": 1.0,
+  "wps": 2.78,
+  "max_gap": 0.7,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "halo",
+  "text": "I'm not here for you. I'm here for him.",
+  "heard": "I'm not here for you. I'm here for him.",
+  "sim": 1.0,
+  "wps": 3.08,
+  "max_gap": 0.58,
+  "missing": [],
+  "flags": []
+ }
+]

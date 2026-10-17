@@ -11,23 +11,40 @@ const VOL = () => ({ music:T.musicVol??0.5, sfx:T.sfxVol??0.75, voice:T.voiceVol
 function voiceKey(who,text){ let h=0x811c9dc5; for (const b of new TextEncoder().encode(who+'|'+text)){ h^=b; h=Math.imul(h,0x01000193)>>>0; } return who+'_'+h.toString(16).padStart(8,'0'); }
 
 function audioUnlock(){
-  if (AUDIO.unlocked) return; AUDIO.unlocked=true;
-  if (!AUDIO.html){
+  const first=!AUDIO.unlocked;
+  if (!AUDIO.html && (!AUDIO.ctx || AUDIO.ctx.state==='closed')){
     try {
+      // Safari's playback session routes game sound through media playback, including in fullscreen.
+      try { if (navigator.audioSession) navigator.audioSession.type='playback'; } catch(e){}
       const C=window.AudioContext||window.webkitAudioContext; AUDIO.ctx=new C();
       for (const b of ['music','sfx','voice']){ const g=AUDIO.ctx.createGain(); g.connect(AUDIO.ctx.destination); AUDIO.buses[b]=g; }
-      audioVolumes(); AUDIO.ctx.resume && AUDIO.ctx.resume(); voiceFxInit(AUDIO.ctx);
+      audioVolumes(); voiceFxInit(AUDIO.ctx);
     } catch(e){ AUDIO.html=true; }
   }
-  for (const n of ['strike1','strike2','strike3','dash','hurt','enemyhit','ui_select','ui_move','parry','block']) loadBuf('sfx/'+n);
+  // iOS can suspend/interupt an already-unlocked context on fullscreen, lock or tab switches.
+  // Retry synchronously in every trusted gesture, rather than permanently latching the first attempt.
+  if (AUDIO.ctx && AUDIO.ctx.state!=='running'){
+    try {
+      const resumed=AUDIO.ctx.resume(); if (resumed && resumed.catch) resumed.catch(()=>{});
+      const pulse=AUDIO.ctx.createBufferSource(); pulse.buffer=AUDIO.ctx.createBuffer(1,1,AUDIO.ctx.sampleRate);
+      pulse.connect(AUDIO.ctx.destination); pulse.start(0);
+    } catch(e){}
+  }
+  AUDIO.unlocked=true;
+  if (first) for (const n of ['strike1','strike2','strike3','dash','hurt','enemyhit','ui_select','ui_move','parry','block']) loadBuf('sfx/'+n);
 }
-for (const ev of ['pointerdown','keydown','touchstart']) addEventListener(ev, audioUnlock, {once:false, passive:true});
+for (const ev of ['pointerdown','pointerup','touchend','keydown','click']) addEventListener(ev, audioUnlock, {capture:true, passive:true});
+const audioWake=()=>{ if (AUDIO.unlocked && !document.hidden) audioUnlock(); };
+document.addEventListener('visibilitychange',audioWake);
+document.addEventListener('fullscreenchange',audioWake);
+document.addEventListener('webkitfullscreenchange',audioWake);
+addEventListener('pageshow',audioWake);
 function audioVolumes(){ if (!AUDIO.ctx) return; const v=VOL(); for (const b in AUDIO.buses) AUDIO.buses[b].gain.value=v[b]; }
 
 function loadBuf(path){
   if (AUDIO.buffers[path] || AUDIO.loading[path] || !AUDIO.ctx) return AUDIO.loading[path];
   const revision = path.startsWith('voice/') ? `?v=${VOICE_REVISION}` : '';
-  AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3${revision}`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; return buf; }).catch(()=>null);
+  AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3${revision}`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; delete AUDIO.loading[path]; return buf; }).catch(()=>{ delete AUDIO.loading[path]; return null; });
   return AUDIO.loading[path];
 }
 // One-shot sound. vol and rate vary slightly so repeated hits don't sound machine-gunned.
@@ -94,7 +111,7 @@ function playVoice(who, text){
   stopVoice();
   if (!AUDIO.unlocked || !who || !text) return false;
   const key=voiceKey(who,text); if (!VOICED.has(key)) return false;
-  const rate = who==='gravemark' ? 0.86 : 1; // without Web Audio effects, the golem at least speaks lower and slower
+  const rate = 1; // Size comes from casting and pitch layers, never from dragging out the delivery.
   const v={playing:true}; AUDIO.voice=v;
   if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3?v=${VOICE_REVISION}`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onended=()=>v.playing=false; a.play().catch(()=>{}); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
   const p=loadBuf('voice/'+key); p && p.then(buf=>{ if (!buf || AUDIO.voice!==v) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start(); v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });

@@ -470,8 +470,8 @@ function render(){
   ctx.setTransform(DPR,0,0,DPR,0,0);
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
   const sx=(Math.random()*2-1)*shakeAmt, sy=(Math.random()*2-1)*shakeAmt;
-  ctx.save(); ctx.translate(W/2+sx,H/2+sy); ctx.scale(cam.zoom,cam.zoom); ctx.translate(-cam.x,-cam.y);
-  drawCity(); drawFloor(); drawDecals(); drawExitPads(); drawZones(); drawBossHazards(); drawTelegraphs(); drawBossActiveFx(); if (typeof vfxDrawGround==='function') vfxDrawGround(); drawActors(); if (typeof vfxDraw==='function') vfxDraw(); drawStyleFx(); drawBlockFx(); drawGlints(); drawFrontWall(); drawBars(); drawExitIcons(); drawFx(); drawBossHitboxes();
+  const view=combatViewport(); ctx.save(); ctx.beginPath(); ctx.rect(view.x,view.y,view.w,view.h); ctx.clip(); ctx.translate(view.cx+sx,view.cy+sy); ctx.scale(cam.zoom,cam.zoom); ctx.translate(-cam.x,-cam.y);
+  drawCity(); drawFloor(); drawDecals(); drawExitPads(); drawZones(); drawBossHazards(); drawTelegraphs(); drawBossActiveFx(); if (typeof vfxDrawGround==='function') vfxDrawGround(); drawActors(); if (typeof vfxDraw==='function') vfxDraw(); drawStyleFx(); drawBlockFx(); drawGlints(); drawFrontWall(); drawBars(); drawComposureMeters(); drawExitIcons(); drawFx(); drawBossHitboxes();
   ctx.restore();
   drawExitPointers(); drawTransitOverlay();
   if (flash>0){ ctx.fillStyle=`rgba(38,191,255,${flash*0.7})`; ctx.fillRect(0,0,W,H); }

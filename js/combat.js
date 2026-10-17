@@ -47,7 +47,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   sfx(e.isBoss?'bosshit':'enemyhit',{vol:0.7,gap:55});
   // Boon multipliers stack multiplicatively, like Hades.
   let m=1;
-  if (e.exposedT>0) m*=BLOCK.exposedMul;
+  if (e.exposedT>0) m*=e.composureBrokenT>0?COMPOSURE.multiplier:BLOCK.exposedMul;
   if (isSpecBoss(e) && BOSSES[e.kind].damageMul) m*=BOSSES[e.kind].damageMul(e);
   if (e.markT>0) m*=1+(has('mindspike')?val('mindspike'):25)/100;
   if (has('inspire') && player.hp>=player.maxHp*0.8) m*=1+val('inspire')/100;
@@ -55,6 +55,7 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (has('natsel') && e.hp<e.maxHp*0.3) m*=1+val('natsel')/100;
   dmg*=m;
   e.hp-=dmg; e.flashT=opt.quiet?0.04:0.09;
+  if (!opt.quiet && e.hp>0) damageComposure(e,Math.min(e.isBoss?9:6,dmg*0.18));
   if (opt.quiet){
     texts.push({x:e.x+rand(-10,10),y:e.y-e.r,v:Math.round(dmg),t:0.15,c:opt.c,small:true});
     player.sig=Math.min(100,player.sig+dmg*R.sigRate*0.5);
@@ -122,6 +123,7 @@ function doSig(){
   if (p.suppressed){ texts.push({x:p.x,y:p.y-40,v:'SUPPRESSED',t:0,c:'#e0283c'}); return; }
   p.sig=0; sfx('overload'); bark('overload',0.7);
   fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.45,r:290});
+  comicAttack(p.x,p.y,p.aim,110);
   const storm=has('storm');
   for (const e of liveEnemies()){ const dx=e.x-p.x, dy=e.y-p.y, d=Math.hypot(dx,dy); if (d<290+e.r){
     damageEnemy(e,42*(1+val('storm')/100),Math.atan2(dy,dx),760,storm?2.4:0.9,{src:'overload'});
