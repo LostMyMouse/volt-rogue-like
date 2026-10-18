@@ -37,12 +37,17 @@ function startGame(){
   { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
   save.runs++; writeSave(); leaveHub();
   show('#splash',false); show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
-  openCityMap();
+  missionBrief(openCityMap);
 }
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
 function gameOver(){ state='over'; playVoice('volt',"Not... yet..."); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
-function winRun(){ state='over'; run.won=true; commendWin(); banner(run.route && curDistrict()==='redactor' ? 'THE CITY\'S POWER RETURNS' : 'CITY SECURED'); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },1600); }
+function winRun(){
+  if(run.won)return;
+  run.won=true;commendWin();
+  const finish=()=>{state='over';banner('THE DRAIN IS OFFLINE');fillResults();setTimeout(()=>{if(state==='over'){show('#mOver',true);$('#btnAgain').focus();}},1600);};
+  if(curDistrict()==='redactor')runDialogue(missionPages('victory'),'Operation complete',finish);else finish();
+}
 
 /* ---------- Run results ---------- */
 // Rank: reward progress and bosses, punish sloppiness. Roughly 330 for a clean win.
@@ -122,11 +127,11 @@ function fillResults(){
   // Rank thresholds scale with the length of a full run (they were tuned for 15 rooftops).
   const full=routeLength(), score=runScore()*15/full, rk=RANKS.find(x=>score>=x.min), dTotal=run.route?run.route.picks+(BOSSES.gravemark?1:0)+(BOSSES.redactor?1:0):0;
   const where = run.route && curDistrict() ? DISTRICTS[curDistrict()].name+(isBossRoom()?' · villain':' · rooftop '+run.route.room) : 'the rooftops';
-  $('#resTag').textContent = (run.won ? 'Run complete · City secured' : 'Hero down · '+where)+' · '+STYLE().name;
+  $('#resTag').textContent = (run.won ? 'Operation complete · Main drain offline' : 'Hero extracted · '+where)+' · '+STYLE().name;
   const rEl=$('#resRank'); rEl.textContent=rk.r; rEl.style.setProperty('--rank',rk.c);
   $('#resRankTag').textContent=`${rk.r}-Rank hero · ${Math.round(score)} pts`;
   $('#overTitle').textContent=rk.title;
-  $('#resCause').textContent = run.won ? `Gravemark defeated ${run.bossKills} time${run.bossKills===1?'':'s'}.` : `Defeated by ${causeText(run.lastHit)}.`;
+  $('#resCause').textContent = run.won ? `${run.bossKills} villains defeated. The drain is offline; the Redactor escaped through his backup network.` : `Defeated by ${causeText(run.lastHit)}. Patch extracted you. Regroup at the Fortress.`;
   $('#statWaves').textContent=`${run.districtsCleared||0}/${dTotal}`;
   $('#statKills').textContent=kills;
   const t=Math.floor(run.time); $('#statTime').textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;
@@ -147,7 +152,12 @@ function fillResults(){
   if (run.won) save.wins=(save.wins||0)+1;
   else { const v=villainOf(run.lastHit); if (v){ save.killedBy=save.killedBy||{}; save.killedBy[v]=(save.killedBy[v]||0)+1; } }
   writeSave();
-  setPortrait($('#resPortrait'),who,sp.role==='Villain'?'pleased':run.won||rk.r==='S'||rk.r==='A'?'pleased':'stern'); $('#resLine').textContent=line; $('#resWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;
+  setPortrait($('#resPortrait'),who,sp.role==='Villain'?'pleased':run.won||rk.r==='S'||rk.r==='A'?'pleased':'stern'); $('#resLine').textContent=line; $('#resWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;playResultsQuote(who,line);
+}
+function playResultsQuote(who,line){
+  const operation=run,started=performance.now();
+  const speak=()=>{if(state!=='over'||run!==operation)return;if(AUDIO.voice?.playing&&performance.now()-started<6000){setTimeout(speak,100);return;}playVoice(who,line);};
+  speak();
 }
 let tuneReturn=null;
 function openTune(){

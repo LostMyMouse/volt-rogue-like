@@ -22,7 +22,7 @@ const KIND_COL = { rusher:COL.threat, needle:COL.amber, gravemark:COL.boon, kiln
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- Tuning ---------- */
-const DEFAULTS = { parryWindow:0.12, moveSpeed:290, dashSpeed:1250, dashTime:0.16, dashCooldown:0.8, strikeDamage:12, strikeRange:78, powerDamage:16, powerCooldown:1.1, hitPause:0.055, shake: reduceMotion?0.3:1, enemyHealth:1, enemySpeed:1, musicVol:0.5, sfxVol:0.75, voiceVol:0.9 };
+const DEFAULTS = { parryWindow:0.12, moveSpeed:290, dashSpeed:1250, dashTime:0.16, dashCooldown:0.8, strikeDamage:12, strikeRange:78, powerDamage:16, powerCooldown:1.1, hitPause:0.055, shake: reduceMotion?0.3:1, enemyHealth:1, enemySpeed:1, musicVol:0.35, sfxVol:0.75, voiceVol:0.9 };
 const T = Object.assign({}, DEFAULTS);
 try { const s = JSON.parse(localStorage.getItem('volt-tune') || 'null'); if (s) for (const k in DEFAULTS) if (typeof s[k]==='number') T[k]=s[k]; } catch(e){}
 function saveTune(){ try{ localStorage.setItem('volt-tune', JSON.stringify(T)); }catch(e){} }

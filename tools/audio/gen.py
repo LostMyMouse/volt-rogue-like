@@ -81,6 +81,11 @@ SILENT = lambda t: not re.sub(r'[.\s…]', '', t)
 # The complete cast uses Eleven v4 with emotion cues and natural punctuation (no SSML break tags).
 EXPRESSIVE_MODELS = {who: 'eleven_v4' for who in VOICES}
 PERFORMANCE_TAGS = {
+  "Patch.": "[annoyed] Patch.",
+  "Who were you betting with?": "[curious] Who... were you betting with?",
+  "I sent someone better than me.": "[firm] I sent someone better than me.",
+  "Do not make it sound kind. I am still going to crush you.": "[serious] Do not make it sound kind. I am still going to crush you.",
+  "Compost. That's all you'll be.": "[serious] Compost. That's all you'll be.",
   "For the moment. I prefer to let a habit establish itself before I correct it.": "[serious] For the moment. I prefer to let a habit establish itself before I correct it.",
   "Halo and I were partners. Then the tower fell. There was time to make one choice. She made it while I was still calling her name.": "[serious] Halo and I were partners. Then the tower fell. There was time to make one choice. She made it while I was still calling her name.",
   "Back already? I only just scraped your confidence off the furnace.": "[sarcastic] Back already? I only just scraped your confidence off the furnace.",
@@ -93,7 +98,7 @@ PERFORMANCE_TAGS = {
   "One district back!": "[excited] One district back!", "Nice!": "[excited] Nice!", "Hi. Yes. That's me. Volt. Huge fan. I mean, hi.": "[nervous] Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",
 }
 
-def voice_lines(lines, only=None, force=False):
+def voice_lines(lines, only=None, force=False, quiet=False):
     done = 0
     for ln in lines:
         who, text = ln['who'], ln['text']
@@ -104,7 +109,9 @@ def voice_lines(lines, only=None, force=False):
         if who in EXPRESSIVE_MODELS:
             n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
                      {'text': PERFORMANCE_TAGS.get(text, ('[calm] ' + text) if who == 'redactor' else ('[firm] ' + text) if who == 'gravemark' else SAY.get(text, text)), 'model_id': EXPRESSIVE_MODELS[who], 'voice_settings': {'stability': 0.75 if who in {'redactor','gravemark','bastion'} else 0.5, 'similarity_boost': 0.8, **({'speed': 0.86} if who == 'redactor' else {'speed': 1.04} if who == 'gravemark' else {})}}, fn)
-            done += bool(n); print('voice', who, n, text[:50]); continue
+            done += bool(n)
+            if not quiet: print('voice',who,n,text[:50])
+            continue
         n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
                  {'text': pace(SAY.get(text, text), who), 'model_id': 'eleven_multilingual_v2', 'voice_settings': {'stability': stab, 'similarity_boost': 0.75, 'style': style, 'use_speaker_boost': True, 'speed': SPEED.get(who, 0.9)}}, fn)
         done += bool(n); print('voice', who, n, text[:50])

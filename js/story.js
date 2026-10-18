@@ -8,11 +8,11 @@
 const STORY = {
   // A hero's first call, the one time they get an intro card.
   first:{
-    halo:[['',"Halo on comms. So you're the rookie everyone keeps talking about."],['v',"Halo? THE Halo? Okay. Okay. Be cool. I'm being cool.",'pleased'],['',"You're narrating.",'pleased'],['v',"...Yep."]],
-    bastion:[['',"Bastion. I hold this city's line. Tonight, I'm holding yours."],['v',"Cool. Great. I'll hold... a different line."],['',"Just hold still and take the gear.",'stern']],
-    echo:[['',"Echo. And before you say anything, I already know how tonight ends."],['v',"Do you, though?",'pleased'],['',"...Mostly.",'pleased']],
-    thorn:[['',"Thorn. I used to be on the other side."],['v',"Glad you switched.",'pleased'],['',"Some days, so am I."]],
-    patch:[['',"Patch. I build the gear. You break the gear."],['v',"I'll try to break it less."],['',"You won't. But I appreciate the lie.",'pleased']],
+    halo:[['',"Halo on comms. I have your feed. I can channel a little light through your suit. Choose how to use it."],['v',"Actual Halo backup. In my actual suit. Be cool, Volt. Be cool.",'pleased'],['',"You're narrating.",'pleased'],['v',"...Yep."]],
+    bastion:[['',"Bastion on comms. Your suit has a shield channel. Take an upgrade and keep that relay in sight."],['v',"Right. Shield first. Heroic pose later."],['',"Just hold still and take the gear.",'stern']],
+    echo:[['',"Echo here. Your suit can carry a psychic signal. Mine. Try not to make this weird."],['v',"You are literally in my head. I think weird has arrived.",'pleased'],['',"...Mostly.",'pleased']],
+    thorn:[['',"Thorn on comms. I know these relay crews. My roots can help you keep them off your back."],['v',"Glad you are on this side of the call.",'pleased'],['',"Some days, so am I."]],
+    patch:[['',"Patch here. A supply locker is waiting on this roof. Choose one piece of kit."],['v',"I'll try to break it less."],['',"You won't. But I appreciate the lie.",'pleased']],
   },
   encounter:{
     kilnheart:[
@@ -86,11 +86,11 @@ const STORY = {
     halo:[
       {id:'hc_feed', when:c=>c.runs>=1, pages:[['',"Halo here."],['v',"Halo? Hi! I mean, hey. Hi. Volt here.",'pleased'],['',"I know. I'm watching your feed."],['v',"Cool. Cool cool cool. No pressure."],['',"All pressure. Take the power.",'stern']]},
       {id:'hc_prove', when:c=>c.beatenAny, pages:[['',"You fight like you've got something to prove."],['v',"Don't I?"],['',"Not to me. To them. The ones watching from the windows."]]},
-      {id:'hc_redactor', when:c=>c.seen('rd_halo1'), pages:[['',"Whatever he told you about me. Finish the fight first.",'stern'],['v',"And then you'll tell me?"],['',"...Then I'll tell you."]]},
+      {id:'hc_redactor', when:c=>c.seen('rd_halo1') && !c.seen('h_partner2'), pages:[['',"Whatever he told you about me. Finish the fight first.",'stern'],['v',"And then you'll tell me?"],['',"...Then I'll tell you."]]},
     ],
     bastion:[
       {id:'bc_over', when:c=>c.runs>=1, pages:[['',"Bastion. You're overextending.",'stern'],['v',"I'm being aggressive!",'pleased'],['',"You're being aggressive in the wrong direction. Here.",'stern']]},
-      {id:'bc_twice', when:c=>c.runs>=3, pages:[['',"I've sent a lot of rookies out that gate."],['v',"Is this a pep talk?"],['',"You're the first one I've sent gear to twice. Don't make it weird.",'stern'],['v',"Too late. It's weird.",'pleased']]},
+      {id:'bc_twice', when:c=>c.runs>=3, pages:[['',"I've sent a lot of rookies out that gate."],['v',"Is this a pep talk?"],['',"You keep bringing the gear back. Most rookies only bring excuses. Don't make it weird.",'stern'],['v',"Too late. It's weird.",'pleased']]},
     ],
     echo:[
       {id:'ec_ask', when:c=>c.runs>=1, pages:[['',"Before you ask: no.",'pleased'],['v',"I wasn't going to ask anything."],['',"You were going to ask if I'm reading your mind."],['v',"...Are you?"],['',"Pick a power.",'pleased']]},
@@ -125,8 +125,8 @@ function nextStory(kind,owner){
   const list=STORY[kind][owner]; if (!list) return null;
   const c=storyContext(owner), e=list.find(x=>!c.seen(x.id) && x.when(c));
   if (!e) return null;
-  (save.story||(save.story={}))[e.id]=1; writeSave();
-  return storyPages(owner,e.pages);
+  const pages=storyPages(owner,e.pages);pages.storyId=e.id;return pages;
 }
+function markStoryHeard(id){if(id){(save.story||(save.story={}))[id]=1;writeSave();}}
 // An optional third entry picks the portrait: 'pleased' or 'stern' (neutral otherwise).
 const storyPages = (owner,pages) => pages.map(([w,text,expression])=>({who: w==='' ? owner : w==='v' ? 'volt' : w, text, expression}));

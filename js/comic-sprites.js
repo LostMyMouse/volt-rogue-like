@@ -4,7 +4,7 @@
 const COMIC_IDS=['volt','halo','bastion','echo','thorn','patch','kilnheart','bellwether','verdigris','glasswake','undertow','gravemark','redactor','rusher','needle'];
 const COMIC_ART=new Map();
 function comicAtlas(id){
-  if (!COMIC_IDS.includes(id)) return null;
+  if (!COMIC_IDS.includes(id)&&id!=='volt-jog') return null;
   if (!COMIC_ART.has(id)){
     const a={img:new Image(),ready:false,cells:[],reference:[]}; COMIC_ART.set(id,a);
     a.img.onload=()=>{
@@ -22,7 +22,9 @@ function comicAtlas(id){
             if(x1<x0||y1<y0)throw Error('Empty comic pose');
             let sum=0,count=0;
             for(let y=Math.max(y0,y1-Math.ceil((y1-y0)*.08));y<=y1;y++)for(let x=x0;x<=x1;x++)if(data[(y*canvas.width+x)*4+3]>100){sum+=x;count++;}
-            a.cells[row][col]={x:x0,y:y0,w:x1-x0+1,h:y1-y0+1,ax:count?sum/count:(x0+x1)/2,ay:y1};
+            let torsoSum=0,torsoCount=0;
+            for(let y=Math.floor(y0+(y1-y0)*.35);y<=y0+(y1-y0)*.6;y++)for(let x=x0;x<=x1;x++)if(data[(y*canvas.width+x)*4+3]>100){torsoSum+=x;torsoCount++;}
+            a.cells[row][col]={x:x0,y:y0,w:x1-x0+1,h:y1-y0+1,ax:count?sum/count:(x0+x1)/2,cx:torsoCount?torsoSum/torsoCount:(x0+x1)/2,ay:y1+1};
           }
           a.reference[row]=a.cells[row][0].h;
         }
@@ -40,7 +42,8 @@ function comicAtlas(id){
 }
 function comicPose(name,c,elapsed,frame){
   const at=frame===null?animationFrame(c,elapsed):clamp(Math.floor(frame),0,c.frames-1);
-  if(/^(run|walk|hover)$/.test(name)) return [1,0,2,0][Math.floor(elapsed*8)%4];
+  if(name==='hover')return 0;
+  if(/^(run|walk)$/.test(name))return [1,2][Math.floor(elapsed*(name==='run'?4.8:3.6))%2];
   if(/hurt|exposed|death/.test(name))return 6;
   if(/block|parry|recovery|vents_open/.test(name))return 5;
   if(/dash|rush|mirror_step/.test(name))return 7;
@@ -48,14 +51,17 @@ function comicPose(name,c,elapsed,frame){
   return at<(c.key_frame??Math.floor(c.frames/2))?3:4;
 }
 function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
-  const a=comicAtlas(id);if(!a?.ready)return false;
+  let a=comicAtlas(id);if(!a?.ready)return false;
   const s=SPRITES[id],c=ANIMATION_DATA[id]?.[name]||{frames:4,fps:8,loop:true};
+  const moving=/^(run|walk)$/.test(name),jog=id==='volt'&&moving?comicAtlas('volt-jog'):null;
+  if(jog?.ready)a=jog;
   const direction=['east','south','west','north'][((Math.round(face/(Math.PI/2))%4)+4)%4],row=['south','east','north','west'].indexOf(direction);
-  const cell=a.cells[row][comicPose(name,c,elapsed,frame)],worldHeight=s.frame*(id==='needle'?.8:.94),ratio=worldHeight/a.reference[row]*scale;
+  const pose=jog?.ready?Math.floor(elapsed*12*s.scale/scale)%8:comicPose(name,c,elapsed,frame);
+  const cell=a.cells[row][pose],worldHeight=s.frame*(id==='needle'?.8:.94),ratio=worldHeight/(moving?cell.h:a.reference[row])*scale;
   let sheet=a.img;
   if(tint){const key=tint==='white'?'white':'ghost';if(!a[key])a[key]=tintSheet(a.img,tint==='white'?'#ffffff':COL.volt);sheet=a[key];}
-  const moving=/^(run|walk|hover)$/.test(name),bob=moving?-Math.abs(Math.sin(elapsed*8*Math.PI))*1.5*scale:name==='idle'?-Math.sin(elapsed*2.4)*.6*scale:0;
-  const ax=cell.ax,ay=id==='needle'?cell.y+cell.h/2:cell.ay;
+  const bob=name==='idle'?-Math.sin(elapsed*2.4)*.6*scale:0;
+  const ax=moving?(cell.cx??cell.ax):cell.ax,ay=id==='needle'?cell.y+cell.h/2:cell.ay;
   ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   if(name==='death'){const t=clamp(elapsed/(c.frames/c.fps),0,1);ctx.globalAlpha*=1-t;ctx.translate(x,y);ctx.rotate(t*.9);x=y=0;}
   ctx.drawImage(sheet,cell.x,cell.y,cell.w,cell.h,x+(cell.x-ax)*ratio,y+(cell.y-ay)*ratio+bob,cell.w*ratio,cell.h*ratio);
@@ -71,3 +77,4 @@ drawAnimation=function(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
 drawTurn=function(id,x,y,face,scale,sheet){const s=SPRITES[id],tint=sheet?(sheet===s.white?'white':'ghost'):null;return drawComicPose(id,'idle',x,y,face,scale||s.scale,0,null,tint)||pixelDrawTurn(id,x,y,face,scale,sheet);};
 animationClip=function(id,name){const a=comicAtlas(id);return a?.ready&&ANIMATION_DATA[id]?.[name]?{...ANIMATION_DATA[id][name],ready:true}:pixelAnimationClip(id,name);};
 comicAtlas('volt');
+comicAtlas('volt-jog');

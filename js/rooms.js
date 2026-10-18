@@ -124,7 +124,7 @@ function updateTransit(dt){
 }
 function arrive(reward){
   roomPhase='reward'; sfx('land');
-  if (reward.type==='district'){ banner(DISTRICTS[curDistrict()].name.toUpperCase()); openDraft('boon'); }
+  if (reward.type==='district'){ banner(DISTRICTS[curDistrict()].name.toUpperCase()); missionArrival(curDistrict(),()=>openDraft('boon')); }
   else if (reward.type==='boon') openDraft('boon',reward.hero);
   else if (reward.type==='tech') openDraft('tech');
   else if (reward.type==='shards'){

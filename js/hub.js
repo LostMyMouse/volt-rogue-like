@@ -52,9 +52,9 @@ const V = (text,expression) => ({who:'volt', text, expression});
 const E = (text,expression) => ({text, expression});
 const HUB_LINES = {
   halo:[
-    {id:'h_first', text:["You must be the rookie.", V("Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",'pleased'), E("Bastion says you asked to join the roster. I didn't vote for you.",'stern'), V("Oh. Okay. That's... fair."), E("Prove me wrong.",'stern')]},
-    {id:'h_partner2', when:c=>c.seen('rd_halo2'), text:[E("He told you.",'stern'), V("Is it true? You left him in the tower?",'stern'), E("The tower was coming down. Half the district was still inside. I could reach him, or I could reach them.",'stern'), V("So you chose them."), "I've stood on this balcony every night since, making sure it was the right call.", V("Was it?"), "Ask me again when you've beaten him."]},
-    {id:'h_partner', when:c=>c.seen('rd_halo1'), text:["The Redactor talked to you.", V("He asked if you still stand out here. And who used to stand here with you."), "...", V("Halo?"), E("Leave it, rookie.",'stern')]},
+    {id:'h_first', text:["You made it inside. Keep listening to Bastion and we might keep you alive.", V("Still getting used to being in here. Huge fan. I mean, ready to work.",'pleased'), E("You volunteered before you understood the danger. I need you to understand it now.",'stern'), V("Oh. Okay. That's... fair."), E("Train first. Then help us shut down the drain.",'stern')]},
+    {id:'h_partner2', when:c=>c.seen('rd_halo2'), text:[E("He told you.",'stern'), V("Is it true? You left him in the tower?",'stern'), E("The tower was coming down. Half the district was still inside. I could reach him, or I could reach them.",'stern'), V("So you chose them."), "I've stood on this balcony every night since, making sure it was the right call.", V("Was it?"), "I chose the people I could reach. That saved lives. It does not make leaving him hurt less."]},
+    {id:'h_partner', when:c=>c.seen('rd_halo1') && !c.seen('rd_halo2'), text:["The Redactor talked to you.", V("He asked if you still stand out here. And who used to stand here with you."), "...", V("Halo?"), E("Leave it, rookie.",'stern')]},
     {id:'h_won', when:c=>c.lastWon, text:["You walked out of the Redactor's tower.", V("I did! I mean. Yes. I did that.",'pleased'), "...", E("I knew someone once who'd have said I was wrong about you.",'pleased'), V("Were you?"), E("Go to bed, rookie.",'pleased')]},
     {id:'h_gm', when:c=>c.beaten.gravemark, text:["Gravemark.", V("You put it down once, right? How?"), "I didn't. It got back up. They always get back up.", V("So what do I do?"), E("Get up faster.",'stern')]},
     {id:'h_beat', when:c=>c.beatenAny, text:["One district back.", V("Did you see? Did you see the part where I—",'pleased'), E("I saw.",'pleased'), V("...And?"), E("Don't get comfortable.",'stern')]},
@@ -62,10 +62,10 @@ const HUB_LINES = {
     {id:'h_runs5', when:c=>c.runs>=5, text:["Most rookies have quit by now.", V("I'm not most rookies.",'stern'), E("No. You're not.",'pleased')]},
   ],
   bastion:[
-    {id:'b_first', text:["So. You're Volt.", V("That's me! Hi. Nice table.",'pleased'), E("Don't touch my table.",'stern'), V("I wasn't going to—"), E("Workshop's left. Armoury's right. Gate's at the bottom. My table is in the middle. Don't touch it.",'stern')]},
+    {id:'b_first', text:["Volt. Before you deploy, learn where everything is.", V("That's me! Hi. Nice table.",'pleased'), E("Don't touch my table.",'stern'), V("I wasn't going to—"), E("Workshop's left. Armoury's right. Gate's at the bottom. My table is in the middle. Don't touch it.",'stern')]},
     {id:'b_docks', when:c=>c.seen('ut_why'), text:["Undertow told you about the docks.", V("Is it true? You just... left?"), "I followed orders.", E("I have regretted it every single day since.",'stern'), V("Does Echo know?",'pleased'), E("If you tell Echo, you're on toilet duty for a year.",'stern')]},
     {id:'b_lic', when:c=>c.lic>0, text:["Hero Licence came through.", V("An actual licence? With my name on it?",'pleased'), "Take it to the armoury. And don't frame it.", V("I'm going to frame it.",'pleased'), E("I know.",'pleased')]},
-    {id:'b_cause', when:c=>c.lastDied && c.last.cause, text:c=>["Pulled the footage from last night.", V("Oh no.",'stern'), `You went down to ${causeText(c.last.cause)}.`, V("I had it. I had it right up until I didn't have it."), E("That's what everyone says. Watch for the tell next time.",'stern')]},
+    {id:'b_cause', when:c=>c.lastDied && c.last.cause, text:["Pulled the footage from your last operation.", V("Oh no.",'stern'), "The cause is on your run report. Learn the tell before the next deployment.", V("I had it. I had it right up until I didn't have it."), E("That's what everyone says. Watch for the tell next time.",'stern')]},
     {id:'b_beat', when:c=>c.beatenAny, text:["Updated the map. One district back.", V("Can I put the marker on? Please?",'pleased'), E("...Fine. Don't touch anything else.",'stern')]},
     {id:'b_runs3', when:c=>c.runs>=3, text:["Rule one: block what you can read.", V("And rule two?"), "Dash what you can't.", V("Rule three?"), E("Stop asking how many rules there are.",'stern')]},
   ],
@@ -74,7 +74,7 @@ const HUB_LINES = {
     {id:'e_glass', when:c=>c.seen('gw_echo'), text:["Glasswake was terrified of me.", V("I noticed. You were very smug about it."), E("I'm always smug. That was premium smug.",'pleased')]},
     {id:'e_won', when:c=>c.lastWon, text:["Don't look at me like that.", V("Like what?"), "Like you won and you want me to say it.", V("I did win.",'pleased'), E("...Fine. You were good. Happy?",'pleased'), V("Extremely.",'pleased')]},
     {id:'e_beat', when:c=>c.beatenAny, text:["That last villain. Decent.", V("Decent? I took back a whole district!",'pleased'), "I'd have been faster.", V("You would not."), E("I would. And I'd have looked better doing it.",'pleased')]},
-    {id:'e_death', when:c=>c.lastDied, text:[E("I saw that coming. Literally.",'pleased'), V("And you didn't think to warn me?"), "I thought about it.", V("And?"), E("And then I didn't.",'pleased')]},
+    {id:'e_death', when:c=>c.lastDied, text:[E("I saw the strike too late. By the time I called, you were already down.",'pleased'), V("And you didn't think to warn me?"), "I did. The relay interference swallowed the warning.", V("And?"), E("Next time I call earlier. You listen earlier. Deal?",'pleased')]},
     {id:'e_runs5', when:c=>c.runs>=5, text:["You keep coming back.", V("Yep."), "That's either really brave or really stupid. I'm still reading which.", V("Can't you just tell me?"), E("Where's the fun in that?",'pleased')]},
   ],
   thorn:[
@@ -87,9 +87,9 @@ const HUB_LINES = {
   patch:[
     {id:'p_first', text:["Patch. Comms, gear, coffee.", V("In that order?"), "Depends on the night. The terminal's for upgrades. Shards go in, a better you comes out.", V("A better me?"), E("A slightly better you. Let's be realistic.",'pleased')]},
     {id:'p_kiln', when:c=>c.seen('kh_patch'), text:["Kilnheart complimented my suit design.", V("And then insulted me."), E("Both were correct.",'pleased'), V("Patch!",'stern'), E("I stand by it.",'pleased')]},
-    {id:'p_shards', when:c=>c.shards>=12, text:c=>[`You've got ${c.shards} shards just sitting there.`, V("Is this a sales pitch?"), E("It's an observation. A pointed one. Terminal's right there.",'pleased')]},
+    {id:'p_shards', when:c=>c.shards>=12, text:[`You've got shards just sitting there.`, V("Is this a sales pitch?"), E("It's an observation. A pointed one. Terminal's right there.",'pleased')]},
     {id:'p_lic', when:c=>c.lic>0, text:["Licence paperwork cleared.", V("Thanks, Patch!"), E("Don't thank me. Thank the forms. There were nine.",'pleased')]},
-    {id:'p_death', when:c=>c.lastDied, text:["Your suit telemetry flatlined last night.", V("It felt dramatic."), "It looked dramatic. I've patched it. That's repair number...", E("I've lost count. Let's call it 'again'.",'pleased')]},
+    {id:'p_death', when:c=>c.lastDied, text:["Your suit beacon tripped last operation. I pulled you out before the signal died.", V("It felt dramatic."), "It looked dramatic. I've patched it. That's repair number...", E("I've lost count. Let's call it 'again'.",'pleased')]},
   ],
 };
 const HUB_IDLE = {
@@ -184,19 +184,20 @@ function hubInteract(){
   }
 }
 function talkTo(id){
-  const c=hubContext(); let pages=null;
+  const c=hubContext(); let pages=null,completed=null;
   if (!hubVisit.talked[id]){
     const seen=save.talk||(save.talk={});
     const e=HUB_LINES[id].find(l=>!seen[l.id] && (!l.when || l.when(c)));
-    if (e){ seen[e.id]=1; writeSave(); pages=resolveText(e.text,c); }
+    if (e){pages=resolveText(e.text,c);completed=()=>{seen[e.id]=1;writeSave();};}
   }
   hubVisit.talked[id]=true;
-  openTalk(id, pages || [pick(HUB_IDLE[id])]);
+  openTalk(id,pages||[pick(HUB_IDLE[id])],null,completed);
 }
 // Pages are strings (said by `who`, or narration for a spot) or {who,text} for another speaker.
-function openTalk(who,pages,spot){
+function openTalk(who,pages,spot,completed){
   talk={npc:who, spot, pages:pages.map(pg=>typeof pg==='string'?{who,text:pg}:{who,...pg}), i:0, t:performance.now()}; state='hubtalk'; keys.clear(); stick.id=null; player.vx=player.vy=0;
   if (who) player.aim=Math.atan2(HUB_NPCS.find(n=>n.id===who).y-player.y, HUB_NPCS.find(n=>n.id===who).x-player.x); // Volt turns to face them
+  talk.completed=completed;
   $('#hubTalk').dataset.label='Fortress'; show('#hubPrompt',false); show('#hubTalk',true); showTalkPage();
 }
 function showTalkPage(){
@@ -210,14 +211,14 @@ function advanceTalk(){
   if ((state!=='hubtalk' && state!=='dialogue') || !talk || performance.now()-talk.t<250) return;
   talk.t=performance.now();
   if (++talk.i<talk.pages.length){ showTalkPage(); return; }
-  const done=talk.done; show('#hubTalk',false); talk=null; stopVoice();
+  const done=talk.done;talk.completed&&talk.completed();markStoryHeard(talk.storyId);show('#hubTalk',false);talk=null;stopVoice();
   if (done){ done(); return; }
   state='hub'; hubNear=null; // the prompt reappears next frame
 }
 // The same box during a run: an exchange after an intro card, with the action frozen until it ends.
 function runDialogue(pages, label, done){
   if (window.__volt && window.__volt.noIntro){ done && done(); return; } // tests skip cards and their dialogue
-  talk={pages, i:0, t:performance.now(), done:()=>{ state='play'; done && done(); }};
+  talk={pages,storyId:pages.storyId,i:0,t:performance.now(),done:()=>{state='play';done&&done();}};
   state='dialogue'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; powerHeld=false;
   if (player){ player.blockHeld=false; player.charging=0; }
   $('#hubTalk').dataset.label=label; show('#hubTalk',true); showTalkPage();

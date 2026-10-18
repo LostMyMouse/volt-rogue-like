@@ -7,6 +7,11 @@
 const seenAny = (c,...ids) => ids.some(id=>c.seen(id));
 const talks = (prefix) => Object.keys(save.talk||{}).filter(k=>k.startsWith(prefix)).length;
 const CODEX = [
+  {id:'operation',group:'The mission',notes:[
+    {text:'The Redactor steals registered hero powers through district relays. The Fortress shield protects the team inside. My lightning is not registered, so Patch can route their backup through my suit without broadcasting their signatures.'},
+    {when:c=>!!save.missionBriefed,text:'Three district relay operators, then Gravemark, then the tower control room. If I go down, Patch extracts me. Borrowed upgrades burn out during extraction; permanent Fortress upgrades stay. His crews reconnect the relays between operations.'},
+    {when:c=>c.wins>=1,text:'Shutting down the main drain returned stolen powers. The Redactor escaped through a backup network. We are going back to keep those relays offline. A win matters, even while there is more work to do.'},
+  ]},
   { id:'volt', group:'Me', notes:[
     { text:"Me. Volt. Electric powers, which I mostly use to punch things very fast. No hero licence. No team. One very good jacket. Goal: become the greatest hero in the world. Current progress: allowed inside the building." },
     { when:c=>c.runs>=3, text:"Things I've learned: walls have opinions, Bastion's table is sacred, and when a white ring closes, you block. Things I haven't learned: how to land without falling over." },
@@ -39,37 +44,37 @@ const CODEX = [
   ]},
   { id:'kilnheart', group:'Villains', notes:[
     { text:"Furnace suit running at nine hundred degrees. Punches like a building falling over. Calls me \"kid\". Do not hug." },
-    { when:c=>(c.beaten.kilnheart||0)>=1, text:"She used to work the foundry that kept this city warm. When they shut it down, her neighbourhood's lights went out first. She's angry at the right people. She's just hitting the wrong ones." },
+    { when:c=>c.seen('kh_why'), text:"She used to work the foundry that kept this city warm. When they shut it down, her neighbourhood's lights went out first. She's angry at the right people. She's just hitting the wrong ones." },
     { when:c=>(c.beaten.kilnheart||0)>=2 || c.seen('kh_why'), text:"She's not evil. She's tired. When this is over, someone should turn that foundry back on. It's on my list." },
   ]},
   { id:'bellwether', group:'Villains', notes:[
     { text:"Sound powers. Turns speakers into weapons and every fight into a concert. Hates critics. I am now a critic." },
-    { when:c=>(c.beaten.bellwether||0)>=1, text:"Ten years singing to empty rooms. Now the whole city has to listen. I told her being heard isn't the same as being listened to. She called me a terrible audience." },
+    { when:c=>c.seen('bw_why'), text:"Ten years singing to empty rooms. Now the whole city has to listen. I told her being heard isn't the same as being listened to. She called me a terrible audience." },
     { when:c=>(c.beaten.bellwether||0)>=2 || c.seen('bw_why'), text:"Honestly? She's good. If she ever plays a show nobody's forced to attend, I'm buying a ticket." },
   ]},
   { id:'verdigris', group:'Villains', notes:[
     { text:"Living metal and acid. Turns rooftops into rust gardens. Extremely polite while trying to dissolve me." },
-    { when:c=>(c.beaten.verdigris||0)>=1 || c.seen('vg_thorn'), text:"Thorn's old partner. They used to grow living things together. Now everything they touch rusts." },
+    { when:c=>c.seen('vg_thorn'), text:"Thorn's old partner. They used to grow living things together. Now everything they touch rusts." },
     { when:c=>c.seen('vg_thorn2'), text:"They asked if Thorn still has the plant. That's not something a lost cause asks." },
   ]},
   { id:'glasswake', group:'Villains', notes:[
     { text:"Mirrors and hard light. Makes copies of herself. All of them smug. Hit the one that's thinking." },
-    { when:c=>(c.beaten.glasswake||0)>=1, text:"For years nobody looked at her twice. Now nobody can look away. I get it more than I'd like to admit." },
+    { when:c=>c.seen('gw_why'), text:"For years nobody looked at her twice. Now nobody can look away. I get it more than I'd like to admit." },
     { when:c=>(c.beaten.glasswake||0)>=2 || c.seen('gw_why'), text:"When I said I could see her, the real her, she went quiet. Then she threw glass at me. Progress." },
   ]},
   { id:'undertow', group:'Villains', notes:[
     { text:"Water pressure and ice. Lives in the flooded docks and holds grudges deeper than the harbour." },
-    { when:c=>(c.beaten.undertow||0)>=1 || c.seen('ut_bastion'), text:"The city pulled the heroes out of the docks. The floods came and nobody answered. The Redactor did. That's his whole reason, and it isn't a bad one." },
+    { when:c=>c.seen('ut_why'), text:"The city pulled the heroes out of the docks. The floods came and nobody answered. The Redactor did. That's his whole reason, and it isn't a bad one." },
     { when:c=>(c.beaten.undertow||0)>=2 || c.seen('ut_why'), text:"He told me to prove the water's safe. So that's the job now." },
   ]},
   { id:'gravemark', group:'Villains', notes:[
-    { text:"Stone golem. Gravity powers. Carves the names of heroes it beats into its roof. It's carved V, O, L. I am not letting it finish." },
-    { when:c=>(c.beaten.gravemark||0)>=1, text:"The names on the roof are heroes the city forgot. Gravemark remembers them. I don't know what to do with that." },
-    { when:c=>(c.beaten.gravemark||0)>=2 || c.seen('gm_names'), text:"Halo beat it years ago. It got back up. It always does. So do I." },
+    { text:"Stone golem. Gravity powers. Carves the names of heroes it beats into its roof. It threatens to put my name there next. I am keeping it off the list." },
+    { when:c=>c.seen('gm_names'), text:"The names on the roof are heroes the city forgot. Gravemark remembers them. I don't know what to do with that." },
+    { when:c=>(c.beaten.gravemark||0)>=2 || c.seen('gm_names'), text:"Halo faced it years ago. Even she could not keep it down. It always gets back up. So do I." },
   ]},
   { id:'redactor', group:'Villains', notes:[
     { text:"Steals powers and calls it \"reviewing\" them. Talks like a customer-service email that wants you dead." },
-    { when:c=>c.seen('rd_halo2') || (c.beaten.redactor||0)>=1, text:"He was Halo's partner. The city forgot his name. He decided nobody should have powers if powers mean somebody gets left behind." },
+    { when:c=>c.seen('rd_halo2'), text:"He was Halo's partner. The city forgot his name. He decided nobody should have powers if powers mean somebody gets left behind." },
     { when:c=>(c.beaten.redactor||0)>=2 || c.seen('rd_why'), text:"He's wrong. But he's not wrong about why it hurts. Beat him anyway. Then maybe find out his name." },
   ]},
 ];
