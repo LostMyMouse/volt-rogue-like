@@ -433,7 +433,7 @@ function animationDeathActors(){
   SPRITE_LAST_TIME=time;
   const current=new Set(enemies);
   for(const e of PREVIOUS_SPRITE_ACTORS){
-    if (!current.has(e) && e.dead && !e.isDecoy && !e.isIce && !e.isBud && !e.isPlate && ANIMATION_DATA[e.kind]?.death){
+    if (!current.has(e) && e.dead && !e.isDecoy && !e.isIce && !e.isBud && !e.isPlate && !e.tutWeak && !e.tutDummy && !e.isPractice && ANIMATION_DATA[e.kind]?.death){
       animationClip(e.kind,'death');SPRITE_CORPSES.push({kind:e.kind,x:e.x,y:e.y,r:e.r,face:e.face||0,t0:time});
     }
   }

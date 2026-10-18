@@ -6,10 +6,11 @@ const COMIC_COVER=new Image();COMIC_COVER.src='assets/comic/volt-cover-v1.webp';
 comicImage('halo');
 const COMIC_SPREADS={heroes:new Image(),villains:new Image()};
 COMIC_SPREADS.heroes.src='assets/comic/vanguard-spread-v1.webp';COMIC_SPREADS.villains.src='assets/comic/villains-spread-v1.webp';
-const COVER_TIMING={hold:4.2,turn:1.8};
+const COVER_TIMING={hold:4.2,turn:1.25};
+const COMIC_PAGE_TURN=1.05,SPREAD_HOLD={heroes:18,villains:14};
 const storyPlayComic=playCutscene,storyNextComic=nextCutPanel,storyUpdateComic=updateCinematic,storyRenderComic=renderCinematic,storyEndComic=endCutscene;
 playCutscene=function(done){storyPlayComic(done);if(!comic)return;stopVoice();comic.i=-1;comic.t=0;comic.cover={t:0,turning:false,turnT:0};$('#cutscene').dataset.cover='true';$('#csNext').textContent='Open comic →';};
-function openComicBook(){if(!comic?.cover||comic.cover.turning||comic.cover.t<.8)return;comic.cover.turning=true;comic.cover.turnT=0;sfx('ui_move',{vol:.2});}
+function openComicBook(){if(!comic?.cover||comic.cover.turning||comic.cover.t<.8)return;comic.cover.turning=true;comic.cover.turnT=0;const front=document.createElement('canvas');front.width=cv.width;front.height=cv.height;front.getContext('2d').drawImage(cv,0,0);comic.cover.front=front;sfx('ui_move',{vol:.2});}
 nextCutPanel=function(){
  if(comic?.cover){openComicBook();return;}if(!comic||comic.pageTurn)return;
  if(comic.spread){if(comic.spread.t<1.2)return;startComicPageTurn(comic.i+1);comic.spread=null;return;}
@@ -22,29 +23,28 @@ function startComicPageTurn(to,spread=null){const snapshot=document.createElemen
 function beginComicSpread(kind){comic.spread={kind,t:0};if(kind==='villains')comic.villainsSpreadSeen=true;$('#cutscene').dataset.cover='spread';$('#csNext').textContent='Turn page →';}
 endCutscene=function(){delete $('#cutscene').dataset.cover;storyEndComic();};
 updateCinematic=function(dt){
- if(comic?.pageTurn){const tr=comic.pageTurn,im=tr.spread?COMIC_SPREADS[tr.spread]:comicImage(COMIC_BEATS[tr.to].id);if(!im.complete||!im.naturalWidth)return;tr.t+=dt;if(tr.t>=1.6){comic.pageTurn=null;if(tr.spread)beginComicSpread(tr.spread);else{delete $('#cutscene').dataset.cover;$('#csNext').textContent='Next scene →';storyNextComic();}}return;}
- if(comic?.spread){const im=COMIC_SPREADS[comic.spread.kind];if(im.complete&&im.naturalWidth)comic.spread.t+=dt;if(comic.auto&&comic.spread.t>=7)nextCutPanel();return;}
+ if(comic?.pageTurn){const tr=comic.pageTurn,im=tr.spread?COMIC_SPREADS[tr.spread]:comicImage(COMIC_BEATS[tr.to].id);if(!im.complete||!im.naturalWidth)return;tr.t+=dt;if(tr.t>=COMIC_PAGE_TURN){comic.pageTurn=null;if(tr.spread)beginComicSpread(tr.spread);else{delete $('#cutscene').dataset.cover;$('#csNext').textContent='Next scene →';storyNextComic();}}return;}
+ if(comic?.spread){const im=COMIC_SPREADS[comic.spread.kind];if(im.complete&&im.naturalWidth)comic.spread.t+=dt;if(comic.auto&&comic.spread.t>=SPREAD_HOLD[comic.spread.kind])nextCutPanel();return;}
  if(!comic?.cover){storyUpdateComic(dt);return;}
  const c=comic.cover;if(!(COMIC_COVER.complete&&COMIC_COVER.naturalWidth)&&!COMIC_COVER.failed)return;
  c.t+=dt;if(!c.turning&&comic.auto&&c.t>=COVER_TIMING.hold)openComicBook();
  if(c.turning){const spread=COMIC_SPREADS.heroes;if(!spread.complete||!spread.naturalWidth)return;c.turnT+=dt;if(c.turnT>=COVER_TIMING.turn){comic.cover=null;beginComicSpread('heroes');}}
 };
 COMIC_COVER.onerror=()=>COMIC_COVER.failed=true;
+function coverRect(){const h=Math.min(H-110,(W-48)*1.5,760);return{x:(W-h*2/3)/2,y:62+(H-76-h)/2,w:h*2/3,h};}
+// Preserve the inked page. Only a thin paper edge curls; the illustration never becomes strips.
+function paintPaperCurl(front,box,progress){
+ const p=clamp(progress,0,1),ease=p*p*(3-2*p),edge=box.x+box.w*(1-ease),fold=Math.sin(p*Math.PI)*Math.min(34,box.w*.055);
+ ctx.save();if(reduceMotion){ctx.globalAlpha=1-p;ctx.drawImage(front,0,0,front.width,front.height,0,0,W,H);ctx.restore();return;}
+ ctx.beginPath();ctx.rect(box.x,box.y,Math.max(0,edge-box.x),box.h);ctx.clip();ctx.drawImage(front,0,0,front.width,front.height,0,0,W,H);ctx.restore();
+ if(p<=0||p>=1)return;ctx.save();const shade=ctx.createLinearGradient(edge,0,edge+fold+18,0);shade.addColorStop(0,'rgba(0,0,0,.28)');shade.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=shade;ctx.fillRect(edge,box.y,fold+18,box.h);
+ ctx.fillStyle='#ecdfbd';ctx.strokeStyle='#1b1b20';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(edge,box.y);ctx.bezierCurveTo(edge+fold,box.y+box.h*.22,edge+fold,box.y+box.h*.78,edge,box.y+box.h);ctx.bezierCurveTo(edge-fold*.35,box.y+box.h*.72,edge-fold*.35,box.y+box.h*.28,edge,box.y);ctx.fill();ctx.stroke();ctx.restore();
+}
 function drawComicCover(){
- const c=comic.cover,turn=c.turning?clamp(c.turnT/COVER_TIMING.turn,0,1):0,ease=turn*turn*(3-2*turn),angle=ease*Math.PI;
- const h=Math.min(H-110,(W-48)*1.5,760),w=h*2/3,x=(W-w)/2,y=62+(H-76-h)/2;
- ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);
- const glow=ctx.createRadialGradient(W/2,H/2,20,W/2,H/2,Math.max(W,H)*.7);glow.addColorStop(0,'#223c54');glow.addColorStop(1,'#080d16');ctx.fillStyle=glow;ctx.fillRect(0,0,W,H);
- ctx.save();ctx.globalAlpha=Math.min(1,c.t/1.1);ctx.shadowColor='#000';ctx.shadowBlur=28;ctx.shadowOffsetY=12;ctx.fillStyle='#eedfb9';ctx.fillRect(x,y,w,h);ctx.shadowBlur=0;ctx.shadowOffsetY=0;
- if(c.turning){const im=COMIC_SPREADS.heroes;ctx.fillStyle='#171a24';ctx.fillRect(x+7,y+7,w-14,h-14);ctx.fillStyle='#f4e6c4';ctx.textAlign='center';ctx.font=`900 ${w*.11}px "Big Shoulders Display",Impact,sans-serif`;ctx.fillText('THE VANGUARD',x+w/2,y+h*.16);const ih=(w-18)*im.naturalHeight/im.naturalWidth;ctx.drawImage(im,x+9,y+(h-ih)/2,w-18,ih);ctx.font=`700 ${Math.max(10,w*.035)}px sans-serif`;ctx.fillText('THE PEOPLE WHO PROTECTED US',x+w/2,y+h*.88);}
- // Rotate about the binding. Narrow strips give the sheet a gentle bend as it turns.
- for(let i=0;i<48;i++){const u=i/48,v=(i+1)/48,bend=Math.sin(u*Math.PI)*Math.sin(angle)*w*.045,x0=x+u*w*Math.cos(angle),x1=x+v*w*Math.cos(angle),dy=bend;
-  ctx.save();ctx.translate(x0,y+dy);ctx.transform((x1-x0)/(w/48),Math.sin(angle)*.025,0,1,0,0);
-  if(angle<Math.PI/2&&COMIC_COVER.complete&&COMIC_COVER.naturalWidth)ctx.drawImage(COMIC_COVER,u*COMIC_COVER.naturalWidth,0,COMIC_COVER.naturalWidth/48+1,COMIC_COVER.naturalHeight,0,0,w/48+1,h);
-  else{ctx.fillStyle='#d8cba7';ctx.fillRect(0,0,w/48+1,h);}ctx.restore();
- }
- ctx.strokeStyle='rgba(0,0,0,.5)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h);ctx.stroke();ctx.restore();
- ctx.fillStyle='#c7d7df';ctx.font='600 13px sans-serif';ctx.textAlign='center';ctx.fillText(c.turning?'':comic.auto?'Issue #1 · Opening in a moment…':'Issue #1 · Tap Open comic to begin',W/2,H-12);
+ const c=comic.cover,box=coverRect();ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);
+ if(c.turning){paintComicSpread('heroes',0);if(c.front)paintPaperCurl(c.front,box,c.turnT/COVER_TIMING.turn);return;}
+ ctx.save();ctx.globalAlpha=Math.min(1,c.t/1.1);ctx.shadowColor='#000';ctx.shadowBlur=24;ctx.shadowOffsetY=10;
+ if(COMIC_COVER.complete&&COMIC_COVER.naturalWidth)ctx.drawImage(COMIC_COVER,box.x,box.y,box.w,box.h);ctx.restore();ctx.fillStyle='#c7d7df';ctx.font='600 13px sans-serif';ctx.textAlign='center';ctx.fillText(comic.auto?'Issue #1 - Opening in a moment...':'Issue #1 - Tap Open comic to begin',W/2,H-12);
 }
 // Brief, unvoiced character speech accompanies the existing Volt narration.
 // Each entry follows the four actions in that character's illustrated sequence.
@@ -80,16 +80,18 @@ function drawComicBubble(){
  comic.lastBubble={who,line,x,y,width,height,view:box};
 }
 function drawComicPageTurn(){
- const tr=comic.pageTurn,box=tr.box,progress=clamp(tr.t/1.6,0,1),ease=progress*progress*(3-2*progress),angle=ease*Math.PI,im=tr.spread?COMIC_SPREADS[tr.spread]:comicImage(COMIC_BEATS[tr.to].id);
- ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);ctx.save();ctx.beginPath();ctx.rect(box.x,box.y,box.w,box.h);ctx.clip();ctx.fillStyle='#e7d8b3';ctx.fillRect(box.x,box.y,box.w,box.h);
- const ratio=Math.min((box.w-18)/im.naturalWidth,(box.h-18)/im.naturalHeight),w=im.naturalWidth*ratio,h=im.naturalHeight*ratio;ctx.drawImage(im,box.x+(box.w-w)/2,box.y+(box.h-h)/2,w,h);
- for(let i=0;i<56;i++){const u=i/56,v=(i+1)/56,x0=box.x+u*box.w*Math.cos(angle),x1=box.x+v*box.w*Math.cos(angle),bend=Math.sin(u*Math.PI)*Math.sin(angle)*12;
-  ctx.save();ctx.translate(x0,box.y+bend);ctx.scale((x1-x0)/(box.w/56),1);
-  if(angle<Math.PI/2)ctx.drawImage(tr.snapshot,(box.x+u*box.w)*DPR,box.y*DPR,(box.w/56+1)*DPR,box.h*DPR,0,0,box.w/56+1,box.h);
-  else{ctx.fillStyle='#dfd0ab';ctx.fillRect(0,0,box.w/56+1,box.h);}ctx.restore();
- }
- const shadow=ctx.createLinearGradient(box.x,0,box.x+Math.max(20,box.w*Math.max(0,Math.cos(angle))),0);shadow.addColorStop(0,'rgba(0,0,0,.35)');shadow.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=shadow;ctx.fillRect(box.x,box.y,box.w,box.h);ctx.restore();
+ const tr=comic.pageTurn,box=tr.box,im=tr.spread?COMIC_SPREADS[tr.spread]:comicImage(COMIC_BEATS[tr.to].id);ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);
+ if(tr.spread)paintComicSpread(tr.spread,0);else{const ratio=Math.min((box.w-18)/im.naturalWidth,(box.h-18)/im.naturalHeight),w=im.naturalWidth*ratio,h=im.naturalHeight*ratio;ctx.drawImage(im,box.x+(box.w-w)/2,box.y+(box.h-h)/2,w,h);}
+ paintPaperCurl(tr.snapshot,box,tr.t/COMIC_PAGE_TURN);
 }
 function spreadView(){return{x:14,y:66,w:W-28,h:H-102};}
-function drawComicSpread(){const s=comic.spread,im=COMIC_SPREADS[s.kind],box=spreadView();ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);if(!im.complete||!im.naturalWidth)return;const ratio=Math.min(box.w/im.naturalWidth,(box.h-55)/im.naturalHeight),w=im.naturalWidth*ratio,h=im.naturalHeight*ratio,x=(W-w)/2,y=box.y+(box.h-h)/2;ctx.drawImage(im,x,y,w,h);ctx.strokeStyle='#e7d8b3';ctx.lineWidth=3;ctx.strokeRect(x-3,y-3,w+6,h+6);ctx.fillStyle=s.kind==='heroes'?'#eecf79':'#e68176';ctx.textAlign='center';ctx.font='900 '+clamp(W*.033,20,36)+'px "Big Shoulders Display",Impact,sans-serif';ctx.fillText(s.kind==='heroes'?'THE VANGUARD':'THE CITY UNDER SIEGE',W/2,box.y+3);ctx.fillStyle='#d8e1e6';ctx.font='600 '+clamp(W*.016,11,15)+'px sans-serif';ctx.fillText(s.kind==='heroes'?'Halo leads. Bastion, Echo, Thorn and Patch stand with her.':'The Redactor and the villains taking the city.',W/2,H-13);}
+function spreadCamera(kind,t){
+ const length=SPREAD_HOLD[kind],k=t/length,frames=[[0,.5,.5,1],[.17,.5,.5,1],[.36,.5,.43,1.42],[.53,.22,.39,1.55],[.75,.79,.54,1.38],[.9,.5,.5,1],[1,.5,.5,1]];let i=0;while(i<frames.length-2&&k>frames[i+1][0])i++;const a=frames[i],b=frames[i+1],p=clamp((k-a[0])/(b[0]-a[0]),0,1),e=p*p*(3-2*p);return{x:a[1]+(b[1]-a[1])*e,y:a[2]+(b[2]-a[2])*e,z:reduceMotion?1:a[3]+(b[3]-a[3])*e};
+}
+function paintComicSpread(kind,t){
+ const im=COMIC_SPREADS[kind],box=spreadView();if(!im.complete||!im.naturalWidth)return;const ratio=W>H?box.w/im.naturalWidth:Math.min(box.w/im.naturalWidth,box.h/im.naturalHeight),w=im.naturalWidth*ratio,h=W>H?box.h:im.naturalHeight*ratio,x=(W-w)/2,y=box.y+(box.h-h)/2,c=spreadCamera(kind,t),sw=im.naturalWidth*ratio*c.z,sh=im.naturalHeight*ratio*c.z,dx=clamp(x+w/2-c.x*sw,x+w-sw,x),dy=clamp(y+h/2-c.y*sh,y+h-sh,y);
+ ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.drawImage(im,dx,dy,sw,sh);ctx.restore();ctx.strokeStyle='#e7d8b3';ctx.lineWidth=2;ctx.strokeRect(x-2,y-2,w+4,h+4);ctx.fillStyle=kind==='heroes'?'#eecf79':'#e68176';ctx.textAlign='center';ctx.font='900 '+clamp(W*.033,20,36)+'px "Big Shoulders Display",Impact,sans-serif';ctx.fillText(kind==='heroes'?'THE VANGUARD':'THE CITY UNDER SIEGE',W/2,box.y-8);
+ ctx.fillStyle='#d8e1e6';ctx.font='600 '+clamp(W*.016,11,15)+'px sans-serif';const part=t/SPREAD_HOLD[kind];const label=kind==='heroes'?(part<.3?'Halo leads the Vanguard.':part<.48?'Halo - the city’s shield.':part<.65?'Bastion and Thorn - hold the line, make a way.':part<.86?'Echo and Patch - rescue, repair, repeat.':'Halo. Bastion. Echo. Thorn. Patch.'):'The Redactor and the villains taking the city.';ctx.fillText(label,W/2,H-13);
+}
+function drawComicSpread(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);paintComicSpread(comic.spread.kind,comic.spread.t);}
 renderCinematic=function(){if(comic?.cover){drawComicCover();return;}if(comic?.pageTurn){drawComicPageTurn();return;}if(comic?.spread){drawComicSpread();return;}storyRenderComic();drawComicBubble();};
