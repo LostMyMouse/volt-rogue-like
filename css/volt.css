@@ -504,3 +504,4 @@ body.in-hub.touch-mode #tDash{display:block;pointer-events:auto}
 
 body.touch-mode .practice-controls{top:8px}body.touch-mode .practice-controls span{display:none}
 body.motion-comic .cutscene[data-cover] .cs-caption{display:none!important}
+body.in-cut.touch-mode .touch{display:none!important}
