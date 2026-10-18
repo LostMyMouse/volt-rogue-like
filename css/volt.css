@@ -492,3 +492,14 @@ body.touch-mode.tutorial-mode .tut-skip{top:8px;right:8px;max-width:80px;min-hei
 .shop-panel #shopLeave{position:sticky;bottom:0;z-index:2;box-shadow:0 8px 0 #080d18}
 
 .run-credits{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--heal)}.shop-panel .card-foot{margin-top:0;color:var(--text);font-size:11px}
+
+/* Only Dash is available on the Fortress touch controls. */
+body.in-hub.touch-mode .touch{display:block!important;pointer-events:none}
+body.in-hub .touch button{display:none}
+body.in-hub.touch-mode #tDash{display:block;pointer-events:auto}
+.field-claim{position:fixed;z-index:30;bottom:110px;left:50%;transform:translateX(-50%);width:min(430px,70vw);padding:10px 14px;border:3px solid var(--ink);background:#122738;color:var(--spark);font:700 14px var(--ui);box-shadow:4px 4px 0 var(--ink);cursor:pointer}
+.field-claim[hidden]{display:none}.field-claim:disabled{color:#bdc7d2}
+
+.practice-controls{position:fixed;top:64px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;z-index:25;padding:5px;background:#102333;border:3px solid var(--ink);max-width:95vw}.practice-controls[hidden]{display:none}.practice-controls span{font:700 12px var(--ui);color:var(--volt)}.practice-controls button{font:700 12px var(--ui);color:var(--spark);background:#244056;border:2px solid var(--ink);padding:8px;cursor:pointer}@media(max-width:700px){.practice-controls{top:6px}.practice-controls span{display:none}}
+
+body.touch-mode .practice-controls{top:8px}body.touch-mode .practice-controls span{display:none}

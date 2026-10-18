@@ -20,7 +20,7 @@ function rumble(strong=0.5, weak=0.3, ms=90){
 }
 
 /* ---------- Menus: spatial navigation over the buttons of whichever panel is on top ---------- */
-const MENU_LAYERS = ['#mConfirm','#mTune','#mCodex','#mSlots','#mStart','#mStyle','#mFortress','#mPause','#mDraft','#mCity','#mOver','#splash'];
+const MENU_LAYERS = ['#mProgression','#mConfirm','#mTune','#mCodex','#mSlots','#mStart','#mStyle','#mFortress','#mPause','#mDraft','#mCity','#mOver','#splash'];
 function menuLayer(){ for (const id of MENU_LAYERS){ const el=$(id); if (el && !el.hidden && getComputedStyle(el).display!=='none') return el; } return null; }
 function menuItems(layer){
   return [...layer.querySelectorAll('button, input[type=range]')].filter(b=>!b.disabled && !b.hidden && b.offsetParent!==null && b.getAttribute('aria-disabled')!=='true' || (b.classList.contains('style-card') && b.offsetParent!==null));
@@ -71,10 +71,11 @@ function pollPads(dt){
     if (down(BTN.A)) doDash();
     if (down(BTN.RB)) pressBlock(); if (up(BTN.RB)) releaseBlock();
     if (down(BTN.LB)||down(BTN.RT)) doSig();
+    if(down(BTN.B)&&roomPhase==='shop')claimNearbySupply();
     if (down(BTN.B) && roomPhase==='exits') jumpTo(exitNear());
     if (down(BTN.START)) padKey('escape');
   } else if (state==='hub'){
-    if (down(BTN.A)||down(BTN.B)) hubInteract();
+    if(down(BTN.A))doDash();if(down(BTN.B))hubInteract();
     if (down(BTN.START)) { /* nothing to pause in the hub */ }
   } else {
     // Any menu screen: move focus with the stick or D-pad (with key-repeat), A selects, B / Start backs out.

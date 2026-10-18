@@ -4,9 +4,9 @@
 const SHOP_GREETING=PATCH.lines[0];
 let shop=null;
 const resetShopRun=reset;
-reset=function(){resetShopRun();run.credits=25;run.shopsVisited=[];shop=null;};
+reset=function(){resetShopRun();run.credits=0;run.shopsVisited=[];shop=null;supplyCrates=[];fieldDrops=[];if($('#fieldClaim'))$('#fieldClaim').hidden=true;};
 const damageShopCredits=damageEnemy;
-damageEnemy=function(e,...args){const alive=!e.dead;const result=damageShopCredits(e,...args);if(alive&&e.dead&&!e.isDecoy&&!e.isIce&&!e.isPlate&&!inTutorial())run.credits=(run.credits||0)+(e.isBoss?15:e.elite?2:1);return result;};
+damageEnemy=function(e,...args){if(e.isSupply){if(!e.dead){e.dead=true;dropFieldCredits(e.x,e.y,e.amount);sparks(e.x,e.y,0,14,COL.amber,280,Math.PI);sfx('enemyhit');}return;}const alive=!e.dead;const result=damageShopCredits(e,...args);if(alive&&e.dead&&!e.isDecoy&&!e.isIce&&!e.isPlate&&!e.isBud&&!inTutorial()&&Math.random()<.25)dropFieldCredits(e.x,e.y,e.isBoss?15:e.elite?8:4);return result;};
 function rollShopOffers(){
  const offers=[],used=new Set(),pool=BOONS.filter(b=>b.weapon===run.style&&!(player.owned[b.id]?.level>=3));
  for(let i=0;i<3;i++){
@@ -18,27 +18,61 @@ function rollShopOffers(){
  if(player.hp>=player.maxHp&&offers.every(o=>o.type==='health'))offers[2]={type:'shards',cost:60,amount:12};
  return offers;
 }
+// The supply stop is a live, safe rooftop. Purchases require standing beside a pedestal.
+const PATCH_ROOF={id:'patch',x:555,y:370,face:0};
+function drawRoofPatch(){drawHubNpc(PATCH_ROOF);ctx.save();ctx.textAlign='center';ctx.font='bold 16px sans-serif';ctx.lineWidth=5;ctx.strokeStyle=COL.ink;ctx.strokeText('PATCH - FIELD SUPPLY',PATCH_ROOF.x,PATCH_ROOF.y-112);ctx.fillStyle=COL.heal;ctx.fillText('PATCH - FIELD SUPPLY',PATCH_ROOF.x,PATCH_ROOF.y-112);ctx.restore();}
+const SHOP_SPOTS=[{x:720,y:405},{x:920,y:405},{x:1120,y:405}];
 function openFieldShop(){
  run.shopsVisited=run.shopsVisited||[];if(!run.shopsVisited.includes(curDistrict()))run.shopsVisited.push(curDistrict());
- shop={offers:rollShopOffers(),district:curDistrict()};roomPhase='shop';state='shop';keys.clear();strikeHeld=false;mouse.left=false;stick.id=null;
- if(!$('#mFieldShop')){const el=document.createElement('div');el.id='mFieldShop';el.className='scrim';el.innerHTML='<div class="panel shop-panel" role="dialog" aria-modal="true" aria-labelledby="shopTitle"><div class="shop-heading"><img src="assets/intro/patch.webp" alt="Patch, superhero field engineer"><div><span class="tag">Safe stop · before the villain</span><h2 id="shopTitle">Patch’s Field Supply</h2><p class="hint" id="shopGreeting"></p><b id="shopCredits"></b></div></div><div class="draft-cards" id="shopCards"></div><p class="hint" id="shopMessage">Three random offers; repeats are possible. Field credits come from defeated enemies and expire after the run. Renown shards are permanent.</p><button class="btn primary" id="shopLeave" type="button">Continue to the unknown villain →</button></div>';document.body.appendChild(el);$('#shopLeave').onclick=leaveFieldShop;el.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Escape')leaveFieldShop();if(/^[123]$/.test(e.key))buyShopOffer(+e.key-1);});}
- $('#shopGreeting').textContent=SHOP_GREETING;fillFieldShop();show('#mFieldShop',true);$('#shopLeave').focus({preventScroll:true});$('#mFieldShop .shop-panel').scrollTop=0;playVoice('patch',SHOP_GREETING);
+ shop={offers:rollShopOffers(),district:curDistrict()};roomPhase='shop';state='play';keys.clear();strikeHeld=false;mouse.left=false;stick.id=null;
+ enemies=[];bullets=[];packs=[];supplyCrates=[];fieldDrops=[];boss=null;
+ exits=[{...PADS[0],reward:{type:'boss',boss:curDistrict()},hold:0,t:0}];
+ if(!$('#fieldClaim')){const b=document.createElement('button');b.id='fieldClaim';b.className='field-claim';b.hidden=true;document.body.appendChild(b);b.onclick=claimNearbySupply;}
+ banner('PATCH · FIELD SUPPLY');playVoice('patch',SHOP_GREETING);fillFieldShop();
 }
+function shopNear(){return shop?SHOP_SPOTS.findIndex(s=>Math.hypot(player.x-s.x,player.y-s.y)<95):-1;}
+function shopTitle(o){return o.type==='boon'?BOON_BY_ID[o.id].name:o.type==='health'?'Emergency Repair':'Renown Cache';}
 function fillFieldShop(){
- $('#shopCredits').textContent=`${run.credits||0} field credits · Health ${Math.ceil(player.hp)}/${player.maxHp}`;const cards=$('#shopCards');cards.innerHTML='';
- shop.offers.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.className='card';b.disabled=o.sold||run.credits<o.cost||(o.type==='health'&&player.hp>=player.maxHp);b.style.setProperty('--c',o.type==='boon'?HEROES[BOON_BY_ID[o.id].hero].c:o.type==='health'?COL.heal:COL.boon);
-  const def=o.type==='boon'?BOON_BY_ID[o.id]:null,level=def?(player.owned[o.id]?.level||0)+1:1,base=k=>def?.[k]?Math.round(def[k][o.rarity]*(1+.4*(level-1))*100)/100:0;
-  const title=def?def.name:o.type==='health'?'Emergency Repair':'Renown Cache',desc=def?def.desc(base('v'),base('v2')):o.type==='health'?`Restore <b>${o.amount} health</b>, up to your maximum.`:`Bank <b>${o.amount} Renown shards</b> for permanent upgrades.`;
-  b.innerHTML=`<span class="card-top"><span class="tag">${def?SPEAKERS[def.hero].name+' · '+RARITY[o.rarity].name:o.type==='health'?'Health':'Permanent currency'}</span><span class="card-key">${i+1}</span></span><strong>${title}</strong><span class="card-foot">${o.sold?'Sold':o.cost+' field credits'}</span><span class="card-desc">${desc}</span>`;b.onclick=()=>buyShopOffer(i);cards.appendChild(b);
- });
+ const button=$('#fieldClaim');if(!button)return;const i=shopNear(),o=shop?.offers[i];button.hidden=state!=='play'||roomPhase!=='shop'||!o;
+ if(button.hidden)return;
+ const def=o.type==='boon'?BOON_BY_ID[o.id]:null,level=def?(player.owned[o.id]?.level||0)+1:1,base=k=>def?.[k]?Math.round(def[k][o.rarity]*(1+.4*(level-1))*100)/100:0;
+ const desc=def?def.desc(base('v'),base('v2')).replace(/<[^>]*>/g,''):o.type==='health'?`Restore ${o.amount} health.`:`Bank ${o.amount} permanent Renown.`;
+ const blocked=o.sold?'Sold':run.credits<o.cost?'Not enough credits':o.type==='health'&&player.hp>=player.maxHp?'Health full':def&&level>3?'Maximum level':null;
+ button.disabled=!!blocked;button.textContent=`${shopTitle(o)} · ${o.cost} CR — ${desc} · ${blocked||'Claim [E / B / tap]'}`;
 }
+function claimNearbySupply(){const i=shopNear();if(i>=0)buyShopOffer(i);}
 function buyShopOffer(i){
- if(state!=='shop'||!shop)return;const o=shop.offers[i];if(!o||o.sold||run.credits<o.cost||(o.type==='health'&&player.hp>=player.maxHp))return;
+ if(state!=='play'||roomPhase!=='shop'||!shop||i!==shopNear())return;const o=shop.offers[i];if(!o||o.sold||run.credits<o.cost||(o.type==='health'&&player.hp>=player.maxHp))return;
  if(o.type==='boon'&&player.owned[o.id]?.level>=3)return;
  o.sold=true;run.credits-=o.cost;sfx('power_pick');
  if(o.type==='health')player.hp=Math.min(player.maxHp,player.hp+o.amount);
  else if(o.type==='shards')gainShards(o.amount,player.x,player.y-40);
- else{show('#mFieldShop',false);const def=BOON_BY_ID[o.id],line=commsLine(def.hero);runDialogue([{who:def.hero,text:line}],'Supply comms',()=>{takeBoon(o.id,o.rarity);state='shop';roomPhase='shop';fillFieldShop();show('#mFieldShop',true);$('#shopLeave').focus({preventScroll:true});$('#mFieldShop .shop-panel').scrollTop=0;});return;}
+ else{fillFieldShop();$('#fieldClaim').hidden=true;const def=BOON_BY_ID[o.id],line=commsLine(def.hero);runDialogue([{who:def.hero,text:line}],'Supply comms',()=>{takeBoon(o.id,o.rarity);state='play';roomPhase='shop';keys.clear();fillFieldShop();});return;}
  fillFieldShop();
 }
-function leaveFieldShop(){if(state!=='shop')return;show('#mFieldShop',false);stopVoice();state='play';roomPhase='exits';arrivalT=0;exits=[{...PADS[0],reward:{type:'boss',boss:curDistrict()},hold:0,t:0}];shop=null;invalidateRender();}
+function leaveFieldShop(){if(!shop)return;stopVoice();if($('#fieldClaim'))$('#fieldClaim').hidden=true;shop=null;roomPhase='exits';invalidateRender();}
+const jumpFromSupply=jumpTo;
+jumpTo=function(exit){if(state==='play'&&roomPhase==='shop')leaveFieldShop();jumpFromSupply(exit);};
+addEventListener('keydown',e=>{if(state==='play'&&roomPhase==='shop'&&e.key.toLowerCase()==='e'){e.preventDefault();claimNearbySupply();}});
+const updateSupply=update;
+update=function(dt){updateSupply(dt);if(state!=='play')return;updateFieldDrops(dt);if(roomPhase==='shop'){fillFieldShop();updateExits(dt);}};
+function drawShopPickup(i){
+ const o=shop.offers[i],s=SHOP_SPOTS[i],near=shopNear()===i,c=o.type==='boon'?HEROES[BOON_BY_ID[o.id].hero].c:o.type==='health'?COL.heal:COL.boon;
+ ctx.save();ctx.translate(s.x,s.y);ctx.globalAlpha=o.sold?.35:1;ctx.lineWidth=4;ctx.strokeStyle=COL.ink;ctx.fillStyle='#121e30';ctx.beginPath();ctx.ellipse(0,0,44,18,0,0,PI2);ctx.fill();ctx.stroke();
+ const img=rewardIcon(o.type==='boon'?{type:'boon',hero:BOON_BY_ID[o.id].hero}:o.type==='health'?{type:'shop'}:{type:'shards'});
+ ctx.fillStyle=c;ctx.beginPath();ctx.arc(0,-48,near?32:28,0,PI2);ctx.fill();ctx.stroke();if(img.complete&&img.naturalWidth)ctx.drawImage(img,-23,-71,46,46);
+ ctx.textAlign='center';ctx.font='700 14px "Chakra Petch",sans-serif';ctx.lineWidth=5;ctx.strokeText(shopTitle(o),0,-99);ctx.fillStyle='#fff';ctx.fillText(shopTitle(o),0,-99);
+ ctx.strokeText(o.sold?'SOLD':o.cost+' CR',0,-7);ctx.fillStyle=c;ctx.fillText(o.sold?'SOLD':o.cost+' CR',0,-7);ctx.restore();
+}
+
+// Breakables stay out of the enemy list, so they never hold up a wave or award kills.
+let supplyCrates=[],fieldDrops=[];
+const buildSupplyRoom=buildRoom;
+buildRoom=function(){buildSupplyRoom();fieldDrops=[];supplyCrates=[];if(inTutorial()||!curDistrict()||isBossRoom())return;
+ const candidates=shuffle([{x:370,y:180},{x:620,y:180},{x:1030,y:240},{x:360,y:510},{x:800,y:550},{x:1160,y:520}]);
+ supplyCrates=candidates.slice(0,3+Math.floor(Math.random()*3)).map(p=>({...p,r:25,isSupply:true,spawnT:0,dead:false,amount:8+Math.floor(Math.random()*5)}));
+};
+function dropFieldCredits(x,y,amount){fieldDrops.push({x,y,amount,t:0});}
+function updateFieldDrops(dt){for(const d of fieldDrops){d.t+=dt;const dx=player.x-d.x,dy=player.y-d.y,r=Math.hypot(dx,dy);if(d.t>.2&&r<100){const k=Math.min(1,dt*12);d.x+=dx*k;d.y+=dy*k;}if(d.t>.2&&r<30){d.dead=true;run.credits=(run.credits||0)+d.amount;sfx('power_pick',{vol:.35});texts.push({x:player.x,y:player.y-35,v:'+'+d.amount+' CR',t:0,c:COL.amber});}}fieldDrops=fieldDrops.filter(d=>!d.dead);}
+function drawSupplyCrate(c){ctx.save();ctx.translate(c.x,c.y);ctx.lineWidth=3;ctx.strokeStyle=COL.ink;ctx.fillStyle='#a7783c';ctx.fillRect(-24,-44,48,42);ctx.strokeRect(-24,-44,48,42);ctx.fillStyle='#d6af68';ctx.beginPath();ctx.moveTo(-24,-44);ctx.lineTo(-13,-54);ctx.lineTo(34,-54);ctx.lineTo(24,-44);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#72502d';ctx.beginPath();ctx.moveTo(24,-44);ctx.lineTo(34,-54);ctx.lineTo(34,-13);ctx.lineTo(24,-2);ctx.closePath();ctx.fill();ctx.stroke();ctx.strokeStyle='#4e3527';ctx.beginPath();ctx.moveTo(-20,-40);ctx.lineTo(20,-7);ctx.moveTo(20,-40);ctx.lineTo(-20,-7);ctx.stroke();ctx.fillStyle=COL.amber;ctx.font='bold 15px sans-serif';ctx.textAlign='center';ctx.fillText('CR',0,-18);ctx.restore();}
+function drawFieldDrop(d){ctx.save();ctx.translate(d.x,d.y-9+Math.sin(time*4)*2);ctx.fillStyle=COL.amber;ctx.strokeStyle=COL.ink;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,-12);ctx.lineTo(13,0);ctx.lineTo(0,12);ctx.lineTo(-13,0);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}

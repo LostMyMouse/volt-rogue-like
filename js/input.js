@@ -49,6 +49,7 @@ addEventListener('keydown', e => {
   if (state==='start' && k==='enter' && !$('#splash').hidden && $('#mConfirm').hidden && $('#mStart').hidden && $('#mTune').hidden && $('#mSlots').hidden){ startFromSplash(); return; }
   if (state==='draft'){ if (k==='1'||k==='2'||k==='3') pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
   keys.add(k);
+  if(state==='hub'&&k===' '){doDash();return;}
   if (state==='hub' && (k==='e'||k==='enter')){ hubInteract(); return; }
   if (state!=='play') return;
   if (k==='shift') pressBlock();
@@ -86,7 +87,7 @@ cv.addEventListener('pointerup', endPointer); cv.addEventListener('pointercancel
 
 function bindTouch(id, down, up){
   const el=$(id);
-  el.addEventListener('pointerdown', e => { e.preventDefault(); el.classList.add('pressed'); if (state==='play') down(); });
+  el.addEventListener('pointerdown', e => { e.preventDefault(); el.classList.add('pressed'); if (state==='play'||(state==='hub'&&id==='#tDash')) down(); });
   const end = () => { el.classList.remove('pressed'); up && up(); };
   el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end); el.addEventListener('pointerleave', end);
 }
