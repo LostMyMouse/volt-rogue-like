@@ -3,6 +3,18 @@
 'use strict';
 const COMIC_IDS=['volt','halo','bastion','echo','thorn','patch','kilnheart','bellwether','verdigris','glasswake','undertow','gravemark','redactor','rusher','needle'];
 const COMIC_ART=new Map();
+// Select complete connected bodies rather than slicing oversized shoulders/hands at grid edges.
+function connectedComicCells(canvas,data,cw,ch){
+ const w=canvas.width,h=canvas.height,labels=new Int32Array(w*h),queue=new Int32Array(w*h),parts=[null];
+ for(let at=0;at<w*h;at++){if(labels[at]||data[at*4+3]<100)continue;const id=parts.length;let head=0,tail=1;queue[0]=at;labels[at]=id;const b={x:w,y:h,right:0,bottom:0};
+  while(head<tail){const i=queue[head++],x=i%w,y=(i/w)|0;b.x=Math.min(b.x,x);b.y=Math.min(b.y,y);b.right=Math.max(b.right,x);b.bottom=Math.max(b.bottom,y);for(const n of[x?i-1:-1,x<w-1?i+1:-1,y?i-w:-1,y<h-1?i+w:-1])if(n>=0&&!labels[n]&&data[n*4+3]>=100){labels[n]=id;queue[tail++]=n;}}
+  parts.push(b);
+ }
+ return Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>{const counts=new Map();for(let y=Math.ceil(row*ch);y<(row+1)*ch;y++)for(let x=Math.ceil(col*cw);x<(col+1)*cw;x++){const id=labels[y*w+x];if(id)counts.set(id,(counts.get(id)||0)+1);}const id=[...counts].sort((a,b)=>b[1]-a[1])[0]?.[0];if(!id)throw Error('Empty connected pose');const b=parts[id],c=document.createElement('canvas');c.width=b.right-b.x+5;c.height=b.bottom-b.y+5;const g=c.getContext('2d'),p=g.createImageData(c.width,c.height);let sum=0,count=0;
+  for(let y=b.y;y<=b.bottom;y++)for(let x=b.x;x<=b.right;x++)if(labels[y*w+x]===id){const from=(y*w+x)*4,to=((y-b.y+2)*c.width+x-b.x+2)*4;p.data.set(data.subarray(from,from+4),to);if(y>b.bottom-(b.bottom-b.y)*.08){sum+=x-b.x+2;count++;}}
+  g.putImageData(p,0,0);return{img:c,x:0,y:0,w:c.width,h:c.height,ax:count?sum/count:c.width/2,cx:c.width/2,ay:c.height-2};
+ }));
+}
 function comicAtlas(id){
   if (!COMIC_IDS.includes(id)&&id!=='volt-jog') return null;
   if (!COMIC_ART.has(id)){
@@ -27,6 +39,10 @@ function comicAtlas(id){
             a.cells[row][col]={x:x0,y:y0,w:x1-x0+1,h:y1-y0+1,ax:count?sum/count:(x0+x1)/2,cx:torsoCount?torsoSum/torsoCount:(x0+x1)/2,ay:y1+1};
           }
           a.reference[row]=a.cells[row][0].h;
+        }
+        if(['verdigris','gravemark','bastion'].includes(id)){
+          a.cells=connectedComicCells(canvas,data,a.w,a.h);
+          a.reference=a.cells.map(row=>row[0].h);
         }
       }catch(e){
         // file:// may prohibit reading pixels. Regular atlas cells still render with fixed anchors.
@@ -92,13 +108,17 @@ function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
   if(id==='volt'&&moving){if(drawVoltStride(x,y,face,scale,elapsed,tint))return true;name='idle';}
   if(jog?.ready)a=jog;
   const direction=['east','south','west','north'][((Math.round(face/(Math.PI/2))%4)+4)%4],row=['south','east','north','west'].indexOf(direction);
-  const pose=jog?.ready?Math.floor(elapsed*12*s.scale/scale)%8:comicPose(name,c,elapsed,frame);
+  const weaponAttack=id==='volt'&&/strike|power|special/.test(name),progress=clamp(elapsed/(c.frames/c.fps),0,.999),phase=Math.floor(progress*3);
+  const weaponPoses={brawler:[3,4,0],caster:[5,4,4],titan:[3,3,4],speedster:[7,4,7],magnetar:[5,4,5]};
+  const pose=weaponAttack?weaponPoses[run.style][phase]:jog?.ready?Math.floor(elapsed*12*s.scale/scale)%8:comicPose(name,c,elapsed,frame);
   const cell=a.cells[row][pose],worldHeight=s.frame*(id==='needle'?.8:.94),ratio=worldHeight/(moving?cell.h:a.reference[row])*scale;
-  let sheet=a.img;
-  if(tint){const key=tint==='white'?'white':'ghost';if(!a[key])a[key]=tintSheet(a.img,tint==='white'?'#ffffff':COL.volt);sheet=a[key];}
-  const bob=name==='idle'?-Math.sin(elapsed*2.4)*.6*scale:0;
+  let sheet=cell.img||a.img;
+  if(tint){const owner=cell.img?cell:a,key=tint==='white'?'white':'ghost';if(!owner[key])owner[key]=tintSheet(sheet,tint==='white'?'#ffffff':COL.volt);sheet=owner[key];}
+  const bob=name==='idle'?-Math.sin(elapsed*2.4)*1.2*scale:0;
   const ax=moving?(cell.cx??cell.ax):cell.ax,ay=id==='needle'?cell.y+cell.h/2:cell.ay;
   ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  if(weaponAttack){const k=Math.sin(progress*Math.PI),travel={brawler:6,caster:-4,titan:11,speedster:19,magnetar:4}[run.style];ctx.translate(Math.cos(face)*travel*k,Math.sin(face)*travel*k);if(run.style==='titan'){ctx.translate(x,y);ctx.scale(1+k*.045,1-k*.035);ctx.translate(-x,-y);}}
+  if(name==='idle'&&!reduceMotion){const breath=Math.sin(elapsed*2.2+row);ctx.translate(x,y);ctx.scale(1-breath*.008,1+breath*.015);ctx.translate(-x+Math.sin(elapsed*1.1)*.8,y*-1);}
   if(name==='death'){const t=clamp(elapsed/(c.frames/c.fps),0,1);ctx.globalAlpha*=1-t;ctx.translate(x,y);ctx.rotate(t*.9);x=y=0;}
   ctx.drawImage(sheet,cell.x,cell.y,cell.w,cell.h,x+(cell.x-ax)*ratio,y+(cell.y-ay)*ratio+bob,cell.w*ratio,cell.h*ratio);
   ctx.restore();return true;

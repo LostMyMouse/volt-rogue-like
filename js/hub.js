@@ -121,7 +121,7 @@ function enterHub(){
   refreshHubHud(); banner('THE FORTRESS');
 }
 function leaveHub(){ document.body.classList.remove('in-hub'); show('#hubTalk',false); show('#hubPrompt',false); hubNear=null; }
-function refreshHubHud(){ $('#hubShards').textContent='◆ '+save.shards; $('#hubLic').textContent='✦ '+save.licences; const h=$('#hubHint'); h.hidden=save.runs>0; h.textContent = inputMode==='touch' ? 'Drag to move · Tap the prompt to interact · The Deploy Gate starts a run' : 'WASD to move · E to interact · The Deploy Gate starts a run'; }
+function refreshHubHud(){ $('#hubShards').textContent='◆ '+save.shards; $('#hubLic').textContent='✦ '+save.licences; const h=$('#hubHint'); h.hidden=false; h.textContent = inputMode==='touch' ? 'Drag to move · Dash to travel faster · Tap prompts to interact' : 'WASD to move · Space to dash · E to interact · Deploy Gate starts a run'; }
 
 /* ---------- Movement ---------- */
 const inRect = (x,y,r) => x>=r[0] && x<=r[2] && y>=r[1] && y<=r[3];
@@ -137,8 +137,10 @@ function hubCollide(p){
   p.x=best.x; p.y=best.y;
 }
 function updateHub(dt){
-  const p=player, mv=moveInput(), sp=T.moveSpeed*0.8, k=Math.min(1,((mv.x||mv.y)?14:11)*dt);
-  p.vx+=(mv.x*sp-p.vx)*k; p.vy+=(mv.y*sp-p.vy)*k;
+  const p=player, mv=moveInput(), sp=T.moveSpeed*1.2, k=Math.min(1,((mv.x||mv.y)?14:11)*dt);
+  p.dashCd=Math.max(0,p.dashCd-dt);p.iT=Math.max(0,p.iT-dt);
+  if(p.dashT>0){p.dashT=Math.max(0,p.dashT-dt);p.vx=p.dashDir.x*T.dashSpeed;p.vy=p.dashDir.y*T.dashSpeed;}
+  else{p.vx+=(mv.x*sp-p.vx)*k; p.vy+=(mv.y*sp-p.vy)*k;}
   p.x+=p.vx*dt; p.y+=p.vy*dt; hubCollide(p);
   if (mv.x||mv.y) p.aim=Math.atan2(mv.y,mv.x);
   // The nearest thing in reach gets the prompt.

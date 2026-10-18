@@ -82,6 +82,9 @@ function fillBuild(el){
 }
 
 function updateCam(dt){
+  if(typeof shop!=='undefined'&&shop&&roomPhase==='shop'){
+    cam.zoom=Math.min(.8,(W-80)/1100,(H-90)/620);cam.x=800;cam.y=400;return;
+  }
   if(typeof tut!=='undefined'&&tut&&inputMode==='touch'){
     const v=combatViewport(),target=enemies.find(e=>!e.dead&&e.tutWeak),cx=target?(player.x+target.x)/2:player.x,cy=target?(player.y+target.y)/2-25:player.y-30;
     const span=target?Math.abs(player.y-target.y)+190:240;

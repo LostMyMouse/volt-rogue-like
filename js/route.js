@@ -20,7 +20,8 @@ const builtPool = () => DISTRICT_POOL.filter(id=>BOSSES[id]);
 // run.route = { order:[district ids so far], i: index of current district, room: room within it (1-based) }
 function routeStart(){ const picks=Math.min(DISTRICT_PICKS,builtPool().length);run.route={order:[],i:-1,room:0,picks,plan:shuffle(builtPool().slice()).slice(0,picks),pendingDistrict:null}; }
 const curDistrict = () => run.route.order[run.route.i];
-const roomsIn = id => (DISTRICTS[id].rooms||ROOMS_PER_DISTRICT);
+// Roll once on entering a district. Later stretches grow from 5–6 to 7–8 combat roofs.
+const roomsIn = id => run.route.lengths?.[id] || 5;
 const isBossRoom = () => run.route.room > roomsIn(curDistrict());
 // What comes after this district: another city-map choice, Gravemark, the Redactor, or the end of the run.
 function nextAfterDistrict(){
@@ -36,6 +37,8 @@ function villainHpMul(id){ return DISTRICT_POOL.includes(id) ? 1+POSITION_HP*run
 
 function enterDistrict(id){
   const r=run.route; r.order.push(id);r.pendingDistrict=null; r.i=r.order.length-1; r.room=1;
+  r.lengths=r.lengths||{};
+  if(!r.lengths[id]){const low=5+Math.min(2,Math.floor(r.i/2));r.lengths[id]=low+Math.floor(Math.random()*2);}
   run.districtsCleared = r.i;
 }
 

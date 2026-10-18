@@ -3,6 +3,7 @@
 
 /* ---------- Helpers ---------- */
 const liveEnemies = () => enemies.filter(e => !e.dead && e.spawnT<=0);
+function attackTargets(){return liveEnemies().concat(typeof supplyCrates==='undefined'?[]:supplyCrates.filter(c=>!c.dead));}
 function nearestEnemy(x,y,max,exclude){
   let best=null, bd=max;
   for (const e of enemies){ if (e.dead||e.spawnT>0||(exclude&&exclude.includes(e))) continue; const d=Math.hypot(e.x-x,e.y-y); if (d<bd){bd=d;best=e;} }
@@ -106,7 +107,7 @@ function killEnemy(e,ang){
   hitStop=Math.max(hitStop,T.hitPause*1.4); addShake(7);
 }
 function doDash(){
-  const p=player; if (state!=='play'||p.dashCd>0||p.dashT>0||p.stunT>0) return;
+  const p=player; if ((state!=='play'&&state!=='hub')||p.dashCd>0||p.dashT>0||p.stunT>0) return;
   sfx('dash');
   if (p.blockHeld){ p.blockHeld=false; }
   const mv=moveInput(); let dx=mv.x, dy=mv.y;
@@ -114,6 +115,7 @@ function doDash(){
   const m=Math.hypot(dx,dy); p.dashDir={x:dx/m,y:dy/m};
   if (typeof tut!=='undefined' && tut) tut.dashes=(tut.dashes||0)+1;
   p.dashT=T.dashTime; p.dashCd=T.dashCooldown*R.dashCdMul+T.dashTime; p.iT=Math.max(p.iT,T.dashTime+0.06);
+  if(state==='hub'){sparks(p.x,p.y,p.aim+Math.PI,8,COL.volt,300);return;}
   p.charging=0; p.shield=false; { const so=STYLE(); so.onDash && so.onDash(); }
   if (has('flashstep')){ fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.25,r:120,c:HEROES.halo.c}); for (const e of liveEnemies()) if (!e.isBoss && Math.hypot(e.x-p.x,e.y-p.y)<120+e.r){ e.stunT=Math.max(e.stunT,val('flashstep')); if (e.state==='windup'||e.state==='charge'){ e.state=e.kind==='rusher'?'recover':'move'; e.timer=0.6; } } }
   if (has('aegis')) p.reflectT=T.dashTime+val('aegis');

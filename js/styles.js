@@ -44,7 +44,7 @@ const STYLES = {
       p.vx += Math.cos(a)*(fin?280:170); p.vy += Math.sin(a)*(fin?280:170);
       fx.push({type:'slash',a,range,arc,t:0,dur:fin?0.2:0.13,dir:p.combo===1?-1:1,fin});
       let hit=0;
-      for (const e of liveEnemies()) if (inCone(e,p.x,p.y,a,range,arc)){ strikeHit(e,strikeDmg(T.strikeDamage*(fin?1.7:1)),Math.atan2(e.y-p.y,e.x-p.x),fin?560:300,fin?0.28:0.1); hit++; }
+      for (const e of attackTargets()) if (inCone(e,p.x,p.y,a,range,arc)){ strikeHit(e,strikeDmg(T.strikeDamage*(fin?1.7:1)),Math.atan2(e.y-p.y,e.x-p.x),fin?560:300,fin?0.28:0.1); hit++; }
       for (const b of bullets){
         if (b.friendly) continue;
         const dx=b.x-p.x, dy=b.y-p.y, d=Math.hypot(dx,dy);
@@ -56,7 +56,7 @@ const STYLES = {
     powerPress(){
       const p=player; setPowerCd(T.powerCooldown*R.powerCdMul);
       let first=null, best=1e9;
-      for (const e of liveEnemies()){
+      for (const e of attackTargets()){
         const dx=e.x-p.x, dy=e.y-p.y, d=Math.hypot(dx,dy); if (d>460) continue;
         const ad=Math.abs(angDiff(Math.atan2(dy,dx),p.aim)), sc=d*(1+ad*2.2);
         if (ad<0.8 && sc<best){ best=sc; first=e; }
@@ -97,7 +97,7 @@ const STYLES = {
       const p=player; if (!p.charging) return;
       const k=clamp(p.charging/1.0,0.25,1); p.charging=0;
       const L=640*(1+0.15*powerReach()), w=14+16*k, a=p.aim, sx=p.x+Math.cos(a)*18, sy=p.y+Math.sin(a)*18;
-      const hits=liveEnemies().map(e=>{ const dx=e.x-sx, dy=e.y-sy, t=dx*Math.cos(a)+dy*Math.sin(a), perp=Math.abs(-dx*Math.sin(a)+dy*Math.cos(a)); return {e,t,perp}; })
+      const hits=attackTargets().map(e=>{ const dx=e.x-sx, dy=e.y-sy, t=dx*Math.cos(a)+dy*Math.sin(a), perp=Math.abs(-dx*Math.sin(a)+dy*Math.cos(a)); return {e,t,perp}; })
         .filter(h=>h.t>-h.e.r && h.t<L && h.perp<w+h.e.r).sort((x,y)=>x.t-y.t);
       hits.forEach((h,i)=>powerHit(h.e,powerDmg(16+44*k),a,200+300*k,0.2+0.35*k,i===0));
       bolts.push({pts:[{x:sx,y:sy},{x:sx+Math.cos(a)*L,y:sy+Math.sin(a)*L}],t:0,dur:.18+.12*k,c:powerTint(),w:1+k*1.6});
@@ -118,14 +118,14 @@ const STYLES = {
       p.vx+=Math.cos(a)*240; p.vy+=Math.sin(a)*240;
       fx.push({type:'slash',a,range,arc,t:0,dur:0.24,dir:(p.combo=(p.combo+1)%2)?1:-1,fin:true,heavy:true});
       let hit=0;
-      for (const e of liveEnemies()) if (inCone(e,p.x,p.y,a,range,arc)){ strikeHit(e,strikeDmg(30),Math.atan2(e.y-p.y,e.x-p.x),900,0.38,{titan:true}); hit++; }
+      for (const e of attackTargets()) if (inCone(e,p.x,p.y,a,range,arc)){ strikeHit(e,strikeDmg(30),Math.atan2(e.y-p.y,e.x-p.x),900,0.38,{titan:true}); hit++; }
       if (hit){ hitStop=Math.max(hitStop,T.hitPause*2.2); addShake(13); heavyLanded(p.x+Math.cos(a)*range*0.85,p.y+Math.sin(a)*range*0.85); }
       else { addShake(3); sparks(p.x+Math.cos(a)*range*.7,p.y+Math.sin(a)*range*.7,a,5,COL.spark,300,.6); }
     },
     powerPress(){
       const p=player, r=150*(1+0.12*powerReach());
       setPowerCd(T.powerCooldown*R.powerCdMul*1.45);
-      const hits=liveEnemies().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<r+e.r).sort((x,y)=>Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y));
+      const hits=attackTargets().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<r+e.r).sort((x,y)=>Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y));
       hits.forEach((e,i)=>powerHit(e,powerDmg(26),Math.atan2(e.y-p.y,e.x-p.x),650,0.7,i===0,{titan:true}));
       fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.35,r,c:powerTint()||COL.spark});
       for (let i=0;i<5;i++) stainAtColor(p.x+rand(-r*.6,r*.6),p.y+rand(-r*.6,r*.6),rand(18,34),'#000');
@@ -143,7 +143,7 @@ const STYLES = {
       const p=player; setStrikeCd(0.14); p.hitN=(p.hitN||0)+1;
       const heavy=p.hitN%5===0;
       let t=null, best=1e9;
-      for (const e of liveEnemies()){ const dx=e.x-p.x, dy=e.y-p.y, d=Math.hypot(dx,dy); if (d>240) continue; const ad=Math.abs(angDiff(Math.atan2(dy,dx),p.aim)); if (ad>1.0 && d>90) continue; const sc=d*(1+ad); if (sc<best){ best=sc; t=e; } }
+      for (const e of attackTargets()){ const dx=e.x-p.x, dy=e.y-p.y, d=Math.hypot(dx,dy); if (d>240) continue; const ad=Math.abs(angDiff(Math.atan2(dy,dx),p.aim)); if (ad>1.0 && d>90) continue; const sc=d*(1+ad); if (sc<best){ best=sc; t=e; } }
       if (!t){ p.vx+=Math.cos(p.aim)*420; p.vy+=Math.sin(p.aim)*420; sparks(p.x,p.y,p.aim+Math.PI,4,COL.volt,300,.4); p.hitN--; return; }
       const a=Math.atan2(t.y-p.y,t.x-p.x), ox=p.x, oy=p.y;
       fx.push({type:'ghost',x:ox,y:oy,a,t:0,dur:.22});
@@ -155,7 +155,7 @@ const STYLES = {
       p.mom=Math.min(1,(p.mom||0)+0.04);
     },
     powerPress(){
-      const p=player, targets=liveEnemies().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<230).sort((x,y)=>Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y));
+      const p=player, targets=attackTargets().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<230).sort((x,y)=>Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y));
       setPowerCd(T.powerCooldown*R.powerCdMul*1.3);
       if (!targets.length){ fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.25,r:60,c:COL.volt}); return; }
       const n=6+powerReach();
@@ -188,13 +188,13 @@ const STYLES = {
         // Empty-handed: a weak jab while the disc is away.
         setStrikeCd(0.32); const a=p.aim;
         fx.push({type:'slash',a,range:58,arc:1.4,t:0,dur:0.1,dir:1,fin:false});
-        for (const e of liveEnemies()) if (inCone(e,p.x,p.y,a,58,1.4)) strikeHit(e,strikeDmg(5),a,180,0.05);
+        for (const e of attackTargets()) if (inCone(e,p.x,p.y,a,58,1.4)) strikeHit(e,strikeDmg(5),a,180,0.05);
       }
     },
     powerPress(){
       const p=player, r=280*(1+0.12*powerReach()), cx=p.x+Math.cos(p.aim)*90, cy=p.y+Math.sin(p.aim)*90;
       setPowerCd(T.powerCooldown*R.powerCdMul);
-      const hits=liveEnemies().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<r+e.r).sort((x,y)=>Math.hypot(x.x-cx,x.y-cy)-Math.hypot(y.x-cx,y.y-cy));
+      const hits=attackTargets().filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<r+e.r).sort((x,y)=>Math.hypot(x.x-cx,x.y-cy)-Math.hypot(y.x-cx,y.y-cy));
       hits.forEach((e,i)=>{ const d=Math.hypot(cx-e.x,cy-e.y); bolts.push({pts:[{x:e.x,y:e.y},{x:cx,y:cy}],t:0,dur:.16,c:powerTint(),w:0.5}); powerHit(e,powerDmg(8),Math.atan2(cy-e.y,cx-e.x),Math.min(700,d*3.2),0.35,i===0); });
       fx.push({type:'shock',x:cx,y:cy,t:0,dur:.25,r:60,c:powerTint()||COL.volt});
       addShake(hits.length?7:2);
@@ -204,7 +204,7 @@ const STYLES = {
       if (d.state==='out'){
         d.t+=dt; const px=d.x, py=d.y; d.x+=d.vx*dt; d.y+=d.vy*dt; d.dist+=Math.hypot(d.x-px,d.y-py);
         if (d.x<24||d.y<24||d.x>ARENA.w-24||d.y>ARENA.h-24||inObstacle(d.x,d.y)||d.dist>560*R.reachMul){ d.state='back'; d.hit=[]; sparks(d.x,d.y,rand(PI2),5,COL.volt,260,Math.PI); }
-        for (const e of liveEnemies()){
+        for (const e of attackTargets()){
           if (d.state!=='out' || d.hit.includes(e) || Math.hypot(e.x-d.x,e.y-d.y)>e.r+14) continue;
           d.hit.push(e);
           const heavy=d.first; d.first=false;
@@ -218,7 +218,7 @@ const STYLES = {
         }
       } else if (d.state==='back'){
         const a=Math.atan2(p.y-d.y,p.x-d.x); d.vx=Math.cos(a)*1150; d.vy=Math.sin(a)*1150; d.x+=d.vx*dt; d.y+=d.vy*dt;
-        for (const e of liveEnemies()) if (!d.hit.includes(e) && Math.hypot(e.x-d.x,e.y-d.y)<e.r+12){ d.hit.push(e); strikeHit(e,strikeDmg(4),a,120,0.05); }
+        for (const e of attackTargets()) if (!d.hit.includes(e) && Math.hypot(e.x-d.x,e.y-d.y)<e.r+12){ d.hit.push(e); strikeHit(e,strikeDmg(4),a,120,0.05); }
         if (Math.hypot(p.x-d.x,p.y-d.y)<p.r+12){ d.state='held'; p.strikeCd=Math.min(p.strikeCd,0.05); sparks(p.x,p.y,a+Math.PI,6,COL.volt,260,.6); }
       } else { d.x=p.x; d.y=p.y; }
     },
@@ -230,7 +230,7 @@ function updateShots(dt){
   for (const s of shots){
     s.t+=dt; s.x+=s.vx*dt; s.y+=s.vy*dt;
     if (s.t>s.life || s.x<20||s.y<20||s.x>ARENA.w-20||s.y>ARENA.h-20||inObstacle(s.x,s.y)){ s.dead=true; sparks(s.x,s.y,Math.atan2(-s.vy,-s.vx),3,COL.volt,220); continue; }
-    for (const e of liveEnemies()){
+    for (const e of attackTargets()){
       if (s.hit.includes(e) || Math.hypot(e.x-s.x,e.y-s.y)>e.r+s.r) continue;
       s.hit.push(e);
       strikeHit(e,s.dmg,Math.atan2(s.vy,s.vx),s.heavy?260:70,s.heavy?0.28:0.04);

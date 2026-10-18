@@ -139,7 +139,7 @@ function arrive(reward){
 }
 // Screen-edge pointers so off-screen jump points are never missed.
 function drawExitPointers(){
-  if (roomPhase!=='exits' || state!=='play') return;
+  if (!['exits','shop'].includes(roomPhase) || state!=='play') return;
   const m=34;
   for (const x of exits){
     const sx=(x.x-cam.x)*cam.zoom+W/2, sy=(x.y-74-cam.y)*cam.zoom+H/2;
