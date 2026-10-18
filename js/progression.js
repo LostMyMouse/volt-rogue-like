@@ -62,7 +62,8 @@ const oldOwnedProgression=ownedList;
 ownedList=function(){const out=oldOwnedProgression();if(run.aspect)out.push({name:ASPECTS[run.aspect].name,c:COL.volt,slot:'aspect'});if(run.risk)out.push({name:`Risk ${run.risk} · +${run.risk*10}% Shards`,c:COL.threat,slot:'contract'});for(const id of run.hybrids||[])out.push({name:HYBRIDS[id].name+(hybridActive(id)?' · active':' · needs both heroes'),c:COL.boon,slot:'hybrid'});return out;};
 
 // Dedicated room interactions; accessible floor paths follow the painted door openings.
-HUB_FLOOR.push([90,220,330,275],[90,175,255,270],[70,560,440,610],[390,650,560,740],[355,700,425,900],[70,835,425,925],[970,660,1100,790],[1060,735,1420,925]);
+HUB_FLOOR.push([90,220,330,275],[90,175,255,270],[70,560,440,610],[390,650,560,740],[355,700,460,925],[70,835,460,925],[970,660,1100,790],[1060,735,1420,925],[1020,450,1160,600]);
+Object.assign(HUB_SPOTS.find(s=>s.id==='armoury'),{at:{x:1100,y:485},r:55,lx:1100,ly:390});
 Object.assign(HUB_SPOTS.find(s=>s.id==='bunk'),{at:{x:300,y:875},r:65,lx:260,ly:770});
 Object.assign(HUB_SPOTS.find(s=>s.id==='training'),{at:{x:1210,y:825},r:75,lx:1230,ly:760});
 HUB_NPCS.find(n=>n.id==='echo').y=790;

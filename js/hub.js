@@ -4,7 +4,7 @@
 'use strict';
 
 const HUB = { w:1484, h:1060, spawn:{x:742, y:690} };
-const hubImg = new Image(); hubImg.src = 'assets/fortress/hub-doorways.webp';
+const hubImg = new Image(); hubImg.src = 'assets/fortress/hub-open-doors-v2.webp';
 hubImg.onload=()=>invalidateRender();
 // Where feet can stand: a union of overlapping rectangles [x0,y0,x1,y1] traced over the painting.
 const HUB_FLOOR = [
@@ -306,7 +306,7 @@ $('#hubTalk').addEventListener('pointerdown', () => advanceTalk());
 const HUB_DOORS=[
  {x:285,y:250,a:Math.PI,label:'GREENHOUSE'}, {x:453,y:572,a:Math.PI,label:'WORKSHOP'},
  {x:442,y:701,a:Math.PI/2,label:'BUNK · NOTEBOOK'}, {x:1035,y:707,a:Math.PI/2,label:'TRAINING'},
- {x:1022,y:557,a:0,label:'ARMOURY'}, {x:1090,y:280,a:0,label:'CONTRACTS'},
+ {x:1100,y:475,a:-Math.PI/2,label:'ARMOURY · ENTER'}, {x:1090,y:280,a:0,label:'CONTRACTS'},
 ];
 function drawHubDoorways(){
  ctx.save();ctx.lineJoin='miter';

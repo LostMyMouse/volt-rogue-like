@@ -23,8 +23,8 @@ function updateHud(){
   hud.blockAb.classList.toggle('ready',p.blockHeld); hud.blockTb.classList.toggle('ready',p.blockHeld);
   const sT='◆ '+run.shards; if (hud.shards.textContent!==sT) hud.shards.textContent=sT;
   const credits='CR '+(run.credits||0),creditEl=$('#hudCredits');if(creditEl.textContent!==credits)creditEl.textContent=credits;
-  const r=run.route, dId=r&&curDistrict(), wT=dId?dId+':'+r.room:'';
-  if (hud.wave.dataset.w!==wT){ hud.wave.dataset.w=wT; hud.district.textContent=dId?DISTRICTS[dId].name:'Rooftop'; hud.wave.innerHTML = !dId ? '–' : isBossRoom() ? 'Boss' : `${r.room}<small>/${roomsIn(dId)}</small>`; }
+  const r=run.route, dId=r&&curDistrict(), wT=(dId?dId+':'+r.room:'')+':'+roomPhase;
+  if (hud.wave.dataset.w!==wT){ hud.wave.dataset.w=wT; hud.district.textContent=armouryRoom()?'Fortress Armoury':roomPhase==='shop'?'Supply rooftop':dId&&isBossRoom()?DISTRICTS[dId].name:dId==='redactor'?'Tower approach':'Rooftops'; hud.wave.innerHTML = !dId ? '–' : isBossRoom() ? 'Boss' : `${r.room}<small>/${roomsIn(dId)}</small>`; }
   const cds = { s:clamp(p.strikeCd/(p.strikeCdMax||0.34),0,1), p:clamp(p.powerCd/(p.powerCdMax||1),0,1), d:clamp(p.dashCd/(T.dashCooldown+T.dashTime),0,1) };
   for (const k of ['s','p','d']){ setVar(hud.ab[k],'--cd',cds[k]); setVar(hud.tb[k],'--cd',cds[k]); }
   const ch=p.sig/100; setVar(hud.ab.q,'--ch',ch); setVar(hud.tb.q,'--ch',ch);
@@ -40,7 +40,7 @@ function startGame(){
   show('#splash',false); show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
   missionBrief(openCityMap);
 }
-function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
+function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null;if($('#fieldClaim'))$('#fieldClaim').hidden=true;if($('#practiceControls'))$('#practiceControls').hidden=true;$('#btnPauseFortress').hidden=!armouryRoom(); fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
 function gameOver(){ state='over'; playVoice('volt',"Not... yet..."); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
 function winRun(){
@@ -255,7 +255,8 @@ $('#btnReroll').addEventListener('click', rerollDraft);
 refreshStyleButtons();
 $('#btnAgain').addEventListener('click', () => enterHub());
 $('#btnQuick').addEventListener('click', startGame);
-$('#btnRestart').addEventListener('click', startGame);
+$('#btnRestart').addEventListener('click',()=>{if(practice){show('#mPause',false);stopVoice();preparePractice();}else if(inTutorial()){const first=tut.first;tut=null;show('#tut',false);startTutorial(first);}else startGame();});
+$('#btnPauseFortress').addEventListener('click',()=>leavePracticeRoom());
 $('#btnResume').addEventListener('click', closePause);
 $('#btnPause').addEventListener('click', () => state==='play'?openPause():state==='paused'&&$('#mTune').hidden?closePause():null);
 $('#btnTune').addEventListener('click', openTune);

@@ -82,11 +82,16 @@ function fillBuild(el){
 }
 
 function updateCam(dt){
+  if(boss?.kind==='glasswake'&&boss.atk?.hallPuzzle&&['WINDUP','ACTIVE'].includes(boss.bstate)){
+    const figures=[boss,...boss.atk.decoys.filter(d=>!d.dead),player],xs=figures.map(f=>f.x),ys=figures.map(f=>f.y),left=Math.min(...xs)-95,right=Math.max(...xs)+95,top=Math.min(...ys)-130,bottom=Math.max(...ys)+40;
+    const uiTop=inputMode==='touch'?145:155,viewH=Math.max(120,H-uiTop-24),zoom=Math.min(.85,(W-90)/(right-left),viewH/(bottom-top)),cx=(left+right)/2,cy=(top+bottom)/2-((uiTop+viewH/2)-H/2)/zoom,k=1-Math.exp(-dt*10);
+    cam.zoom+=(zoom-cam.zoom)*k;cam.x+=(cx-cam.x)*k;cam.y+=(cy-cam.y)*k;return;
+  }
   if(typeof shop!=='undefined'&&shop&&roomPhase==='shop'){
     cam.zoom=Math.min(.8,(W-80)/1100,(H-90)/620);cam.x=800;cam.y=400;return;
   }
   if(typeof tut!=='undefined'&&tut&&inputMode==='touch'){
-    const v=combatViewport(),target=enemies.find(e=>!e.dead&&e.tutWeak),cx=target?(player.x+target.x)/2:player.x,cy=target?(player.y+target.y)/2-25:player.y-30;
+    const v=combatViewport(),target=enemies.find(e=>!e.dead&&(e.tutWeak||e.tutDummy)),cx=target?(player.x+target.x)/2:player.x,cy=target?(player.y+target.y)/2-25:player.y-30;
     const span=target?Math.abs(player.y-target.y)+190:240;
     cam.zoom=clamp(Math.min(v.h/span,v.w/600),.35,.9);cam.x=cx;cam.y=cy;return;
   }

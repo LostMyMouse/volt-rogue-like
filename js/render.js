@@ -28,15 +28,16 @@ const ROOF = { k:1.124, ox:110, oy:178, img:new Image() };
 const DISTRICT_ART=new Map();
 function districtPainting(id){
  if(!id)return null;
- if(!DISTRICT_ART.has(id)){const im=new Image();im.onload=()=>invalidateRender();im.onerror=()=>im.failed=true;im.src=`assets/arena/${id}-district.webp`;DISTRICT_ART.set(id,im);}
+ if(!DISTRICT_ART.has(id)){const im=new Image();im.onload=()=>invalidateRender();im.onerror=()=>im.failed=true;im.src=id==='glasswake'?'assets/arena/glasswake-mirror-hall-v1.webp':`assets/arena/${id}-district.webp`;DISTRICT_ART.set(id,im);}
  return DISTRICT_ART.get(id);
 }
 ROOF.img.onload=()=>invalidateRender();ROOF.img.src='assets/arena/rooftop.webp';
-const roofPainted = () => {const theme=districtPainting(curDistrict());return !!((theme?.complete&&theme.naturalWidth)||(ROOF.img.complete&&ROOF.img.naturalWidth>0));};
+const arenaTheme=()=>curDistrict()&&(isBossRoom()||curDistrict()==='redactor')?curDistrict():null;
+const roofPainted = () => {const theme=districtPainting(arenaTheme());return !!((theme?.complete&&theme.naturalWidth)||(ROOF.img.complete&&ROOF.img.naturalWidth>0));};
 function drawPaintedRoof(){
-  const k=ROOF.k, theme=districtPainting(curDistrict()),im=theme?.complete&&theme.naturalWidth?theme:ROOF.img;
+  const k=ROOF.k, theme=districtPainting(arenaTheme()),im=theme?.complete&&theme.naturalWidth?theme:ROOF.img;
   ctx.drawImage(im, -ROOF.ox*k, -ROOF.oy*k, im.naturalWidth*k, im.naturalHeight*k);
-  const d=run && run.route && curDistrict(), c=im===ROOF.img&&d&&KIND_COL[d];
+  const d=arenaTheme(), c=im===ROOF.img&&d&&KIND_COL[d];
   if (c){ ctx.save(); ctx.globalCompositeOperation='soft-light'; ctx.globalAlpha=0.22; ctx.fillStyle=c; ctx.fillRect(-ROOF.ox*k, -ROOF.oy*k, im.naturalWidth*k, im.naturalHeight*k); ctx.restore(); }
 }
 function drawFloor(){
@@ -382,7 +383,7 @@ function drawActors(){
   for(const d of fieldDrops)list.push({y:d.y,f:()=>drawFieldDrop(d)});
   if(shop&&roomPhase==='shop'){list.push({y:PATCH_ROOF.y,f:drawRoofPatch});for(let i=0;i<3;i++)list.push({y:SHOP_SPOTS[i].y,f:()=>drawShopPickup(i)});}
   for (const b of obstacles) list.push({y:obstacleDepth(b),f:()=>drawObstacle(b)});
-  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>e.isPractice?drawPracticeDummy(e):drawEnemyActor(e)});
+  for (const e of enemies) if (e.spawnT<=0) list.push({y:e.y,f:()=>e.isPractice||e.tutDummy||e.tutWeak?drawPracticeDummy(e):drawEnemyActor(e)});
   for (const b of bullets) list.push({y:b.y,f:()=>drawBullet(b)});
   for (const k of packs) list.push({y:k.y,f:()=>drawPack(k)});
   if (state!=='over' || player.hp>0) list.push({y:player.y,f:drawPlayer});
@@ -472,7 +473,7 @@ function drawFx(){
 function drawBossActiveFx(){ if (typeof vfxDrawActive!=='function') return; for (const e of enemies) if (isSpecBoss(e) && e.bstate==='ACTIVE' && e.atk && e.atk.step) vfxDrawActive(e,e.atk,e.atk.step); }
 function render(){
   if (state==='cutscene'){ renderCinematic(); return; }
-  if (inHub()){ renderHub(); return; }
+  if (inHub()&&!practice){ renderHub(); return; }
   ctx.setTransform(DPR,0,0,DPR,0,0);
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
   const sx=(Math.random()*2-1)*shakeAmt, sy=(Math.random()*2-1)*shakeAmt;

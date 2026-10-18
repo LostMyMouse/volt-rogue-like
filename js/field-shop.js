@@ -6,7 +6,7 @@ let shop=null;
 const resetShopRun=reset;
 reset=function(){resetShopRun();run.credits=0;run.shopsVisited=[];shop=null;supplyCrates=[];fieldDrops=[];if($('#fieldClaim'))$('#fieldClaim').hidden=true;};
 const damageShopCredits=damageEnemy;
-damageEnemy=function(e,...args){if(e.isSupply){if(!e.dead){e.dead=true;dropFieldCredits(e.x,e.y,e.amount);sparks(e.x,e.y,0,14,COL.amber,280,Math.PI);sfx('enemyhit');}return;}const alive=!e.dead;const result=damageShopCredits(e,...args);if(alive&&e.dead&&!e.isDecoy&&!e.isIce&&!e.isPlate&&!e.isBud&&!inTutorial()&&Math.random()<.25)dropFieldCredits(e.x,e.y,e.isBoss?15:e.elite?8:4);return result;};
+damageEnemy=function(e,...args){if(e.isSupply){if(!e.dead){e.dead=true;if(e.loot==='health')packs.push({x:e.x,y:e.y,t:0});else if(e.loot==='credits'||(!e.loot&&e.amount>0))dropFieldCredits(e.x,e.y,e.amount);sparks(e.x,e.y,0,14,'#a88d68',280,Math.PI);sfx('enemyhit');}return;}const alive=!e.dead;const result=damageShopCredits(e,...args);if(alive&&e.dead&&!e.isDecoy&&!e.isIce&&!e.isPlate&&!e.isBud&&!inTutorial()&&Math.random()<.25)dropFieldCredits(e.x,e.y,e.isBoss?15:e.elite?8:4);return result;};
 function rollShopOffers(){
  const offers=[],used=new Set(),pool=BOONS.filter(b=>b.weapon===run.style&&!(player.owned[b.id]?.level>=3));
  for(let i=0;i<3;i++){
@@ -67,12 +67,15 @@ function drawShopPickup(i){
 
 // Breakables stay out of the enemy list, so they never hold up a wave or award kills.
 let supplyCrates=[],fieldDrops=[];
+const STORAGE_CRATES=new Image();STORAGE_CRATES.src='assets/arena/storage-crates-v1.webp';STORAGE_CRATES.onload=()=>invalidateRender();
+function rollCrateLoot(){const r=Math.random();return r<.08?'health':r<.5?'credits':'empty';}
 const buildSupplyRoom=buildRoom;
 buildRoom=function(){buildSupplyRoom();fieldDrops=[];supplyCrates=[];if(inTutorial()||!curDistrict()||isBossRoom())return;
- const candidates=shuffle([{x:370,y:180},{x:620,y:180},{x:1030,y:240},{x:360,y:510},{x:800,y:550},{x:1160,y:520}]);
- supplyCrates=candidates.slice(0,3+Math.floor(Math.random()*3)).map(p=>({...p,r:25,isSupply:true,spawnT:0,dead:false,amount:8+Math.floor(Math.random()*5)}));
+ // Stored beside the water tower, access hut, parapets and HVAC; leave landings and exits clear.
+ const candidates=shuffle([{x:315,y:150},{x:1180,y:135},{x:1280,y:180},{x:275,y:655},{x:1250,y:655},{x:85,y:205},{x:1390,y:200}]).filter(p=>!inObstacle(p.x,p.y,32)&&[...PADS,...Object.values(LANDING)].every(e=>Math.hypot(e.x-p.x,e.y-p.y)>130));
+ supplyCrates=candidates.slice(0,3+Math.floor(Math.random()*3)).map((p,i)=>{const loot=rollCrateLoot();return{...p,r:25,isSupply:true,spawnT:0,dead:false,skin:i%4,loot,amount:loot==='credits'?12+Math.floor(Math.random()*9):0};});
 };
 function dropFieldCredits(x,y,amount){fieldDrops.push({x,y,amount,t:0});}
 function updateFieldDrops(dt){for(const d of fieldDrops){d.t+=dt;const dx=player.x-d.x,dy=player.y-d.y,r=Math.hypot(dx,dy);if(d.t>.2&&r<100){const k=Math.min(1,dt*12);d.x+=dx*k;d.y+=dy*k;}if(d.t>.2&&r<30){d.dead=true;run.credits=(run.credits||0)+d.amount;sfx('power_pick',{vol:.35});texts.push({x:player.x,y:player.y-35,v:'+'+d.amount+' CR',t:0,c:COL.amber});}}fieldDrops=fieldDrops.filter(d=>!d.dead);}
-function drawSupplyCrate(c){ctx.save();ctx.translate(c.x,c.y);ctx.lineWidth=3;ctx.strokeStyle=COL.ink;ctx.fillStyle='#a7783c';ctx.fillRect(-24,-44,48,42);ctx.strokeRect(-24,-44,48,42);ctx.fillStyle='#d6af68';ctx.beginPath();ctx.moveTo(-24,-44);ctx.lineTo(-13,-54);ctx.lineTo(34,-54);ctx.lineTo(24,-44);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#72502d';ctx.beginPath();ctx.moveTo(24,-44);ctx.lineTo(34,-54);ctx.lineTo(34,-13);ctx.lineTo(24,-2);ctx.closePath();ctx.fill();ctx.stroke();ctx.strokeStyle='#4e3527';ctx.beginPath();ctx.moveTo(-20,-40);ctx.lineTo(20,-7);ctx.moveTo(20,-40);ctx.lineTo(-20,-7);ctx.stroke();ctx.fillStyle=COL.amber;ctx.font='bold 15px sans-serif';ctx.textAlign='center';ctx.fillText('CR',0,-18);ctx.restore();}
+function drawSupplyCrate(c){if(!STORAGE_CRATES.complete||!STORAGE_CRATES.naturalWidth)return;const i=c.skin||0,w=STORAGE_CRATES.naturalWidth/2,h=STORAGE_CRATES.naturalHeight/2;ctx.drawImage(STORAGE_CRATES,(i%2)*w,Math.floor(i/2)*h,w,h,c.x-45,c.y-57,90,60);}
 function drawFieldDrop(d){ctx.save();ctx.translate(d.x,d.y-9+Math.sin(time*4)*2);ctx.fillStyle=COL.amber;ctx.strokeStyle=COL.ink;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,-12);ctx.lineTo(13,0);ctx.lineTo(0,12);ctx.lineTo(-13,0);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}

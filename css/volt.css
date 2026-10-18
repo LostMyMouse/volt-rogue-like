@@ -503,3 +503,4 @@ body.in-hub.touch-mode #tDash{display:block;pointer-events:auto}
 .practice-controls{position:fixed;top:64px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;z-index:25;padding:5px;background:#102333;border:3px solid var(--ink);max-width:95vw}.practice-controls[hidden]{display:none}.practice-controls span{font:700 12px var(--ui);color:var(--volt)}.practice-controls button{font:700 12px var(--ui);color:var(--spark);background:#244056;border:2px solid var(--ink);padding:8px;cursor:pointer}@media(max-width:700px){.practice-controls{top:6px}.practice-controls span{display:none}}
 
 body.touch-mode .practice-controls{top:8px}body.touch-mode .practice-controls span{display:none}
+body.motion-comic .cutscene[data-cover] .cs-caption{display:none!important}

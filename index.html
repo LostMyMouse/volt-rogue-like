@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="volt-build" content="2026-10-18-rooftop-supply-v7">
+<meta name="volt-build" content="2026-10-18-comic-cover-armoury-v8">
 <script>/* Some hosts serve this page at /folder with no trailing slash, which breaks relative paths. */ if (!/\/$|\.html?$/.test(location.pathname)) document.write('<base href="'+location.pathname+'/">');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@
 </div>
 
 <div class="hub-hud" id="hubHud">
-  <span class="tag">Superhero Fortress</span><strong>THE FORTRESS</strong>
+  <span class="tag">Vanguard headquarters</span><strong>THE FORTRESS</strong>
   <div class="hub-wallet"><span id="hubShards">◆ 0</span><span id="hubLic">✦ 0</span></div>
   <p class="hub-hint" id="hubHint">WASD to move · E to interact · The Deploy Gate starts a run</p>
 </div>
@@ -225,6 +225,7 @@
       <button class="btn" id="btnPauseCodex" type="button">Notebook</button>
       <button class="btn" id="btnPauseTune" type="button">Tune</button>
       <button class="btn" id="btnRestart" type="button">Restart</button>
+      <button class="btn" id="btnPauseFortress" type="button" hidden>Return to Fortress</button>
     </div>
   </div>
 </div>
@@ -306,6 +307,7 @@
 <script src="js/hub.js"></script>
 <script src="js/cutscene.js"></script>
 <script src="js/motion-comic.js"></script>
+<script src="js/comic-opening.js"></script>
 <script src="js/tutorial.js"></script>
 <script src="js/codex.js"></script>
 <script src="js/advanced-enemies.js"></script>
@@ -313,6 +315,7 @@
 <script src="js/weapon-channels.js"></script>
 <script src="js/field-shop.js"></script>
 <script src="js/practice.js"></script>
+<script src="js/glass-hall.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/audio-manifest.js"></script>
 <script src="js/audio.js"></script>
