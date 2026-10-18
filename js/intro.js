@@ -55,6 +55,7 @@ function maybeIntro(id, done, opt={}){
     // The encounter's own defeat conversation already acknowledges this loss.
     const remembered=/_killed$/.test(pages.storyId||'')?null:rivalMemory(id);if(remembered)pages.unshift(remembered);
   }
+  for(const pg of pages.slice(0,2))prepareVoice(pg.who,pg.text);
   writeSave();
   const sp=SPEAKERS[id];
   // The card announces them; then they talk in the dialogue box.
@@ -79,8 +80,9 @@ function showIntro(card, done){
   art.innerHTML='';art.style.backgroundImage='';art.classList.remove('bust');
   const image=new Image();image.alt=card.name;image.className='intro-character-art';
   image.onerror=()=>{image.onerror=null;image.src=`assets/portraits/${card.id}.png?v=2026-10-18-story`;};
-  const extension=['volt','halo','bastion','echo','thorn','patch'].includes(card.id)?'webp':'png';
-  image.src=`assets/intro/${card.id}.${extension}?v=2026-10-18-comms`;art.appendChild(image);
+  // Villain posters have painted scenery; their portrait cut-outs have genuine alpha.
+  const heroArt=['volt','halo','bastion','echo','thorn','patch'].includes(card.id);
+  image.src=heroArt?`assets/intro/${card.id}.webp?v=2026-10-18-comms`:`assets/portraits/${card.id}.png?v=2026-10-18-cutout`;art.appendChild(image);
   el.classList.remove('in','out'); el.hidden=false; void el.offsetWidth; el.classList.add('in');
   introDone=done; introStart=performance.now();
   clearTimeout(introTimer);

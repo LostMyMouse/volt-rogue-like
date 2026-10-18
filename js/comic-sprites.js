@@ -33,13 +33,48 @@ function comicAtlas(id){
         a.cells=Array.from({length:4},(_,row)=>Array.from({length:8},(_,col)=>({x:col*a.w,y:row*a.h,w:a.w,h:a.h,ax:(col+.5)*a.w,ay:(row+.92)*a.h})));
         a.reference=[a.h*.75,a.h*.75,a.h*.75,a.h*.75];
       }
-      a.ready=true;
+      a.ready=true;invalidateRender();
       for(const key of ANIMATION_CACHE.keys())if(key.startsWith(id+'/'))ANIMATION_CACHE.delete(key);
     };
     a.img.src=`assets/sprites/comic/${id}.webp?v=2026-10-18`;
   }
   return COMIC_ART.get(id);
 }
+
+// Each stride direction is its own 2x2 cycle. Extract the connected body from each
+// cell so flecks or pieces of neighbouring poses can never appear above the helmet.
+const VOLT_STRIDES=new Map();
+function isolatedStride(img,col,row){
+ const w=Math.floor(img.width/2),h=Math.floor(img.height/2),c=document.createElement('canvas');c.width=w;c.height=h;
+ const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,col*w,row*h,w,h,0,0,w,h);
+ const pixels=g.getImageData(0,0,w,h),d=pixels.data,seen=new Uint8Array(w*h),queue=new Int32Array(w*h);let largest=[];
+ for(let at=0;at<w*h;at++){
+  if(seen[at]||d[at*4+3]<100)continue;
+  let head=0,tail=1;queue[0]=at;seen[at]=1;
+  while(head<tail){const i=queue[head++],x=i%w,y=Math.floor(i/w);for(const n of [x?i-1:-1,x<w-1?i+1:-1,y?i-w:-1,y<h-1?i+w:-1])if(n>=0&&!seen[n]&&d[n*4+3]>=100){seen[n]=1;queue[tail++]=n;}}
+  if(tail>largest.length)largest=Array.from(queue.subarray(0,tail));
+ }
+ const keep=new Uint8Array(w*h);let x0=w,y0=h,x1=0,y1=0;
+ for(const i of largest){const x=i%w,y=Math.floor(i/w);x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);for(let yy=Math.max(0,y-2);yy<=Math.min(h-1,y+2);yy++)for(let xx=Math.max(0,x-2);xx<=Math.min(w-1,x+2);xx++)keep[yy*w+xx]=1;}
+ if(!largest.length)throw Error('Empty stride');
+ for(let i=0;i<w*h;i++)if(!keep[i])d[i*4+3]=0;
+ g.putImageData(pixels,0,0);let sum=0,count=0;
+ for(let y=Math.floor(y0+(y1-y0)*.32);y<y0+(y1-y0)*.58;y++)for(let x=x0;x<=x1;x++)if(d[(y*w+x)*4+3]>100){sum+=x;count++;}
+ return{img:c,x:Math.max(0,x0-2),y:Math.max(0,y0-2),w:Math.min(w-1,x1+2)-Math.max(0,x0-2)+1,h:Math.min(h-1,y1+2)-Math.max(0,y0-2)+1,cx:sum/count,ay:y1+1,bodyHeight:y1-y0+1};
+}
+function voltStride(direction){
+ const key=direction==='west'?'east':direction;
+ if(!VOLT_STRIDES.has(key)){const a={img:new Image(),ready:false,cells:[]};VOLT_STRIDES.set(key,a);a.img.onload=()=>{try{a.cells=Array.from({length:4},(_,i)=>isolatedStride(a.img,i%2,Math.floor(i/2)));a.ready=true;invalidateRender();}catch(e){console.warn('Stride extraction',key,e);}};a.img.src=`assets/sprites/comic/volt-stride-${key}.webp`;}
+ return VOLT_STRIDES.get(key);
+}
+function drawVoltStride(x,y,face,scale,elapsed,tint){
+ const direction=['east','south','west','north'][((Math.round(face/(Math.PI/2))%4)+4)%4],a=voltStride(direction);if(!a.ready)return false;
+ const c=a.cells[Math.floor(elapsed*8)%4],ratio=SPRITES.volt.frame*.94/c.bodyHeight*scale;
+ let sheet=c.img;if(tint){const key=tint==='white'?'white':'ghost';if(!c[key])c[key]=tintSheet(c.img,tint==='white'?'#ffffff':COL.volt);sheet=c[key];}
+ ctx.save();ctx.translate(x,y);if(direction==='west')ctx.scale(-1,1);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+ ctx.drawImage(sheet,c.x,c.y,c.w,c.h,(c.x-c.cx)*ratio,(c.y-c.ay)*ratio,c.w*ratio,c.h*ratio);ctx.restore();return true;
+}
+
 function comicPose(name,c,elapsed,frame){
   const at=frame===null?animationFrame(c,elapsed):clamp(Math.floor(frame),0,c.frames-1);
   if(name==='hover')return 0;
@@ -53,7 +88,8 @@ function comicPose(name,c,elapsed,frame){
 function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
   let a=comicAtlas(id);if(!a?.ready)return false;
   const s=SPRITES[id],c=ANIMATION_DATA[id]?.[name]||{frames:4,fps:8,loop:true};
-  const moving=/^(run|walk)$/.test(name),jog=id==='volt'&&moving?comicAtlas('volt-jog'):null;
+  const moving=/^(run|walk)$/.test(name),jog=null;
+  if(id==='volt'&&moving){if(drawVoltStride(x,y,face,scale,elapsed,tint))return true;name='idle';}
   if(jog?.ready)a=jog;
   const direction=['east','south','west','north'][((Math.round(face/(Math.PI/2))%4)+4)%4],row=['south','east','north','west'].indexOf(direction);
   const pose=jog?.ready?Math.floor(elapsed*12*s.scale/scale)%8:comicPose(name,c,elapsed,frame);
@@ -77,4 +113,4 @@ drawAnimation=function(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
 drawTurn=function(id,x,y,face,scale,sheet){const s=SPRITES[id],tint=sheet?(sheet===s.white?'white':'ghost'):null;return drawComicPose(id,'idle',x,y,face,scale||s.scale,0,null,tint)||pixelDrawTurn(id,x,y,face,scale,sheet);};
 animationClip=function(id,name){const a=comicAtlas(id);return a?.ready&&ANIMATION_DATA[id]?.[name]?{...ANIMATION_DATA[id][name],ready:true}:pixelAnimationClip(id,name);};
 comicAtlas('volt');
-comicAtlas('volt-jog');
+for(const direction of ['east','south','north'])voltStride(direction);

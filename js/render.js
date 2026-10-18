@@ -25,7 +25,7 @@ const facadeWins = Array.from({length:46},(_,i)=>({x:20+i*32+rand(-4,4),y:rand(4
 // The painted rooftop: its floor maps onto the arena at ROOF.k world units per painting pixel,
 // with painting pixel (ox,oy) at the arena's top-left corner. Each district gets a colour grade.
 const ROOF = { k:1.124, ox:110, oy:178, img:new Image() };
-ROOF.img.src='assets/arena/rooftop.webp';
+ROOF.img.onload=()=>invalidateRender();ROOF.img.src='assets/arena/rooftop.webp';
 const roofPainted = () => ROOF.img.complete && ROOF.img.naturalWidth>0;
 function drawPaintedRoof(){
   const k=ROOF.k, im=ROOF.img;

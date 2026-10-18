@@ -42,7 +42,8 @@ addEventListener('pageshow',audioWake);
 function audioVolumes(){ if (!AUDIO.ctx) return; const v=VOL(); for (const b in AUDIO.buses) AUDIO.buses[b].gain.value=v[b]; }
 
 function loadBuf(path){
-  if (AUDIO.buffers[path] || AUDIO.loading[path] || !AUDIO.ctx) return AUDIO.loading[path];
+  if (AUDIO.buffers[path]) return Promise.resolve(AUDIO.buffers[path]);
+  if (AUDIO.loading[path] || !AUDIO.ctx) return AUDIO.loading[path];
   const revision = path.startsWith('voice/') ? `?v=${VOICE_REVISION}` : '';
   AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3${revision}`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; delete AUDIO.loading[path]; return buf; }).catch(()=>{ delete AUDIO.loading[path]; return null; });
   return AUDIO.loading[path];
@@ -114,10 +115,17 @@ function playVoice(who, text){
   const rate = 1; // Size comes from casting and pitch layers, never from dragging out the delivery.
   const v={playing:true,started:false}; AUDIO.voice=v;
   if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3?v=${VOICE_REVISION}`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onplaying=()=>v.started=true;a.onended=()=>v.playing=false;a.onerror=()=>v.playing=false; a.play().catch(()=>v.playing=false); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
-  const p=loadBuf('voice/'+key); p && p.then(buf=>{ if(AUDIO.voice!==v)return;if(!buf){v.playing=false;return;} const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start();v.started=true; v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
+  const p=loadBuf('voice/'+key); p && p.then(buf=>{ if(AUDIO.voice!==v)return;if(!buf){v.playing=false;return;} const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; const cleanup=voiceChain(AUDIO.ctx,s,who,AUDIO.buses.voice)||(()=>{}); s.onended=()=>{v.playing=false;setTimeout(cleanup,3500);}; s.start(AUDIO.ctx.currentTime+.06);v.started=true; v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false;cleanup(); }; });
   return true;
 }
 function stopVoice(){if(AUDIO.voice?.stop)AUDIO.voice.stop();if(AUDIO.voice)AUDIO.voice.playing=false;AUDIO.voice=null;}
+// Decode the next line and prepare expensive effect buffers before speech begins.
+function prepareVoice(who,text){
+  if(!AUDIO.unlocked||AUDIO.html||!who||!text||!VOICED.has(voiceKey(who,text)))return;
+  loadBuf('voice/'+voiceKey(who,text));
+  const warm=()=>{if(typeof warmVoiceFx==='function')warmVoiceFx(who);};
+  if(window.requestIdleCallback)requestIdleCallback(warm,{timeout:600});else setTimeout(warm,0);
+}
 // Short combat lines from Volt. Never talks over a conversation; has a cooldown and a chance to stay quiet.
 const BARKS = { parry:["Nice!","Got it!","Not today!"], hurt:["Ow.","Okay, ow!","That's gonna bruise."], low:["I'm fine. I'm fine!"], overload:["Overload!","Light 'em up!"],
   bossdown:["Yes! Did everyone see that?"], district:["One district back!"], death:["Not... yet..."], start:["Here we go!","Let's do this."] };

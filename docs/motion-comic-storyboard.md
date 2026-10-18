@@ -29,3 +29,8 @@ Fifteen bespoke scene atlases are now implemented: all five heroes, seven villai
 Volt narrates all sixteen beats. His established swept black/silver helmet crest, narrow blue visor and angular jaw are identity constraints; the initial rounded neighbourhood helmet was rejected and replaced before integration. Hero comms use separate transparent high-resolution cutouts.
 
 Controls: automatic advance waits for actual voice playback completion; failed audio falls back to reading time. Next scene, Skip and notebook replay remain available. Reduced motion removes shake and animated effects and makes camera changes immediate.
+
+
+## Editorial pass: conflict rather than roster
+
+Act one, **The people who protected us**, connects the five rescues. Act two, **The city under siege**, frames the seven villains as the force tearing down those protections, with Redactor identified as the architect. Act three, **A new hero steps forward**, turns the story from Volt protecting his block to volunteering when the city needs help. Chapter openers establish these changes in the illustrated page, not character name splashes. Every scene explicitly labels Hero or Villain, and its heading describes the action (for example, Civilians first / The barricades fall), while Volt’s recorded narration provides the character introduction. The printed chapter captions are editorial headings, not unrecorded dialogue. Blue/red borders reinforce the sides without relying on colour alone. No hero-villain partnership spoilers are added.
