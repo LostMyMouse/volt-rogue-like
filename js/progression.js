@@ -6,9 +6,12 @@ const HYBRIDS={sunroot:{name:'Sunroot',heroes:['halo','thorn'],desc:'Special gro
 const riskOf=c=>CONTRACTS.reduce((n,x)=>n+clamp(Math.floor(+c?.[x.id]||0),0,3),0);
 const selectedContracts=()=>save.wins>0?Object.fromEntries(CONTRACTS.map(x=>[x.id,clamp(Math.floor(+save.contracts?.[x.id]||0),0,3)])):{};
 const hybridsUnlocked=()=>save.wins>0&&save.runs>=5;
-function hybridActive(id){const h=HYBRIDS[id];return run.hybrid===id&&h.heroes.every(hero=>Object.keys(player.owned).some(b=>BOON_BY_ID[b]?.hero===hero));}
+function hybridReady(id){return HYBRIDS[id].heroes.every(hero=>Object.keys(player.owned).some(b=>BOON_BY_ID[b]?.hero===hero));}
+function hybridActive(id){return !!run.hybrids?.includes(id)&&hybridReady(id);}
+function eligibleHybrids(hero){return hybridsUnlocked()?Object.keys(HYBRIDS).filter(id=>!run.hybrids?.includes(id)&&hybridReady(id)&&HYBRIDS[id].heroes.includes(hero)):[];}
+function takeHybrid(id){if(!HYBRIDS[id]||!hybridReady(id)||!hybridsUnlocked())return false;run.hybrids=run.hybrids||[];if(!run.hybrids.includes(id))run.hybrids.push(id);return true;}
 const oldResetProgression=reset;
-reset=function(){oldResetProgression();run.contracts=selectedContracts();run.risk=riskOf(run.contracts);run.aspect=save.aspectUnlocked?.[run.style]&&save.aspects?.[run.style]?run.style:null;run.hybrid=hybridsUnlocked()&&HYBRIDS[save.hybrid]?save.hybrid:null;recalcRun();player.hp=player.maxHp;};
+reset=function(){oldResetProgression();run.contracts=selectedContracts();run.risk=riskOf(run.contracts);run.aspect=save.aspectUnlocked?.[run.style]&&save.aspects?.[run.style]?run.style:null;run.hybrid=null;run.hybrids=[];recalcRun();player.hp=player.maxHp;};
 const oldRecalcProgression=recalcRun;
 recalcRun=function(){oldRecalcProgression();if(run?.contracts){player.maxHp=Math.round(player.maxHp*(1-.08*(run.contracts.fragile||0)));player.hp=Math.min(player.hp,player.maxHp);}};
 const oldWaveHpProgression=waveHp;
@@ -56,14 +59,14 @@ doSig=function(){const p=player;if(!p.tech.stormlance)return originalSigVariant(
 const oldUpdateProgression=update;
 update=function(dt){oldUpdateProgression(dt);if(run.style!=='caster')updateShots(dt);};
 const oldOwnedProgression=ownedList;
-ownedList=function(){const out=oldOwnedProgression();if(run.aspect)out.push({name:ASPECTS[run.aspect].name,c:COL.volt,slot:'aspect'});if(run.risk)out.push({name:`Risk ${run.risk} · +${run.risk*10}% Shards`,c:COL.threat,slot:'contract'});if(run.hybrid)out.push({name:HYBRIDS[run.hybrid].name+(hybridActive(run.hybrid)?' · active':' · needs both heroes'),c:COL.boon,slot:'hybrid'});return out;};
+ownedList=function(){const out=oldOwnedProgression();if(run.aspect)out.push({name:ASPECTS[run.aspect].name,c:COL.volt,slot:'aspect'});if(run.risk)out.push({name:`Risk ${run.risk} · +${run.risk*10}% Shards`,c:COL.threat,slot:'contract'});for(const id of run.hybrids||[])out.push({name:HYBRIDS[id].name+(hybridActive(id)?' · active':' · needs both heroes'),c:COL.boon,slot:'hybrid'});return out;};
 
 // Dedicated room interactions; accessible floor paths follow the painted door openings.
 HUB_FLOOR.push([90,220,330,275],[90,175,255,270],[70,560,440,610],[390,650,560,740],[355,700,425,900],[70,835,425,925],[970,660,1100,790],[1060,735,1420,925]);
 Object.assign(HUB_SPOTS.find(s=>s.id==='bunk'),{at:{x:300,y:875},r:65,lx:260,ly:770});
 Object.assign(HUB_SPOTS.find(s=>s.id==='training'),{at:{x:1210,y:825},r:75,lx:1230,ly:760});
 HUB_NPCS.find(n=>n.id==='echo').y=790;
-HUB_SPOTS.push({id:'hybrids',name:'Resonance greenhouse',verb:'Combine powers',at:{x:115,y:252},r:50,lx:145,ly:160,c:COL.boon},{id:'contracts',name:'Risk contracts',verb:'Set challenge',at:{x:1140,y:280},r:50,lx:1150,ly:180,c:COL.threat},{id:'variants',name:'Weapon variants',verb:'Modify style',at:{x:1350,y:565},r:55,lx:1350,ly:425,c:COL.volt});
+HUB_SPOTS.push({id:'hybrids',name:'Resonance greenhouse',verb:'Research combinations',at:{x:115,y:252},r:50,lx:145,ly:160,c:COL.boon},{id:'contracts',name:'Risk contracts',verb:'Set challenge',at:{x:1140,y:280},r:50,lx:1150,ly:180,c:COL.threat},{id:'variants',name:'Weapon variants',verb:'Modify style',at:{x:1350,y:565},r:55,lx:1350,ly:425,c:COL.volt});
 const originalHubProgression=hubInteract;
 hubInteract=function(){if(state==='hub'&&['hybrids','contracts','variants'].includes(hubNear?.spot?.id))return openProgression(hubNear.spot.id);originalHubProgression();};
 let progressionKind=null;
@@ -80,8 +83,7 @@ function fillProgression(){const kind=progressionKind;$('#progressionList').inne
   progressionButton('Clear contracts','Return all handicaps to zero for your next run.','Risk '+riskOf(selectedContracts()),!(save.wins>0),()=>save.contracts={});
  }else if(kind==='variants'){$('#progressionTitle').textContent='Weapon variants';$('#progressionHint').textContent=`Each unlocked combat style has a mechanical variant. Unlock once for 2 Hero Licences, then freely switch between the standard and modified style. Available: ${save.licences} licences.`;
   for(const [id,a] of Object.entries(ASPECTS)){const bought=!!save.aspectUnlocked?.[id],equipped=!!save.aspects?.[id];progressionButton(STYLES[id].name+' · '+a.name,a.desc,!styleUnlocked(id)?'Unlock the style first':!bought?'Unlock · 2 licences':equipped?'Variant equipped · use standard':'Standard equipped · use variant',!styleUnlocked(id)||(!bought&&save.licences<2),()=>{save.aspectUnlocked=save.aspectUnlocked||{};save.aspects=save.aspects||{};if(!bought){save.licences-=2;save.aspectUnlocked[id]=1;}save.aspects[id]=!equipped;});}
- }else{$('#progressionTitle').textContent='Hybrid resonance';$('#progressionHint').textContent=hybridsUnlocked()?'Choose a hybrid for the next run. It activates only after you acquire a power from BOTH listed heroes. Replacing your last power from a required hero suspends it.':'Unlock after five deployments and one completed run. Hero powers can then resonate through Volt together.';
-  progressionButton('No hybrid','Deploy without a resonance recipe.',!save.hybrid?'Selected':'Select',false,()=>save.hybrid=null);
-  for(const [id,h] of Object.entries(HYBRIDS))progressionButton(h.name+' · '+h.heroes.map(x=>SPEAKERS[x].name).join(' + '),h.desc,save.hybrid===id?'Selected for next run':'Select recipe',!hybridsUnlocked(),()=>save.hybrid=id);
+ }else{$('#progressionTitle').textContent='Hybrid resonance';$('#progressionHint').textContent=hybridsUnlocked()?'Discover combinations during a run: collect powers from both named heroes, then their comms offers may include the hybrid. Choose it instead of another power. No recipe is selected here.':'After five deployments and one completed run, hybrid powers can appear in comms offers during your runs.';
+  for(const h of Object.values(HYBRIDS)){const card=document.createElement('article');card.className='style-card';card.innerHTML=`<strong>${h.name} · ${h.heroes.map(x=>SPEAKERS[x].name).join(' + ')}</strong><span class="style-line">${h.desc}</span><span class="tag">Discover during runs</span>`;$('#progressionList').appendChild(card);}
  }
 }

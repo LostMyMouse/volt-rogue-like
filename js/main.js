@@ -12,7 +12,7 @@ reset(); run.route={order:['kilnheart'],i:0,room:1,picks:0}; buildRoom(); run.ro
 const PORTRAIT_TOUCH = matchMedia('(orientation: portrait) and (pointer: coarse)');
 let lastT=performance.now();
 let paintedFrame='';
-const frozenCanvas=()=>['paused','draft','map','intro','dialogue','hubmenu','hubtalk'].includes(state);
+const frozenCanvas=()=>['paused','draft','map','shop','intro','dialogue','hubmenu','hubtalk'].includes(state);
 function frame(now){
   const dt=Math.min(0.033,(now-lastT)/1000); lastT=now;
   pollPads(dt); audioTick(dt);

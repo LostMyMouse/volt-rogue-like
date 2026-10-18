@@ -29,16 +29,17 @@ function openDraftNow(kind, hero, reroll){
   } else {
     who=hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)); lastCaller=who; draftHero=who;
     const n=reroll?run.calls[who]:(run.calls[who]=(run.calls[who]||0)+1); line=reroll?"Fine. Something else, then.":n===1?HEROES[who].first:commsLine(who);
-    const pool=BOONS.filter(b=>b.hero===who && !(p.owned[b.id] && p.owned[b.id].level>=3));
+    const pool=BOONS.filter(b=>b.weapon===run.style && b.hero===who && !(p.owned[b.id] && p.owned[b.id].level>=3));
     draftCards=shuffle(pool).slice(0,3).map(b=>{ const o=p.owned[b.id]; return {kind:'boon',id:b.id,rarity:o?o.rarity:rollRarity(),levelUp:!!o}; });
   }
+  if(kind!=='tech'){const pool=eligibleHybrids(who);if(pool.length)draftCards[draftCards.length-1]={kind:'hybrid',id:pick(pool)};}
   const comms=$('#draftComms'), sp=SPEAKERS[who];
   comms.style.setProperty('--c',sp.c); setPortrait($('#draftPortrait'),who);
   $('#draftLine').textContent=line; $('#draftWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;playVoice(who,line);
   const box=$('#draftCards'); box.innerHTML='';
   draftCards.forEach((c,i)=>{
     const b=document.createElement('button'); b.type='button'; b.className='card';
-    if (c.kind==='tech'){
+    if(c.kind==='hybrid'){const h=HYBRIDS[c.id];b.style.setProperty('--c',COL.boon);b.innerHTML=`<span class="card-top"><span class="tag">Hybrid · ${h.heroes.map(id=>SPEAKERS[id].name).join(' + ')}</span><span class="card-key">${i+1}</span></span><strong>${h.name}</strong><span class="card-desc">${h.desc}</span><span class="card-foot">Combine the powers collected this run</span>`;}else if (c.kind==='tech'){
       const t=TECH.find(x=>x.id===c.id), n=p.tech[c.id]||0;
       b.style.setProperty('--c',COL.heal);
       b.innerHTML=`<span class="card-top"><span class="tag">Fortress tech</span><span class="card-key">${i+1}</span></span><strong>${t.name}</strong><span class="card-desc">${t.desc}</span><span class="card-foot">${n?'Owned ×'+n+' · stacks':'New'}</span>`;
@@ -54,16 +55,16 @@ function openDraftNow(kind, hero, reroll){
   });
   const rr=$('#btnReroll'); rr.hidden=run.rerolls<=0; rr.textContent=`Reroll (${run.rerolls})`;
   state='draft'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null;
-  show('#mDraft',true); box.firstChild && box.firstChild.focus();
+  show('#mDraft',true);$('#mDraft .panel').scrollTop=0; box.firstChild && box.firstChild.focus({preventScroll:true});
 }
 function rerollDraft(){ if (state!=='draft' || run.rerolls<=0) return; run.rerolls--; openDraft(draftKind,draftHero,true); }
 function pickCard(i){
   if (state!=='draft' || !draftCards[i]) return;
   const c=draftCards[i]; sfx('power_pick');
-  if (c.kind==='tech') takeTech(c.id); else takeBoon(c.id,c.rarity);
-  const name=c.kind==='tech'?TECH.find(x=>x.id===c.id).name:BOON_BY_ID[c.id].name;
+  if(c.kind==='hybrid'){if(!takeHybrid(c.id))return;}else if (c.kind==='tech') takeTech(c.id); else takeBoon(c.id,c.rarity);
+  const name=c.kind==='hybrid'?HYBRIDS[c.id].name:c.kind==='tech'?TECH.find(x=>x.id===c.id).name:BOON_BY_ID[c.id].name;
   show('#mDraft',false);stopVoice();state='play';draftCards=[];
-  texts.push({x:player.x,y:player.y-40,v:name.toUpperCase(),t:0,big:true,c:c.kind==='tech'?COL.heal:HEROES[BOON_BY_ID[c.id].hero].c});
+  texts.push({x:player.x,y:player.y-40,v:name.toUpperCase(),t:0,big:true,c:c.kind==='hybrid'?COL.boon:c.kind==='tech'?COL.heal:HEROES[BOON_BY_ID[c.id].hero].c});
   startWave();
 }
 function refreshSlotHud(){
@@ -86,9 +87,9 @@ function updateCam(dt){
     const span=target?Math.abs(player.y-target.y)+190:240;
     cam.zoom=clamp(Math.min(v.h/span,v.w/600),.35,.9);cam.x=cx;cam.y=cy;return;
   }
-  cam.zoom = inputMode==='touch' ? clamp(Math.min(W,H)/540,0.62,1.3) : clamp(Math.min(W,H)/760,0.5,1.3);
+  cam.zoom = (inputMode==='touch' ? clamp(Math.min(W,H)/540,0.62,1.3) : clamp(Math.min(W,H)/760,0.5,1.3))*(curDistrict()==='redactor'?.85:1);
   const p=player, lead=40;
-  const tx=p.x+Math.cos(p.aim)*lead, ty=p.y+Math.sin(p.aim)*lead;
+  const tx=p.x+Math.cos(p.aim)*lead, ty=p.y+Math.sin(p.aim)*lead-(curDistrict()==='redactor'?50:0);
   const k=Math.min(1,6*dt); cam.x+=(tx-cam.x)*k; cam.y+=(ty-cam.y)*k;
   const hw=W/2/cam.zoom, hh=H/2/cam.zoom, m=140;
   cam.x = hw*2>ARENA.w+m*2 ? ARENA.w/2 : clamp(cam.x,hw-m,ARENA.w-hw+m);

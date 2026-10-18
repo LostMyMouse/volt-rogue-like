@@ -25,12 +25,18 @@ const facadeWins = Array.from({length:46},(_,i)=>({x:20+i*32+rand(-4,4),y:rand(4
 // The painted rooftop: its floor maps onto the arena at ROOF.k world units per painting pixel,
 // with painting pixel (ox,oy) at the arena's top-left corner. Each district gets a colour grade.
 const ROOF = { k:1.124, ox:110, oy:178, img:new Image() };
+const DISTRICT_ART=new Map();
+function districtPainting(id){
+ if(!id)return null;
+ if(!DISTRICT_ART.has(id)){const im=new Image();im.onload=()=>invalidateRender();im.onerror=()=>im.failed=true;im.src=`assets/arena/${id}-district.webp`;DISTRICT_ART.set(id,im);}
+ return DISTRICT_ART.get(id);
+}
 ROOF.img.onload=()=>invalidateRender();ROOF.img.src='assets/arena/rooftop.webp';
-const roofPainted = () => ROOF.img.complete && ROOF.img.naturalWidth>0;
+const roofPainted = () => {const theme=districtPainting(curDistrict());return !!((theme?.complete&&theme.naturalWidth)||(ROOF.img.complete&&ROOF.img.naturalWidth>0));};
 function drawPaintedRoof(){
-  const k=ROOF.k, im=ROOF.img;
+  const k=ROOF.k, theme=districtPainting(curDistrict()),im=theme?.complete&&theme.naturalWidth?theme:ROOF.img;
   ctx.drawImage(im, -ROOF.ox*k, -ROOF.oy*k, im.naturalWidth*k, im.naturalHeight*k);
-  const d=run && run.route && curDistrict(), c=d && KIND_COL[d];
+  const d=run && run.route && curDistrict(), c=im===ROOF.img&&d&&KIND_COL[d];
   if (c){ ctx.save(); ctx.globalCompositeOperation='soft-light'; ctx.globalAlpha=0.22; ctx.fillStyle=c; ctx.fillRect(-ROOF.ox*k, -ROOF.oy*k, im.naturalWidth*k, im.naturalHeight*k); ctx.restore(); }
 }
 function drawFloor(){

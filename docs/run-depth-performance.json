@@ -1,0 +1,74 @@
+[
+  {
+    "mobile": false,
+    "cpuThrottle": 4,
+    "stage": "power-offer",
+    "eventMs": 34.70000000298023,
+    "draws": 1,
+    "renderCpuMs": 1.2000000029802322,
+    "renderP95": 1.2000000029802322,
+    "frameGapP95": 6.100000000000364,
+    "frameGapMax": 86,
+    "longTasks": 0
+  },
+  {
+    "mobile": false,
+    "cpuThrottle": 4,
+    "stage": "power-selection",
+    "eventMs": 7,
+    "draws": 294,
+    "renderCpuMs": 330.1000000536442,
+    "renderP95": 1.4000000059604645,
+    "frameGapP95": 6.200000000000728,
+    "frameGapMax": 29.399999999999636,
+    "longTasks": 0
+  },
+  {
+    "mobile": false,
+    "cpuThrottle": 4,
+    "stage": "comms",
+    "eventMs": 4,
+    "draws": 1,
+    "renderCpuMs": 1.0999999940395355,
+    "renderP95": 1.0999999940395355,
+    "frameGapP95": 5.899999999999636,
+    "frameGapMax": 11.600000000000364,
+    "longTasks": 0
+  },
+  {
+    "mobile": true,
+    "cpuThrottle": 4,
+    "stage": "power-offer",
+    "eventMs": 29.799999997019768,
+    "draws": 1,
+    "renderCpuMs": 1.4000000059604645,
+    "renderP95": 1.4000000059604645,
+    "frameGapP95": 5.600000000000364,
+    "frameGapMax": 34.19999999999982,
+    "longTasks": 0
+  },
+  {
+    "mobile": true,
+    "cpuThrottle": 4,
+    "stage": "power-selection",
+    "eventMs": 6.5,
+    "draws": 304,
+    "renderCpuMs": 313.6999998986721,
+    "renderP95": 1.2999999970197678,
+    "frameGapP95": 5.800000000001091,
+    "frameGapMax": 25.399999999999636,
+    "longTasks": 0
+  },
+  {
+    "mobile": true,
+    "cpuThrottle": 4,
+    "stage": "comms",
+    "eventMs": 3.5999999940395355,
+    "draws": 1,
+    "renderCpuMs": 1,
+    "renderP95": 1,
+    "frameGapP95": 5.600000000000364,
+    "frameGapMax": 10.700000000000728,
+    "longTasks": 0
+  }
+]

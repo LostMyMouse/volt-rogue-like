@@ -13,7 +13,7 @@ function registerBoss(def){ BOSSES[def.id]=def; Object.assign(BOSS_PARRY, def.pa
 const isSpecBoss = e => !!(e && BOSSES[e.kind]);
 
 function makeBoss(id, at, opt={}){
-  const def=BOSSES[id], hp=def.hp*T.enemyHealth*(opt.hpMul||1);
+  const def=BOSSES[id], hp=def.hp*T.enemyHealth*(opt.hpMul||1)*(id==='redactor'?1.8:1.6);
   return { kind:id, isBoss:true, name:def.name, x:at.x, y:at.y, vx:0, vy:0, mx:0, my:0, r:def.radius*U, hp, maxHp:hp,
     flashT:0, stunT:0, spawnT:0, face:Math.PI/2, dead:false,
     bstate:'INTRO', stateT:0, phase:1, queuedPhase:1, seqI:0, atk:null, invuln:true, exposedT:0, vent:0 };
@@ -47,7 +47,7 @@ function bossUpdate(e,dt){
     case 'WINDUP': bossWindup(e,dt); break;
     case 'ACTIVE': bossActive(e,dt); break;
     case 'PAUSE': if (e.stateT>=e.atk.pause) bossBeginStep(e,e.atk.stepI+1); break;
-    case 'RECOVERY': if (e.stateT>=e.atk.def.recovery) bossEndAttack(e); break;
+    case 'RECOVERY': if (e.stateT>=Math.max(.3,e.atk.def.recovery*.72)) bossEndAttack(e); break;
   }
 }
 function bossNextAttack(e){
@@ -76,7 +76,8 @@ function bossClearOwned(e){
 function bossBeginStep(e,i){
   const a=e.atk, steps=a.def.steps, p=player;
   if (i>=steps.length){ bossToRecovery(e); return; }
-  const st=steps[i], w=st.windup*R.windMul;
+  const st={...steps[i]};if(st.speed)st.speed*=1.18;if(st.every)st.every*=.85;
+  const w=Math.max(.38,st.windup*.85)*R.windMul;
   Object.assign(a,{ stepI:i, step:st, hit:false, locked:false, windup:w, lockAt:Math.max(0,Math.min(w*0.6,w-0.3)),
     aim:Math.atan2(p.y-e.y,p.x-e.x), target:{x:p.x,y:p.y}, origin:{x:e.x,y:e.y}, activeT:0, dist:0, stopped:false });
   (BOSS_PRIMS[st.prim].begin||(()=>{}))(e,a,st);
@@ -101,7 +102,7 @@ function bossActive(e,dt){
   if (!done) return;
   if (a.step.after) a.step.after(e,a);
   if (a.stepI+1<a.def.steps.length){
-    a.pause=a.step.pause||0;
+    a.pause=(a.step.pause||0)*.8;
     if (a.pause>0) bossSetState(e,'PAUSE'); else bossBeginStep(e,a.stepI+1);
   } else bossToRecovery(e);
 }

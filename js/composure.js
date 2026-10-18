@@ -1,9 +1,9 @@
 // Enemy Composure: parries create large openings; direct attacks maintain pressure.
 'use strict';
-const COMPOSURE = { normal:70, boss:180, parry:35, bossParry:60, breakTime:3, recoverAfter:5, regen:0.05, multiplier:2 };
+const COMPOSURE = { normal:70, boss:300, parry:35, bossParry:60, breakTime:3, recoverAfter:5, regen:0.05, multiplier:2 };
 function hasComposure(e){ return e && !e.dead && !e.isBud && !e.isPlate && !e.isIce && !e.isDecoy && !e.tutDummy; }
 function initComposure(e){
-  if (e.maxComposure===undefined){ e.maxComposure=e.isBoss?COMPOSURE.boss:COMPOSURE.normal; e.composure=e.maxComposure; e.composureBrokenT=0; e.composureRest=0; e.composureBreaks=0; }
+  if (e.maxComposure===undefined){ e.maxComposure=e.kind==='redactor'?360:e.isBoss?COMPOSURE.boss:COMPOSURE.normal; e.composure=e.maxComposure; e.composureBrokenT=0; e.composureRest=0; e.composureBreaks=0; }
   return e;
 }
 function damageComposure(e,amount,cause='attack'){

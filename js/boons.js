@@ -114,7 +114,7 @@ function commsLine(who){
   const used=run.lines||(run.lines=[]), fresh=a=>a.filter(t=>!used.includes(t));
   const d=run.route && curDistrict(), situational=[];
   if (player.hp<player.maxHp*0.4) situational.push(...fresh(L.low||[]));
-  if (d && L[d] && !used.includes(L[d])) situational.push(L[d]);
+  if (d && isBossRoom() && L[d] && !used.includes(L[d])) situational.push(L[d]);
   if (run.route && run.route.i>=3) situational.push(...fresh(L.late||[]));
   if (run.hits===0 && (run.roomsCleared||0)>=3) situational.push(...fresh(L.clean||[]));
   if ((run.parries||0)>=5) situational.push(...fresh(L.parry||[]));
