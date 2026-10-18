@@ -1,4 +1,4 @@
-// Volt: The run route. Five villains per run: three district villains chosen on the city map, then
+// Volt: The run route. Five villains per run: three randomly assigned district villains, then
 // Gravemark's roof, then the Redactor's tower (once he exists). See docs/boss-gameplay-spec.md, Run structure.
 'use strict';
 
@@ -18,7 +18,7 @@ const DISTRICT_POOL = ['kilnheart','bellwether','verdigris','glasswake','underto
 const builtPool = () => DISTRICT_POOL.filter(id=>BOSSES[id]);
 
 // run.route = { order:[district ids so far], i: index of current district, room: room within it (1-based) }
-function routeStart(){ run.route={ order:[], i:-1, room:0, picks:Math.min(DISTRICT_PICKS,builtPool().length) }; }
+function routeStart(){ const picks=Math.min(DISTRICT_PICKS,builtPool().length);run.route={order:[],i:-1,room:0,picks,plan:shuffle(builtPool().slice()).slice(0,picks),pendingDistrict:null}; }
 const curDistrict = () => run.route.order[run.route.i];
 const roomsIn = id => (DISTRICTS[id].rooms||ROOMS_PER_DISTRICT);
 const isBossRoom = () => run.route.room > roomsIn(curDistrict());
@@ -35,37 +35,26 @@ const isFinalVillain = () => { const n=nextAfterDistrict(); return n.type==='end
 function villainHpMul(id){ return DISTRICT_POOL.includes(id) ? 1+POSITION_HP*run.route.i : 1; }
 
 function enterDistrict(id){
-  const r=run.route; r.order.push(id); r.i=r.order.length-1; r.room=1;
+  const r=run.route; r.order.push(id);r.pendingDistrict=null; r.i=r.order.length-1; r.room=1;
   run.districtsCleared = r.i;
 }
 
-/* ---- City map: pick the next district from two villain gates ---- */
+/* ---- Route briefing: the run assigns districts; the player continues the route. ---- */
 function openCityMap(){
-  const r=run.route, pool=builtPool().filter(id=>!r.order.includes(id));
-  const gates=shuffle(pool.slice()).slice(0,2);
-  const box=$('#cityGates'); box.innerHTML='';
-  $('#cityStep').textContent = `District ${r.order.filter(id=>DISTRICT_POOL.includes(id)).length+1} of ${r.picks}`;
-  gates.forEach((id,i)=>{
-    const d=DISTRICTS[id], sp=SPEAKERS[id]||{name:id,c:COL.boon}, pos=r.i+1;
-    const b=document.createElement('button'); b.type='button'; b.className='gate'; b.style.setProperty('--c',KIND_COL[id]||sp.c);
-    b.innerHTML=`<span class="gate-art"></span>
-      <span class="card-top"><span class="tag">${d.name}</span><span class="card-key">${i+1}</span></span>
-      <strong>${sp.name}</strong>
-      <span class="gate-title">${BOSSES[id].title}</span>
-      <span class="card-desc">${d.blurb}</span>
-      <span class="card-foot">${(save.met&&save.met.villains&&save.met.villains[id])?'Faced before':'Unknown threat'} · ${pos>0?`+${Math.round(POSITION_HP*pos*100)}% tougher this late`:'First district'}</span>`;
-    const art=b.querySelector('.gate-art');
-    if (PORTRAIT_FILES.includes(id)) art.style.backgroundImage=`url(assets/portraits/${id}.png)`; else art.innerHTML=`<svg viewBox="0 0 64 64">${PORTRAIT_SVG[id]||BUST}</svg>`;
-    b.addEventListener('click',()=>chooseDistrict(id));
-    box.appendChild(b);
-  });
-  cityGates=gates;
-  state='map'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null;
-  show('#mCity',true); box.firstChild && box.firstChild.focus();
+ const r=run.route,index=r.order.filter(id=>DISTRICT_POOL.includes(id)).length;
+ if(!r.plan)r.plan=shuffle(builtPool().filter(id=>!r.order.includes(id))).slice(0,r.picks-index);
+ const id=r.pendingDistrict||r.plan.find(id=>!r.order.includes(id));
+ if(!id){const next=nextAfterDistrict();if(next.id)beginDistrict(next.id);return;}
+ r.pendingDistrict=id;const box=$('#cityGates');box.innerHTML='';
+ $('#cityStep').textContent=`District ${index+1} of ${r.picks} · assigned route`;
+ const b=document.createElement('button');b.type='button';b.className='gate';b.style.setProperty('--c',COL.volt);
+ b.innerHTML='<span class="card-top"><span class="tag">Next rooftop · Power</span></span><strong>Uncharted district</strong><span class="card-desc">A power awaits on arrival. Your contact and the district villain will be revealed when you reach them.</span><span class="card-foot">Continue route →</span>';
+ b.addEventListener('click',()=>chooseDistrict(id));box.appendChild(b);cityGates=[id];
+ state='map';keys.clear();strikeHeld=false;mouse.left=false;stick.id=null;show('#mCity',true);b.focus();
 }
 let cityGates=[];
 function chooseDistrict(id){
-  if (state!=='map') return;
+  if (state!=='map'||id!==run.route.pendingDistrict) return;
   show('#mCity',false); state='play';
   if (run.route.i<0){ beginDistrict(id); return; }   // first district: no leap, start right away
   jumpTo({x:player.x, y:-40, side:'top', reward:{type:'district', id}, hold:0, t:0});

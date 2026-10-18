@@ -3,6 +3,8 @@
 
 const $ = s => document.querySelector(s);
 const cv = $('#game'), ctx = cv.getContext('2d');
+let renderRevision=0;
+function invalidateRender(){renderRevision++;}
 let W = 0, H = 0, DPR = 1;
 function resize(){ DPR = Math.min(window.devicePixelRatio || 1, 3); W = innerWidth; H = innerHeight; cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR); }
 addEventListener('resize', resize); resize();

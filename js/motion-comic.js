@@ -19,7 +19,18 @@ const COMIC_BEATS=[
  {id:'arrival',title:'AN OPENING',el:'repair',frames:[2,3],text:"Patch checked my power. No registered signature. Their shield kept the team safe, and my hidden ability gave us an opening outside it. Bastion insisted on training first. Fair."},
 ];
 CUTSCENE.splice(0,CUTSCENE.length,...COMIC_BEATS.map(b=>({...b,who:'volt'})));
+// Editorial captions turn the introductions into a single escalating conflict.
+// These are printed comic headings; the existing Volt narration remains verbatim.
+const COMIC_ACTIONS={halo:'Civilians first',bastion:'Hold the escape route',echo:'Get them out before the shot',thorn:'Make a way through',patch:'Keep the rescue running',kilnheart:'The barricades fall',bellwether:'The square becomes a weapon',verdigris:'The city comes apart',glasswake:'Nowhere safe to strike',undertow:'The docks are cut off',gravemark:'The tower has a guard',redactor:'The man behind the takeover',volt:'One block. Someone to help.',crisis:'Now the whole city needs help',arrival:'Get to the Fortress'};
+function comicContext(i){
+ const b=COMIC_BEATS[i];
+ if(i<5)return{role:'Hero',side:'heroes',chapter:'1 · The people who protected us',colour:'#72c8de',headline:COMIC_ACTIONS[b.id]};
+ if(i<12)return{role:'Villain',side:'villains',chapter:'2 · The city under siege',colour:'#e87164',headline:COMIC_ACTIONS[b.id]};
+ return{role:'Hero',side:'volt',chapter:'3 · A new hero steps forward',colour:'#72c8de',headline:i===15?'An opening the Redactor cannot see':COMIC_ACTIONS[b.id]};
+}
+const COMIC_CHAPTERS={0:['BEFORE THE BLACKOUT','Heroes stood between danger and the people.'],5:['THEN THE CITY WAS TAKEN','The Redactor’s villains seized the districts.'],12:['SOMEONE STILL HAD TO HELP','Before he could save a city, Volt protected his block.']};
 const COMIC_IMAGES={};
+const COMIC_TIMING={overview:.9,panelStarts:[0,4.2,7.6,11],twoPanelChange:5.5,minScene:14.4,minTwoPanelScene:10.5,narrationDelay:1.65,afterVoice:1.2,cameraRate:3.2};
 function comicImage(id){
  if(COMIC_IMAGES[id])return COMIC_IMAGES[id];
  const im=new Image();im.failed=false;im.onerror=()=>im.failed=true;im.src=`assets/comic/${id}-action.webp?v=2026-10-18-motion`;COMIC_IMAGES[id]=im;return im;
@@ -51,11 +62,15 @@ nextCutPanel=function(){
  if(comic.i>=0&&comic.t<.35)return;
  stopVoice();
  if(++comic.i>=COMIC_BEATS.length){endCutscene();return;}
- comic.t=0;comic.phase=0;comic.voiceStarted=false;comic.voiceSeen=false;comic.loading=true;comic.lastPhase=-1;
+ comic.t=0;comic.phase=0;comic.voiceStarted=false;comic.voiceSeen=false;comic.voiceEndedAt=null;comic.loading=true;comic.lastPhase=-1;
  const b=COMIC_BEATS[comic.i];comicImage(b.id);
- $('#csTag').hidden=false;$('#csTag').textContent=b.title;$('#csWho').hidden=false;
- $('#csText').textContent=b.text;$('#csCount').textContent=`${comic.i+1} / ${COMIC_BEATS.length} · Tap to continue`;
- $('#csCaption').style.setProperty('--c',SPEAKERS[b.id]?.c||COL.volt);
+ prepareVoice('volt',b.text);
+ const context=comicContext(comic.i);
+ $('#cutscene').dataset.faction=context.side;
+ $('#csTag').hidden=false;$('#csTag').textContent=`${context.role} · ${SPEAKERS[b.id]?.name||b.title}`;
+ $('#csWho').hidden=false;$('#csWho').textContent=context.headline;
+ $('#csText').textContent=b.text;$('#csCount').textContent=`${context.chapter} · ${comic.i+1}/${COMIC_BEATS.length} · Volt narrating`;
+ $('#csCaption').style.setProperty('--c',context.colour);
 };
 endCutscene=function(){
  if(!comic)return;const done=comic.done;comic=null;stopVoice();show('#cutscene',false);document.body.classList.remove('in-cut','motion-comic');save.seenIntro=2;writeSave();done?.();
@@ -66,56 +81,74 @@ updateCinematic=function(dt){
  if(c.loading)return;
  c.t+=dt;
  // Actions play once; the aftermath holds while narration completes.
- c.phase=b.frames?b.frames[c.t<2?0:1]:c.t<1.25?0:c.t<1.7?1:c.t<2.5?2:3;
+ c.phase=b.frames?b.frames[c.t<COMIC_TIMING.twoPanelChange?0:1]:c.t<COMIC_TIMING.panelStarts[1]?0:c.t<COMIC_TIMING.panelStarts[2]?1:c.t<COMIC_TIMING.panelStarts[3]?2:3;
  if(c.phase!==c.lastPhase){c.lastPhase=c.phase;if(!reduceMotion&&c.phase===1)sfx(b.id==='crisis'?'broadcast':'block',{vol:.28});if(c.phase===2){const sound={electric:'lightning',stone:'stone',fire:'fire',sound:'sound',acid:'acid',glass:'glass',ice:'ice',drain:'redact',repair:'special',mind:'sound',plant:'acid',shield:'block',light:'beam'};sfx(sound[b.el]||'enemyhit',{vol:.22});}}
  const p=comicPanel(c.phase),box=comicView(),target={x:p.x+p.w/2,y:p.y+p.h/2,z:Math.min(box.w/p.w,box.h/p.h)*.96};
- if(c.t<.5&&!b.hold){target.x=970;target.y=550;target.z=Math.min(box.w/1940,box.h/1100)*.95;}
- const k=reduceMotion?1:Math.min(1,dt*12);for(const key of ['x','y','z'])c.cam[key]+=(target[key]-c.cam[key])*k;
+ if(c.t<COMIC_TIMING.overview&&!b.hold){target.x=970;target.y=550;target.z=Math.min(box.w/1940,box.h/1100)*.95;}
+ const k=reduceMotion?1:1-Math.exp(-dt*COMIC_TIMING.cameraRate);for(const key of ['x','y','z'])c.cam[key]+=(target[key]-c.cam[key])*k;
  // Let the camera establish the panel before the narration starts.
- if(!c.voiceStarted&&c.t>.65){c.voiceStarted=true;playVoice('volt',b.text);}
+ if(!c.voiceStarted&&c.t>COMIC_TIMING.narrationDelay){c.voiceStarted=true;playVoice('volt',b.text);}
  if(AUDIO.voice?.playing&&AUDIO.voice.started)c.voiceSeen=true;
+ if(c.voiceSeen&&!AUDIO.voice?.playing&&c.voiceEndedAt===null)c.voiceEndedAt=c.t;
  const readTime=Math.max(7,b.text.split(/\s+/).length/2.6+1);
- if(c.auto&&c.voiceStarted&&c.t>3.5&&((c.voiceSeen&&!AUDIO.voice?.playing)||(!c.voiceSeen&&c.t>readTime)))nextCutPanel();
+ const minimum=b.frames?COMIC_TIMING.minTwoPanelScene:COMIC_TIMING.minScene;
+ if(c.auto&&c.voiceStarted&&c.t>=minimum&&((c.voiceEndedAt!==null&&c.t-c.voiceEndedAt>=COMIC_TIMING.afterVoice)||(!c.voiceSeen&&c.t>COMIC_TIMING.narrationDelay+readTime)))nextCutPanel();
 };
 function comicView(){const cap=$('#csCaption').getBoundingClientRect();return{x:12,y:55,w:W-24,h:Math.max(80,cap.top-67)};}
+// A small highlight layer uses only bright coloured pixels already in the illustration.
+// It shares the source crop exactly, so no invented particles or shapes drift off the artwork.
+const COMIC_HIGHLIGHTS=new Map();
+function comicHighlight(id,el){
+ const key=id+':'+el;if(COMIC_HIGHLIGHTS.has(key))return COMIC_HIGHLIGHTS.get(key);
+ if(el==='plant')return null;
+ const im=comicImage(id);if(!im.complete||!im.naturalWidth)return null;
+ let canvas=null;
+ try{
+  canvas=document.createElement('canvas');canvas.width=im.naturalWidth;canvas.height=im.naturalHeight;
+  const g=canvas.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const pixels=g.getImageData(0,0,canvas.width,canvas.height),d=pixels.data;
+  for(let i=0;i<d.length;i+=4){const r=d[i],v=d[i+1],b=d[i+2],bright=Math.max(r,v,b),contrast=bright-Math.min(r,v,b);let match=false;
+   if(bright>230&&contrast>55){
+    if(el==='light'||el==='sound')match=r>v*.95&&v>b*1.35&&v>170;
+    else if(['shield','repair','ice','electric'].includes(el))match=b>170&&v>120&&r<b*.85;
+    else if(el==='mind'||el==='stone')match=b>160&&r>v*1.1&&b>v*1.25;
+    else if(el==='acid')match=v>180&&v>r*1.1&&v>b*1.2;
+    else if(el==='fire')match=r>210&&v>75&&r>v*1.12&&v>b*1.3;
+    else if(el==='glass')match=r>180&&b>110&&v<r*.7;
+    else if(el==='drain')match=r>190&&r>v*1.8&&r>b*1.5;
+   }d[i+3]=match?Math.round(d[i+3]*.7):0;
+  }g.putImageData(pixels,0,0);
+ }catch(e){canvas=null;}
+ COMIC_HIGHLIGHTS.set(key,canvas);
+ while(COMIC_HIGHLIGHTS.size>2){const oldest=COMIC_HIGHLIGHTS.keys().next().value,old=COMIC_HIGHLIGHTS.get(oldest);if(old){old.width=old.height=0;}COMIC_HIGHLIGHTS.delete(oldest);}
+ return canvas;
+}
 function comicEffects(g,p,b,phase,t){
- if(reduceMotion)return;g.save();g.beginPath();g.rect(p.x,p.y,p.w,p.h);g.clip();g.translate(p.x,p.y);
- const colors={light:'#ffe298',shield:'#9dceff',mind:'#c49cff',plant:'#9cc86c',repair:'#bde9fa',fire:'#ffaf56',sound:'#ffe287',acid:'#b5ed6b',glass:'#ff86d2',ice:'#b6f4ff',stone:'#b58bff',drain:'#ef5267',electric:'#84e3ff'};const col=colors[b.el];
- // Persistent rain/steam/energy drift keeps the held panel alive without repeating impacts.
- g.lineWidth=1.2;g.strokeStyle=b.el==='fire'?'#ffb257':'#adc9e4';g.globalAlpha=.23;
- if(['halo','bastion','echo','thorn','bellwether','undertow'].includes(b.id))for(let i=0;i<45;i++){const x=(i*89.7+t*55)%p.w,y=(i*61.3+t*390)%p.h;g.beginPath();g.moveTo(x,y);g.lineTo(x-4,y-15);g.stroke();}
- g.strokeStyle=col;g.fillStyle=col;g.lineWidth=2;g.globalAlpha=.65;
- // Each power has its own moving shape language. Effects follow the illustrated action.
- if(b.el==='sound'&&phase>=1&&phase<=2){for(let i=0;i<4;i++){const q=(t*.85+i*.25)%1;g.globalAlpha=(1-q)*.65;g.beginPath();g.ellipse(270,270,30+q*760,45+q*420,0,-1.3,1.3);g.stroke();}}
- if(b.el==='shield'&&phase===1){for(let i=0;i<8;i++){const q=(t*2.5+i*.125)%1,x=940-q*400,y=150+i*24;g.globalAlpha=.8;g.beginPath();g.moveTo(x,y);g.lineTo(x+35,y-2);g.stroke();}}
- if(b.el==='light'&&phase===2){for(let i=0;i<9;i++){const q=(t*2+i*.11)%1,x=440+q*400;g.globalAlpha=(1-q)*.7;g.beginPath();g.moveTo(x,260+(i-4)*6);g.lineTo(x+70,260+(i-4)*10);g.stroke();}}
- if((b.el==='plant'||b.el==='acid')&&phase>=1&&phase<=2){const q=clamp((t-1.2)/1.1,0,1);for(let i=0;i<5;i++){g.globalAlpha=.4;g.beginPath();for(let j=0;j<=24*q;j++){const x=170+j*28,y=455-i*18-Math.sin(j*.45+i)*22;if(!j)g.moveTo(x,y);else g.lineTo(x,y);}g.stroke();}}
- if(b.el==='mind'&&phase>=1){for(let i=0;i<3;i++){g.globalAlpha=.35;g.beginPath();g.ellipse(750,185,45+i*12,20+i*7,t*.7+i,0,PI2);g.stroke();}}
- if(b.el==='glass'){for(let i=0;i<16;i++){const q=(t*.3+i*.071)%1,x=200+(i*137)%650,y=80+q*400;g.save();g.translate(x,y);g.rotate(t*1.8+i);g.globalAlpha=.2+.35*Math.sin(q*Math.PI);g.beginPath();g.moveTo(0,-9);g.lineTo(5,7);g.lineTo(-4,4);g.closePath();g.stroke();g.restore();}}
- if(b.el==='stone'){for(let i=0;i<15;i++){const lift=phase<2?Math.sin(t*2+i)*8+clamp(t/1.7,0,1)*30:Math.max(0,1-(t-1.7)*2)*35,x=80+(i*151)%820,y=460-(i*23)%100-lift;g.globalAlpha=.7;g.fillStyle='#28232e';g.strokeStyle='#a68bc3';g.beginPath();g.moveTo(x-7,y);g.lineTo(x-4,y-10);g.lineTo(x+8,y-5);g.lineTo(x+5,y+4);g.closePath();g.fill();g.stroke();}}
- if(b.el==='drain'&&phase===2){g.lineWidth=1.5;for(let i=0;i<4;i++){const q=(t*.8+i*.25)%1;g.globalAlpha=.5;g.beginPath();g.moveTo(300,260+i*9);g.bezierCurveTo(400,250+Math.sin(t*5+i)*20,530,240,650,250+i*9);g.stroke();g.beginPath();g.arc(300+q*350,250+i*9,3,0,PI2);g.fill();}}
- if(b.el==='ice'&&phase===1){const q=clamp((t-1.25)/.45,0,1);g.globalAlpha=.7;g.lineWidth=3;g.beginPath();g.moveTo(410,210);g.lineTo(410+q*400,210+q*25);g.stroke();}
- if(b.el==='fire'){for(let i=0;i<22;i++){const q=(t*.35+i*.071)%1,x=120+(i*139)%720,y=490-q*360;g.globalAlpha=(1-q)*.55;g.fillStyle=i%2?'#ffd59a':'#ff8e38';g.fillRect(x+Math.sin(t*2+i)*13,y,2,5);}}
- if((b.el==='repair'||b.el==='electric')&&phase>=1){for(let i=0;i<7;i++){const q=(t*2+i*.14)%1;g.globalAlpha=(1-q)*.6;g.strokeStyle=col;const cx=b.el==='repair'?270:440,cy=310;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.sin(i*3+t)*q*55,cy-q*55);g.lineTo(cx+Math.sin(i*4+t)*q*75,cy-q*85);g.stroke();}}
- const contact=t-1.25,release=t-1.7;
- if((phase===1||phase===2)&&contact>=0&&b.el!=='drain'){let q=phase===1?contact/.45:release/.8;q=clamp(q,0,1);g.globalAlpha=(1-q)*.8;g.strokeStyle=col;g.lineWidth=3;
-  for(let i=0;i<27;i++){const a=i*2.399,r=24+q*350;g.beginPath();g.moveTo(570+Math.cos(a)*r,260+Math.sin(a)*r*.6);g.lineTo(570+Math.cos(a)*(r+35),260+Math.sin(a)*(r+35)*.6);g.stroke();}
-  if(b.el==='sound'||b.el==='shield'||b.el==='light'){g.lineWidth=5;g.beginPath();g.ellipse(540,270,35+q*350,60+q*230,0,0,PI2);g.stroke();}
- }
- g.restore();
+ if(reduceMotion||phase!==comic.phase)return;
+ const mask=comicHighlight(b.id,b.el);if(!mask)return;
+ const sw=mask.width/2,sh=mask.height/2,inset=4;
+ g.save();g.globalCompositeOperation='screen';g.globalAlpha=.04+.08*(.5+.5*Math.sin(t*2.5));
+ g.drawImage(mask,(phase%2)*sw+inset,Math.floor(phase/2)*sh+inset,sw-inset*2,sh-inset*2,p.x,p.y,p.w,p.h);g.restore();
 }
 renderCinematic=function(){
  if(!comic)return;const c=comic,b=COMIC_BEATS[c.i],im=comicImage(b.id),box=comicView();
  ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);
  if(c.loading){ctx.fillStyle='#f3dfac';ctx.font='700 18px sans-serif';ctx.textAlign='center';ctx.fillText(im.failed?'Scene could not load. Tap Next or Skip.':'Loading illustrated scene…',W/2,H*.4);return;}
  ctx.save();ctx.beginPath();ctx.rect(box.x,box.y,box.w,box.h);ctx.clip();ctx.translate(box.x+box.w/2,box.y+box.h/2);
- if(!reduceMotion&&c.phase===1){const q=Math.max(0,c.t-1.25);ctx.translate(Math.sin(q*90)*5*Math.exp(-q*8),Math.cos(q*73)*3*Math.exp(-q*8));}
+
  ctx.scale(c.cam.z,c.cam.z);ctx.translate(-c.cam.x,-c.cam.y);
  const sw=im.naturalWidth/2,sh=im.naturalHeight/2;
  for(let i=0;i<4;i++){const p=comicPanel(i);ctx.fillStyle='#000';ctx.fillRect(p.x-7,p.y-7,p.w+14,p.h+14);
-  if(i<=c.phase||c.t<.5){const inset=4;ctx.drawImage(im,(i%2)*sw+inset,Math.floor(i/2)*sh+inset,sw-inset*2,sh-inset*2,p.x,p.y,p.w,p.h);comicEffects(ctx,p,b,i,c.t);}
+  if(i<=c.phase||c.t<COMIC_TIMING.overview){const inset=4;ctx.drawImage(im,(i%2)*sw+inset,Math.floor(i/2)*sh+inset,sw-inset*2,sh-inset*2,p.x,p.y,p.w,p.h);comicEffects(ctx,p,b,i,c.t);}
   else{ctx.fillStyle='#141a25';ctx.fillRect(p.x,p.y,p.w,p.h);}
-  ctx.strokeStyle=i===c.phase?'#f3dfac':'#5b6370';ctx.lineWidth=i===c.phase?5:2;ctx.strokeRect(p.x,p.y,p.w,p.h);
+  ctx.strokeStyle=i===c.phase?comicContext(c.i).colour:'#5b6370';ctx.lineWidth=i===c.phase?5:2;ctx.strokeRect(p.x,p.y,p.w,p.h);
  }
  ctx.restore();
+ const chapter=COMIC_CHAPTERS[c.i];
+ if(chapter&&c.t<3.2){
+  ctx.save();ctx.beginPath();ctx.rect(box.x,box.y,box.w,box.h);ctx.clip();
+  const x=box.x+10,y=box.y+12,width=Math.min(box.w-20,650),size=clamp(width/25,14,26);
+  ctx.fillStyle='#0b111c';ctx.fillRect(x,y,width,size*2.8+18);ctx.strokeStyle=comicContext(c.i).colour;ctx.lineWidth=3;ctx.strokeRect(x,y,width,size*2.8+18);
+  ctx.fillStyle=comicContext(c.i).colour;ctx.font=`900 ${size}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText(chapter[0],x+12,y+9,width-24);
+  ctx.fillStyle='#f3dfac';ctx.font=`600 ${Math.max(11,size*.58)}px "Chakra Petch",sans-serif`;ctx.fillText(chapter[1],x+12,y+size+18,width-24);ctx.restore();
+ }
 };

@@ -85,6 +85,8 @@ const codexNew = e => { const n=codexUnlocked(e), s=(save.codexSeen||{})[e.id]||
 const codexAnyNew = () => CODEX.some(codexNew);
 
 let codexSel='volt', codexBack=null;
+const codexSpeaker=e=>SPEAKERS[e.id]||{name:e.id==='operation'?'Operation notes':e.group,role:'Mission and extraction',c:COL.amber};
+const codexPortrait=e=>SPEAKERS[e.id]?`<img src="assets/portraits/${e.id}.png" alt="">`:'<span class="codex-q" aria-hidden="true">▤</span>';
 function openCodex(from){
   codexBack=from; if (from==='hub'){ state='hubmenu'; keys.clear(); }
   if (!CODEX.find(e=>e.id===codexSel && codexKnown(e))) codexSel='volt';
@@ -98,16 +100,16 @@ function fillCodex(){
   let group='';
   for (const e of CODEX){
     if (e.group!==group){ group=e.group; const h=document.createElement('span'); h.className='tag codex-group'; h.textContent=group; tabs.appendChild(h); }
-    const known=codexKnown(e), sp=SPEAKERS[e.id];
+    const known=codexKnown(e), sp=codexSpeaker(e);
     const b=document.createElement('button'); b.type='button'; b.className='codex-tab'+(e.id===codexSel?' sel':''); b.dataset.id=e.id; b.disabled=!known;
     b.style.setProperty('--c', sp.c);
-    b.innerHTML = known ? `<img src="assets/portraits/${e.id}.png" alt=""><span>${sp.name}</span>${codexNew(e)?'<i>New</i>':''}` : `<span class="codex-q">?</span><span>Unknown</span>`;
+    b.innerHTML = known ? `${codexPortrait(e)}<span>${sp.name}</span>${codexNew(e)?'<i>New</i>':''}` : `<span class="codex-q">?</span><span>Unknown</span>`;
     b.addEventListener('click',()=>{ codexSel=e.id; fillCodex(); const t=$(`#codexTabs [data-id="${e.id}"]`); t&&t.focus(); });
     tabs.appendChild(b);
   }
-  const e=CODEX.find(x=>x.id===codexSel), sp=SPEAKERS[e.id], n=codexUnlocked(e), page=$('#codexPage');
+  const e=CODEX.find(x=>x.id===codexSel), sp=codexSpeaker(e), n=codexUnlocked(e), page=$('#codexPage');
   page.style.setProperty('--c', sp.c);
-  page.innerHTML = `<div class="codex-head"><img src="assets/portraits/${e.id}.png" alt=""><div><span class="tag">${e.id==='volt'?`Rookie hero · ${sp.pronouns}`:sp.role}</span><h3>${sp.name}</h3></div></div>`
+  page.innerHTML = `<div class="codex-head">${codexPortrait(e)}<div><span class="tag">${e.id==='volt'?`Rookie hero · ${sp.pronouns||'he / him'}`:sp.role}</span><h3>${sp.name}</h3></div></div>`
     + e.notes.map((nt,i)=> i<n ? `<p>${nt.text}</p>` : i===n ? `<p class="codex-locked">More to write here. ${e.group==='Villains'?'Keep fighting them.':e.id==='volt'?'Keep going.':'Keep talking to them.'}</p>` : '').join('');
 }
 $('#btnCodexClose').addEventListener('click', closeCodex);

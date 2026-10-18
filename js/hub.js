@@ -4,7 +4,8 @@
 'use strict';
 
 const HUB = { w:1484, h:1060, spawn:{x:742, y:690} };
-const hubImg = new Image(); hubImg.src = 'assets/fortress/hub.jpg';
+const hubImg = new Image(); hubImg.src = 'assets/fortress/hub-doorways.webp';
+hubImg.onload=()=>invalidateRender();
 // Where feet can stand: a union of overlapping rectangles [x0,y0,x1,y1] traced over the painting.
 const HUB_FLOOR = [
   [495,250,1010,712],   // main hall
@@ -201,6 +202,7 @@ function openTalk(who,pages,spot,completed){
   $('#hubTalk').dataset.label='Fortress'; show('#hubPrompt',false); show('#hubTalk',true); showTalkPage();
 }
 function showTalkPage(){
+  const next=talk.pages[talk.i+1];if(next)prepareVoice(next.who,next.text);
   const pg=talk.pages[talk.i], el=$('#hubTalk'), pt=$('#talkPortrait');
   if (pg.who){ const sp=SPEAKERS[pg.who]; setPortrait(pt,pg.who,pg.expression||'neutral'); pt.hidden=false; el.style.setProperty('--c',sp.c); $('#talkWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`; }
   else { pt.hidden=true; el.style.setProperty('--c',talk.spot.c); $('#talkWho').innerHTML=`<b>${talk.spot.name}</b>`; }
@@ -217,6 +219,7 @@ function advanceTalk(){
 }
 // The same box during a run: an exchange after an intro card, with the action frozen until it ends.
 function runDialogue(pages, label, done){
+  for(const pg of pages.slice(0,2))prepareVoice(pg.who,pg.text);
   if (window.__volt && window.__volt.noIntro){ done && done(); return; } // tests skip cards and their dialogue
   talk={pages,storyId:pages.storyId,i:0,t:performance.now(),done:()=>{state='play';done&&done();}};
   state='dialogue'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null; powerHeld=false;
@@ -275,6 +278,7 @@ function renderHub(){
   ctx.fillStyle='#080d18'; ctx.fillRect(0,0,W,H);
   ctx.save(); ctx.translate(W/2,H/2); ctx.scale(cam.zoom,cam.zoom); ctx.translate(-cam.x,-cam.y);
   if (hubImg.complete && hubImg.naturalWidth) ctx.drawImage(hubImg,0,0,HUB.w,HUB.h);
+  drawHubDoorways();
   // The hologram map breathes.
   ctx.save(); ctx.globalCompositeOperation='lighter'; ctx.globalAlpha=0.10+0.06*Math.sin(time*2.4);
   const hg=ctx.createRadialGradient(742,445,10,742,445,170); hg.addColorStop(0,COL.volt); hg.addColorStop(1,'rgba(38,191,255,0)'); ctx.fillStyle=hg; ctx.fillRect(560,270,370,350); ctx.restore();
@@ -294,3 +298,17 @@ function renderHub(){
 
 $('#hubPrompt').addEventListener('click', hubInteract);
 $('#hubTalk').addEventListener('pointerdown', () => advanceTalk());
+
+// These thresholds sit on the actual collision corridors, with a short label
+// visible before the player approaches an interaction marker inside the room.
+const HUB_DOORS=[
+ {x:285,y:250,a:Math.PI,label:'GREENHOUSE'}, {x:453,y:572,a:Math.PI,label:'WORKSHOP'},
+ {x:442,y:701,a:Math.PI/2,label:'BUNK · NOTEBOOK'}, {x:1035,y:707,a:Math.PI/2,label:'TRAINING'},
+ {x:1022,y:557,a:0,label:'ARMOURY'}, {x:1090,y:280,a:0,label:'CONTRACTS'},
+];
+function drawHubDoorways(){
+ ctx.save();ctx.lineJoin='miter';
+ for(const d of HUB_DOORS){ctx.save();ctx.translate(d.x,d.y);ctx.rotate(d.a);ctx.fillStyle='#142936';ctx.strokeStyle='#77cfde';ctx.lineWidth=2;ctx.fillRect(-25,-9,50,18);ctx.strokeRect(-25,-9,50,18);ctx.strokeStyle='#d5e9db';ctx.beginPath();ctx.moveTo(-16,0);ctx.lineTo(16,0);ctx.moveTo(10,-4);ctx.lineTo(16,0);ctx.lineTo(10,4);ctx.stroke();ctx.restore();
+ ctx.font='700 11px "Chakra Petch",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';const w=ctx.measureText(d.label).width+14;ctx.fillStyle='rgba(5,12,22,.92)';ctx.fillRect(d.x-w/2,d.y-34,w,18);ctx.fillStyle='#d5e9db';ctx.fillText(d.label,d.x,d.y-25);
+ }ctx.restore();
+}

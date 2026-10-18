@@ -11,6 +11,8 @@ reset(); run.route={order:['kilnheart'],i:0,room:1,picks:0}; buildRoom(); run.ro
 
 const PORTRAIT_TOUCH = matchMedia('(orientation: portrait) and (pointer: coarse)');
 let lastT=performance.now();
+let paintedFrame='';
+const frozenCanvas=()=>['paused','draft','map','intro','dialogue','hubmenu','hubtalk'].includes(state);
 function frame(now){
   const dt=Math.min(0.033,(now-lastT)/1000); lastT=now;
   pollPads(dt); audioTick(dt);
@@ -26,13 +28,14 @@ function frame(now){
     shakeAmt-=shakeAmt*Math.min(1,10*dt); flash=Math.max(0,flash-dt*1.6); hurtFlash=Math.max(0,hurtFlash-dt*1.4);
   } else if (state==='cutscene'){
     time+=dt; updateCinematic(dt);
-  } else if (inHub()){
-    time+=dt; if (state==='hub') updateHub(dt); updateFx(dt); hubCam(dt);
+  } else if (state==='hub'){
+    time+=dt;updateHub(dt);updateFx(dt);hubCam(dt);
   } else if (state==='start' || state==='over'){
     time+=dt; updateFx(dt); updateCam(dt);
     shakeAmt-=shakeAmt*Math.min(1,10*dt); flash=Math.max(0,flash-dt*1.6); hurtFlash=Math.max(0,hurtFlash-dt*1.4);
   }
-  render(); updateHud(); updateComposureHud();
+  const stamp=state+'|'+W+'|'+H+'|'+DPR+'|'+renderRevision+'|'+(talk?.i??'');
+  if(!frozenCanvas()||stamp!==paintedFrame){render();updateHud();updateComposureHud();paintedFrame=stamp;}
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

@@ -8,7 +8,7 @@ const EAST_FIRST = ['east','south-east','south','south-west','west','north-west'
 const SPRITES = {};
 for (const [id,scale] of [['volt',1.25],['halo',1.5],['bastion',1.5],['echo',1.5],['thorn',1.5],['patch',1.5]]){
   const img=new Image(), s={frame:64, anchor:[32,60], scale, img, ready:false};
-  img.onload=()=>{ s.feet=measureFeet(img,s.frame); s.ghost=tintSheet(img,COL.volt); s.white=tintSheet(img,'#ffffff'); s.ready=true; };
+  img.onload=()=>{ s.feet=measureFeet(img,s.frame); s.ghost=tintSheet(img,COL.volt); s.white=tintSheet(img,'#ffffff'); s.ready=true;invalidateRender(); };
   img.src=`assets/sprites/${id}/${id}_rotations.png`;
   SPRITES[id]=s;
 }
@@ -145,7 +145,7 @@ for (const [id,def] of Object.entries(ENEMY_SPRITES)){
   img.onload=()=>{
     if (img.width!==s.frame*s.order.length || img.height!==s.frame) return;
     s.white=tintSheet(img,'#ffffff');
-    s.ready=true;
+    s.ready=true;invalidateRender();
   };
   img.src=`assets/sprites/${id}/${id}_rotations.png`;
   SPRITES[id]=s;
@@ -307,7 +307,7 @@ function animationClip(id,name){
   const key=id+'/'+name;
   if (!ANIMATION_CACHE.has(key)){
     const clip={...def,ready:false,img:new Image()}; ANIMATION_CACHE.set(key,clip);
-    clip.img.onload=()=>{clip.ready=clip.img.width===clip.frame[0]*clip.frames && clip.img.height===clip.frame[1]*clip.directions.length; if (clip.ready && IN_PLACE.has(name)) clip.offsets=registerFrames(clip);};
+    clip.img.onload=()=>{invalidateRender();clip.ready=clip.img.width===clip.frame[0]*clip.frames && clip.img.height===clip.frame[1]*clip.directions.length; if (clip.ready && IN_PLACE.has(name)) clip.offsets=registerFrames(clip);};
     clip.img.src=clip.file;
   }
   return ANIMATION_CACHE.get(key);

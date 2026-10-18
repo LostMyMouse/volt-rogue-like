@@ -480,3 +480,8 @@ body.touch-mode.tutorial-mode .tut-skip{top:8px;right:8px;max-width:80px;min-hei
 .motion-comic .cs-caption{width:auto;display:block!important}.motion-comic #csText{font-family:var(--body,"Chakra Petch"),sans-serif}.motion-comic .cs-lines{gap:4px}
 .in-cut #banner{display:none!important}
 .progression-panel{max-width:900px}
+.touch-mode .scrim{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(4,7,14,.88)}
+.motion-comic .cs-caption{border-left:7px solid var(--c)}
+.motion-comic .cs-tag{background:var(--c);color:#0b111c;letter-spacing:.08em;max-width:90%;white-space:normal}
+.motion-comic .cs-who{color:#292016;font-size:clamp(14px,1.6vw,19px);letter-spacing:.02em}
+@media(max-height:450px){.motion-comic .cs-who{display:block!important;font-size:14px}.motion-comic .cs-count{font-size:10px}.motion-comic .cs-tag{font-size:11px}}

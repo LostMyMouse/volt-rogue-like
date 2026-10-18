@@ -11,9 +11,10 @@ const SHARD_ROOM = [12,18];
 const PADS = [ {x:ARENA.w/2, y:44, side:'top'}, {x:44, y:ARENA.h*0.48, side:'left'}, {x:ARENA.w-44, y:ARENA.h*0.48, side:'right'} ];
 const LANDING = { top:{x:ARENA.w/2, y:ARENA.h-90}, left:{x:ARENA.w-90, y:ARENA.h*0.48}, right:{x:90, y:ARENA.h*0.48} };
 const REWARD_STYLE = {
-  tech:{ c:COL.heal, label:'Fortress tech' },
+  boon:{ c:COL.volt, label:'Power' },
+  tech:{ c:COL.heal, label:'Upgrade' },
   shards:{ c:COL.boon, label:'Renown shards' },
-  boss:{ c:COL.boon, label:'Gravemark' },
+  boss:{ c:COL.boon, label:'Unknown villain' },
 };
 let exits=[], roomPhase='reward', clearT=0, arrivalT=0, transit=null;
 const weighted = list => { const tot=list.reduce((a,[,w])=>a+w,0); let r=Math.random()*tot; for (const [v,w] of list){ if ((r-=w)<0) return v; } return list[0][0]; };
@@ -161,19 +162,19 @@ function drawTransitOverlay(){
 /* Jump-point visuals: a glowing pad on the floor, the reward medallion floating above it */
 const ICON_CACHE = {};
 function rewardIcon(r){
-  const key = r.type==='boon' ? r.hero : r.type==='boss' ? 'boss_'+r.boss : r.type;
+  // Preview only the reward category. Identity stays concealed until landing.
+  const key = r.type;
   if (ICON_CACHE[key]) return ICON_CACHE[key];
   let inner, bg;
-  if (r.type==='boon'){ inner=PORTRAIT_SVG[r.hero]; bg=HEROES[r.hero].c; }
+  if (r.type==='boon'){ bg=COL.volt; inner='<path d="M36 5L15 35h16l-4 24 23-33H34Z" fill="#0b111c" stroke="#f4fbff" stroke-width="2"/>'; }
   else if (r.type==='tech'){ bg=COL.heal; inner='<circle cx="32" cy="32" r="13" fill="none" stroke="#0b111c" stroke-width="7"/><g stroke="#0b111c" stroke-width="7" stroke-linecap="round"><path d="M32 8v8M32 48v8M8 32h8M48 32h8M15 15l6 6M43 43l6 6M15 49l6-6M43 21l6-6"/></g>'; }
   else if (r.type==='shards'){ bg='#2a1748'; inner='<path d="M32 6 L50 26 L32 58 L14 26 Z" fill="#b56cff" stroke="#f4fbff" stroke-width="2"/><path d="M14 26 H50 M32 6 L26 26 L32 58 L38 26 Z" fill="none" stroke="#f4fbff" stroke-width="1.5" opacity=".7"/>'; }
-  else if (PORTRAIT_FILES.includes(r.boss)){ const img=new Image(); img.src=`assets/portraits/${r.boss}.png`; return ICON_CACHE[key]=img; }
-  else { bg='#1a1428'; inner=PORTRAIT_SVG[r.boss]||PORTRAIT_SVG.gravemark; }
+  else { bg='#1a1428'; inner='<path d="M17 21Q17 7 32 7T47 23Q47 32 34 37v7" fill="none" stroke="#f4fbff" stroke-width="7"/><circle cx="34" cy="54" r="4" fill="#f4fbff"/>'; }
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="${bg}"/>${inner}</svg>`;
   const img=new Image(); img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
   return ICON_CACHE[key]=img;
 }
-function rewardStyle(r){ return r.type==='boon' ? {c:HEROES[r.hero].c, label:SPEAKERS[r.hero].name+' · power'} : r.type==='boss' ? {c:KIND_COL[r.boss]||COL.boon, label:(SPEAKERS[r.boss]||{name:'Boss'}).name} : REWARD_STYLE[r.type]; }
+function rewardStyle(r){ return REWARD_STYLE[r.type]||REWARD_STYLE.boss; }
 function drawExitPads(){
   for (const x of exits){
     const st=rewardStyle(x.reward), pop=Math.min(1,x.t/0.35), pulse=0.5+0.5*Math.sin(time*5+x.x);

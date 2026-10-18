@@ -23,9 +23,10 @@ const HERO_IDS = ['halo','bastion','echo','thorn','patch'];
 const PITCH_WORKLET = `
 class PitchShift extends AudioWorkletProcessor {
   static get parameterDescriptors(){ return [{ name:'ratio', defaultValue:1, minValue:0.25, maxValue:4 }]; }
-  constructor(){ super(); this.size=16384; this.buf=new Float32Array(this.size); this.w=0; this.phase=0; this.win=1400; }
+  constructor(){ super(); this.size=16384; this.buf=new Float32Array(this.size); this.w=0; this.phase=0; this.win=1400; this.stopped=false;this.port.onmessage=e=>{if(e.data?.stop)this.stopped=true;}; }
   read(d){ let p=this.w-d; while (p<0) p+=this.size; const i=Math.floor(p), f=p-i, a=this.buf[i%this.size], b=this.buf[(i+1)%this.size]; return a+(b-a)*f; }
   process(inputs, outputs, params){
+    if(this.stopped)return false;
     const inp=inputs[0][0], out=outputs[0][0]; if (!out) return true;
     const r=params.ratio[0], step=(1-r)/this.win;
     for (let n=0;n<out.length;n++){
@@ -43,13 +44,13 @@ let pitchReady=false;
 function voiceFxInit(ctx){
   if (!ctx || !ctx.audioWorklet) return;
   const url=URL.createObjectURL(new Blob([PITCH_WORKLET],{type:'application/javascript'}));
-  ctx.audioWorklet.addModule(url).then(()=>{ pitchReady=true; }).catch(()=>{});
+  ctx.audioWorklet.addModule(url).then(()=>{ pitchReady=true; }).catch(()=>{}).finally(()=>URL.revokeObjectURL(url));
 }
 const IR_CACHE={};
 function reverbIR(ctx,t){
   const key=t.toFixed(1); if (IR_CACHE[key]) return IR_CACHE[key];
   const len=Math.floor(ctx.sampleRate*t), b=ctx.createBuffer(2,len,ctx.sampleRate);
-  for (let c=0;c<2;c++){ const d=b.getChannelData(c); for (let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3); }
+  for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++){const decay=1-i/len;d[i]=(Math.random()*2-1)*decay*decay*decay;}}
   return IR_CACHE[key]=b;
 }
 function driveCurve(k){ const n=1024, c=new Float32Array(n); for (let i=0;i<n;i++){ const x=i/(n-1)*2-1; c[i]=Math.tanh(x*(1+k*12))/Math.tanh(1+k*12); } return c; }
@@ -67,36 +68,40 @@ function voicePreset(who){
 }
 // Builds the chain for one line: src -> [pitch] -> dry + layers -> tone -> [comb/echo] -> [radio] -> out, plus reverb.
 function voiceChain(ctx, src, who, dest){
-  const p=voicePreset(who);
+  const p=voicePreset(who),nodes=[];const make=(kind,...args)=>{const n=ctx[kind](...args);nodes.push(n);return n;};
   if (p.rate) src.playbackRate.value=p.rate;
-  const mix=ctx.createGain();
-  const dry=pitchNode(ctx,p.pitch||1); src.connect(dry); dry.connect(mix);
+  const mix=make('createGain');
+  const dry=pitchNode(ctx,p.pitch||1);nodes.push(dry); src.connect(dry); dry.connect(mix);
   for (const L of (p.layers||[])){
-    let n=pitchNode(ctx,L.pitch||1); src.connect(n);
-    if (L.delay){ const d=ctx.createDelay(1); d.delayTime.value=L.delay; n.connect(d); n=d; }
-    if (L.lp){ const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=L.lp; n.connect(f); n=f; }
-    if (L.hp){ const f=ctx.createBiquadFilter(); f.type='highpass'; f.frequency.value=L.hp; n.connect(f); n=f; }
-    const g=ctx.createGain(); g.gain.value=L.gain; n.connect(g); g.connect(mix);
+    let n=pitchNode(ctx,L.pitch||1);nodes.push(n); src.connect(n);
+    if (L.delay){ const d=make('createDelay',1); d.delayTime.value=L.delay; n.connect(d); n=d; }
+    if (L.lp){ const f=make('createBiquadFilter'); f.type='lowpass'; f.frequency.value=L.lp; n.connect(f); n=f; }
+    if (L.hp){ const f=make('createBiquadFilter'); f.type='highpass'; f.frequency.value=L.hp; n.connect(f); n=f; }
+    const g=make('createGain'); g.gain.value=L.gain; n.connect(g); g.connect(mix);
   }
   let node=mix;
-  const filt=(type,f,gain,q)=>{ const b=ctx.createBiquadFilter(); b.type=type; b.frequency.value=f; if (gain!==undefined) b.gain.value=gain; if (q) b.Q.value=q; node.connect(b); node=b; };
+  const filt=(type,f,gain,q)=>{ const b=make('createBiquadFilter'); b.type=type; b.frequency.value=f; if (gain!==undefined) b.gain.value=gain; if (q) b.Q.value=q; node.connect(b); node=b; };
   if (p.lowshelf) filt('lowshelf',p.lowshelf.f,p.lowshelf.g);
   if (p.highshelf) filt('highshelf',p.highshelf.f,p.highshelf.g);
   if (p.peak) filt('peaking',p.peak.f,p.peak.g,p.peak.q);
   if (p.comb){ // a short feedback delay: metal helmets and suits
-    const d=ctx.createDelay(0.1), fb=ctx.createGain(), out=ctx.createGain(); d.delayTime.value=p.comb.d; fb.gain.value=p.comb.fb;
+    const d=make('createDelay',0.1), fb=make('createGain'), out=make('createGain'); d.delayTime.value=p.comb.d; fb.gain.value=p.comb.fb;
     node.connect(out); node.connect(d); d.connect(fb); fb.connect(d); d.connect(out); node=out;
   }
   if (p.echo){
-    const d=ctx.createDelay(1), fb=ctx.createGain(), wet=ctx.createGain(), out=ctx.createGain(); d.delayTime.value=p.echo.d; fb.gain.value=p.echo.fb; wet.gain.value=p.echo.wet;
+    const d=make('createDelay',1), fb=make('createGain'), wet=make('createGain'), out=make('createGain'); d.delayTime.value=p.echo.d; fb.gain.value=p.echo.fb; wet.gain.value=p.echo.wet;
     node.connect(out); node.connect(d); d.connect(fb); fb.connect(d); d.connect(wet); wet.connect(out); node=out;
   }
-  if (p.drive){ const s=ctx.createWaveShaper(); s.curve=driveCurve(p.drive); node.connect(s); node=s; }
+  if (p.drive){ const s=make('createWaveShaper'); s.curve=driveCurve(p.drive); node.connect(s); node=s; }
   if (p.radio){
     filt('highpass',p.radio.bp[0]); filt('lowpass',p.radio.bp[1]);
-    const s=ctx.createWaveShaper(); s.curve=driveCurve(p.radio.drive); node.connect(s); node=s;
-    const g=ctx.createGain(); g.gain.value=p.radio.gain; node.connect(g); node=g;
+    const s=make('createWaveShaper'); s.curve=driveCurve(p.radio.drive); node.connect(s); node=s;
+    const g=make('createGain'); g.gain.value=p.radio.gain; node.connect(g); node=g;
   }
   node.connect(dest);
-  if (p.reverb){ const cv=ctx.createConvolver(), wet=ctx.createGain(); cv.buffer=reverbIR(ctx,p.reverb.t); wet.gain.value=p.reverb.wet; node.connect(cv); cv.connect(wet); wet.connect(dest); }
+  if (p.reverb){ const cv=make('createConvolver'), wet=make('createGain'); cv.buffer=reverbIR(ctx,p.reverb.t); wet.gain.value=p.reverb.wet; node.connect(cv); cv.connect(wet); wet.connect(dest); }
+  return ()=>{try{src.disconnect();}catch(e){}for(const n of nodes)try{n.port?.postMessage({stop:true});n.disconnect();}catch(e){}};
 }
+
+// Prepare expensive impulse data before a line starts, during the encounter card.
+function warmVoiceFx(who){if(!AUDIO.ctx)return;const p=VOICE_FX[who];if(p?.reverb)reverbIR(AUDIO.ctx,p.reverb.t);}
