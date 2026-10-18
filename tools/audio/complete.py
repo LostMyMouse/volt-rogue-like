@@ -31,7 +31,7 @@ active={key(x):manifest[key(x)] for x in lines}
 manifest_path.write_text(json.dumps(active,indent=1,ensure_ascii=False)+'\n',encoding='utf-8')
 p=root/'js/audio-manifest.js';s=p.read_text();a=s.index('const VOICED = ');b=s.index('\nconst SFX_NAMES',a)
 s=s[:a]+'const VOICED = new Set('+json.dumps(sorted(active))+');'+s[b:]
-s=re.sub(r"const VOICE_REVISION = '[^']+'", "const VOICE_REVISION = '2026-10-18-story-complete-v4'",s)
+s=re.sub(r"const VOICE_REVISION = '[^']+'", "const VOICE_REVISION = '2026-10-18-motion-progression-v4'",s)
 p.write_text(s,encoding='utf-8',newline='\n')
 print('Every active spoken line now has a verified Eleven v4 recording. Checking transcripts.',flush=True)
 qa_path=here/'cast-v4-qa.json';previous=json.loads(qa_path.read_text(encoding='utf-8')) if qa_path.exists() else []

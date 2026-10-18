@@ -93,7 +93,7 @@ function audioTick(dt){
   const inRunState = ['play','transit','draft','map','intro','dialogue','paused'].includes(state);
   let m=null, amb=null, mv=1;
   if (state==='start') m='title';
-  else if (state==='cutscene'){ m='cutscene'; amb = cut && cut.scene==='roof' ? 'rain_loop' : 'fortress_loop'; }
+  else if (state==='cutscene'){ m='cutscene';const scene=typeof comic!=='undefined'&&comic?COMIC_BEATS[comic.i]?.id:null;amb=['verdigris','glasswake','redactor','arrival'].includes(scene)?'fortress_loop':'rain_loop';mv=.65; }
   else if (inHub && inHub()){ m='fortress-siege'; amb='fortress_loop'; mv=0.72; }
   else if (state==='over'){ m=AUDIO.musicName; mv=0.35; }
   else if (inRunState){ m = boss && !boss.dead ? 'boss' : 'combat'; amb='rain_loop'; if (state==='paused'||state==='draft'||state==='map') mv=0.55; if (state==='dialogue'||state==='intro') mv=0.45; }
@@ -112,9 +112,9 @@ function playVoice(who, text){
   if (!AUDIO.unlocked || !who || !text) return false;
   const key=voiceKey(who,text); if (!VOICED.has(key)) return false;
   const rate = 1; // Size comes from casting and pitch layers, never from dragging out the delivery.
-  const v={playing:true}; AUDIO.voice=v;
-  if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3?v=${VOICE_REVISION}`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onended=()=>v.playing=false; a.play().catch(()=>{}); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
-  const p=loadBuf('voice/'+key); p && p.then(buf=>{ if (!buf || AUDIO.voice!==v) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start(); v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
+  const v={playing:true,started:false}; AUDIO.voice=v;
+  if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3?v=${VOICE_REVISION}`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onplaying=()=>v.started=true;a.onended=()=>v.playing=false;a.onerror=()=>v.playing=false; a.play().catch(()=>v.playing=false); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
+  const p=loadBuf('voice/'+key); p && p.then(buf=>{ if(AUDIO.voice!==v)return;if(!buf){v.playing=false;return;} const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start();v.started=true; v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
   return true;
 }
 function stopVoice(){if(AUDIO.voice?.stop)AUDIO.voice.stop();if(AUDIO.voice)AUDIO.voice.playing=false;AUDIO.voice=null;}

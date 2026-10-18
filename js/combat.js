@@ -54,8 +54,12 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (has('guiding') && e.isBoss) m*=1+val('guiding')/100;
   if (has('natsel') && e.hp<e.maxHp*0.3) m*=1+val('natsel')/100;
   dmg*=m;
+  const pressure=dmg;
+  if(typeof squadProtection==='function')dmg*=squadProtection(e);
+  if(!opt.quiet&&typeof lockjawGuard==='function'&&lockjawGuard(e,ang))dmg*=.4;
+  if(!opt.quiet&&typeof interruptRelay==='function')interruptRelay(e);
   e.hp-=dmg; e.flashT=opt.quiet?0.04:0.09;
-  if (!opt.quiet && e.hp>0) damageComposure(e,Math.min(e.isBoss?9:6,dmg*0.18));
+  if (!opt.quiet && e.hp>0) damageComposure(e,Math.min(e.isBoss?9:6,pressure*0.18));
   if (opt.quiet){
     texts.push({x:e.x+rand(-10,10),y:e.y-e.r,v:Math.round(dmg),t:0.15,c:opt.c,small:true});
     player.sig=Math.min(100,player.sig+dmg*R.sigRate*0.5);

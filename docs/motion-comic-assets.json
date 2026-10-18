@@ -1,0 +1,151 @@
+{
+ "tool": "Built-in Imagegen",
+ "assets": [
+  {
+   "id": "halo",
+   "path": "assets/comic/halo-action.webp",
+   "prompt": "Use case: illustration-story. Production motion-comic action keyframes for original game VOLT. Create a precise 2 by 2 grid, four equally sized 16:9 landscape images, edge-to-edge with no gutters, lettering, captions, balloons or logos. Each cell is the SAME fixed three-quarter street-level camera and SAME battle location, consecutive moments of one action, dramatic detailed western superhero comic ink, angular black shadows, textured halftone, controlled ivory/gold against rainy blue city. Halo is a tall athletic Black woman, close-cropped silver hair, ivory-and-gold fitted superhero suit, high white collar, thin radiant gold halo ring. Two civilians huddle behind her on LEFT, hostile hooded charcoal/red mercenary with metal pipe on RIGHT. Upper left frame: she steps between attacker and civilians, knees bent, palms lifting. Upper right: pipe SLAMS her raised translucent golden shield; Halo physically braces, shoulder lowered, spray of impact sparks, attacker recoils. Lower left: Halo thrusts BOTH hands forward, massive directed gold shockwave blasts mercenary backwards, body airborne, loose debris flying away. Lower right: shield fading, Halo turns to help civilians move to safety; attacker down on far right. Genuinely different body poses, chronological physical action with readable silhouettes. Preserve faces, costumes, background architecture and screen positions across frames. Full environment and figures in each image, no portrait poses, no repeated standing pose, no familiar copyrighted heroes. Render crisp high quality."
+  },
+  {
+   "id": "bastion",
+   "path": "assets/comic/bastion-action.webp",
+   "prompt": "Use case: illustration-story. Original VOLT motion-comic production action atlas. Precise 2 by 2 grid of four equally sized 16:9 landscape scenes, no gutters, no text, no captions, no balloons. Four chronological keyframes of one continuous action, same fixed three-quarter camera, same environment/identities. Detailed western superhero comic ink, angular shadows, halftone, crisp dramatic lighting. Each frame must have a genuinely distinct action pose and physical progression; never standing portraits. No copyrighted characters. Bastion is a broad muscular older man, short grey hair, weathered face, heavy olive-grey tactical armour, huge reinforced steel-blue gauntlets. A translucent steel-blue forearm force shield. Rainy elevated evacuation walkway, civilians fleeing behind him on left, two charcoal hooded red-trim mercenaries firing from right. Frame1: Bastion plants feet, shield rising. Frame2: bullets hammer shield, he hunches and slides backwards, sparks and boot trails. Frame3: he lunges forward shield-first, smashing one mercenary backwards; strongly changed body position. Frame4: he braces in broken gateway while civilians run behind him, assailants down. Readable grounded physical strength, not acrobatics."
+  },
+  {
+   "id": "echo",
+   "path": "assets/comic/echo-action.webp",
+   "prompt": "Use case: illustration-story. Original VOLT motion-comic production action atlas. Precise 2 by 2 grid of four equally sized 16:9 landscape scenes, no gutters, no text, no captions, no balloons. Four chronological keyframes of one continuous action, same fixed three-quarter camera, same environment/identities. Detailed western superhero comic ink, angular shadows, halftone, crisp dramatic lighting. Each frame must have a genuinely distinct action pose and physical progression; never standing portraits. No copyrighted characters. Echo is an androgynous young adult psychic hero, slim athletic build, black asymmetrical undercut with violet streak, luminous violet circular ear comm, dark fitted suit with high white collar and purple lining. Rainy city crossing, one civilian on left, compact hovering hostile angular black-and-brass drone amber optic twin needle cannons on right, hooded red-trim mercenary behind it. Frame1: Echo notices drone aiming at civilian, fingers to temple. Frame2: one hand pulls civilian behind cover on violet psychic tether while other twists drone sideways. Frame3: drone fires into mercenary's weapon, wrenching it away; Echo fully extended sideways stance. Frame4: Echo clenches fist and drone's cannon assembly crumples midair, civilian safe. Psychic violet distortion restrained; clear consecutive action."
+  },
+  {
+   "id": "thorn",
+   "path": "assets/comic/thorn-action.webp",
+   "prompt": "Use case: illustration-story. Original VOLT motion-comic production action atlas. Precise 2 by 2 grid of four equally sized 16:9 landscape scenes, no gutters, no text, no captions, no balloons. Four chronological keyframes of one continuous action, same fixed three-quarter camera, same environment/identities. Detailed western superhero comic ink, angular shadows, halftone, crisp dramatic lighting. Each frame must have a genuinely distinct action pose and physical progression; never standing portraits. No copyrighted characters. Thorn is a tall lean adult man, shoulder-length brown hair, short beard, layered dark green organic armour and ivy on one shoulder. Rainy cracked city street, two hostile red-hooded charcoal-armoured mercenaries block civilians' escape. Frame1: Thorn drops to one knee, palm slams pavement. Frame2: thick roots split pavement and race towards mercenaries; Thorn pushes upward. Frame3: roots coil around mercenaries' weapon arms and pin them against wrecked van, Thorn rises with pulling gesture. Frame4: Thorn holds roots taut while civilians pass behind him through now clear path. No lethal impalement, no blood. Clear different poses and root positions."
+  },
+  {
+   "id": "patch",
+   "path": "assets/comic/patch-action.webp",
+   "prompt": "Use case: illustration-story. Original VOLT motion-comic production action atlas. Precise 2 by 2 grid of four equally sized 16:9 landscape scenes, no gutters, no text, no captions, no balloons. Four chronological keyframes of one continuous action, same fixed three-quarter camera, same environment/identities. Detailed western superhero comic ink, angular shadows, halftone, crisp dramatic lighting. Each frame must have a genuinely distinct action pose and physical progression; never standing portraits. No copyrighted characters. Patch is athletic adult woman engineer, medium brown skin, black curly hair tied back, amber goggles on head, large grey-teal headset, blue-grey utility coveralls, orange harness and tool belt. Night evacuation station, damaged generator in foreground, closed exit shutter behind, incoming gunfire from far right behind barricade. Frame1: Patch crouch-runs behind cover towards generator clutching repair drone. Frame2: kneeling she launches small mechanical repair drone into exposed generator while sparks hit cover. Frame3: close same camera wide enough, she reaches inside reconnecting a thick cable with insulated tool, drone welding above. Frame4: she throws herself back behind cover as generator lights green and exit shutter rises for civilians. No magical powers, no weapons in her hands, practical engineering."
+  },
+  {
+   "id": "kilnheart",
+   "path": "assets/comic/kilnheart-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Powerful stocky middle-aged woman, tied-up dark hair, orange glowing safety visor, heavy dark furnace armour, shoulder vents, massive molten-orange mechanical forearm gauntlets. Industrial foundry at night. 1 she grips locked steel gate; 2 she tears its halves apart, vents ejecting steam; 3 she swings both huge gauntlets into street and molten fracture races towards helmeted defenders; 4 she rises from crater while defenders scramble behind cover and gate lies twisted. No gore."
+  },
+  {
+   "id": "bellwether",
+   "path": "assets/comic/bellwether-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Tall Black woman sonic diva villain, close-cropped hair, gold earrings, black/gold stage armour with large shoulder speaker modules. Occupied city square at night, security barricades on right. 1 she raises one hand like conducting, shoulder speakers charging; 2 windows ripple and shatter, she leans into power stance; 3 expanding golden sonic shockwave smashes barricades and throws helmeted defenders backward; 4 she lowers her hand amidst drifting glass and broken barriers. Sonic concentric arcs, no fire."
+  },
+  {
+   "id": "verdigris",
+   "path": "assets/comic/verdigris-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Eerie androgynous villain in angular pointed corroded-copper full mask, slit acid-green eyes, ragged leaf cloak and copper armour, tendrils. Industrial transit security barrier. 1 fingertips touch steel; 2 green corrosion spreads and metal buckles, villain leans forward; 3 barrier folds apart while copper-green tendrils burst through and seize equipment beyond; 4 villain steps through ruined barrier with machinery restrained behind. Clear chemical corrosion and metallic plants, not natural flowering garden."
+  },
+  {
+   "id": "glasswake",
+   "path": "assets/comic/glasswake-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Athletic woman mirror villain, asymmetrical swept white hair with pink ends, black angular eye visor magenta slits, black geometric suit with glass shards and magenta trim. Night mirrored office lobby, helmeted defenders surround. 1 she prepares a twisting dodge; 2 three clearly spectral glass reflections split outward as shots pass through copies; 3 real woman emerges behind defender from fractured reflection, knocks weapon aside with spinning kick; 4 crouched woman dissolves into magenta glass fragments, disarmed defender looking wrong way. No blood, false bodies visibly translucent."
+  },
+  {
+   "id": "undertow",
+   "path": "assets/comic/undertow-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Broad muscular middle-aged male dockworker villain, wet messy black hair, rugged face, enormous deep-sea industrial pressure suit with cyan circular valves, ice gauntlets. Flooded dock at night, helmeted defender right. 1 he drives icy fist into water, surface freezing towards defender; 2 ice hook thrown from other gauntlet catches defender's armour; 3 he hauls defender sliding across frozen surface, full torso twist; 4 he slams huge gauntlet down and ice erupts, defender thrown clear into water. No drowning/gore. Consistent one villain body only."
+  },
+  {
+   "id": "gravemark",
+   "path": "assets/comic/gravemark-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Huge ancient stone golem, charcoal angular rock plates, massive shoulders, floating stone arcs, narrow vertical purple face slit, restrained purple fissures. Ruined rooftop, tiny helmeted defenders for scale. 1 golem's heavy foot lands, loose rubble begins lifting; 2 immense stone hand closes, floating debris and defenders dragged towards it; 3 hand drives down in gravity slam, rooftop buckles with concentric cracks, defenders knocked away; 4 golem straightens over wreckage, debris settles. Deliberate huge weight, no humanoid face or clothing."
+  },
+  {
+   "id": "redactor",
+   "path": "assets/comic/redactor-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. Tall slender male villain, tailored angular black long coat crimson lining, bone-white faceless rectangular mask with one thin vertical red slit, elegant gloved hands, floating black rectangular shield slabs behind shoulders. Dark tower atrium with huge windows overlooking city. A generic powered defender in steel-grey armour with cyan light in hands, NOT any named hero. 1 defender lunges firing cyan energy; Redactor stands still; 2 black slabs rotate and intercept beam, he raises two fingers; 3 defender suspended with light draining along thin crimson paths towards black slabs, Redactor takes one measured step; 4 powerless defender kneels, hands dim, Redactor walks past with relaxed hand. Quiet restrained menace, no screaming/demonic anatomy, no gore."
+  },
+  {
+   "id": "volt",
+   "path": "assets/comic/volt-action.webp",
+   "prompt": "Use case: illustration-story. Production action atlas for original game VOLT motion comic. EXACT 2x2 grid, four equal 16:9 landscape scenes, no gutters/text/captions/balloons/logos. Chronological anticipation/contact/release/aftermath, same location and identities and fixed three-quarter camera. Genuinely distinct action poses and physical consequences in each cell. Detailed western superhero ink, angular shadows, halftone, cinematic lighting, not pixel art or portrait poses. No copyrighted characters. First visual reveal of original male hero VOLT. Young adult man athletic/slim, charcoal fitted street-level hero suit, angular white collar/forearm guards and electric blue seams, angular dark helmet with bright blue V visor, not copyrighted suit. Familiar modest neighbourhood at dusk, small shop and jammed metal shutter, neighbours trapped safely behind shutter. 1 Volt catches falling shop sign with both hands while neighbour ducks; 2 he lowers sign safely and kneels at shutter motor; 3 blue electricity flows from his fingers into exposed motor, shutter lifting; 4 neighbour steps out and turns to thank him, Volt hides sparking hand behind back with modest friendly posture. Actual rescue, not combat, no big explosions. Electricity natural from hand, no battery or laboratory origin."
+  },
+  {
+   "id": "arrival",
+   "path": "assets/comic/arrival-action.webp",
+   "prompt": "Use case illustration-story. Original VOLT opening motion-comic production atlas, EXACT 2 by 2 grid four equal landscape16:9 panels, no lettering, gutters, balloons or logos. Crisp western superhero comic ink, halftone, blue night city, warm interior command centre. Chronological scenes with same characters. VOLT is slim athletic young adult man, charcoal fitted suit with electric blue seams, high white angular collar/forearm guards, angular black helmet with BLUE V visor, natural electricity in hands. BASTION broad muscular older grey-haired man olive-grey tactical armour steel-blue gauntlets. PATCH athletic medium-brown-skinned woman engineer, black curly hair tied back, amber goggles, grey-teal headset, blue-grey coveralls, orange harness. HALO athletic Black woman close-cropped silver hair, ivory/gold suit high white collar gold halo. Panel1: huge fortress skyscraper at night, Volt clings to facade halfway up, blue sparks from one hand, city far below, dramatic sense of height. Panel2: Volt vaults over rooftop balcony railing, landing crouched awkwardly, Bastion turns surprised inside. Panel3: interior commandroom, Volt stands shy but attentive, Patch scans his blue-sparking hand with handheld engineering scanner, Halo watches; no facial helmet removal. Panel4: Bastion hands Volt compact training gear/extraction wrist device at open training door, Patch working at console behind, Volt reaching to accept. Distinct grounded physical storytelling, consistent original costumes, no copyrighted heroes, no portrait slideshow."
+  },
+  {
+   "id": "crisis",
+   "path": "assets/comic/crisis-action.webp",
+   "prompt": "Use case illustration-story. New original VOLT motion-comic 2x2 atlas of four equal 16:9 landscape scenes, no text/lettering/captions/balloons/logos. Crisp western superhero comic ink, halftone, angular night-city lighting. Supplied image is character identity reference only: VOLT's exact tall swept black crest with sharp silver/white fins, narrow continuous BLUE V visor, angular black jaw, blue ear unit, high white collar, black suit blue zigzag chest seams. Preserve helmet in every panel. Same modest neighbourhood shop at dusk, neighbours just rescued from stuck shutter. 1 Volt turns from neighbours as all shop television screens light crimson, foreboding broadcast silhouette of tall slender villain in black longcoat crimson lining and bone-white rectangular full mask one vertical red slit. 2 street lights flicker out along block, smoke rising from distant districts, neighbours frightened, Volt's blue sparking hand lights foreground. 3 Volt kneels beside child and points towards shelter, neighbours help each other through doorway; warm earnest body language. 4 Volt climbs fire escape towards skyline and distant towering Fortress, neighbours safe below, blue lightning handgrip, determined athletic movement. Different poses and framing, actual progressing crisis rather than repeated portraits. No combat, no gore, no text on screens, no copyrighted heroes."
+  }
+ ],
+ "identity_correction": {
+  "prompt": "Edit image 1, the four-panel Volt neighbourhood rescue action atlas. Image 2 is the authoritative character identity reference, not a scene to reproduce. Correct ONLY Volt's helmet and costume consistency in ALL FOUR panels: helmet must have the tall swept-back layered black crest with sharp SILVER/WHITE lightning-like fins clearly visible above and behind his head, narrow continuous luminous electric-blue downward V visor, angular black cheek/jaw plates, blue circular ear unit. Match reference silhouette, height and sharp fin geometry. The current rounded smooth helmet is wrong. Preserve every rescue action pose, hands, camera, neighbours, sign, shutter, motor, background, four equal panel boundaries and western comic inking. Retain high white collar and blue lightning chest seams matching reference. Do not redesign the helmet, make it round, show hair/face, or add text. Four distinct actions unchanged. Full opaque scene background.",
+  "refs": [
+   "work/volt/assets/comic/volt-action.png",
+   "work/volt/concept-art/volt.webp"
+  ]
+ },
+ "authoritative_reference": "concept-art/volt.webp",
+ "arrival_identity_constraint": "Tall swept black crest, silver/white fins, narrow blue V visor, angular jaw and blue ear unit in every panel.",
+ "comms": [
+  {
+   "id": "halo",
+   "prompt": {
+    "tool": "built-in Imagegen",
+    "prompt": "Original VOLT game character illustration for a voiced motion comic and comms introduction. Transparent alpha background. ONE isolated three-quarter HALF-BODY portrait from head to just below waist, hands fully visible, no cropped head, generous clear margins. Detailed adult anatomy, sharp confident black comic-book ink, clean expressive face, layered cel shading, restrained halftone and strong readable contours, polished dramatic superhero comic art, not photographic, not pixel art, no smudgy painting. Camera at chest/eye height, slight three-quarter turn, strong relaxed characterful pose rather than attacking. Attached cast sheet is IDENTITY reference; use ONLY the named character. Do not include any other figure, environment, text, frame, floor shadow or background glow cloud. Consistent costume, palette and facial identity. A commanding athletic Black woman in her thirties or forties with close-cropped silver hair, ivory and gold superhero armor, a restrained luminous gold halo ring, calm protective eyes. One hand open as if reassuring someone. Preserve Halo in the reference.",
+    "transparent_background": true
+   },
+   "path": "assets/intro/halo.webp",
+   "transparent_background": true
+  },
+  {
+   "id": "bastion",
+   "prompt": {
+    "tool": "built-in Imagegen",
+    "prompt": "Original VOLT game character illustration for a voiced motion comic and comms introduction. Transparent alpha background. ONE isolated three-quarter HALF-BODY portrait from head to just below waist, hands fully visible, no cropped head, generous clear margins. Detailed adult anatomy, sharp confident black comic-book ink, clean expressive face, layered cel shading, restrained halftone and strong readable contours, polished dramatic superhero comic art, not photographic, not pixel art, no smudgy painting. Camera at chest/eye height, slight three-quarter turn, strong relaxed characterful pose rather than attacking. Attached cast sheet is IDENTITY reference; use ONLY the named character. Do not include any other figure, environment, text, frame, floor shadow or background glow cloud. Consistent costume, palette and facial identity. A broad muscular older man, short grey hair, stern weathered face, olive-grey heavy tactical armor and huge reinforced gauntlets, subdued steel-blue accents. Arms held ready at waist, commanding but protective. Preserve Bastion in the reference.",
+    "transparent_background": true
+   },
+   "path": "assets/intro/bastion.webp",
+   "transparent_background": true
+  },
+  {
+   "id": "echo",
+   "prompt": {
+    "tool": "built-in Imagegen",
+    "prompt": "Original VOLT game character illustration for a voiced motion comic and comms introduction. Transparent alpha background. ONE isolated three-quarter HALF-BODY portrait from head to just below waist, hands fully visible, no cropped head, generous clear margins. Detailed adult anatomy, sharp confident black comic-book ink, clean expressive face, layered cel shading, restrained halftone and strong readable contours, polished dramatic superhero comic art, not photographic, not pixel art, no smudgy painting. Camera at chest/eye height, slight three-quarter turn, strong relaxed characterful pose rather than attacking. Attached cast sheet is IDENTITY reference; use ONLY the named character. Do not include any other figure, environment, text, frame, floor shadow or background glow cloud. Consistent costume, palette and facial identity. A lean young adult psychic hero, pale-to-medium skin, asymmetric dark hair swept over one eye with violet streak, black and grey fitted suit with a high white collar and restrained purple accents, dry knowing half-smile, fingers raised near temple. Preserve Echo in the reference.",
+    "transparent_background": true
+   },
+   "path": "assets/intro/echo.webp",
+   "transparent_background": true
+  },
+  {
+   "id": "thorn",
+   "prompt": {
+    "tool": "built-in Imagegen",
+    "prompt": "Original VOLT game character illustration for a voiced motion comic and comms introduction. Transparent alpha background. ONE isolated three-quarter HALF-BODY portrait from head to just below waist, hands fully visible, no cropped head, generous clear margins. Detailed adult anatomy, sharp confident black comic-book ink, clean expressive face, layered cel shading, restrained halftone and strong readable contours, polished dramatic superhero comic art, not photographic, not pixel art, no smudgy painting. Camera at chest/eye height, slight three-quarter turn, strong relaxed characterful pose rather than attacking. Attached cast sheet is IDENTITY reference; use ONLY the named character. Do not include any other figure, environment, text, frame, floor shadow or background glow cloud. Consistent costume, palette and facial identity. An adult male former villain with brown hair, short beard, green and weathered brown layered practical cloak/coat with living vine details, thoughtful guarded expression, one small living fern in a gloved palm, capable and humane. Preserve Thorn in the reference.",
+    "transparent_background": true
+   },
+   "path": "assets/intro/thorn.webp",
+   "transparent_background": true
+  },
+  {
+   "id": "patch",
+   "prompt": {
+    "tool": "built-in Imagegen",
+    "prompt": "Original VOLT game character illustration for a voiced motion comic and comms introduction. Transparent alpha background. ONE isolated three-quarter HALF-BODY portrait from head to just below waist, hands fully visible, no cropped head, generous clear margins. Detailed adult anatomy, sharp confident black comic-book ink, clean expressive face, layered cel shading, restrained halftone and strong readable contours, polished dramatic superhero comic art, not photographic, not pixel art, no smudgy painting. Camera at chest/eye height, slight three-quarter turn, strong relaxed characterful pose rather than attacking. Attached cast sheet is IDENTITY reference; use ONLY the named character. Do not include any other figure, environment, text, frame, floor shadow or background glow cloud. Consistent costume, palette and facial identity. A capable adult woman engineer with tied-back dark curly hair, orange goggles above her forehead, blue and ochre utility workwear with tool harness and rolled sleeves, warm dry deadpan expression, a small diagnostic device and a wrench. Preserve Patch in the reference.",
+    "transparent_background": true
+   },
+   "path": "assets/intro/patch.webp",
+   "transparent_background": true
+  },
+  {
+   "id": "volt",
+   "prompt": {
+    "tool": "built-in Imagegen",
+    "prompt": "Original VOLT game character illustration for a voiced motion comic and comms introduction. Transparent alpha background. ONE isolated three-quarter HALF-BODY portrait from head to just below waist, hands fully visible, no cropped head, generous clear margins. Detailed adult anatomy, sharp confident black comic-book ink, clean expressive face, layered cel shading, restrained halftone and strong readable contours, polished dramatic superhero comic art, not photographic, not pixel art, no smudgy painting. Camera at chest/eye height, slight three-quarter turn, strong relaxed characterful pose rather than attacking. Attached cast sheet is IDENTITY reference; use ONLY the named character. Do not include any other figure, environment, text, frame, floor shadow or background glow cloud. Consistent costume, palette and facial identity. An athletic young adult MALE electric superhero in fitted black armor with white V shoulder collar, white forearm and shin panels, electric-blue thin suit seams and narrow visor. Swept spiky black-and-white helmet silhouette hides face. Slightly nervous but determined stance, open hand with a tiny contained blue spark. Preserve Volt in the reference.",
+    "transparent_background": true
+   },
+   "path": "assets/intro/volt.webp",
+   "transparent_background": true
+  }
+ ]
+}

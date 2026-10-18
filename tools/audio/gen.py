@@ -81,6 +81,7 @@ SILENT = lambda t: not re.sub(r'[.\s…]', '', t)
 # The complete cast uses Eleven v4 with emotion cues and natural punctuation (no SSML break tags).
 EXPRESSIVE_MODELS = {who: 'eleven_v4' for who in VOICES}
 PERFORMANCE_TAGS = {
+  "Glasswake was always somewhere else when you hit her. By the time you found the real one, she had already found you.": "[calm] Glasswake... was always somewhere else when you hit her. By the time you found the real one... she had already found you.",
   "Patch.": "[annoyed] Patch.",
   "Who were you betting with?": "[curious] Who... were you betting with?",
   "I sent someone better than me.": "[firm] I sent someone better than me.",
@@ -108,7 +109,7 @@ def voice_lines(lines, only=None, force=False, quiet=False):
         vid, stab, style = VOICES[who]
         if who in EXPRESSIVE_MODELS:
             n = post(f'https://api.elevenlabs.io/v1/text-to-speech/{vid}?output_format=mp3_44100_64',
-                     {'text': PERFORMANCE_TAGS.get(text, ('[calm] ' + text) if who == 'redactor' else ('[firm] ' + text) if who == 'gravemark' else SAY.get(text, text)), 'model_id': EXPRESSIVE_MODELS[who], 'voice_settings': {'stability': 0.75 if who in {'redactor','gravemark','bastion'} else 0.5, 'similarity_boost': 0.8, **({'speed': 0.86} if who == 'redactor' else {'speed': 1.04} if who == 'gravemark' else {})}}, fn)
+                     {'text': PERFORMANCE_TAGS.get(text, ('[calm] ' + text) if who == 'redactor' else ('[firm] ' + text) if who == 'gravemark' else SAY.get(text, text)), 'model_id': EXPRESSIVE_MODELS[who], 'voice_settings': {'stability': 0.75 if who in {'redactor','gravemark','bastion'} else 0.5, 'similarity_boost': 0.8, **({'speed': 0.90} if ln.get('set') == 'cutscene' else {}), **({'speed': 0.86} if who == 'redactor' else {'speed': 1.04} if who == 'gravemark' else {})}}, fn)
             done += bool(n)
             if not quiet: print('voice',who,n,text[:50])
             continue

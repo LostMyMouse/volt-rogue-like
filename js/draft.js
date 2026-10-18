@@ -25,7 +25,7 @@ function openDraftNow(kind, hero, reroll){
   let who, line;
   if (kind==='tech'){
     who='patch'; const n=reroll?run.calls.patch:(run.calls.patch=(run.calls.patch||0)+1); line=reroll?"Different crate, same rules.":n===1?PATCH.first:commsLine('patch');
-    draftCards=shuffle(TECH.slice()).slice(0,3).map(t=>({kind:'tech',id:t.id}));
+    draftCards=shuffle(TECH.filter(t=>!t.variant||!p.tech[t.id])).slice(0,3).map(t=>({kind:'tech',id:t.id}));
   } else {
     who=hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)); lastCaller=who; draftHero=who;
     const n=reroll?run.calls[who]:(run.calls[who]=(run.calls[who]||0)+1); line=reroll?"Fine. Something else, then.":n===1?HEROES[who].first:commsLine(who);

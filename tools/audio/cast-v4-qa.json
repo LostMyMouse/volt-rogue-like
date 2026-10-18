@@ -1,240 +1,222 @@
 [
  {
-  "who": "redactor",
-  "text": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary.",
-  "heard": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary",
+  "who": "volt",
+  "text": "Halo. When the city looked up, she was usually the reason. She would take the hit, then make sure everyone behind her got home.",
+  "heard": "Halo. When the city looked up, she was usually the reason. She would take the hit, then make sure everyone behind her got home",
   "sim": 1.0,
-  "wps": 2.8,
-  "max_gap": 0.6,
+  "wps": 3.25,
+  "max_gap": 0.66,
   "missing": [],
   "flags": []
  },
  {
-  "who": "redactor",
-  "text": "The heroes caught outside their Fortress have lost their powers. The others may remain behind their shield. I can be patient.",
-  "heard": "The heroes caught outside their fortress have lost their powers. The others may remain behind their shield. I can be patient",
-  "sim": 1.0,
-  "wps": 3.08,
-  "max_gap": 0.68,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "redactor",
-  "text": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish.",
-  "heard": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish",
-  "sim": 1.0,
-  "wps": 2.86,
-  "max_gap": 0.6,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "gravemark",
-  "text": "And any heroes who object can take it up with me. On the roof.",
-  "heard": "And any heroes who object can take it up with me on the roof",
-  "sim": 1.0,
+  "who": "volt",
+  "text": "Bastion held the line. You could throw a whole squad at him. He would move about six inches, complain about it, and put those six inches back.",
+  "heard": "Bastian held the line. You could throw a whole squad at him. He would move about six inches, complain about it, and put those six inches back",
+  "sim": 0.96,
   "wps": 3.45,
-  "max_gap": 0.72,
-  "missing": [],
-  "flags": [
-   "too fast"
-  ]
- },
- {
-  "who": "redactor",
-  "text": "Sleep well. I know how much safer you feel when someone else is watching.",
-  "heard": "Sleep well. I know how much safer you feel when someone else is watching.",
-  "sim": 1.0,
-  "wps": 3.52,
-  "max_gap": 0.72,
-  "missing": [],
-  "flags": [
-   "too fast"
-  ]
- },
- {
-  "who": "bastion",
-  "text": "The district relays are feeding his drain. Half our roster is down. Patch, can the Fortress shield hold?",
-  "heard": "The district relays are feeding his drain. Half our roster is down. Patch, can the fortress shield hold?",
-  "sim": 1.0,
-  "wps": 2.75,
-  "max_gap": 0.5,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "patch",
-  "text": "The shield holds. Inside, your powers are safe. Outside, he can target every signature on the hero register.",
-  "heard": "The shield holds. Inside, your powers are safe. Outside, he can target every signature on the hero register",
-  "sim": 1.0,
-  "wps": 2.33,
-  "max_gap": 0.52,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "bastion",
-  "text": "And a way to fight back?",
-  "heard": "And a way to fight back?",
-  "sim": 1.0,
-  "wps": 5.08,
-  "max_gap": 0.06,
-  "missing": [],
-  "flags": [
-   "too fast"
-  ]
- },
- {
-  "who": "patch",
-  "text": "I am looking for a way past his scanner. The coffee will have to wait.",
-  "heard": "I am looking for a way past his scanner. The coffee will have to wait",
-  "sim": 1.0,
-  "wps": 3.93,
   "max_gap": 0.46,
-  "missing": [],
+  "missing": [
+   "bastion"
+  ],
   "flags": [
    "too fast"
   ]
  },
  {
-  "who": "echo",
-  "text": "Then we need someone he has not registered. Someone new.",
-  "heard": "Then we need someone he has not registered, someone new",
-  "sim": 1.0,
-  "wps": 2.76,
-  "max_gap": 0.54,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "thorn",
-  "text": "And someone willing to go. Knowing what waits outside.",
-  "heard": "And someone willing to go, knowing what waits outside",
-  "sim": 1.0,
-  "wps": 2.39,
-  "max_gap": 0.72,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "halo",
-  "text": "We keep looking for an opening. Until then, we keep this city alive.",
-  "heard": "We keep looking for an opening. Until then, we keep this city alive",
-  "sim": 1.0,
-  "wps": 2.54,
-  "max_gap": 0.48,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "patch",
-  "text": "Uh. Small thing. Someone's climbing the outside of the Fortress.",
-  "heard": "Uh, small thing. Someone's climbing the outside of the fortress",
-  "sim": 1.0,
-  "wps": 2.29,
-  "max_gap": 0.66,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "bastion",
-  "text": "Nobody climbs a sixty-storey wall.",
-  "heard": "Nobody climbs a 60-story wall",
-  "sim": 0.67,
-  "wps": 2.27,
-  "max_gap": 0.26,
-  "missing": [
-   "sixty",
-   "storey"
-  ],
-  "flags": [
-   "wording/pronunciation"
-  ]
- },
- {
   "who": "volt",
-  "text": "Hi! Sorry. Your front door has, like, nine locks.",
-  "heard": "Hi. Sorry. Your front door has like nine locks",
+  "text": "Echo could hear trouble thinking. They would pull you out of its way before you knew you were in it. Then mention it forever.",
+  "heard": "Echo could hear trouble thinking. They would pull you out of its way before you knew you were in it, then mention it forever",
   "sim": 1.0,
-  "wps": 2.3,
-  "max_gap": 0.66,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "volt",
-  "text": "I'm Volt. I'm a hero. Well... rookie hero. I saw the broadcast, and I want to help.",
-  "heard": "I'm Volt. I'm a hero. Well, rookie hero. I saw the broadcast and I wanna help",
-  "sim": 0.91,
-  "wps": 2.39,
-  "max_gap": 0.8,
-  "missing": [
-   "want",
-   "to"
-  ],
-  "flags": []
- },
- {
-  "who": "echo",
-  "text": "Oh, I like him.",
-  "heard": "Oh, I like him",
-  "sim": 1.0,
-  "wps": 3.12,
-  "max_gap": 0.38,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "halo",
-  "text": "You're bleeding.",
-  "heard": "You're bleeding",
-  "sim": 1.0,
-  "wps": 2.44,
-  "max_gap": 0.04,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "volt",
-  "text": "The wall had opinions.",
-  "heard": "The wall had opinions",
-  "sim": 1.0,
-  "wps": 2.9,
-  "max_gap": 0.12,
-  "missing": [],
-  "flags": []
- },
- {
-  "who": "halo",
-  "text": "His lightning still works. No registered signature. Bastion, train him. Patch, fit him with an extraction beacon.",
-  "heard": "His lightning still works. No registered signature. Bastion, train him. Patch, fit him with an extraction beacon",
-  "sim": 1.0,
-  "wps": 2.22,
+  "wps": 3.29,
   "max_gap": 0.64,
   "missing": [],
   "flags": []
  },
  {
-  "who": "bastion",
-  "text": "Training roof, through the Deploy Gate. Learn the kit first. Then we plan a route to the drain.",
-  "heard": "Training roof, through the deploy gate. Learn the kit first. Then we plan a route to the drain",
+  "who": "volt",
+  "text": "Thorn used to fight these people. Now he grows the way out. Changing sides was one decision. Earning trust takes showing up, every day.",
+  "heard": "Thorn used to fight these people. Now he grows the way out. Changing sides was one decision. Earning trust takes showing up every day",
   "sim": 1.0,
-  "wps": 3.06,
-  "max_gap": 0.44,
+  "wps": 2.55,
+  "max_gap": 0.66,
   "missing": [],
   "flags": []
  },
  {
   "who": "volt",
-  "text": "Right now? I just climbed sixty floors.",
-  "heard": "Right now? I just climbed 60 floors",
-  "sim": 0.86,
-  "wps": 2.55,
-  "max_gap": 0.58,
+  "text": "Patch kept the doors opening and the comms working. No powers. Just tools, terrible odds, and a very firm opinion about touching exposed wiring.",
+  "heard": "Patch kept the doors opening and the comms working. No powers, just tools, terrible odds, and a very firm opinion about touching exposed wiring",
+  "sim": 1.0,
+  "wps": 2.71,
+  "max_gap": 0.56,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Then there was Kilnheart. Furnace armour. Hands like demolition equipment. If she wanted a door open, the wall tended to come with it.",
+  "heard": "Then there was Kilnhart. Furnace armor. Hands like demolition equipment. If she wanted a door open, the wall tended to come with it",
+  "sim": 0.91,
+  "wps": 2.83,
+  "max_gap": 0.66,
   "missing": [
-   "sixty"
+   "kilnheart",
+   "armour"
   ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Bellwether could turn a square into a stage. Her opening note broke the windows. The next one broke whatever people were hiding behind.",
+  "heard": "Bellwether could turn a square into a stage. Her opening note broke the windows. The next one broke whatever people were hiding behind",
+  "sim": 1.0,
+  "wps": 3.04,
+  "max_gap": 0.46,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Verdigris made solid things stop being solid. Steel, circuits, the barriers people trusted. You could watch the city coming apart under their hand.",
+  "heard": "Verdigris made solid things stop being solid. Steel, circuits, the barriers people trusted. You could watch the city coming apart under their hand.",
+  "sim": 1.0,
+  "wps": 2.49,
+  "max_gap": 0.6,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Glasswake was always somewhere else when you hit her. By the time you found the real one, she had already found you.",
+  "heard": "Glass Wake was always somewhere else when you hit her. By the time you found the real one, she had already found you",
+  "sim": 0.93,
+  "wps": 3.99,
+  "max_gap": 0.62,
+  "missing": [
+   "glasswake"
+  ],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Undertow owned the docks. He would freeze the ground, pull you off your feet, then explain the problem with trying to stand up again.",
+  "heard": "Undertow owned the docks. He would freeze the ground, pull you off your feet, then explain the problem with trying to stand up again",
+  "sim": 1.0,
+  "wps": 3.42,
+  "max_gap": 0.52,
+  "missing": [],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "Gravemark did not need to chase anyone. The whole roof moved towards him. I had seen the footage. I still hoped the camera was making him look bigger.",
+  "heard": "grave Mark did not need to chase anyone. The whole roof moved towards him. I had seen the footage. I still hope the camera was making him look bigger",
+  "sim": 0.91,
+  "wps": 3.41,
+  "max_gap": 0.6,
+  "missing": [
+   "gravemark",
+   "hoped"
+  ],
+  "flags": [
+   "too fast"
+  ]
+ },
+ {
+  "who": "volt",
+  "text": "And the Redactor gave them a city to take. He could identify a registered hero and drain their power. Almost no effort. That was the frightening part.",
+  "heard": "And The Redactor gave them a city to take. He could identify a registered hero and drain their power. Almost no effort. That was the frightening part",
+  "sim": 1.0,
+  "wps": 3.05,
+  "max_gap": 0.62,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Me? I was not on any of those posters. I helped around my block. My electricity had always been there. I just tried to keep that part quiet.",
+  "heard": "Me? I was not on any of those posters. I helped around my block. My electricity had always been there. I just tried to keep that part quiet",
+  "sim": 1.0,
+  "wps": 3.4,
+  "max_gap": 0.6,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Then the broadcast came. The districts were falling. The heroes still standing were trapped behind the Fortress shield. My neighbours needed them. So I went to find them.",
+  "heard": "Then the broadcast came. The districts were falling. The heroes still standing were trapped behind the fortress shield. My neighbors needed them. So I went to find them",
+  "sim": 0.96,
+  "wps": 2.76,
+  "max_gap": 0.64,
+  "missing": [
+   "neighbours"
+  ],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "The front door was locked. I took the outside. Sixty floors is a long time to reconsider an introduction. Somehow, I still opened with a joke.",
+  "heard": "The front door was locked. I took the outside. Sixty floors is a long time to reconsider an introduction. Somehow, I still opened with a joke",
+  "sim": 1.0,
+  "wps": 2.91,
+  "max_gap": 0.74,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Patch checked my power. No registered signature. Their shield kept the team safe, and my hidden ability gave us an opening outside it. Bastion insisted on training first. Fair.",
+  "heard": "Patch checked my power. No registered signature. Their shield kept the team safe, and my hidden ability gave us an opening outside it. Bastion insisted on training first. Fair",
+  "sim": 1.0,
+  "wps": 2.76,
+  "max_gap": 0.6,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "bastion",
+  "text": "Lockjaw. Frontal shield. Get behind him, or parry his swing. Two clean parries break his composure.",
+  "heard": "Lockjaw. Frontal shield. Get behind him or parry his swing. Two clean parries break his composure",
+  "sim": 1.0,
+  "wps": 2.3,
+  "max_gap": 0.52,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Right. Open the tin. Avoid the lid.",
+  "heard": "Right. Open the tin. Avoid the lid",
+  "sim": 1.0,
+  "wps": 2.73,
+  "max_gap": 0.5,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "echo",
+  "text": "Relay is linking that squad. Hit the operator to cut their protection. The antenna is your target.",
+  "heard": "Relay is linking that squad. Hit the operator to cut their protection. The antenna is your target",
+  "sim": 1.0,
+  "wps": 2.94,
+  "max_gap": 0.48,
+  "missing": [],
+  "flags": []
+ },
+ {
+  "who": "volt",
+  "text": "Unsubscribe. Aggressively.",
+  "heard": "Unsubscribe aggressively",
+  "sim": 1.0,
+  "wps": 0.93,
+  "max_gap": 0.6,
+  "missing": [],
   "flags": []
  },
  {

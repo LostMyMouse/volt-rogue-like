@@ -18,7 +18,8 @@ let tut=null;
 const inTutorial = () => !!tut;
 
 function startTutorial(first){
-  reset(); routeStart(); lastCaller=null; exits=[]; transit=null; powerHeld=false;
+  reset();run.contracts={};run.risk=0;run.aspect=null;run.hybrid=null;recalcRun();player.hp=player.maxHp;
+  routeStart(); lastCaller=null; exits=[]; transit=null; powerHeld=false;
   { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
   leaveHub(); for (const id of ['#mStart','#mOver','#mPause','#mDraft','#mFortress','#mCity','#mStyle']) show(id,false);
   buildRoom(); refreshSlotHud();

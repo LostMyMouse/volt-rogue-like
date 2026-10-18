@@ -13,7 +13,7 @@ const CODEX = [
     {when:c=>c.wins>=1,text:'Shutting down the main drain returned stolen powers. The Redactor escaped through a backup network. We are going back to keep those relays offline. A win matters, even while there is more work to do.'},
   ]},
   { id:'volt', group:'Me', notes:[
-    { text:"Me. Volt. Electric powers, which I mostly use to punch things very fast. No hero licence. No team. One very good jacket. Goal: become the greatest hero in the world. Current progress: allowed inside the building." },
+    { text:"Me. Volt. The electricity is natural. I kept it quiet while helping around my neighbourhood. Then the whole city needed help. Apparently that meant climbing sixty floors and admitting I could not do everything alone. I joke when I am nervous. Bastion has noticed." },
     { when:c=>c.runs>=3, text:"Things I've learned: walls have opinions, Bastion's table is sacred, and when a white ring closes, you block. Things I haven't learned: how to land without falling over." },
     { when:c=>c.wins>=1, text:"I walked out of the Redactor's tower. Me. The rookie who climbed in through the window. Halo looked at me like she was doing maths. I think I passed. I'm writing it down so it's official." },
   ]},

@@ -1,157 +1,143 @@
 {
- "redactor_b4d8de1e": {
-  "who": "redactor",
-  "text": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary.",
+ "volt_441726db": {
+  "who": "volt",
+  "text": "Halo. When the city looked up, she was usually the reason. She would take the hit, then make sure everyone behind her got home.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "dbcc9c7e1d7e6437228be3b7860f8e90448ed3c9b16c9f4e459ba4ef8166834b"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "bf9fec13711d605f3b0a2afa6884a3781a0675b09f153abd440e27f569995a63"
  },
- "redactor_dd47de8a": {
-  "who": "redactor",
-  "text": "The heroes caught outside their Fortress have lost their powers. The others may remain behind their shield. I can be patient.",
+ "volt_40bfd904": {
+  "who": "volt",
+  "text": "Bastion held the line. You could throw a whole squad at him. He would move about six inches, complain about it, and put those six inches back.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "d590ae2f46a40f99d15a6801df6282aa499450328df04034cecab2b937b9001a"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "f87b13344ab4efd6d15e73642e71d65b8059545874934a5b47e666d1ec805157"
  },
- "redactor_6fdd44a1": {
-  "who": "redactor",
-  "text": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish.",
+ "volt_077541e2": {
+  "who": "volt",
+  "text": "Echo could hear trouble thinking. They would pull you out of its way before you knew you were in it. Then mention it forever.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "564805043d8e924c75e455c735b4001ad23507fd087178811663d3ab6934999d"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0b189c075bc05c6341300ff24c6b9aa5383285e6b9b0bcbddb58e35eab005827"
  },
- "gravemark_54602e44": {
-  "who": "gravemark",
-  "text": "And any heroes who object can take it up with me. On the roof.",
+ "volt_a736183f": {
+  "who": "volt",
+  "text": "Thorn used to fight these people. Now he grows the way out. Changing sides was one decision. Earning trust takes showing up, every day.",
   "model": "eleven_v4",
-  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
-  "sha256": "e97eee8f782b317facbfcd0b9e6723639363979f41443eee3cdd9edaf76b3482"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "decfd801c19048df3c9838edf531e90968acb33cde59e37ae3f8527117f83166"
  },
- "redactor_8d38b4d9": {
-  "who": "redactor",
-  "text": "Sleep well. I know how much safer you feel when someone else is watching.",
+ "volt_18d00831": {
+  "who": "volt",
+  "text": "Patch kept the doors opening and the comms working. No powers. Just tools, terrible odds, and a very firm opinion about touching exposed wiring.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "08fc3eec30fa8a2cab7201192783cfe7bb3ec6307a474c8d6909b52bbc98f108"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "28e9b6708a0b9f400e695f0ac3a90b8f478a74fd5b5e0f5f3f0ecdf619854a9c"
  },
- "bastion_c36af370": {
+ "volt_efef1683": {
+  "who": "volt",
+  "text": "Then there was Kilnheart. Furnace armour. Hands like demolition equipment. If she wanted a door open, the wall tended to come with it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ff31c766258169209c535f7bc19757aa0cbc453089e8aaa74ec24bfe0e5dd952"
+ },
+ "volt_3d448e11": {
+  "who": "volt",
+  "text": "Bellwether could turn a square into a stage. Her opening note broke the windows. The next one broke whatever people were hiding behind.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "bf6ae5065617ca3fdffda64bf0113ffc8e19001e24972f86bf9e2e7b1e7592a1"
+ },
+ "volt_f712ef81": {
+  "who": "volt",
+  "text": "Verdigris made solid things stop being solid. Steel, circuits, the barriers people trusted. You could watch the city coming apart under their hand.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0fcb6dc828107ac36e433a20687a6445da15848b5855584fa0625748aaf878ab"
+ },
+ "volt_6605b3f0": {
+  "who": "volt",
+  "text": "Glasswake was always somewhere else when you hit her. By the time you found the real one, she had already found you.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "626e923f0094b669d4468738df300cbc9ed99bdb07dddf56e9c9f7ddca0d4446"
+ },
+ "volt_da6b31f0": {
+  "who": "volt",
+  "text": "Undertow owned the docks. He would freeze the ground, pull you off your feet, then explain the problem with trying to stand up again.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8196b643ad0d768ad4d661cab54d7e80b25958dbd1f453b2f9cb307e93dc5735"
+ },
+ "volt_be1fb797": {
+  "who": "volt",
+  "text": "Gravemark did not need to chase anyone. The whole roof moved towards him. I had seen the footage. I still hoped the camera was making him look bigger.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "13a1f5a2d23000a78824b4ec93cfd92b59707202ab3d2474e09986c875065057"
+ },
+ "volt_dcf4fe84": {
+  "who": "volt",
+  "text": "And the Redactor gave them a city to take. He could identify a registered hero and drain their power. Almost no effort. That was the frightening part.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0379dd351dbfd5de1de2717cd4487ff16dd0b1f170cfb6f5632f81f5af35a304"
+ },
+ "volt_84f4720c": {
+  "who": "volt",
+  "text": "Me? I was not on any of those posters. I helped around my block. My electricity had always been there. I just tried to keep that part quiet.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "091fd6522ec8478b3ba918642d69be37f786da1b51b9609256cc8ce0d24124a2"
+ },
+ "volt_0a94c0cf": {
+  "who": "volt",
+  "text": "Then the broadcast came. The districts were falling. The heroes still standing were trapped behind the Fortress shield. My neighbours needed them. So I went to find them.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2dbeb1bd61d771efdd0d979ca990db7257e8366f941d5091385af346d86e1ff7"
+ },
+ "volt_fcef9577": {
+  "who": "volt",
+  "text": "The front door was locked. I took the outside. Sixty floors is a long time to reconsider an introduction. Somehow, I still opened with a joke.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "73ec45ccce197e484943937626b149c07688f79972b3f6126acfc46137387448"
+ },
+ "volt_65b64244": {
+  "who": "volt",
+  "text": "Patch checked my power. No registered signature. Their shield kept the team safe, and my hidden ability gave us an opening outside it. Bastion insisted on training first. Fair.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "c92451a27fcc14c4a403aa6f0329d1fb9d19b51bc94fd38884660123fa03bbbc"
+ },
+ "bastion_3fb1e441": {
   "who": "bastion",
-  "text": "The district relays are feeding his drain. Half our roster is down. Patch, can the Fortress shield hold?",
+  "text": "Lockjaw. Frontal shield. Get behind him, or parry his swing. Two clean parries break his composure.",
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "b3c2054aa4ac964c26686f65e1aa5de67eb7342ce853082f5efc7eab01922523"
+  "sha256": "aa1524e6329610868bbb8d95dbe177386b1f96625728209845493549d7cd8eb7"
  },
- "patch_19791062": {
-  "who": "patch",
-  "text": "The shield holds. Inside, your powers are safe. Outside, he can target every signature on the hero register.",
+ "volt_5c578c7f": {
+  "who": "volt",
+  "text": "Right. Open the tin. Avoid the lid.",
   "model": "eleven_v4",
-  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
-  "sha256": "d4eb54b681ce9c1de86a13cbdb97da31ab4046c8e09cec972831b60c49b66a90"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "da95a3584f39a921449d89500ef11edb634aee9e1d2a4dcb2088a7994b77c228"
  },
- "bastion_60e45571": {
-  "who": "bastion",
-  "text": "And a way to fight back?",
-  "model": "eleven_v4",
-  "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "6eefc3cc12db3b97d1e8c0640ef1f6b83e255fe6b3675ae65f2fa42cea63a8a9"
- },
- "patch_3d25bf2f": {
-  "who": "patch",
-  "text": "I am looking for a way past his scanner. The coffee will have to wait.",
-  "model": "eleven_v4",
-  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
-  "sha256": "7f4eac68960f78e7a5adc093533d0b2bb5072fdb8fd3435fc3bb6828b4d07921"
- },
- "echo_7091bd57": {
+ "echo_8fc97052": {
   "who": "echo",
-  "text": "Then we need someone he has not registered. Someone new.",
+  "text": "Relay is linking that squad. Hit the operator to cut their protection. The antenna is your target.",
   "model": "eleven_v4",
   "voice_id": "Y5YV8HtWsJXkknTppIP7",
-  "sha256": "ed5f529f22045a1b514a91951573100848f2223e5448f2eb6ea9ccbbabaca09f"
+  "sha256": "763ce1eb01a29053eeda59efde3de73a5b915d28a53a045e3f53f360957a3db3"
  },
- "thorn_aefd5866": {
-  "who": "thorn",
-  "text": "And someone willing to go. Knowing what waits outside.",
-  "model": "eleven_v4",
-  "voice_id": "nPczCjzI2devNBz1zQrb",
-  "sha256": "98fec3b9b35ef23aa91e7f3bf68fecc1bbc5e1acd677abc58c07ddc98d372dde"
- },
- "halo_8722831d": {
-  "who": "halo",
-  "text": "We keep looking for an opening. Until then, we keep this city alive.",
-  "model": "eleven_v4",
-  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "ebf7c4de379bd9673059351e72244e1c08b226b19c3c6d44b89fb1643c36999f"
- },
- "patch_b3fde7be": {
-  "who": "patch",
-  "text": "Uh. Small thing. Someone's climbing the outside of the Fortress.",
-  "model": "eleven_v4",
-  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
-  "sha256": "bb87e57d34192f38e92b1181478f82c6621eb43fc047bb50d807fbf4ee98b9ff"
- },
- "bastion_e7522979": {
-  "who": "bastion",
-  "text": "Nobody climbs a sixty-storey wall.",
-  "model": "eleven_v4",
-  "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "21d19b613f54ffa47266fc5d8f31e496ba986d11a621b25126b7fed2a079d5b0"
- },
- "volt_575d0d54": {
+ "volt_a0c82d00": {
   "who": "volt",
-  "text": "Hi! Sorry. Your front door has, like, nine locks.",
+  "text": "Unsubscribe. Aggressively.",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "12dea4c843412791d9fb3ab9a3e59d929ba1f12ff0040a475f7639d59198fbd0"
- },
- "volt_8b642679": {
-  "who": "volt",
-  "text": "I'm Volt. I'm a hero. Well... rookie hero. I saw the broadcast, and I want to help.",
-  "model": "eleven_v4",
-  "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "1bed901bf3368e218b6f4e513817606a163e0901f09d485a937c6dcac849782f"
- },
- "echo_6c8d6193": {
-  "who": "echo",
-  "text": "Oh, I like him.",
-  "model": "eleven_v4",
-  "voice_id": "Y5YV8HtWsJXkknTppIP7",
-  "sha256": "94a54e3afb67ee98c58c7208bbcfd796e456f865ab73671dbd6e53b4c345b642"
- },
- "halo_58358912": {
-  "who": "halo",
-  "text": "You're bleeding.",
-  "model": "eleven_v4",
-  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "9b8e440bf34aed4a972f75c9743c8066c5796cf05f83cdff981b8d3fe56805d8"
- },
- "volt_c3b5a289": {
-  "who": "volt",
-  "text": "The wall had opinions.",
-  "model": "eleven_v4",
-  "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "0569eb6f0894bac8bdb007764957dc354f75c02ce5b663880d21e12b7e54c9f2"
- },
- "halo_c5594bf9": {
-  "who": "halo",
-  "text": "His lightning still works. No registered signature. Bastion, train him. Patch, fit him with an extraction beacon.",
-  "model": "eleven_v4",
-  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "b8e077f84008ee9fa6ef6081ce5f9c6ca73815297214163a66255d0384457c64"
- },
- "bastion_f9714a00": {
-  "who": "bastion",
-  "text": "Training roof, through the Deploy Gate. Learn the kit first. Then we plan a route to the drain.",
-  "model": "eleven_v4",
-  "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "f5baef399bd9f98c45dbfef719b82dc782ec0e93fb40f0fa718628d2e19e6df2"
- },
- "volt_2075047c": {
-  "who": "volt",
-  "text": "Right now? I just climbed sixty floors.",
-  "model": "eleven_v4",
-  "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "fba9e4824dac59bc4ac992061b879e2c006ca467283e91cea4a44834689d28a3"
+  "sha256": "14f92011c9c20a0030845db2d3b4a68212a9c0d043a4dc20f7fb477a76a02717"
  },
  "halo_01d9aff7": {
   "who": "halo",
