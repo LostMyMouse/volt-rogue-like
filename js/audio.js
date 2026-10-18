@@ -11,6 +11,7 @@ const VOL = () => ({music:(T.musicVol??0.35)*0.65,sfx:T.sfxVol??0.75,voice:T.voi
 function voiceKey(who,text){ let h=0x811c9dc5; for (const b of new TextEncoder().encode(who+'|'+text)){ h^=b; h=Math.imul(h,0x01000193)>>>0; } return who+'_'+h.toString(16).padStart(8,'0'); }
 
 function audioUnlock(){
+  if(typeof voiceFxInit!=='function')return;
   const first=!AUDIO.unlocked;
   if (!AUDIO.html && (!AUDIO.ctx || AUDIO.ctx.state==='closed')){
     try {

@@ -27,6 +27,7 @@ function setMode(m){
 setMode(inputMode);
 
 addEventListener('keydown', e => {
+  if(!window.__voltBootReady)return;
   const k = e.key.toLowerCase();
   if (k===' ') e.preventDefault();
   if (e.repeat) return;
