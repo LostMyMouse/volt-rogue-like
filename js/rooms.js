@@ -15,6 +15,7 @@ const REWARD_STYLE = {
   tech:{ c:COL.heal, label:'Upgrade' },
   shards:{ c:COL.boon, label:'Renown shards' },
   boss:{ c:COL.boon, label:'Unknown villain' },
+  shop:{ c:COL.heal, label:'Supply stop' },
 };
 let exits=[], roomPhase='reward', clearT=0, arrivalT=0, transit=null;
 const weighted = list => { const tot=list.reduce((a,[,w])=>a+w,0); let r=Math.random()*tot; for (const [v,w] of list){ if ((r-=w)<0) return v; } return list[0][0]; };
@@ -57,6 +58,7 @@ function randomLayout(){
   return out;
 }
 function buildRoom(){
+  districtPainting(curDistrict());
   obstacles = finishObstacles(PAINTED_LAYOUT.map(b=>Object.assign({},b)));
   floorTint = DISTRICTS[curDistrict()] ? DISTRICTS[curDistrict()].tint : pick(FLOOR_TINTS);
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
@@ -75,7 +77,7 @@ function rollReward(taken){
   return {type:'tech'};
 }
 function openExits(){
-  if (run.route.room+1 > roomsIn(curDistrict())){ exits=[{...PADS[0], reward:{type:'boss', boss:curDistrict()}, hold:0, t:0}]; return; }
+  if (run.route.room+1 > roomsIn(curDistrict())){ exits=[{...PADS[0], reward:run.shopsVisited?.includes(curDistrict())?{type:'boss',boss:curDistrict()}:{type:'shop'}, hold:0, t:0}]; return; }
   const count=weighted(DOOR_COUNT_ODDS), spots=count===1?[PADS[0]]:shuffle(PADS.slice()).slice(0,count), taken=[];
   exits=spots.map(s=>{ const r=rollReward(taken); taken.push(r); return {...s, reward:r, hold:0, t:0}; });
 }
@@ -106,7 +108,7 @@ function updateTransit(dt){
     if (Math.random()<.8) particles.push({x:p.x,y:p.y,vx:rand(-60,60),vy:rand(-60,60),life:.25,max:.25,color:COL.volt,w:2});
     if (tr.t>=TRANSIT_OUT){
       tr.swapped=true;
-      if (tr.ex.reward.type==='district') enterDistrict(tr.ex.reward.id); else run.route.room++;
+      if (tr.ex.reward.type==='district') enterDistrict(tr.ex.reward.id); else if(tr.ex.reward.type!=='shop')run.route.room++;
       buildRoom();
       const land=LANDING[tr.ex.side], back={top:[0,1],left:[1,0],right:[-1,0]}[tr.ex.side];
       tr.land=land; tr.from={x:land.x+back[0]*180, y:land.y+back[1]*180};
@@ -125,6 +127,7 @@ function updateTransit(dt){
 }
 function arrive(reward){
   roomPhase='reward'; sfx('land');
+  if(reward.type==='shop'){openFieldShop();return;}
   if (reward.type==='district'){ banner(DISTRICTS[curDistrict()].name.toUpperCase()); missionArrival(curDistrict(),()=>openDraft('boon')); }
   else if (reward.type==='boon') openDraft('boon',reward.hero);
   else if (reward.type==='tech') openDraft('tech');
@@ -166,7 +169,8 @@ function rewardIcon(r){
   const key = r.type;
   if (ICON_CACHE[key]) return ICON_CACHE[key];
   let inner, bg;
-  if (r.type==='boon'){ bg=COL.volt; inner='<path d="M36 5L15 35h16l-4 24 23-33H34Z" fill="#0b111c" stroke="#f4fbff" stroke-width="2"/>'; }
+  if(r.type==='shop'){bg='#12372f';inner='<path d="M25 12h14v13h13v14H39v13H25V39H12V25h13Z" fill="#55e6c1" stroke="#0b111c" stroke-width="3"/>';}
+  else if (r.type==='boon'){ bg=COL.volt; inner='<path d="M36 5L15 35h16l-4 24 23-33H34Z" fill="#0b111c" stroke="#f4fbff" stroke-width="2"/>'; }
   else if (r.type==='tech'){ bg=COL.heal; inner='<circle cx="32" cy="32" r="13" fill="none" stroke="#0b111c" stroke-width="7"/><g stroke="#0b111c" stroke-width="7" stroke-linecap="round"><path d="M32 8v8M32 48v8M8 32h8M48 32h8M15 15l6 6M43 43l6 6M15 49l6-6M43 21l6-6"/></g>'; }
   else if (r.type==='shards'){ bg='#2a1748'; inner='<path d="M32 6 L50 26 L32 58 L14 26 Z" fill="#b56cff" stroke="#f4fbff" stroke-width="2"/><path d="M14 26 H50 M32 6 L26 26 L32 58 L38 26 Z" fill="none" stroke="#f4fbff" stroke-width="1.5" opacity=".7"/>'; }
   else { bg='#1a1428'; inner='<path d="M17 21Q17 7 32 7T47 23Q47 32 34 37v7" fill="none" stroke="#f4fbff" stroke-width="7"/><circle cx="34" cy="54" r="4" fill="#f4fbff"/>'; }

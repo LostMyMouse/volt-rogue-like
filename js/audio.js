@@ -95,6 +95,7 @@ function audioTick(dt){
   let m=null, amb=null, mv=1;
   if (state==='start') m='title';
   else if (state==='cutscene'){ m='cutscene';const scene=typeof comic!=='undefined'&&comic?COMIC_BEATS[comic.i]?.id:null;amb=['verdigris','glasswake','redactor','arrival'].includes(scene)?'fortress_loop':'rain_loop';mv=.65; }
+  else if (state==='shop'){m='fortress-siege';amb='fortress_loop';mv=.42;}
   else if (inHub && inHub()){ m='fortress-siege'; amb='fortress_loop'; mv=0.72; }
   else if (state==='over'){ m=AUDIO.musicName; mv=0.35; }
   else if (inRunState){ m = boss && !boss.dead ? 'boss' : 'combat'; amb='rain_loop'; if (state==='paused'||state==='draft'||state==='map') mv=0.55; if (state==='dialogue'||state==='intro') mv=0.45; }

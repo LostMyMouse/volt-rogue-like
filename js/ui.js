@@ -22,6 +22,7 @@ function updateHud(){
   const bl=clamp(Math.max(p.blockLock,p.stunT)/BLOCK.shatterLock,0,1); setVar(hud.blockAb,'--cd',bl); setVar(hud.blockTb,'--cd',bl);
   hud.blockAb.classList.toggle('ready',p.blockHeld); hud.blockTb.classList.toggle('ready',p.blockHeld);
   const sT='◆ '+run.shards; if (hud.shards.textContent!==sT) hud.shards.textContent=sT;
+  const credits='CR '+(run.credits||0),creditEl=$('#hudCredits');if(creditEl.textContent!==credits)creditEl.textContent=credits;
   const r=run.route, dId=r&&curDistrict(), wT=dId?dId+':'+r.room:'';
   if (hud.wave.dataset.w!==wT){ hud.wave.dataset.w=wT; hud.district.textContent=dId?DISTRICTS[dId].name:'Rooftop'; hud.wave.innerHTML = !dId ? '–' : isBossRoom() ? 'Boss' : `${r.room}<small>/${roomsIn(dId)}</small>`; }
   const cds = { s:clamp(p.strikeCd/(p.strikeCdMax||0.34),0,1), p:clamp(p.powerCd/(p.powerCdMax||1),0,1), d:clamp(p.dashCd/(T.dashCooldown+T.dashTime),0,1) };

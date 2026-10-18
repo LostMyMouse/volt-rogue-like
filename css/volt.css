@@ -485,3 +485,10 @@ body.touch-mode.tutorial-mode .tut-skip{top:8px;right:8px;max-width:80px;min-hei
 .motion-comic .cs-tag{background:var(--c);color:#0b111c;letter-spacing:.08em;max-width:90%;white-space:normal}
 .motion-comic .cs-who{color:#292016;font-size:clamp(14px,1.6vw,19px);letter-spacing:.02em}
 @media(max-height:450px){.motion-comic .cs-who{display:block!important;font-size:14px}.motion-comic .cs-count{font-size:10px}.motion-comic .cs-tag{font-size:11px}}
+.shop-panel{width:min(1050px,96vw);max-width:1050px;max-height:94dvh;overflow:auto}.shop-heading{display:flex;align-items:center;gap:20px}.shop-heading img{height:160px;width:140px;object-fit:contain;object-position:bottom}.shop-heading h2{margin:4px 0}.shop-panel #shopCards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.shop-panel .card{min-width:0}.shop-panel #shopLeave{min-height:44px}.shop-panel .card:disabled{opacity:.55}.shop-panel .card-desc{font-size:14px}
+@media(max-height:450px){.shop-heading img{width:65px;height:85px}.shop-heading{gap:12px}.shop-heading h2{font-size:27px}.shop-heading .hint{margin:3px 0;font-size:12px}.shop-panel{padding:12px}.shop-panel #shopCards{margin:10px 0;gap:8px}.shop-panel .card{padding:12px}.shop-panel .card strong{font-size:23px}.shop-panel .card-desc{font-size:12px}.shop-panel .card-top{flex-wrap:wrap}.shop-panel #shopMessage{font-size:11px}}
+@media(max-width:500px) and (orientation:portrait){.shop-panel #shopCards{grid-template-columns:1fr}.shop-heading img{width:70px;height:100px}}
+
+.shop-panel #shopLeave{position:sticky;bottom:0;z-index:2;box-shadow:0 8px 0 #080d18}
+
+.run-credits{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--heal)}.shop-panel .card-foot{margin-top:0;color:var(--text);font-size:11px}
