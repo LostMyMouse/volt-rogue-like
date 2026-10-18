@@ -75,7 +75,7 @@ function beginDistrict(id){
   enterDistrict(id); buildRoom();
   player.x=ARENA.w/2; player.y=ARENA.h*0.6;
   banner(DISTRICTS[id].name.toUpperCase());
-  openDraft('boon');
+  missionArrival(id,()=>openDraft('boon'));
 }
 // Called when a district villain falls.
 function districtCleared(){

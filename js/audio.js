@@ -5,7 +5,7 @@
 'use strict';
 
 const AUDIO = { ctx:null, buses:{}, buffers:{}, loading:{}, music:null, musicName:null, amb:null, ambName:null, voice:null, unlocked:false, html:location.protocol==='file:', lastSfx:{}, barkT:0 };
-const VOL = () => ({ music:T.musicVol??0.5, sfx:T.sfxVol??0.75, voice:T.voiceVol??0.9 });
+const VOL = () => ({music:(T.musicVol??0.35)*0.65,sfx:T.sfxVol??0.75,voice:T.voiceVol??0.9});
 
 // FNV-1a: the same hash the generator used to name voice files.
 function voiceKey(who,text){ let h=0x811c9dc5; for (const b of new TextEncoder().encode(who+'|'+text)){ h^=b; h=Math.imul(h,0x01000193)>>>0; } return who+'_'+h.toString(16).padStart(8,'0'); }
@@ -70,7 +70,7 @@ function makeLoop(path, bus, vol){
 function stopLoop(l){ if (!l) return; l.target=0; l.dying=true; }
 function fadeLoop(l,dt,busVol){
   if (!l) return false;
-  l.level += (l.target-l.level)*Math.min(1,dt*1.6);
+  l.level += (l.target-l.level)*Math.min(1,dt*(l.target<l.level?12:1.6));
   if (l.html) l.html.volume=clamp(l.level*busVol,0,1); else l.g.gain.value=l.level;
   if (l.dying && l.level<0.01){ l.dead=true; if (l.html) l.html.pause(); else if (l.src) try{ l.src.stop(); }catch(e){} return false; }
   return true;
@@ -94,15 +94,15 @@ function audioTick(dt){
   let m=null, amb=null, mv=1;
   if (state==='start') m='title';
   else if (state==='cutscene'){ m='cutscene'; amb = cut && cut.scene==='roof' ? 'rain_loop' : 'fortress_loop'; }
-  else if (inHub && inHub()){ m='fortress'; amb='fortress_loop'; }
+  else if (inHub && inHub()){ m='fortress-siege'; amb='fortress_loop'; mv=0.72; }
   else if (state==='over'){ m=AUDIO.musicName; mv=0.35; }
   else if (inRunState){ m = boss && !boss.dead ? 'boss' : 'combat'; amb='rain_loop'; if (state==='paused'||state==='draft'||state==='map') mv=0.55; if (state==='dialogue'||state==='intro') mv=0.45; }
   setMusic(m, mv); setAmbience(amb, 0.35);
+  // Apply ducking before the fade; applying it afterwards was overwritten by setMusic next frame.
+  if(AUDIO.music&&AUDIO.voice?.playing)AUDIO.music.target=Math.min(AUDIO.music.target,0.16);
   const v=VOL();
   fadeLoop(AUDIO.music,dt,v.music); fadeLoop(AUDIO.amb,dt,v.sfx);
   OLD_LOOPS=OLD_LOOPS.filter(l=>fadeLoop(l,dt,v.music));
-  // Music ducks under speech.
-  if (AUDIO.music && AUDIO.voice && AUDIO.voice.playing) AUDIO.music.target=Math.min(AUDIO.music.target,0.4);
 }
 
 /* ---------- Voice ---------- */
@@ -117,7 +117,7 @@ function playVoice(who, text){
   const p=loadBuf('voice/'+key); p && p.then(buf=>{ if (!buf || AUDIO.voice!==v) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; voiceChain(AUDIO.ctx, s, who, AUDIO.buses.voice); s.onended=()=>v.playing=false; s.start(); v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false; }; });
   return true;
 }
-function stopVoice(){ if (AUDIO.voice && AUDIO.voice.stop) AUDIO.voice.stop(); if (AUDIO.voice) AUDIO.voice.playing=false; }
+function stopVoice(){if(AUDIO.voice?.stop)AUDIO.voice.stop();if(AUDIO.voice)AUDIO.voice.playing=false;AUDIO.voice=null;}
 // Short combat lines from Volt. Never talks over a conversation; has a cooldown and a chance to stay quiet.
 const BARKS = { parry:["Nice!","Got it!","Not today!"], hurt:["Ow.","Okay, ow!","That's gonna bruise."], low:["I'm fine. I'm fine!"], overload:["Overload!","Light 'em up!"],
   bossdown:["Yes! Did everyone see that?"], district:["One district back!"], death:["Not... yet..."], start:["Here we go!","Let's do this."] };

@@ -1,0 +1,170 @@
+{
+ "required_recordings": 739,
+ "transcribed": 739,
+ "unresolved_recording_failures": 0,
+ "reviewed_comparison_flags": [
+  {
+   "who": "bastion",
+   "text": "Nobody climbs a sixty-storey wall.",
+   "heard": "Nobody climbs a 60-story wall",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "volt",
+   "text": "I prefer 'rookie'. Sounds more official.",
+   "heard": "I prefer rookie. Sounds more official.",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "patch",
+   "text": "Volt, quick note. Kilnheart's suit runs at nine hundred degrees.",
+   "heard": "Vault, quick note. Kilnhart's suit runs at 900 degrees",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "glasswake",
+   "text": "Eleven. You hit my reflections eleven times last time. I counted.",
+   "heard": "11. You hit my reflections 11 times last time. I counted",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "glasswake",
+   "text": "'Pretty sure.' Adorable. That's how I get everybody.",
+   "heard": "Pretty sure. Adorable. That's how I get everybody",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Volt. Put this one on ice.",
+   "heard": "Vault, put this one on ice",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Bastion. You're overextending.",
+   "heard": "Bastian, you're overextending",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "volt",
+   "text": "...Thanks, Thorn.",
+   "heard": "Thanks, Thorne",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "patch",
+   "text": "Repair forty-one. 'Again.'",
+   "heard": "Repair 41. Again",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Workshop's left. Armoury's right. Gate's at the bottom. My table is in the middle. Don't touch it.",
+   "heard": "Workshops left, armories right, gates at the bottom. My table is in the middle. Don't touch it",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Hero Licence came through.",
+   "heard": "Hero license came through",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "volt",
+   "text": "Hi! I'm Vol—",
+   "heard": "Hi, I'm Volt",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "echo",
+   "text": "Potato, potahto.",
+   "heard": "Potato. Potato",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "echo",
+   "text": "Glasswake was terrified of me.",
+   "heard": "Glass Wake was terrified of me",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "patch",
+   "text": "Kilnheart complimented my suit design.",
+   "heard": "Kilnhart complimented my suit design",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "patch",
+   "text": "Licence paperwork cleared.",
+   "heard": "License paperwork cleared",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "halo",
+   "text": "...Hm.",
+   "heard": "Hmm.",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Gate's that way.",
+   "heard": "Gates that way",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "That dummy's survived forty rookies. Ruin its streak.",
+   "heard": "That dummy survived 40 rookies. Ruin its streak",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "patch",
+   "text": "Tech locker's open. Don't break anything.",
+   "heard": "Tech lockers open. Don't break anything",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Kilnheart telegraphs everything. Read the wind-up.",
+   "heard": "Kilnhart telegraphs everything. Read the windup",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bastion",
+   "text": "Gravemark hits like a building. Don't be standing there.",
+   "heard": "Grave Mark hits like a building. Don't be standing there",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "echo",
+   "text": "Kilnheart's angry. Angry people telegraph.",
+   "heard": "Kilnhart's angry. Angry people telegraph",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "volt",
+   "text": "Cool off, Kilnheart.",
+   "heard": "Cool off, Kilnhart",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "volt",
+   "text": "I've been practising holding my breath.",
+   "heard": "I've been practicing holding my breath",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  },
+  {
+   "who": "bellwether",
+   "text": "Off-beat from start to finish. Painful to listen to.",
+   "heard": "Offbeat from start to finish. Painful to listen to",
+   "assessment": "Accepted transcript orthography: number formatting, punctuation/contraction, name spelling, intentional interruption, nonverbal response or explicit pronunciation alias."
+  }
+ ],
+ "repairs": [
+  "Volt: Patch.",
+  "Volt: Who were you betting with?",
+  "Halo: I sent someone better than me.",
+  "Gravemark: Do not make it sound kind. I am still going to crush you.",
+  "Verdigris: Compost. That's all you'll be."
+ ]
+}

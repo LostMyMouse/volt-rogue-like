@@ -42,23 +42,27 @@ function maybeIntro(id, done, opt={}){
   let pages;
   if (info.kind==='hero'){
     if (met.heroes.includes(id)) return false; // heroes are introduced once, ever
-    met.heroes.push(id); pages = STORY.first[id] ? storyPages(id,STORY.first[id]) : [{who:id, text:info.first}, {who:'volt', text:VOLT_REPLIES[id]}];
+    pages=STORY.first[id]?storyPages(id,STORY.first[id]):[{who:id,text:info.first},{who:'volt',text:VOLT_REPLIES[id]}];
   } else {
     // The next story conversation with this villain (js/story.js); once those run out, a short exchange.
     pages=nextStory('encounter',id);
-    const n=met.villains[id]||0; met.villains[id]=n+1;
+    const n=met.villains[id]||0;
     if (!pages){
       const r=VOLT_REPLIES[id];
       pages=[{who:id, text: n===0 ? info.first : pick(info.repeat)}];
       if (r) pages.push({who:'volt', text: n===0 ? r.first : pick(r.repeat)});
     }
-    const remembered=rivalMemory(id);if(remembered)pages.unshift(remembered);
+    // The encounter's own defeat conversation already acknowledges this loss.
+    const remembered=/_killed$/.test(pages.storyId||'')?null:rivalMemory(id);if(remembered)pages.unshift(remembered);
   }
   writeSave();
   const sp=SPEAKERS[id];
   // The card announces them; then they talk in the dialogue box.
   showIntro({ id, name:sp.name, c:sp.c, tag:(info.kind==='hero'?'Hero · ':'Villain · ')+(info.kind==='hero'?sp.role:info.title), flourish:opt.flourish||info.flourish },
-    () => runDialogue(pages, info.kind==='hero'?'Comms':'Encounter', done));
+    ()=>runDialogue(pages,info.kind==='hero'?'Comms':'Encounter',()=>{
+      if(info.kind==='hero'){if(!met.heroes.includes(id))met.heroes.push(id);}else met.villains[id]=(met.villains[id]||0)+1;
+      writeSave();done&&done();
+    }));
   return true;
 }
 
@@ -72,8 +76,10 @@ function showIntro(card, done){
   el.style.setProperty('--c',card.c);
   $('#introTag').textContent=card.tag; $('#introName').textContent=card.name;
   $('#introSub').textContent=card.flourish;
-  if (INTRO_ART.includes(card.id)){ art.innerHTML=''; art.style.backgroundImage=`url(assets/intro/${card.id}.png)`; art.classList.remove('bust'); }
-  else { art.style.backgroundImage=''; art.classList.add('bust'); art.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true">${PORTRAIT_SVG[card.id]||BUST}</svg>`; }
+  art.innerHTML='';art.style.backgroundImage='';art.classList.remove('bust');
+  const image=new Image();image.alt=card.name;image.className='intro-character-art';
+  image.onerror=()=>{image.onerror=null;image.src=`assets/portraits/${card.id}.png?v=2026-10-18-story`;};
+  image.src=`assets/intro/${card.id}.png?v=2026-10-18-story`;art.appendChild(image);
   el.classList.remove('in','out'); el.hidden=false; void el.offsetWidth; el.classList.add('in');
   introDone=done; introStart=performance.now();
   clearTimeout(introTimer); introTimer=setTimeout(()=>dismissIntro(true),2800);

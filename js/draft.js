@@ -34,7 +34,7 @@ function openDraftNow(kind, hero, reroll){
   }
   const comms=$('#draftComms'), sp=SPEAKERS[who];
   comms.style.setProperty('--c',sp.c); setPortrait($('#draftPortrait'),who);
-  $('#draftLine').textContent=line; $('#draftWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;
+  $('#draftLine').textContent=line; $('#draftWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;playVoice(who,line);
   const box=$('#draftCards'); box.innerHTML='';
   draftCards.forEach((c,i)=>{
     const b=document.createElement('button'); b.type='button'; b.className='card';
@@ -62,7 +62,7 @@ function pickCard(i){
   const c=draftCards[i]; sfx('power_pick');
   if (c.kind==='tech') takeTech(c.id); else takeBoon(c.id,c.rarity);
   const name=c.kind==='tech'?TECH.find(x=>x.id===c.id).name:BOON_BY_ID[c.id].name;
-  show('#mDraft',false); state='play'; draftCards=[];
+  show('#mDraft',false);stopVoice();state='play';draftCards=[];
   texts.push({x:player.x,y:player.y-40,v:name.toUpperCase(),t:0,big:true,c:c.kind==='tech'?COL.heal:HEROES[BOON_BY_ID[c.id].hero].c});
   startWave();
 }

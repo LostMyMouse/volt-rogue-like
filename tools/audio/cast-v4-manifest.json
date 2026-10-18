@@ -1,4 +1,25 @@
 {
+ "redactor_b4d8de1e": {
+  "who": "redactor",
+  "text": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "dbcc9c7e1d7e6437228be3b7860f8e90448ed3c9b16c9f4e459ba4ef8166834b"
+ },
+ "redactor_dd47de8a": {
+  "who": "redactor",
+  "text": "The heroes caught outside their Fortress have lost their powers. The others may remain behind their shield. I can be patient.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "d590ae2f46a40f99d15a6801df6282aa499450328df04034cecab2b937b9001a"
+ },
+ "redactor_6fdd44a1": {
+  "who": "redactor",
+  "text": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "564805043d8e924c75e455c735b4001ad23507fd087178811663d3ab6934999d"
+ },
  "gravemark_54602e44": {
   "who": "gravemark",
   "text": "And any heroes who object can take it up with me. On the roof.",
@@ -6,54 +27,61 @@
   "voice_id": "UrBeqP9db3vlQVM3Tmfu",
   "sha256": "e97eee8f782b317facbfcd0b9e6723639363979f41443eee3cdd9edaf76b3482"
  },
- "bastion_7fc38a62": {
+ "redactor_8d38b4d9": {
+  "who": "redactor",
+  "text": "Sleep well. I know how much safer you feel when someone else is watching.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "08fc3eec30fa8a2cab7201192783cfe7bb3ec6307a474c8d6909b52bbc98f108"
+ },
+ "bastion_c36af370": {
   "who": "bastion",
-  "text": "Four districts dark. Half my roster drained. Somebody give me good news.",
+  "text": "The district relays are feeding his drain. Half our roster is down. Patch, can the Fortress shield hold?",
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "8d7e9d007f3e774d001ac90a6a9c578b228ea1c4d00f9519f3a4d4d1ffff51fc"
+  "sha256": "b3c2054aa4ac964c26686f65e1aa5de67eb7342ce853082f5efc7eab01922523"
  },
- "patch_716b0bc7": {
+ "patch_19791062": {
   "who": "patch",
-  "text": "Good news: the coffee machine survived.",
+  "text": "The shield holds. Inside, your powers are safe. Outside, he can target every signature on the hero register.",
   "model": "eleven_v4",
   "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
-  "sha256": "5c772141f72477ce62f3143de211deb71aaaae3e40dfac46e14f5d18ccf72f4d"
+  "sha256": "d4eb54b681ce9c1de86a13cbdb97da31ab4046c8e09cec972831b60c49b66a90"
  },
- "bastion_decf2519": {
+ "bastion_60e45571": {
   "who": "bastion",
-  "text": "Patch.",
+  "text": "And a way to fight back?",
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "ec8ffe12bb85fdb62d8e544cacfcb93365bb8b13af0d354d976d2f0dffb5ba31"
+  "sha256": "6eefc3cc12db3b97d1e8c0640ef1f6b83e255fe6b3675ae65f2fa42cea63a8a9"
  },
- "patch_67bb8f29": {
+ "patch_3d25bf2f": {
   "who": "patch",
-  "text": "Bad news: so did the Redactor.",
+  "text": "I am looking for a way past his scanner. The coffee will have to wait.",
   "model": "eleven_v4",
   "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
-  "sha256": "b12f04db174a6e84774eb62a22c6fd213ab2cb136f71e02dfad2f0531271b389"
+  "sha256": "7f4eac68960f78e7a5adc093533d0b2bb5072fdb8fd3435fc3bb6828b4d07921"
  },
- "echo_115191c1": {
+ "echo_7091bd57": {
   "who": "echo",
-  "text": "Can we skip to the part where I'm right? We need more people.",
+  "text": "Then we need someone he has not registered. Someone new.",
   "model": "eleven_v4",
   "voice_id": "Y5YV8HtWsJXkknTppIP7",
-  "sha256": "a136400ae71d85a566bdd11993d9f7d15e393cd761e8e61177b3bf59e9bc69d5"
+  "sha256": "ed5f529f22045a1b514a91951573100848f2223e5448f2eb6ea9ccbbabaca09f"
  },
- "thorn_bd7413fd": {
+ "thorn_aefd5866": {
   "who": "thorn",
-  "text": "People who aren't scared of him. That's a short list.",
+  "text": "And someone willing to go. Knowing what waits outside.",
   "model": "eleven_v4",
   "voice_id": "nPczCjzI2devNBz1zQrb",
-  "sha256": "3de90ca25a88013e8473794258f3dbdf90e361966fb97dc7fdad8720fde48665"
+  "sha256": "98fec3b9b35ef23aa91e7f3bf68fecc1bbc5e1acd677abc58c07ddc98d372dde"
  },
- "halo_956fc1b8": {
+ "halo_8722831d": {
   "who": "halo",
-  "text": "Then we make it longer.",
+  "text": "We keep looking for an opening. Until then, we keep this city alive.",
   "model": "eleven_v4",
   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "d2ff3506923c18a54376f4cd80eaef0a7eeb68f6d08b923bb8ad06730519e11d"
+  "sha256": "ebf7c4de379bd9673059351e72244e1c08b226b19c3c6d44b89fb1643c36999f"
  },
  "patch_b3fde7be": {
   "who": "patch",
@@ -104,19 +132,19 @@
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "0569eb6f0894bac8bdb007764957dc354f75c02ce5b663880d21e12b7e54c9f2"
  },
- "halo_9b908412": {
+ "halo_c5594bf9": {
   "who": "halo",
-  "text": "Bastion. Give the rookie a run.",
+  "text": "His lightning still works. No registered signature. Bastion, train him. Patch, fit him with an extraction beacon.",
   "model": "eleven_v4",
   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "ec444221f5e41d59a68c34051c39cc002a9c07c080a9eceba7cd2dce5fdbfb98"
+  "sha256": "b8e077f84008ee9fa6ef6081ce5f9c6ca73815297214163a66255d0384457c64"
  },
- "bastion_705207b3": {
+ "bastion_f9714a00": {
   "who": "bastion",
-  "text": "Training roof. Now. Let's see what you've actually got.",
+  "text": "Training roof, through the Deploy Gate. Learn the kit first. Then we plan a route to the drain.",
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "3c1f3fe8dc7c8301171b1e11d5f3db2539c9c7d9f261482113b87109f8f3d5a7"
+  "sha256": "f5baef399bd9f98c45dbfef719b82dc782ec0e93fb40f0fa718628d2e19e6df2"
  },
  "volt_2075047c": {
   "who": "volt",
@@ -125,19 +153,19 @@
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "fba9e4824dac59bc4ac992061b879e2c006ca467283e91cea4a44834689d28a3"
  },
- "halo_9174fefa": {
+ "halo_01d9aff7": {
   "who": "halo",
-  "text": "Halo on comms. So you're the rookie everyone keeps talking about.",
+  "text": "Halo on comms. I have your feed. I can channel a little light through your suit. Choose how to use it.",
   "model": "eleven_v4",
   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "073e84fc72979dbf43fe5f47d185c5febff5e2b2066a23135833af82a4e91f1a"
+  "sha256": "070a141d74edce49e2ed02e704a0c033cbd9ed48a16e507250bfc593bb1b506b"
  },
- "volt_bd434882": {
+ "volt_e8d89ca7": {
   "who": "volt",
-  "text": "Halo? THE Halo? Okay. Okay. Be cool. I'm being cool.",
+  "text": "Actual Halo backup. In my actual suit. Be cool, Volt. Be cool.",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "ab8dcf86cf71ba2ac13e053c9795d9763bafc7cc458c74f1f84ae2ed398c68ab"
+  "sha256": "de1e265f42f3836e3c872f1688b7d228620690a4d798d987501a574dc4bd9d8c"
  },
  "halo_4121158e": {
   "who": "halo",
@@ -153,19 +181,19 @@
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "9f7ed7bf3ec241d0b0d5ea68aced87e2b8ef532d0ae1a6159cea1f1448274df8"
  },
- "bastion_1a33bf07": {
+ "bastion_abe2bdee": {
   "who": "bastion",
-  "text": "Bastion. I hold this city's line. Tonight, I'm holding yours.",
+  "text": "Bastion on comms. Your suit has a shield channel. Take an upgrade and keep that relay in sight.",
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "1be1b89c64a6c5527f2b4ef4f75d0c43f0ea2c32063513ae7d44431e44c13e96"
+  "sha256": "0fd368f963aa33db8cc64a72a1223436429a6f25ec7ef398171a7913dd874bf9"
  },
- "volt_b6cb499b": {
+ "volt_c0193e2c": {
   "who": "volt",
-  "text": "Cool. Great. I'll hold... a different line.",
+  "text": "Right. Shield first. Heroic pose later.",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "b4469ed475a6a5779bf5396bfae2fd274f63a8cd55edbea65dc7835f11c8d77d"
+  "sha256": "556e2b1c1ee516958e8008b28aec7f8113cbc7d10f40cfd3a8b49acdb63292ed"
  },
  "bastion_9c4164aa": {
   "who": "bastion",
@@ -174,19 +202,19 @@
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
   "sha256": "12c2155798a661543236a5590157d225052f270e60167cd74d33a2ca36c8cb36"
  },
- "echo_677de98a": {
+ "echo_be6749e5": {
   "who": "echo",
-  "text": "Echo. And before you say anything, I already know how tonight ends.",
+  "text": "Echo here. Your suit can carry a psychic signal. Mine. Try not to make this weird.",
   "model": "eleven_v4",
   "voice_id": "Y5YV8HtWsJXkknTppIP7",
-  "sha256": "677ac8e0f0eaf136bca61d72ecddd37ef64bd086fcfba9e5f818f135741949ec"
+  "sha256": "4a76545ac143da95473c6642e1b26cca3fbbd034519209f8c12a361b498c95a3"
  },
- "volt_8b45ae34": {
+ "volt_945b1247": {
   "who": "volt",
-  "text": "Do you, though?",
+  "text": "You are literally in my head. I think weird has arrived.",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "5e2bf5026a79268908fea4fd06d73a224e7b24b32922a62200de2cf678e5811d"
+  "sha256": "3a91ab9d4b577f8147656b67f4f146d6e51728605c40dc34bb8889dc59f13d39"
  },
  "echo_b4432418": {
   "who": "echo",
@@ -195,19 +223,19 @@
   "voice_id": "Y5YV8HtWsJXkknTppIP7",
   "sha256": "8132cfa4b07b3a52755157f0f0cb4234fcc4e8ed100023688b77fb33a6e46093"
  },
- "thorn_e8741fb6": {
+ "thorn_93e3e1ba": {
   "who": "thorn",
-  "text": "Thorn. I used to be on the other side.",
+  "text": "Thorn on comms. I know these relay crews. My roots can help you keep them off your back.",
   "model": "eleven_v4",
   "voice_id": "nPczCjzI2devNBz1zQrb",
-  "sha256": "ea15f2c2c80970a12ce4cfb83053807b9f6e3be9f661aff6ef3767833d766d63"
+  "sha256": "e221d8ec19028e310a3d45d7c3a2b2700a0b21dc957a5affcf213271790835e4"
  },
- "volt_5986ad5a": {
+ "volt_85493767": {
   "who": "volt",
-  "text": "Glad you switched.",
+  "text": "Glad you are on this side of the call.",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "f4b07bf9e8dca7eaaa6333e9822c7a241f4c660d2a552ec44bb1103bcb369f31"
+  "sha256": "c3a55efbf4a96c7233365dca9f0a816287876d6fc5809ec2d8acc086b0123871"
  },
  "thorn_bc360c3e": {
   "who": "thorn",
@@ -216,12 +244,12 @@
   "voice_id": "nPczCjzI2devNBz1zQrb",
   "sha256": "387bd652e0a0e0283b64b44c309f8f711553c8b638963c8395bcd3636d025544"
  },
- "patch_94156648": {
+ "patch_fdce01af": {
   "who": "patch",
-  "text": "Patch. I build the gear. You break the gear.",
+  "text": "Patch here. A supply locker is waiting on this roof. Choose one piece of kit.",
   "model": "eleven_v4",
   "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
-  "sha256": "01d508ce02fd89240feaaec43b5d6f5704b5d5163cab0c9b135eaaf002ecc705"
+  "sha256": "41fd3a42518975a04d75a5ade80d69870f64422abf875e49258733ea705bf0b9"
  },
  "volt_ed27beb9": {
   "who": "volt",
@@ -272,6 +300,188 @@
   "voice_id": "yWRPuhQv7d5rFyrtj0GI",
   "sha256": "b71700f6f8ae4358d355a1910994b7fd17366520a78dbc0d03870d1ee67e4398"
  },
+ "kilnheart_8e06fce0": {
+  "who": "kilnheart",
+  "text": "There they are. Feeling better? You were a little crispy last time.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "1f0cff2f1e4d6750677ebc9de951bab15d1ea4529b4dbf3fcbb368e0c6384e4f"
+ },
+ "volt_86ce591d": {
+  "who": "volt",
+  "text": "I'm fine. Totally fine. Thanks for asking.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "3e4a0faca4c0748cb871301e1a8f68beb10648b28803aa0625348fcda156ce85"
+ },
+ "kilnheart_3ff6d246": {
+  "who": "kilnheart",
+  "text": "I wasn't asking. I was gloating. There's a difference.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "0c6de9762c1af8e29c9eebc124c7cbac21595e71680c9e86294b97faa4ecd403"
+ },
+ "kilnheart_87e192a6": {
+  "who": "kilnheart",
+  "text": "You came back. Huh. Gotta be honest, I had money on you quitting.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "543b3d0c33d7b2b8f4c73ce1f6847cb6a05bb6cda7ebb828aa921de2cc22a50f"
+ },
+ "volt_4d9ea3c2": {
+  "who": "volt",
+  "text": "Who were you betting with?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "5580a83ba745458e42c93aa6ac567d57e342c189f5aab651835eacece7a45477"
+ },
+ "kilnheart_361afd16": {
+  "who": "kilnheart",
+  "text": "Myself. I lost. I'm taking it out on you.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "7a90fe54f3d872e4b29ad9546f1a7a631e3b07e50b256a38605c1d736541c23a"
+ },
+ "kilnheart_288e7b7a": {
+  "who": "kilnheart",
+  "text": "Okay. Last time. That was a fluke, right? Tell me that was a fluke.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "d84589e27dc5019a3dbc263ec33f741fc91807e9ba6433f4a03e6501a088734f"
+ },
+ "volt_2aa3e2dd": {
+  "who": "volt",
+  "text": "A hundred percent skill.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "029efb85b1519ee962453c4ddf2da5b93403fb5d35c88b4d74cf34eb13cfadbf"
+ },
+ "kilnheart_a6a99fe1": {
+  "who": "kilnheart",
+  "text": "Great. Love that. Really great for my reputation.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "657f95bbf34c6ca23f29c0458603eb14cb12782e55865c978df1747d61da8cd4"
+ },
+ "patch_1ac914b8": {
+  "who": "patch",
+  "text": "Volt, quick note. Kilnheart's suit runs at nine hundred degrees.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "fd7c0c2a74b2bd0db32418312fbc938432b839cbf723d385b838196e038ccc93"
+ },
+ "volt_b539ea50": {
+  "who": "volt",
+  "text": "Is that a lot?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "1e2034094d8ca6af73dd6f86772241ae74037c79ca4ffb670f80d8634291861e"
+ },
+ "patch_ac78e12e": {
+  "who": "patch",
+  "text": "Don't hug it.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "855831ebc8de7a6ebfd4d837efb725d3f19e81c956e714e464ffb205353b1652"
+ },
+ "kilnheart_73ab998a": {
+  "who": "kilnheart",
+  "text": "Is that the engineer? Hey! Nice work on the kid's suit. Real shame what's inside it.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "2cec61a146fbff7fdc9f2254240a3d563f4ab2620f94b8b4fba5e004a8c42e1c"
+ },
+ "patch_899e9be7": {
+  "who": "patch",
+  "text": "...Okay, that one was a little bit funny.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "a8180f5dffe5a8297b36a2201163536afbe4c05bda331c8a5e46895c1986b947"
+ },
+ "volt_f8fc8c72": {
+  "who": "volt",
+  "text": "Patch.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "35ae162641804f95efe96e93f1c806952ff063165bd4b2172ac9439fd0efa557"
+ },
+ "volt_6fc211cb": {
+  "who": "volt",
+  "text": "Can I ask you something? Why him? Why work for the Redactor?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9d57373ffbcc0138e05b7e561772414fc0402c4d8c9f7eca62a3380c03994ffe"
+ },
+ "kilnheart_804f87f2": {
+  "who": "kilnheart",
+  "text": "Twenty years I kept this city warm. Foundry shifts. Double shifts. Then they shut it down, and you know whose lights went out first?",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "f015f48b7b49c247192b9ba87638a8064534019e888a934152a6affa506d815e"
+ },
+ "volt_d1c5ac72": {
+  "who": "volt",
+  "text": "...Yours.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "34b3ba48bec2209c8985e5433998e23b8cf54969d51202ce823f830fce2aa93a"
+ },
+ "kilnheart_8c0ae762": {
+  "who": "kilnheart",
+  "text": "Ours. He's the first guy who ever handed something back.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "7de1f8fbe54cb7eca4ff0f55b3b125a515c972f60985b6a7eb1e68de018b2fa9"
+ },
+ "volt_24707e85": {
+  "who": "volt",
+  "text": "He didn't hand it back. He's renting it to you.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "251b476f4c4b85da0ab7e8257ee2045d7f2ce03c4bad5ce262e78e6032f9d7d2"
+ },
+ "kilnheart_9f6496dc": {
+  "who": "kilnheart",
+  "text": "...Yeah. Well. Rent's due tonight.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "5aa1684b61448c64c10062a841235c3534019713d5349dee7247af9a3d0720cf"
+ },
+ "kilnheart_7714eeae": {
+  "who": "kilnheart",
+  "text": "So the rumour's true. The kid walked out of the tower.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "662f147b8734b65806fce8488d250dcfda3a50ed94c10a93805b1445b60339a7"
+ },
+ "volt_dead5e7b": {
+  "who": "volt",
+  "text": "Walked. Limped. Same thing.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "4c1b3e9ec3b6bbcbf96f42d5851b243e12f30873271b3edbbfffee097089cd4d"
+ },
+ "kilnheart_66f30cb2": {
+  "who": "kilnheart",
+  "text": "And yet here we are. Same roof. Same furnace.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "86bbefe00b59ea191fe2fd42eb00a21b5cdabbf0e074d8fac1a20607b8d0ec52"
+ },
+ "volt_2984453a": {
+  "who": "volt",
+  "text": "You could just... not?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8a1924afbf4e5ecfb96c9b2510301ee0649966b91cf24b8714fffec232b07962"
+ },
+ "kilnheart_d64eb789": {
+  "who": "kilnheart",
+  "text": "Ever tried switching off a furnace halfway through a melt? Doesn't end well for anybody. Let's go.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "8aa14407fbb5466982b3e1e0dda20d3925adf90ca4cd72b321c21b65b75e2e35"
+ },
  "bellwether_0942764c": {
   "who": "bellwether",
   "text": "Oh, finally. An audience.",
@@ -307,6 +517,167 @@
   "voice_id": "AJuNP3sFJckEVT7VAAqm",
   "sha256": "7bc8275636377f24bb68892ed365769d10d344bec438bd77e9c0976095eb7af8"
  },
+ "bellwether_67042572": {
+  "who": "bellwether",
+  "text": "Back for night two? The reviews from night one were... mixed.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "398ea4df34fc43c35d020f262831ad78968ce72b58f9ba767108aea2e6af9de1"
+ },
+ "volt_e7b0fd5a": {
+  "who": "volt",
+  "text": "I went down on, like, the third song.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "58a6ccba9d671f49dc07f0ce55f1a8108b3f4f8b995f74e64317969e7822cc5a"
+ },
+ "bellwether_a121c172": {
+  "who": "bellwether",
+  "text": "Fourth. You missed the bridge. It's the best part.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "b269fd8755948dc03bd2e7301faca08f9fd9f52bd20ed0153861ccc83e47d11b"
+ },
+ "bellwether_5d6c2b9b": {
+  "who": "bellwether",
+  "text": "You know, most people who come to my shows buy a ticket.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "48144301e4539e20f367739aa10b20915ea1a0bfa99d6b8f7338e6f5b842320a"
+ },
+ "volt_b99bb969": {
+  "who": "volt",
+  "text": "Most people don't get a choice about hearing them.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "47c6c8da5dde83628511b4010cde67a59f5f95f089042a9f485c2afc5b25c6b5"
+ },
+ "bellwether_d032d003": {
+  "who": "bellwether",
+  "text": "Ooh. A critic. I've eaten critics, sweetheart. Metaphorically. Mostly.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "3543550a618339739a234f8c611cdd982fa87094697cd8beba841129c48cedd5"
+ },
+ "bellwether_e2c6cdc6": {
+  "who": "bellwether",
+  "text": "Last time. You found the gaps between the waves.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "0c96e06a769e1f54f6cc7ad082ff9c0c7da50b2a3a037ea4f05e86e5062a2f58"
+ },
+ "volt_71e547cc": {
+  "who": "volt",
+  "text": "They were pretty big gaps.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "be1911f27acc5215a38f8d8699514a49bbef190ed321f857d004dffdbe4ba4d4"
+ },
+ "bellwether_49c5bb00": {
+  "who": "bellwether",
+  "text": "They were RESTS. They're called RESTS. They're a musical—",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "c2bee81930a746bbc62fc929040d63de236d8d38aa8f4f53df4db2ed41336398"
+ },
+ "volt_fdc66224": {
+  "who": "volt",
+  "text": "They were gaps.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "74017c1535654bbb7316e6c39e826dadc486e22cf8a84a2a4cbe378eedff6fe4"
+ },
+ "echo_8ef58508": {
+  "who": "echo",
+  "text": "Volt, I'm in Bellwether's head. It's... really loud in here.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "0bf79476bb282908e75b25f4dbcc741da6e3a82037b017398e348334d674eb8a"
+ },
+ "bellwether_795efd97": {
+  "who": "bellwether",
+  "text": "Who is that? Get out of my headspace, there's no backstage access!",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "e21b2320330b9c70c90e66dd9110904df663f582d129659b0736580f7312ec26"
+ },
+ "echo_8d4967a9": {
+  "who": "echo",
+  "text": "Go left when the bass drops. Also, they hum their own songs. Constantly.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "a2c3e499d89e09bb1029876c842c2c8409b92dc7cdea647644f1181fef89636b"
+ },
+ "bellwether_37377dce": {
+  "who": "bellwether",
+  "text": "It's called PRACTICE.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "02dd2682b104d0f7eb6c95fdae4a333d2f56bcaf63a62b9a1515a6ef5d101b46"
+ },
+ "volt_e39e9c1b": {
+  "who": "volt",
+  "text": "Why the speakers? Why make the whole city listen?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2619881984f94595913bdd6d720eccaf7d62b45796ed1a05ee715ec13cb461dc"
+ },
+ "bellwether_5de1f69a": {
+  "who": "bellwether",
+  "text": "You know how many empty rooms I sang to? Ten years of open mics. Bartenders talking over me. Phones out.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "1f6a6713173e78a26541c86170330f0db97d866f954c56df7a83739a2198b2a1"
+ },
+ "bellwether_15598bad": {
+  "who": "bellwether",
+  "text": "Now nobody talks over me.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "059b4701350ce0b278e01fc279e87bd7674db6790979490214174f90edae2ab1"
+ },
+ "volt_84974e48": {
+  "who": "volt",
+  "text": "That's not the same as somebody listening.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "6a6956e58cd8d14f18fcb6a88d101c0c6b3290a17b4c2e7b6c4cf8b60f91a0fc"
+ },
+ "bellwether_9e49717b": {
+  "who": "bellwether",
+  "text": "...Wow. You really know how to kill a vibe.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "11d6181d98c8cd72ad6e3a4c1f0d19520fbb9a38612dfed1da7a386d6cf86cc0"
+ },
+ "bellwether_3be82b74": {
+  "who": "bellwether",
+  "text": "The night you went into the tower, the whole city went quiet. Did you hear it?",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "57db885b6330ea89f687dfb79be692ba628bad16f97fef956d9a82b91390c068"
+ },
+ "volt_4b0178a8": {
+  "who": "volt",
+  "text": "I was a little busy.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "84add7ee2b571ab2bfe939b1667d557c62d7b805c7ce200fc05a83204025c12c"
+ },
+ "bellwether_4a979129": {
+  "who": "bellwether",
+  "text": "I've never heard anything like it. It was horrible. It was... kind of beautiful.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "3f8cae816b504afd83a51bbcdd630ce82224b442893b1d222c40a3512fc14f63"
+ },
+ "bellwether_1c4c33de": {
+  "who": "bellwether",
+  "text": "Ugh. Forget I said that. From the top!",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "7b03f18b5e1da103a278988c02761690e1e8ef86879c67e054c7f5f712d4e3a4"
+ },
  "verdigris_c0fd776b": {
   "who": "verdigris",
   "text": "Mind the vines. They bite. Well. They don't bite. They just never let go.",
@@ -335,6 +706,181 @@
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "b05b8cbde9943a43cee004bb01de87116a646c4bd0b94780a94d7c5aced1087d"
  },
+ "thorn_f006557f": {
+  "who": "thorn",
+  "text": "Volt. Don't. Let me talk to them.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "e52243bf3cd593d17d8d42634a64110439afeb4cd6452580c5c1ebdec7dadc31"
+ },
+ "verdigris_b00ce3a1": {
+  "who": "verdigris",
+  "text": "Thorn? Thorn, is that you? On a hero frequency?",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "90e5d1284075738216cf751030265f09bbd2d9cbdc7bdadef83198dfb65b3191"
+ },
+ "verdigris_78dc04f9": {
+  "who": "verdigris",
+  "text": "Oh, I need a minute. This is the best thing that's happened to me all year.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "40e3b06ba266626818718afa31d410bd46c02452beb010d2fb50639765452466"
+ },
+ "thorn_dc60c635": {
+  "who": "thorn",
+  "text": "The Redactor's using you. Same way he used me.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "18950c32ce397c2cad8d4b566286526f409562db27c7f7277db6702c2c6643bd"
+ },
+ "verdigris_5ff1fd8d": {
+  "who": "verdigris",
+  "text": "And the heroes keep you in a glass box with a watering can. I've seen it, Thorn.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "103a8d9bd667b29f1a7d5f29d7148a593251c3ea2aeaae4fcd91d0949a4dd7c6"
+ },
+ "thorn_57a244bd": {
+  "who": "thorn",
+  "text": "...Volt. Hit them hard.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "c5cbd06cfd05191cc7adee2f112730fe3ca5b0cff0f9df9dc7f563e207558935"
+ },
+ "verdigris_60556472": {
+  "who": "verdigris",
+  "text": "Welcome back. There's still a little rust on your left shoulder. From last time.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "74603897effa300f416fe8550b15ef626746dd8fe58590ba69e3538b4754649e"
+ },
+ "volt_ff75a736": {
+  "who": "volt",
+  "text": "That's not rust. It's... character.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2919a7b96a0e1d786c5e1aa4e0feac4d237c70b8223904300fc6808320b3032f"
+ },
+ "verdigris_3f1ee93e": {
+  "who": "verdigris",
+  "text": "That's what everyone says right before they're compost.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "6cdc3649099de3d11986576aec7080c3fbb0a21cbbdef6598dc2ac341697dc27"
+ },
+ "verdigris_c43493e9": {
+  "who": "verdigris",
+  "text": "You keep coming back here like a weed.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "a2a134d90c8e4e1d4a4a9d5d57768f2aec8757d5d30be74df43172e4d2d29067"
+ },
+ "volt_2c9eefa9": {
+  "who": "volt",
+  "text": "Isn't that your whole thing?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "3c3b0a3bff350157be964d13abea85ebf58be8eef1f8832f42983300889b0420"
+ },
+ "verdigris_180a954d": {
+  "who": "verdigris",
+  "text": "...Huh. I'll allow it.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "c3b3f683d231f9819b09ce46f4a7e7ad8689a09f29a8cf47a3f8853919c0f140"
+ },
+ "verdigris_20745fa7": {
+  "who": "verdigris",
+  "text": "You cut me back last time.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "c0f692ea2a09cfbc87cd8163cc4e3702f3e4193a6e9ecc4fab4e948815da822e"
+ },
+ "volt_162f38e6": {
+  "who": "volt",
+  "text": "You had it coming.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0352be3072945027983210492db1f78aadca64737201a17fcc353c88882a2dd5"
+ },
+ "verdigris_3367def0": {
+  "who": "verdigris",
+  "text": "Oh, no, I'm grateful. Plants grow back stronger when you prune them. You really should've read the manual.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "dcfc10a625f7e3c30e1d03f4d9c27d74e3eb0096f3d926ad9f07f9b1aeb28e50"
+ },
+ "verdigris_ffb430d9": {
+  "who": "verdigris",
+  "text": "Can I ask you something? Does Thorn still have the little green one? In the blue pot?",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "67895356928c15102b0868cd0b023b62a93ea0ce773c913c9a560b0993bc3d33"
+ },
+ "volt_c2ee64ec": {
+  "who": "volt",
+  "text": "...How do you know about that?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d70dfae66f354d86ba74441c14280d030b9e8f4374688649c8951078edc282d1"
+ },
+ "verdigris_4b7ef874": {
+  "who": "verdigris",
+  "text": "Because I gave it to them. Back when we still grew things that were alive.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "d42b555f6371f076914b5bb077086fa25dcab66d4be641ffeb56d9b66eaff1b9"
+ },
+ "volt_222bd7b0": {
+  "who": "volt",
+  "text": "It's doing okay. It's actually doing really well.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "dcf5ab23b20c99d7202426dbf134a992f98fba53de4478b5c50c18d60bc56e92"
+ },
+ "verdigris_89d2a170": {
+  "who": "verdigris",
+  "text": "...Good. That's good. Now get off my roof.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "c020dc9c34265b48d65227b564c3151a57641750fd5f1aff14ec8f259feb0fab"
+ },
+ "verdigris_46b159bc": {
+  "who": "verdigris",
+  "text": "Something's changed since you went into the tower. The rust is slower. The vines are tired.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "f9d8b23ef6764f25994513f53aa86cd46ccd64046de192350efbe86309df15b0"
+ },
+ "volt_542c756e": {
+  "who": "volt",
+  "text": "Sounds like you're losing.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "e4c8cbed44ac5817129222b11c61fc57acc01a1299f8c871a8949406940c5364"
+ },
+ "verdigris_e9ca1515": {
+  "who": "verdigris",
+  "text": "Sounds like the garden's changing. That's not the same thing.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "4a6fae6cf6698e5ae7058fefad8093d1f3447349353b818983887d7fdcbe032c"
+ },
+ "volt_1a30cfe1": {
+  "who": "volt",
+  "text": "Isn't it?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ff0fb0a1804507d1bca355d09739f1bd04964091941cfb756b2d9b94053ef84a"
+ },
+ "verdigris_41a21977": {
+  "who": "verdigris",
+  "text": "Ask me next season.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "d4a6f1baf3b643d1ba6dbec2ecc42a6d43942dbbd67331abecd79de5d5b1d43f"
+ },
  "glasswake_90cf841f": {
   "who": "glasswake",
   "text": "Hi. Over here. No, over here. No, you know what? Pick one. I'll wait.",
@@ -356,6 +902,167 @@
   "voice_id": "cgSgspJ2msm6clMCkdW9",
   "sha256": "6a1952dc99049596132c20d28a5964dcc35c538838333bcd559f80ecd2e4fdcb"
  },
+ "echo_684a417b": {
+  "who": "echo",
+  "text": "Volt. The real one's the only one actually thinking. The copies are empty.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "6757bdfaf0b6e483201e76f5c55b911c121cdfd891752f5e943e27c04c2601a1"
+ },
+ "glasswake_32646a43": {
+  "who": "glasswake",
+  "text": "Is that a mind reader? In my mirror maze? That's cheating.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "106fcdb60eba5c3647524674023055ef46f9fbd809d0d8157fc90980fecddbae"
+ },
+ "echo_0e60622d": {
+  "who": "echo",
+  "text": "You're thinking about your hair right now.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "702813adc5478c62309b1641a8ae8cb74b8abc1b6b756ffd061c0981407ee4e6"
+ },
+ "glasswake_5188971b": {
+  "who": "glasswake",
+  "text": "I am NOT—",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "e7cfdc31fa408d5a6f75d72ab01f2dd599022a9f06374048c11238b232828b24"
+ },
+ "echo_108ec501": {
+  "who": "echo",
+  "text": "You are. A lot.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "151f5d6ad7361a99bead5e3941fc4e61cc4de3b40c7c5478eee01007a7b6dfc7"
+ },
+ "volt_90733d97": {
+  "who": "volt",
+  "text": "I'm going to hit the one thinking about its hair.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9402417c89759cb7dbf20f175252927f5c212f08e746696f963e4e6a242d0900"
+ },
+ "glasswake_08eec4d1": {
+  "who": "glasswake",
+  "text": "Eleven. You hit my reflections eleven times last time. I counted.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "34aab5486caa12d07f6ae3a81da19c0cf4e32a43a8ced1182320b3e1e78b53df"
+ },
+ "volt_9e70b9d0": {
+  "who": "volt",
+  "text": "You counted?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "6412a16a8a781b60a7209f5badb3c47616a2d7729e2306815a62ce0af5071520"
+ },
+ "glasswake_769c0f44": {
+  "who": "glasswake",
+  "text": "I had a lot of free time. You were lying down.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "56768132a870f87707921b09504b715fb0791533701e792f7b1e2c9ed7d6535b"
+ },
+ "glasswake_5f716e65": {
+  "who": "glasswake",
+  "text": "You're back! And still looking at the wrong me. Honestly, it's kind of sweet.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "b23632211b4766e555850adfffbff60af5c1580599dbe02b9595ad9b8059d0a5"
+ },
+ "volt_9d3da6c6": {
+  "who": "volt",
+  "text": "I'm working on it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "a0e3156dbd5219624767fe9a95868f7b342921fbeea4c99e041621138cf8cab1"
+ },
+ "glasswake_c6279376": {
+  "who": "glasswake",
+  "text": "Take your time. I've got plenty of me.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "72f343e64aa093d6255e476302aa577606f2a81fb7ddd1ed38a34e252a4ffce7"
+ },
+ "glasswake_8ff36bb1": {
+  "who": "glasswake",
+  "text": "So. You broke me.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "c7e958b235c544326512149b9153812add372789f8624c81f45e1f2954145edd"
+ },
+ "volt_7cd2af1a": {
+  "who": "volt",
+  "text": "Into a lot of pieces.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8bfaa3b84b31d0a4a70ea478bb565fdb909b327b21011dc34fe7297897ff256b"
+ },
+ "glasswake_955ae324": {
+  "who": "glasswake",
+  "text": "Do you know how long it takes to find all the pieces? I'm still missing an elbow.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "c58bcf8ca6465db22e42d504e6cfa6690f3fe7a7d25adbaadb87f50feb487060"
+ },
+ "volt_f6d3e6d6": {
+  "who": "volt",
+  "text": "What happens when the mirrors are gone? Who's left?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d3657636d1fae7719e877f9397f502ff961d1c9a1fb116ca09b7fbc0b8ed0eab"
+ },
+ "glasswake_cf4790ba": {
+  "who": "glasswake",
+  "text": "Nobody you'd look at twice. I know. I checked. For years, nobody looked twice.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "b885bc1153cf7948ed52a4afbdcce523b115e01bbfe659bc580361aeeb20eab3"
+ },
+ "glasswake_dcd8cb97": {
+  "who": "glasswake",
+  "text": "Now they can't stop looking.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "c4c45eb87604217b538eabe5340ca47cb7c928d180ce80c7e81a863f4048546f"
+ },
+ "volt_6ecc08a1": {
+  "who": "volt",
+  "text": "I'm looking. Just at you, though.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "5324d67d67903462f4f4adf3f43e91fb324c36b25d30b82ba4719bf4b666c1b4"
+ },
+ "glasswake_1a810920": {
+  "who": "glasswake",
+  "text": "...Okay, that's annoying. Stop being sincere at me. It's very off-putting.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "39d5a288388299afc6957c4ca492ba6326ff62e95d3e9860c65ef2b36aa181fe"
+ },
+ "glasswake_e56ba9a9": {
+  "who": "glasswake",
+  "text": "So the Redactor's gone. Or a reflection of him is. Are you sure which one you hit?",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "09dfec765ee4dc2c6345bf7b25ad019b09f733e74cb32a54b6309d3b55917208"
+ },
+ "volt_04bbea43": {
+  "who": "volt",
+  "text": "Pretty sure.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ed9622cc3b86c0b83a2806f358f066025752b442da173478ea36e5a3f60ff2b1"
+ },
+ "glasswake_602a4a1b": {
+  "who": "glasswake",
+  "text": "'Pretty sure.' Adorable. That's how I get everybody.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "1816ab2ff43e87dd9cf05fb209a82746ba51abcc0c61f343f00ccd7ae840caf9"
+ },
  "undertow_e3048d54": {
   "who": "undertow",
   "text": "Picked a bad night to go swimming, rookie.",
@@ -376,6 +1083,188 @@
   "model": "eleven_v4",
   "voice_id": "urczK0YCwtnTeJkvb4PB",
   "sha256": "29c9663ff418e29df40aa2549ce4418d7a6a78f5c1c33296aa3d7fbd5ec97603"
+ },
+ "bastion_20b3f689": {
+  "who": "bastion",
+  "text": "Undertow.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "cd37c54705e8815fdb355da767b43b8fcf64901b1e8e782024ac5f15f3768053"
+ },
+ "undertow_ce87171d": {
+  "who": "undertow",
+  "text": "Well, well. The old man's on comms. Still hiding up in your tower, Bastion?",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "d7255e6d8612203ce732a38cbca99b67f58dea5da744b52ea328ed8b174de41e"
+ },
+ "bastion_e20cb739": {
+  "who": "bastion",
+  "text": "I held these docks for six years.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "b144171a8e88b37c917db888748df68ec8020ddd6f0344840ab811556484125b"
+ },
+ "undertow_17ea8e3f": {
+  "who": "undertow",
+  "text": "And then you didn't. Funny how the water remembers that and you don't.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "1fe70d5a9c35a78fce134c7e3ac8e0d75b6da0e80d6907920b69ff7da777165c"
+ },
+ "bastion_6cf5334f": {
+  "who": "bastion",
+  "text": "Volt. Put this one on ice.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "316a672cf2c1a6f9c33f6c149202137936e4c0fd7d3ebc406d64aa245686b602"
+ },
+ "volt_0db0c720": {
+  "who": "volt",
+  "text": "Like, literally, or—",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ece387faf4b01cc643e8c5ccca2e515e1708c58436500fc27a0941f8f0a95c02"
+ },
+ "bastion_5cb9b21b": {
+  "who": "bastion",
+  "text": "Literally.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "9652d297eb0a076c0d6901c6506267e0ea253399da63b1c17cf48212eaa84d43"
+ },
+ "undertow_b8d09177": {
+  "who": "undertow",
+  "text": "Nine seconds. That's how long you held your breath last time.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "2be3b1ebfd46ff94ea4944b0fa4ade50eba293efd1bc55913014138d1aa89fd3"
+ },
+ "volt_a6beb747": {
+  "who": "volt",
+  "text": "You were timing me?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "f30b23fa9811eded0543fdedc3bcd83c95f2c8d0dc750c45a408061ce21ce370"
+ },
+ "undertow_ba122f01": {
+  "who": "undertow",
+  "text": "Not a lot else to do down here.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "2b0b88763c4ecff14e414a69a22b38212eff3b03307d97c8f1564ea63a27376b"
+ },
+ "undertow_a2ab9b8c": {
+  "who": "undertow",
+  "text": "Back in the water. Brave, or stupid?",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "14bb79b1db49a16f82f9e7714911f9738ab835d21bc130510b22780d25392ab6"
+ },
+ "volt_36d9f594": {
+  "who": "volt",
+  "text": "Can I pick both?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "a84b221597c5956da55a0c9a17da6bb4413721af17102caeaac1a3a25aec5fa6"
+ },
+ "undertow_1288e9f4": {
+  "who": "undertow",
+  "text": "Most people do. Usually right before the stupid part wins.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "65abaf2c993e459b0558a779581178e38a4bd0666870721fdb2d842f97775891"
+ },
+ "undertow_0311248d": {
+  "who": "undertow",
+  "text": "Last time you pulled me out of the water. Nobody's done that in a long time.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "23bb84c2a571f8899473767f9656611814db24f17b83ecdec3879539487d7b9d"
+ },
+ "volt_e2929e2f": {
+  "who": "volt",
+  "text": "Maybe you needed it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ece7e65cc839f5d0475a0bd684de38f0a3a509e922077a8537642c69cfe3f837"
+ },
+ "undertow_99ffe06d": {
+  "who": "undertow",
+  "text": "Don't. Don't do the hopeful thing. The current hasn't changed.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "e94d89a681290d8f9b23e40490b830a21fc27bf7398373520b0cd4659c41082e"
+ },
+ "volt_e9b983ae": {
+  "who": "volt",
+  "text": "Bastion said he used to guard this place. What happened?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "392ec80a1dceecfffb85befd0c2d2cbe3db2879530f13d729fd26c196e127d1b"
+ },
+ "undertow_142dcdb7": {
+  "who": "undertow",
+  "text": "The city decided the docks weren't worth the budget. Pulled the heroes. Then the flood came, and nobody answered the call.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "0e513e97a438ec7d8ed236ca56ce0cb29b826e2588799b3b8821198dccf4e573"
+ },
+ "undertow_f6745cd8": {
+  "who": "undertow",
+  "text": "The Redactor answered. Wasn't pretty. But he picked up.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "cfc79291d5277b31e374c3d95594212489a0885db6f5dbab389954abf0c6c2bb"
+ },
+ "volt_e6f7eea9": {
+  "who": "volt",
+  "text": "...I'm picking up now.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "756150ef2d3422dfe903e98c63fbf4f2cb9db7632615180c4d98476c855911ba"
+ },
+ "undertow_4e384655": {
+  "who": "undertow",
+  "text": "Yeah? Then prove it, rookie. Out here, sorry doesn't float.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "2a0a3ff78a297bd2786412e3c2c1a9b2fc7db91d0c2440bb42dbc2e9fd5ad42d"
+ },
+ "undertow_afc3849b": {
+  "who": "undertow",
+  "text": "Tide's turning. Feel that? The Redactor's grip is slipping.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "c3f8ba16f0b9095b9370eb255e899d45ebd56b61720f429ab50e7a32c7a47177"
+ },
+ "volt_696e5ef5": {
+  "who": "volt",
+  "text": "So let go.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "af3ac16eb379feb9f059d0b9abe52986874e22ff555333b3aaeae5f351238c99"
+ },
+ "undertow_9aa3ba1d": {
+  "who": "undertow",
+  "text": "Not yet. Somebody's got to show me the water's safe first.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "2293d782c344623bddd6115d6bfe074f52ec33c9718657ffe6ab019520730636"
+ },
+ "volt_1042651c": {
+  "who": "volt",
+  "text": "Okay. I'll show you.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "b159668189b4158714b9996e182ec81373d4ad2940790b1b0d83554976717b4c"
+ },
+ "undertow_de572132": {
+  "who": "undertow",
+  "text": "...Yeah. We'll see.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "55e2c2400b2ffd5de4bd5f896088b1e60234241cf296ad552d2c79d8bc8d2d6f"
  },
  "gravemark_48d7cd1a": {
   "who": "gravemark",
@@ -412,12 +1301,208 @@
   "voice_id": "UrBeqP9db3vlQVM3Tmfu",
   "sha256": "9c3689a2b0a33f51aca0a386723c128f8f04c3eb7545426ec3bacfbc66712f2c"
  },
+ "halo_0b51f4eb": {
+  "who": "halo",
+  "text": "Gravemark.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "eb23c3d610c9d4dd0861c20c20bc5fa3f9d06bd3c393eeee319db1a49def92a2"
+ },
+ "gravemark_23cd763b": {
+  "who": "gravemark",
+  "text": "Halo. It has been a long time. You send children now?",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "1ff32c7e1b73e00226f58d1627f147d3f7f37c0570796ff989303276b6d9d8ad"
+ },
+ "halo_047edfc7": {
+  "who": "halo",
+  "text": "I sent someone better than me.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "a576a18357b04e43fb57db7004a78c9580bf42e11bb3c04ba08c230d3fb31cb9"
+ },
+ "volt_b1ccc781": {
+  "who": "volt",
+  "text": "Wait. Did you just—",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "218ca6ce63de9e39668c75e4458b2c847c890c5e8ccd27c98c9470ce54d3ddd7"
+ },
+ "halo_782df85b": {
+  "who": "halo",
+  "text": "Focus.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "56a7584c6262796e8b86468533422acd83958a10cec8b7763490c7df8f7f148d"
+ },
+ "volt_980929df": {
+  "who": "volt",
+  "text": "She totally did, though.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d04bc3731606e8c6db14c41f19ddbe95ef19fe0cea6e770ec5bddb0802a66948"
+ },
+ "gravemark_50e35946": {
+  "who": "gravemark",
+  "text": "Your name is half carved. V. O. L.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "06c023b0e181fe00e31d607bbc1638285fd567ec78fe5278b1de47c09acdc06e"
+ },
+ "volt_b8fa5dd4": {
+  "who": "volt",
+  "text": "Please don't finish that.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "f8ca1f3aa2ca3bada1ed9fffad9317c4a53cdbd2b1f1b90bd3e49df0e81f6baf"
+ },
+ "gravemark_be88f8f3": {
+  "who": "gravemark",
+  "text": "The chisel is patient.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "37e9f81f23a4064ab46506d0692d4e1f7c34dbeed59a5066d7ef3681eda8937e"
+ },
+ "gravemark_f4e93970": {
+  "who": "gravemark",
+  "text": "The stone remembers you.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "b820fd8238091a39d55216577b5290ef63dff75812d48d6b39a5357b23f4f623"
+ },
+ "volt_b4884823": {
+  "who": "volt",
+  "text": "Good. Tell the stone I said hi.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "5670fae545c5c51c00e945e70b5e0a29e18fe0623332f36abcf3981aebf7f7fa"
+ },
+ "gravemark_e5a66b0b": {
+  "who": "gravemark",
+  "text": "...The stone does not say hi.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "2ee05556c7ee48e47409262d850c92595387c3933f2313077d1dbff31bdac456"
+ },
+ "gravemark_967f1be5": {
+  "who": "gravemark",
+  "text": "You broke me.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "1b7355aa4d39df950b5dc827de5a77f9dcd2bad99d4cc6d260a6700fafe69fa7"
+ },
+ "volt_399de6ea": {
+  "who": "volt",
+  "text": "Sorry? Actually, no. Not sorry.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9c2f257248811732be791276f9dd1671ddfd7cda9f0c7b71014969f6ba91a9e6"
+ },
+ "gravemark_d2a2fe60": {
+  "who": "gravemark",
+  "text": "Do not apologise. A stone that is never broken never learns its shape.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "148124e6c1a5f4d44a81f46bf6f4d9bbf80e17d84909fef7e26227c30c6bb392"
+ },
+ "volt_34f776d0": {
+  "who": "volt",
+  "text": "Was that... encouragement?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "14038f63d1ca96c56e802cb4ae9e5d03ae9d4ff8512ffce004fa289664ae6d96"
+ },
+ "gravemark_f59b80ed": {
+  "who": "gravemark",
+  "text": "It was geology.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "ac940324a67a884a11154346f2aacbe9d45870f926df29f7292c2cc6263af350"
+ },
+ "volt_d928673c": {
+  "who": "volt",
+  "text": "The forty-one names. Who were they?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "bc6bb3495462172eab12dbdcc8020ced2df7e02a044db92caca8eab980e7b49e"
+ },
+ "gravemark_e97f982b": {
+  "who": "gravemark",
+  "text": "Heroes who climbed this roof before you. The city forgot them. I did not.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "b4a8f6bf61bcfe3e93eb1d0dd86694548fcd8e9d7644d677b7a7dab09e47deeb"
+ },
+ "volt_6f389d7c": {
+  "who": "volt",
+  "text": "So you're kind of... a memorial?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d2a42dfb9488fe4374fd96e52244ece3f9211adf0fffbf7a28b21514ec2feb5f"
+ },
+ "gravemark_ec9a6a65": {
+  "who": "gravemark",
+  "text": "Do not make it sound kind. I am still going to crush you.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "7cc11d163d27927899f47a6f17e78cdccaf14adf418b9ac297a0678c5a4e794e"
+ },
+ "volt_0608d262": {
+  "who": "volt",
+  "text": "Sure. Sure. But it's a little bit kind.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "1e365420b76b0a8d09fbd9dbd42df3b7c21ea2ad95c750dbc25b716190531a54"
+ },
+ "gravemark_8c5c50b1": {
+  "who": "gravemark",
+  "text": "You climbed past me. Into the tower. I felt it when the Redactor fell. The whole roof felt it.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "7b922e5d08233d9b4a95334933f9e51fa6c3ec3a5fe760bf6d4acc31efea9464"
+ },
+ "volt_0572aace": {
+  "who": "volt",
+  "text": "Is that why you're being quiet?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9d67b67bb74bddbaba4ca39eb7fa87b82b5a6b09f21ecb7ebe9bfdcf644ed9d1"
+ },
+ "gravemark_8ec7e1fd": {
+  "who": "gravemark",
+  "text": "Even stone listens, little spark. Now. Again.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "e67678508ea6a6c2406edff7d96e00d9b9d2ff311f39afe1e95206c12635bd50"
+ },
+ "redactor_6506d425": {
+  "who": "redactor",
+  "text": "Ah, Volt. Such a promising file. And one complaint I would like to discuss in person.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "77df2a86bd8f9b07d91a7c3b1fd691bad270af7e150bfb540f951e54e16c1eb4"
+ },
  "volt_75821e61": {
   "who": "volt",
   "text": "Complaint? From who?",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "c323ea162e10bbb4e2d37c2a825b143495d594b1d6e9f0ec695da79c71c0b594"
+ },
+ "redactor_2a8cf135": {
+  "who": "redactor",
+  "text": "Mine. You have mistaken my patience for permission to enter.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "60569bed4bbb84ed2e74543f632dfef8965d302ca4f6bd60a4c2788222f8d3d9"
+ },
+ "redactor_5ef5078d": {
+  "who": "redactor",
+  "text": "You think the lightning makes you brave. I shall remove it, and we can meet the person underneath.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "f7dddf08535f93bb8c9ccd73fcb1953b2d2aa1fbb91145d609f20b4e9702c26a"
  },
  "volt_2c8bafe8": {
   "who": "volt",
@@ -426,26 +1511,719 @@
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "edccdc54aa529a9f4981d8e40590f8d6387ef0bc53d0ebfaa864b2e798dbce24"
  },
- "halo_a9e3eade": {
-  "who": "halo",
-  "text": "You must be the rookie.",
+ "redactor_878971ec": {
+  "who": "redactor",
+  "text": "Of course you are. They all ask to keep something.",
   "model": "eleven_v4",
-  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "e3cd9a1d464f3b54f5e3faf435449efd785d2805d25dbe11e442272c069fe087"
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "9b9a4ea09af248c6763efaa661e42fc89e33c60cb9799cad72e1897b3edc7f4c"
  },
- "volt_d19c297b": {
+ "redactor_75177cac": {
+  "who": "redactor",
+  "text": "A small question, Volt. Before we begin. Indulge me.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "f353e79cf9612f4a33075758ca7534cf17fcf9de993e46a8c18ce092cd91eb13"
+ },
+ "volt_9e0e41ee": {
   "who": "volt",
-  "text": "Hi. Yes. That's me. Volt. Huge fan. I mean, hi.",
+  "text": "...Sure?",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "ff0b15e8730690714a2580ad625caa1299364c2648562e652770eecbd1d1602f"
+  "sha256": "399d751f92d2416238a4eb37e06b89a93d008d510bd38214f8187c0ba5a14a19"
  },
- "halo_337aba42": {
+ "redactor_04dfa97e": {
+  "who": "redactor",
+  "text": "Does Halo still stand on that balcony every night? Watching the city. Never looking down.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "b8660d99f1a7aec013e63a2ea971c73a4b25a1eb237450a6cd3505c076ddd905"
+ },
+ "volt_3cc7f580": {
+  "who": "volt",
+  "text": "How do you know about the balcony?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "751af755315be9f94982f31f819eb01ae4d8a0ec09fa15f6973c429a86ef56ae"
+ },
+ "redactor_c7a64760": {
+  "who": "redactor",
+  "text": "Ask her who stood beside her. Watch her face when you do.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "00b504d94b38a79a165cf404c747a4dda7d9fc7c75c91a7c432c9c1b457ff48a"
+ },
+ "redactor_c7703c3e": {
+  "who": "redactor",
+  "text": "You are breathing rather well, considering how we left things. Someone has been taking care of you.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "0c7bc377e9cc6aeaa03b4ea7a70b269ed1d0099b9e9ad2bae98ac22c9f3a1843"
+ },
+ "volt_b5cd68d1": {
+  "who": "volt",
+  "text": "Yeah, I get that a lot.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "1965ea8d75414ba208f403977d0ad10db4f7f10da562fb32e7836362def9dae3"
+ },
+ "redactor_a15e2922": {
+  "who": "redactor",
+  "text": "I shall remember that. Someone ought to.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "75d1711070901cd1d910c400ab7580d6785a001aaf15a345d2e0fd005444e4c8"
+ },
+ "redactor_3fbb88c9": {
+  "who": "redactor",
+  "text": "Persistence is not a power, Volt. It is simply fear that has not recognised itself yet.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "f334cbc77456b88d4fe66bbd751a078f4ea0a67951ce75699521112777da4aac"
+ },
+ "volt_494afbcc": {
+  "who": "volt",
+  "text": "It's kind of working, though.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "cfcaceeb1f358653ecd7d4944a597eb92bbc1e3c2b0a4da647fd8ca08769c9ea"
+ },
+ "redactor_75a0a3da": {
+  "who": "redactor",
+  "text": "For the moment. I prefer to let a habit establish itself before I correct it.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "8ae69c5d2882243303a68ff99e57c321e363e42ca5263c717a840f3a4710049b"
+ },
+ "redactor_b6cbf93b": {
+  "who": "redactor",
+  "text": "I flagged your little victory. I have spent the interval learning exactly where you break.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "6d3d441423f37a3a6737de2aae2d1a89f91e1a1b7f4ee0f346a514de158c7425"
+ },
+ "volt_6718ba60": {
+  "who": "volt",
+  "text": "Flag this one too.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "4244a82ee4d7e6e8829fd4d9a179b504e45f0d11a5ea934fa7d5cc207c38ae18"
+ },
+ "redactor_bd93a30b": {
+  "who": "redactor",
+  "text": "With pleasure. This time, I shall be thorough.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "a2155e6bbde78676da18667d844fef6d72a1fa98394d777e9af360cd627cb438"
+ },
+ "redactor_e64699b4": {
+  "who": "redactor",
+  "text": "She has not told you. How considerate. She always did know what people could bear.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "c1c73194ca343d4698e80c4748a48984074dbd861e17dc2c05524854a1fd8f91"
+ },
+ "volt_fc1f7a1a": {
+  "who": "volt",
+  "text": "Tell me what?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "56161cd370e002e0d118eb643e673eb27aadaf0f5612955b4063da7e766d1c89"
+ },
+ "redactor_2083de34": {
+  "who": "redactor",
+  "text": "Halo and I were partners. Then the tower fell. There was time to make one choice. She made it while I was still calling her name.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "7a7b95015192e6365a814d1c77d8f087c0d2e14f392272c529408c4ccbe35f64"
+ },
+ "redactor_5206bb26": {
+  "who": "redactor",
+  "text": "The city was saved. I was left beneath it. She found the distinction quite manageable.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "8bd39799609dd86ffd15015a0c8587161d1aaf6c9f371638ca8f5c8dbb665631"
+ },
+ "volt_d0b6e1ce": {
+  "who": "volt",
+  "text": "...What was your name?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "e811226f6e9e426d2f53999198a5a795138f99d9652195505bb9359a8f319fbe"
+ },
+ "redactor_9b78b1de": {
+  "who": "redactor",
+  "text": "Redacted. There are things even she does not get to keep.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "d77027937797272dbb361c20fcc53cd5dc465fd6719b071d33965508e5760b1e"
+ },
+ "volt_4575efbf": {
+  "who": "volt",
+  "text": "Why do this? Why take everyone's powers?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9155b7cd5c2705cfa38d3235e11468b671435e29c33824abac6d1d739e5e06e8"
+ },
+ "redactor_4197797c": {
+  "who": "redactor",
+  "text": "Because power lets a person decide who is worth saving. I have been on the other side of that decision.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "6f5c7ffda2c8c3b740fc15f03ed5c0889aa24827667e5c16ff7b7fc3e3ffed12"
+ },
+ "redactor_0449b764": {
+  "who": "redactor",
+  "text": "Take it away, and the choosing stops. Every life is equally fragile. Even hers.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "c7c020da48f68f968639c37fc402703bcc47a7536ad82e7046601bdf71e1a287"
+ },
+ "volt_9ccf50f1": {
+  "who": "volt",
+  "text": "Everyone's helpless.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "4b27ad214472827853568314a88fdc139635f79b221dd7dd96a5bd7f3628d606"
+ },
+ "redactor_64e04831": {
+  "who": "redactor",
+  "text": "Yes. You understand me perfectly.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "2baf2d34c742a81ad7dbf72c25a7fd43cede07eb5548ed913a891c6a31c0db74"
+ },
+ "halo_69e489f0": {
   "who": "halo",
-  "text": "Bastion says you asked to join the roster. I didn't vote for you.",
+  "text": "That's enough.",
   "model": "eleven_v4",
   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "d0b7388cfb66d5f9177b6b723df96c11c05f73943a3d3df6e1c6b2019ca604e4"
+  "sha256": "702ab598dc09d6ae952b16b75761998efa82d0bfcbeb4b7eb033cde217d09068"
+ },
+ "redactor_7f97590e": {
+  "who": "redactor",
+  "text": "Halo. I wondered how long you could bear to listen.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "28e90b7ac88bcbdb30a9546f0dd86989cc69fa1e7ea8bec383a9acd014889bf8"
+ },
+ "halo_17bd91ed": {
+  "who": "halo",
+  "text": "I'm not here for you. I'm here for him.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "749cc602300ad154f024ae18183e88a5d054e95ce4aaea24939788223da39adc"
+ },
+ "redactor_13a9ef31": {
+  "who": "redactor",
+  "text": "Of course. There is always someone else to save while I am speaking.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "0af90b6950d90eb8aa04d711d9805eb4c001c903becc3c7ade43b4546c540a31"
+ },
+ "volt_76b40537": {
+  "who": "volt",
+  "text": "Hey. Hi. Sorry. Can we save the reunion for after I punch him?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "3dd5b0417694c612bcbd74120aba134d937a44330dc6c637266ce048ad9e0bb5"
+ },
+ "redactor_66e8933c": {
+  "who": "redactor",
+  "text": "Twice you have left this room alive. You are beginning to mistake a pattern for a promise.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "e717dffcbb26d141ef924d0ccdc2deb57aed5ac2eca15ecb198ecd6fcc8b7010"
+ },
+ "volt_d65ada4e": {
+  "who": "volt",
+  "text": "You keep rebuilding it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "5eb4cf90619827015e517830b846291f35421083d0c9dd09daef864a0244212a"
+ },
+ "redactor_8e8295fb": {
+  "who": "redactor",
+  "text": "Some rooms must be kept exactly as they were. She understands why.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "8c076ea542e323aab3f47ccde5ffdc26622b12a669bfc6aea86d7e9a65633c95"
+ },
+ "halo_ba6771a3": {
+  "who": "halo",
+  "text": "Halo here.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "489f160545a185fb5a96886cb3db9ed9cda4c6131842d2df2be7ff2818cf4ddb"
+ },
+ "volt_c05bcfe5": {
+  "who": "volt",
+  "text": "Halo? Hi! I mean, hey. Hi. Volt here.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "14aa0ee3cf8a0a6a3451d96fdd3f872e5cb2c0d25866fae921fceac7f0e8347b"
+ },
+ "halo_63cabc56": {
+  "who": "halo",
+  "text": "I know. I'm watching your feed.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "f86ef6dbb0bf1c36bea8179562182fde8b492de0c1dfacb5a1c138ef1adb417e"
+ },
+ "volt_60f5c6bc": {
+  "who": "volt",
+  "text": "Cool. Cool cool cool. No pressure.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "e3c83c67490b08fec74d97177eca1727ef25d0ae4ce90371087f60a1f3539dca"
+ },
+ "halo_70f26c26": {
+  "who": "halo",
+  "text": "All pressure. Take the power.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "c03fe4626c42694f7f5494fb4b0a336a8601894ff952f79b351488f5dd970c15"
+ },
+ "halo_835dbfe3": {
+  "who": "halo",
+  "text": "You fight like you've got something to prove.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "45578b8334cdde667ae9835a0c890f9b6baf08a1ce63874de94be720e4fc69da"
+ },
+ "volt_e240d46c": {
+  "who": "volt",
+  "text": "Don't I?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "c7a3f3f49e195c308207bb1e6aff8324e01fa8e2735f804d2dbeb4ee6cd7a805"
+ },
+ "halo_a97c734d": {
+  "who": "halo",
+  "text": "Not to me. To them. The ones watching from the windows.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "38e795f59d77aeb918aea9333dfa5d95b2d87c6c98eebf6737d9454b0d8e6086"
+ },
+ "halo_9a8779f7": {
+  "who": "halo",
+  "text": "Whatever he told you about me. Finish the fight first.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "a6d47ac2108adb36bf8e11169e3844d262b2e7d7260c1023ddf5581e8aeb7240"
+ },
+ "volt_ba833346": {
+  "who": "volt",
+  "text": "And then you'll tell me?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9d10a0c7d29751973a6b22ecff37b316f3fc97197d1f186405fca629d44f142f"
+ },
+ "halo_52b4f4a4": {
+  "who": "halo",
+  "text": "...Then I'll tell you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "90ba5d99bebb90e54ea6a4130c1297b220c889b93ce10d68e078ea3469c019cd"
+ },
+ "bastion_dbc2b620": {
+  "who": "bastion",
+  "text": "Bastion. You're overextending.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "ffa58f061edfbbdf877567a4f865098ad64520da4e71bbaf111c660e8131fa2d"
+ },
+ "volt_a392a435": {
+  "who": "volt",
+  "text": "I'm being aggressive!",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2ce63142f7ad26612ceea7d476b53c68271047f66601793049f815bfcb78e38e"
+ },
+ "bastion_4ccb036f": {
+  "who": "bastion",
+  "text": "You're being aggressive in the wrong direction. Here.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "54f0d65739b80f01dd578e02e92547ee5aa8ecff267779e4f8434c929a9139d7"
+ },
+ "bastion_55ceb3bb": {
+  "who": "bastion",
+  "text": "I've sent a lot of rookies out that gate.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "192e6ee94beedf194185a734ea1b251113542ce3781b1ed1fb1f75eb0e723dc3"
+ },
+ "volt_7bbee25b": {
+  "who": "volt",
+  "text": "Is this a pep talk?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "172e39fd875e5f609ba3c537155103bf1df66b3cd3d9cd3240a9a014d7e651c2"
+ },
+ "bastion_2a5a3ea9": {
+  "who": "bastion",
+  "text": "You keep bringing the gear back. Most rookies only bring excuses. Don't make it weird.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "f46c057cbc6f9b60c7a78f885e85d9f337b98547851eec115c2d87b7466cf1ef"
+ },
+ "volt_e0e5d30a": {
+  "who": "volt",
+  "text": "Too late. It's weird.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "127a868f342ffbc4b9a505b93567655b6e41a0186c66aac9c831142d8e2cb1d2"
+ },
+ "echo_a7f746ba": {
+  "who": "echo",
+  "text": "Before you ask: no.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "3f8853d745c25027f420e19920c8ebbeabf48876d8c6bd40a41bbfb427f845f5"
+ },
+ "volt_04af766d": {
+  "who": "volt",
+  "text": "I wasn't going to ask anything.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "846cb7482eb65d5a8f7afaae9ac73f116600a50aafd935b1ebecb153c5732e22"
+ },
+ "echo_107270fb": {
+  "who": "echo",
+  "text": "You were going to ask if I'm reading your mind.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "0445d95048113d02974346aee90253a4bc01a77ccdd16582645cc83500580c6a"
+ },
+ "volt_a98d2f72": {
+  "who": "volt",
+  "text": "...Are you?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8da4a341e6038a273da43460c33157eb5f7205c27bfc14374f6ec9bdc6e4350e"
+ },
+ "echo_768e5867": {
+  "who": "echo",
+  "text": "Pick a power.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "19f91af8318baf57d7f56384a358fe9fd4ca3ee5317d03abcd55aad3093584dc"
+ },
+ "echo_f315509f": {
+  "who": "echo",
+  "text": "Can I tell you something weird?",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "7cbee59904b2668297040b887b83155f228167bcc3866fde7efaf27c5876eff1"
+ },
+ "volt_2d3ba123": {
+  "who": "volt",
+  "text": "Always.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "37cef79ccba5778e82ab247ba5a9f0dc309b5d7e1c1c0a591f17234f696f4c81"
+ },
+ "echo_3b4f0945": {
+  "who": "echo",
+  "text": "Out there, your head goes really quiet. Focused. It's... nice.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "9bef1a4de63def91dcb334615f197cfd708f6696b8a1ff18570d86c3a125dcfa"
+ },
+ "volt_003df286": {
+  "who": "volt",
+  "text": "Was that a compliment?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7b8b74d0297240287365c23b9fca34507924c96234c51c7ddbfc81ce8a9c7a9c"
+ },
+ "echo_425993c2": {
+  "who": "echo",
+  "text": "Absolutely not. Pick something.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "4e7dee5c000c59da84dd6b1ae77137df4e013e0c3b631ff296410c6b4047bb16"
+ },
+ "thorn_dbbdd0f1": {
+  "who": "thorn",
+  "text": "Thorn. On comms.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "4d76b412e7a3cfdc6dd9e8e86f06f5e6d8ffaaa36c6b2cadeeb66a28dfa59e0c"
+ },
+ "volt_1d0738ca": {
+  "who": "volt",
+  "text": "Wow. You never call.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "afe1aa0ac8144e012f1c43151e1001dca0209443ca2c8b3bc6b8dc4a4643b8c4"
+ },
+ "thorn_e8697e76": {
+  "who": "thorn",
+  "text": "I don't. I'm calling.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "9d76b5e380615640ea3eb4efb0cd5abe958c22acc00c006604a35a4e53fc6a58"
+ },
+ "volt_49ea4c5c": {
+  "who": "volt",
+  "text": "...Thanks, Thorn.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "f8d2d4b05af9a39b91f6837fd6843d8b5aadd3695dcf28baeca883288d32533a"
+ },
+ "thorn_e12ab957": {
+  "who": "thorn",
+  "text": "If you see Verdigris tonight—",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "cfb8f5853e59067c998773ed4fafcaf8e372781660c51a92d2508fda67dd283c"
+ },
+ "volt_695a62fb": {
+  "who": "volt",
+  "text": "Go easy?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "be8e52025dc69d0cef6ac831b6d51f5fbffe5e645edb72e3684ac562a304fa0a"
+ },
+ "thorn_7e3e87ee": {
+  "who": "thorn",
+  "text": "No. Don't. They'd never forgive you if you did.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "020683d657047627ad65ff1c85ac9e267f601b2acdf085b1dcdeed39691574e9"
+ },
+ "patch_907e5b96": {
+  "who": "patch",
+  "text": "Patch here. Your suit is currently held together by tape and optimism.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "3c46ef5b8d53704cbe0c12fbddc16fa3c38aa8fa7e446a085acb725e88826ba7"
+ },
+ "volt_c2cfa4e5": {
+  "who": "volt",
+  "text": "Mostly optimism?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "f0b6c0af4891065496787bec39c57f7d6bc3d09cf9a68487ef94272ba5a94492"
+ },
+ "patch_d597b625": {
+  "who": "patch",
+  "text": "Mostly tape.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "9762583d8ca5ecde8a0b429b6eee0d4c3e3fab0b72d4864b17b568b687ebf35a"
+ },
+ "patch_139e8988": {
+  "who": "patch",
+  "text": "Fun fact. I've started naming your suit repairs.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "d0e430430616bb6342d020b898acd41dd443c9ae696da7f38c8aac09b0f776ec"
+ },
+ "volt_db008384": {
+  "who": "volt",
+  "text": "What's this one called?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "1d234e810a4ed11786a285db7279a6ff38bbb4d5870d791256090ee4760f7b79"
+ },
+ "patch_a71ebd29": {
+  "who": "patch",
+  "text": "Repair forty-one. 'Again.'",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "523e7cbc75bdb002bb16cc9b6b110ba5770bcdcd0f9a7bca96c640ce95d4b88f"
+ },
+ "bastion_155e5998": {
+  "who": "bastion",
+  "text": "Three district relays feed the tower shield. Choose a route, beat their operators, and we can reach Gravemark.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "f502bb1334c88a901f1f19d002d10bb7f5299db691bc46b2c7b41a947e2fdf07"
+ },
+ "volt_3a5b66a4": {
+  "who": "volt",
+  "text": "Three relays. One enormous doorman. Then the Redactor.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7ee96e0487f1a02486e1c86356acd49aa71435d6238d483cfa21d9320c2079d4"
+ },
+ "patch_ecdcb78f": {
+  "who": "patch",
+  "text": "Your suit can channel the team's power remotely. Choose the upgrades they offer. The link burns out when I extract you.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "abd7e81db6687e45730dbb445a5640ff0421ca1c8713be5ab689a064cca0f4b8"
+ },
+ "halo_7d6e50fa": {
+  "who": "halo",
+  "text": "He has our power signatures. Outside the Fortress shield, he can drain us. Yours is still unregistered. That gives you a chance.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "a4159b8f9dc92ea1b85074a7f4378ed42cbc26c28abef53a4e211199eb04d370"
+ },
+ "volt_40d762e9": {
+  "who": "volt",
+  "text": "Finally. A useful reason for all my missing paperwork.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "871e3b6febc8a1b6f53240c59840d2f39df41487fc9a1b812c394094844509c9"
+ },
+ "bastion_966c1021": {
+  "who": "bastion",
+  "text": "If you go down, Patch pulls you out. We regroup, repair, and try another route. We do not leave you there.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "471a2da8da33beb6717c839e81ed3e546f26070574f5d05ac579c82810acf6b6"
+ },
+ "halo_03da886b": {
+  "who": "halo",
+  "text": "Reach his control room. Shut down the drain. Bring the stolen power home.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "8584415b5b1b23f8a64f5d50f75cf2ce43a3980ac51a1a395ae7fc927839cc5e"
+ },
+ "patch_e8a6bab0": {
+  "who": "patch",
+  "text": "Extraction worked. Your borrowed upgrades burned out, but the permanent suit repairs held.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "ccccfbd4d6976d984a9c46316e931679d83fe33a03c7d452d36828329845cf65"
+ },
+ "patch_eea59708": {
+  "who": "patch",
+  "text": "I changed your suit signature again. His scanners will have to start over.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "acc309c47f80f343d2c444047fb00b7cc2a8b17819f4fe523d11638ab711659f"
+ },
+ "bastion_2884ad88": {
+  "who": "bastion",
+  "text": "His crews have reconnected the relays. We know more than we did last time. Pick our next route.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "7b625dd91729350d78d280d1e5379c5df726395be80043784e1cc6495add1d6b"
+ },
+ "volt_6acd8699": {
+  "who": "volt",
+  "text": "Same job. Better plan. Preferably fewer dents.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "845e19f8d8c59a15794e97fbc64d96c74a60c41629c3f2f3ec3965ac72d15139"
+ },
+ "bastion_3714b276": {
+  "who": "bastion",
+  "text": "The main drain is down, but his backup relays are coming online. This is a new operation.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "bf90c16d500175d370dbf6edac3b6e1a85acad42a3de4507c0c20117dcf3ff7f"
+ },
+ "patch_aa8caf70": {
+  "who": "patch",
+  "text": "Fresh suit signature. Fresh support link. He does not get an easy lock on you.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "015ec2c8cf0aa9ad0af7af183535e9cb18b3338237564626b6c000d77e396f4c"
+ },
+ "halo_0d90a7af": {
+  "who": "halo",
+  "text": "You brought people's powers back. Now we keep them back.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "05471bdbcce66a30ab91d3e40ef14a0d0a7f90da97a7928eb9846fea4c4351d1"
+ },
+ "volt_61addc4d": {
+  "who": "volt",
+  "text": "Then let's find the next switch.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "506eeb9d615b68176914d45457816ce0f4b9afe0fa235dda528e355a15177774"
+ },
+ "patch_470a31c4": {
+  "who": "patch",
+  "text": "Three relays offline. The tower shield is open. Gravemark is the last guard between you and the control room.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "ef7ebf144a9b0a8842990d20ef182584e0c94af488976aaf96eb7fd9304265d9"
+ },
+ "volt_1a4fcbc7": {
+  "who": "volt",
+  "text": "Of course the last lock has fists.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "49c1954dac1b4ece8c715ba866169e246f9b6a00bca9e9b0e20fac245fa5f840"
+ },
+ "bastion_5dd2c022": {
+  "who": "bastion",
+  "text": "Gravemark is down. The Redactor is above you. Keep climbing.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "5eefc6e1f37d86cab194f6cbcc960696d692bd193738277b47863ea09fbd0b13"
+ },
+ "halo_cc20fe64": {
+  "who": "halo",
+  "text": "Whatever he says, you are there to stop the drain. Stay on that.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "8030d8ae163fb680f4776d814403fd051062b94f88e63b22a8c49f06fbfc76dd"
+ },
+ "patch_25c56ac4": {
+  "who": "patch",
+  "text": "The drain is offline. Stolen power is returning across the city.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "865d8e3ef6753c8e3e8b24052cf0c150fec7c7f8ac7737f3e3a0b62f0996448d"
+ },
+ "volt_1b99aff9": {
+  "who": "volt",
+  "text": "And the Redactor?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0b880d8b962e3dc9b8fcde10172c79a2009c18e9b515f47a6a5f754f175dec68"
+ },
+ "halo_2ca29426": {
+  "who": "halo",
+  "text": "Escaped through his backup network. You stopped this operation. We will find the rest.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "c8f82c32e5db8fc544cb03c88066a6dbfefb8593ff83a46c1869c9d6dba525b5"
+ },
+ "bastion_305e8941": {
+  "who": "bastion",
+  "text": "Extraction inbound. Bring our rookie home.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "104313bac9365d8e2de8fcc960b0a6291e601fa03333fc3ced91878b1587e7b5"
+ },
+ "volt_d90908c9": {
+  "who": "volt",
+  "text": "Our rookie. I heard that.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "94eb9c85073eb794a5c847181affb856def9ac2dd022a0124b8ddc42524e6428"
+ },
+ "halo_c8bae87c": {
+  "who": "halo",
+  "text": "You made it inside. Keep listening to Bastion and we might keep you alive.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "517aa95d23f991cc2442fb5c717dad0b96e2a8a752c35bcc754c7c268f78b62b"
+ },
+ "volt_52dbaccd": {
+  "who": "volt",
+  "text": "Still getting used to being in here. Huge fan. I mean, ready to work.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "bb83593499ac22f1e53f86c70668b8a80bc35a4948886b6b71d034c6e42ea789"
+ },
+ "halo_83ba9204": {
+  "who": "halo",
+  "text": "You volunteered before you understood the danger. I need you to understand it now.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "4cd4fe269e9adb94883a2df4f98c4f279c4e862d1dec2611ff61a09453ea68ce"
  },
  "volt_1ffc7ea8": {
   "who": "volt",
@@ -454,19 +2232,250 @@
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
   "sha256": "dde04f2077dad5d3ddc3bf6c94438c2804a42121b456716baed69ca510586f89"
  },
- "halo_86059842": {
+ "halo_b79b0b8e": {
   "who": "halo",
-  "text": "Prove me wrong.",
+  "text": "Train first. Then help us shut down the drain.",
   "model": "eleven_v4",
   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "96d7cf217e493e1ebd6e4094b1fb094d29d11b9c4378c8343f59a69890be4ed5"
+  "sha256": "38a720505617a18502c9048164c0aeb0764f7281540cd8791930aeaecc8fd240"
  },
- "bastion_40cefd4f": {
+ "halo_f1af68b2": {
+  "who": "halo",
+  "text": "He told you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "36a2c6f0a0f46006a1953e3a59e374c6c6ceb5975f5a02ba5ae1a7a723a9321b"
+ },
+ "volt_1a3aecca": {
+  "who": "volt",
+  "text": "Is it true? You left him in the tower?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d42589c5b855feb8f449837ef067b5f2c0f7e5d2fb55323454a9c49fe57b9dd6"
+ },
+ "halo_028ccddf": {
+  "who": "halo",
+  "text": "The tower was coming down. Half the district was still inside. I could reach him, or I could reach them.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "b32138e71fc17bfd0d9e0bf93c4a59cb34d50ccb12c87c827d44c781895a1839"
+ },
+ "volt_18386037": {
+  "who": "volt",
+  "text": "So you chose them.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9592ea12d7ad1910af189074bd78c28062793d8febfc47fd900c45d6c0e3c573"
+ },
+ "halo_7a341e66": {
+  "who": "halo",
+  "text": "I've stood on this balcony every night since, making sure it was the right call.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "10ac5f2c6190b3596be93d2c5d2c5af473813b8d3924938bb454ac6e5e99e7dd"
+ },
+ "volt_1d04f4c1": {
+  "who": "volt",
+  "text": "Was it?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "05d1b5ce288330bd39797d63ad44a48ba585fb8ca338cf461a6a6a15ff79082f"
+ },
+ "halo_be9c5721": {
+  "who": "halo",
+  "text": "I chose the people I could reach. That saved lives. It does not make leaving him hurt less.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "eb066b6a32fb1d9ad8c7dc7eb7fadd6e53b5fd994a6cb841b21d38268ee093f9"
+ },
+ "halo_3248dae7": {
+  "who": "halo",
+  "text": "The Redactor talked to you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "3cc54e641382278674099f7eb27877192036318267ff3f84ef8adaa3c2c1f007"
+ },
+ "volt_ef9239b3": {
+  "who": "volt",
+  "text": "He asked if you still stand out here. And who used to stand here with you.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "4a486063745d32ad3f7a9dffc2b67fbf1c9adf41fd25c5c31cffc9726fca910c"
+ },
+ "volt_89d813d1": {
+  "who": "volt",
+  "text": "Halo?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "b9d69ee0b29f80382e1e6b8f0ded6b4fd971331de10f30993eff06893217869b"
+ },
+ "halo_4095b7fc": {
+  "who": "halo",
+  "text": "Leave it, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "de7169b0f7fe8bcf5acc4c557cba8f6934a090b71024004e5bcab71791a871f6"
+ },
+ "halo_ab66774d": {
+  "who": "halo",
+  "text": "You walked out of the Redactor's tower.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "d64d410b28b10fd92dd6e1a3db48ffe7266b2b479279cd18680dfe5bde0e2a8f"
+ },
+ "volt_506a9e57": {
+  "who": "volt",
+  "text": "I did! I mean. Yes. I did that.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ab08d49bff5c6112beca905992de78a24ee382ffe07fab8269b1bb9f4e8ec9de"
+ },
+ "halo_3c8d96a7": {
+  "who": "halo",
+  "text": "I knew someone once who'd have said I was wrong about you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "cc6f8f1d4a9ab380c3af35435c3cf70e3fbc00811550520c47461fc458677e75"
+ },
+ "volt_13b8f095": {
+  "who": "volt",
+  "text": "Were you?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "28ce0145744c60249c30a1d9b8c036b6af287acf2434ff1f8cad7ea1f83f613b"
+ },
+ "halo_1cc68a36": {
+  "who": "halo",
+  "text": "Go to bed, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "4e2bfe7da42230967231321244ae234b401d170deeda6e381d471a247c377c0b"
+ },
+ "volt_444906be": {
+  "who": "volt",
+  "text": "You put it down once, right? How?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "49a684122fe2b205b2a601e18f0a61c55596f495a22f6bfdf25eb8c300651422"
+ },
+ "halo_ac0ffdb2": {
+  "who": "halo",
+  "text": "I didn't. It got back up. They always get back up.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "0ee5e4dfab0ddd612666bcffcf7da124667b67191d4c9213d3d74b14ea9167ac"
+ },
+ "volt_1a4fbbf6": {
+  "who": "volt",
+  "text": "So what do I do?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "c6d1afcfa248b845067364aeac75d96c1e6f88669ca81f3ec011759421b91b27"
+ },
+ "halo_9f135ee9": {
+  "who": "halo",
+  "text": "Get up faster.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "0b4bdd25cf9e052b56bb0e7fdca718a333534bf4e3aa184cbc79843c6b0be447"
+ },
+ "halo_d354b630": {
+  "who": "halo",
+  "text": "One district back.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "60feb0fc2d28c6810dd613297131413f375ee3585efbfbe4f65b4488162aaf45"
+ },
+ "volt_f7a4ccd3": {
+  "who": "volt",
+  "text": "Did you see? Did you see the part where I—",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "91cc0876a39a414d69446662a0df8387e02f10b01985f17030d90750736e7216"
+ },
+ "halo_38fc4239": {
+  "who": "halo",
+  "text": "I saw.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "d23b1d40242c7ce3edb514c34126c402864de96e0a47bd1d423fbcc4dc2d0a96"
+ },
+ "volt_01d002e2": {
+  "who": "volt",
+  "text": "...And?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7be1670b0dc4323bd31743cc3aaeca3f3a6b52f9ecc9018c765b3aeee138aafd"
+ },
+ "halo_46c7d251": {
+  "who": "halo",
+  "text": "Don't get comfortable.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "102f09445fb1150a60830ab025e6c8e43aafd6f97c3c1fb31308825f8c33d58e"
+ },
+ "halo_a8129be0": {
+  "who": "halo",
+  "text": "You went down.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "dc4ce2e08fa240f0100be91bf7d5c8c3f4cb28e2638f91a8619fdfd99129818e"
+ },
+ "volt_bb46f9e8": {
+  "who": "volt",
+  "text": "Yeah. That was... yeah.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7b8c044bfd230ac519299c83ef4345f4d0a31f22a5a58ded0a268fea1f7ce981"
+ },
+ "halo_babd78ea": {
+  "who": "halo",
+  "text": "Everyone does, the first hundred times.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "5a71e14ad6c5a209d68bdec83ad4f247a8bef805439f71049f094cf8bae39eb6"
+ },
+ "volt_5967ddb1": {
+  "who": "volt",
+  "text": "Did you?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "e4130a86c3c039d850c98723901e8f66d5e7e6deff9932413a3d8af68d16d121"
+ },
+ "halo_bf49f909": {
+  "who": "halo",
+  "text": "...Walk back to the gate, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "32301d2441f1539d1a7c6082e55880dd7cf2f4b97742caa05c0356111a6b7d46"
+ },
+ "halo_1fc6f0e6": {
+  "who": "halo",
+  "text": "Most rookies have quit by now.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "8d579b410e3b6c3e5838cb57a5a8cebbc65db2aaad0c5f567ce3e27f5bfdfcfa"
+ },
+ "volt_82c23a57": {
+  "who": "volt",
+  "text": "I'm not most rookies.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2e7924675c924dca25b2c4482978d7e0b8f4c9e21d5d71f6a4b52a8e4d21dbb1"
+ },
+ "halo_9b9239da": {
+  "who": "halo",
+  "text": "No. You're not.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "45969146b401ab82d3d776a3442cc8d57abd5001e2520b9b9c31481c80d46ed7"
+ },
+ "bastion_305054a7": {
   "who": "bastion",
-  "text": "So. You're Volt.",
+  "text": "Volt. Before you deploy, learn where everything is.",
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
-  "sha256": "da5393862c3760214ac60ea764f7f2a9399c9ebd7103f3e357788b6d416e17d3"
+  "sha256": "1879d1caa0a49b9970091bc6e62f14804f8f2b8bab91ef721377721a0e447595"
  },
  "volt_1ab0998a": {
   "who": "volt",
@@ -484,10 +2493,10 @@
  },
  "volt_93504b02": {
   "who": "volt",
-  "text": "I wasn't going toâ€”",
+  "text": "I wasn't going to—",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "35ec0581a5279b3b0c183d53359610c72fde3fa6ffaea1c81ac4d0bbf7b62ad8"
+  "sha256": "960c6c4ab8a1844b6ed3f9ba39a73833f00bf80d86174dc4b1df113d70b57390"
  },
  "bastion_525d3cbf": {
   "who": "bastion",
@@ -495,6 +2504,174 @@
   "model": "eleven_v4",
   "voice_id": "SRAtZ2ZOED030czOR8WQ",
   "sha256": "110019479c8b9359129fac303fda1e4ceb996a953ae12c95f062e632065c67df"
+ },
+ "bastion_4d59e8f3": {
+  "who": "bastion",
+  "text": "Undertow told you about the docks.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "402a28ac10791c3d153ab2157ea077eae798fd0f006633b65d06a4e94d8968b5"
+ },
+ "volt_0ea362cb": {
+  "who": "volt",
+  "text": "Is it true? You just... left?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "c496f1aea9021c29d628a3a5ab1ab17b0281c90f0669fca424ca468d8651325e"
+ },
+ "bastion_0bc61d01": {
+  "who": "bastion",
+  "text": "I followed orders.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "1d181005d951b1fe22860038884592794b068b606331730b69d62e3ee8daba52"
+ },
+ "bastion_bc01f294": {
+  "who": "bastion",
+  "text": "I have regretted it every single day since.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "790ea9647bbc488e141c3feca33a80a29e671825b08f4376186c597664497bf3"
+ },
+ "volt_4cee8870": {
+  "who": "volt",
+  "text": "Does Echo know?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8c404aded2f3509c5d9afc54b87466b69e043abec92a3650d0b5eb9c458b27c3"
+ },
+ "bastion_381b2fc3": {
+  "who": "bastion",
+  "text": "If you tell Echo, you're on toilet duty for a year.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "c1169b802279208cec53c6ab1edb078de36f8a1309cd64c3dd2900eaf7251664"
+ },
+ "bastion_cd173fd9": {
+  "who": "bastion",
+  "text": "Hero Licence came through.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "c73940d98cce11098af5ccaeafeefee0549880f9759e426d88452c0d041ba6f9"
+ },
+ "volt_114ca2b7": {
+  "who": "volt",
+  "text": "An actual licence? With my name on it?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "4b2e0fde73a0f9e72285dbd3c126ca45b6cd8bf1850f0b67c0a985caeaf05101"
+ },
+ "bastion_00860129": {
+  "who": "bastion",
+  "text": "Take it to the armoury. And don't frame it.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "baeaa900a92e812b221d93bedf90e8031eb8c914f1097a6b4636db1e62a1ed9b"
+ },
+ "volt_fb639384": {
+  "who": "volt",
+  "text": "I'm going to frame it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2759aa315795dc03b532498ce902791672896a56fb025012d72605360e441535"
+ },
+ "bastion_fbda96f7": {
+  "who": "bastion",
+  "text": "I know.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "5378ce8be9cdbc6aa29c21f8f934da8b8a9864df11296e31a61edb56336efee5"
+ },
+ "bastion_ad7df111": {
+  "who": "bastion",
+  "text": "Pulled the footage from your last operation.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "de08607cab1cdd3dc498b10d70a0279e46c7d08ff25cca73214f2294aa97645b"
+ },
+ "volt_a9ea9ff6": {
+  "who": "volt",
+  "text": "Oh no.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "71e34bc5af4d4d5c8ff18e5f8a657446274aaf8f34f3eaa6ca2f641dbcf87a92"
+ },
+ "bastion_436d6a4a": {
+  "who": "bastion",
+  "text": "The cause is on your run report. Learn the tell before the next deployment.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "67dbf1503d12891f02db39b86831bd8c7e259a5bee46bad6ce150abd58192064"
+ },
+ "volt_05bfb0f5": {
+  "who": "volt",
+  "text": "I had it. I had it right up until I didn't have it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ce80cd9caa788c2e2b1f5c0410eee5ab2e9690f8c214d46ee557e666413e941d"
+ },
+ "bastion_1b289135": {
+  "who": "bastion",
+  "text": "That's what everyone says. Watch for the tell next time.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "3c5a2b1d87678f0ade6f0262561466f3783369d39d6d6163c51061964f522e27"
+ },
+ "bastion_93ec3cc2": {
+  "who": "bastion",
+  "text": "Updated the map. One district back.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "27a02a2fd72de3eba47fc54405194f1340745a29493ff85b405210c88c3ccfc1"
+ },
+ "volt_5c5b69f4": {
+  "who": "volt",
+  "text": "Can I put the marker on? Please?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "6e82f2ee03a2f03a1be59b183bf6d66fdf28e198f3c6a5a3ef8c307afe331852"
+ },
+ "bastion_960194b3": {
+  "who": "bastion",
+  "text": "...Fine. Don't touch anything else.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "e244eab5e41318b0eacbb7f453bc93b845522629ddcb899b19b76dbed9fa7494"
+ },
+ "bastion_bded3917": {
+  "who": "bastion",
+  "text": "Rule one: block what you can read.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "47da847e65dd6a5593a99935e84ba28a3d74933b4d6eac6e755706bb79880012"
+ },
+ "volt_f26af0aa": {
+  "who": "volt",
+  "text": "And rule two?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ef4f321471df1bbbe263f93912d83edcac9d875226003a87275baad696023c47"
+ },
+ "bastion_5b6e2aeb": {
+  "who": "bastion",
+  "text": "Dash what you can't.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "36fed3795e5e7d59d371fd9b7ef8e34405d219591e80f4adec7ce649b9cd002e"
+ },
+ "volt_070e0941": {
+  "who": "volt",
+  "text": "Rule three?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7aa8a3307c02841daaf45b1f459af714503ee30f0b8c68457fea3210a8cbfc5c"
+ },
+ "bastion_ab7b88b4": {
+  "who": "bastion",
+  "text": "Stop asking how many rules there are.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "b0428a79134d8a3c0fcb2f5b79617285c8d02a2fe32af0e9cf9e2316322bfe46"
  },
  "echo_344fdd6b": {
   "who": "echo",
@@ -505,10 +2682,10 @@
  },
  "volt_e6657354": {
   "who": "volt",
-  "text": "Hi! I'm Volâ€”",
+  "text": "Hi! I'm Vol—",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "27b7db999af06657dc8feadf50d68da133fb51aa636e7c7bd7ef491a24a96d39"
+  "sha256": "3edda6a6f430d40d088da6a0b0586f95513921aa9594f2fbcf43ab3927f5b9dc"
  },
  "echo_e9735f17": {
   "who": "echo",
@@ -531,12 +2708,180 @@
   "voice_id": "Y5YV8HtWsJXkknTppIP7",
   "sha256": "0e51246ef4fd06af424cb2386be321c83eec006db43c0cc2aef2a720151cf00f"
  },
- "volt_21b94b0c": {
+ "echo_6cf0f2f8": {
+  "who": "echo",
+  "text": "Glasswake was terrified of me.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "63ed82af5cae8adfccdd4cddfd96686b177169db47724770e5ebc04c746e3757"
+ },
+ "volt_9f2d35ff": {
   "who": "volt",
-  "text": "Hi. I'mâ€”",
+  "text": "I noticed. You were very smug about it.",
   "model": "eleven_v4",
   "voice_id": "RmtUVKbwMJFKYraSJIVs",
-  "sha256": "86e9369b2b46d182841b84c7a6f77b592e2f247f3d570a04076f29a2d6feea6a"
+  "sha256": "2847b9209995c14489a09b65121224518e52ddbb3d289d8e958514da006893cb"
+ },
+ "echo_5ab8290d": {
+  "who": "echo",
+  "text": "I'm always smug. That was premium smug.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "e288b36749ab88a7ec10b4e371879fc1825e16588f50f5dec4444753c01f0877"
+ },
+ "echo_86337efa": {
+  "who": "echo",
+  "text": "Don't look at me like that.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "b97929e962c71db9ac6316838375b243fa93cb0d1a63b51cf62c5abb4413e27c"
+ },
+ "volt_42d0191a": {
+  "who": "volt",
+  "text": "Like what?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "67cdd5c0b7576be6463f511f61722056dbf32dae68c21ff0d54a54841b6cbe84"
+ },
+ "echo_dd5db8e5": {
+  "who": "echo",
+  "text": "Like you won and you want me to say it.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "6857624d6557304d89ca0f05a40687f442acc74949567d1d15f2aea1172760ba"
+ },
+ "volt_b468aba0": {
+  "who": "volt",
+  "text": "I did win.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "c795731d3b47a7a89ffbfdb7a1761e3d1df36f86fd9f3b90dabe27165f33eac4"
+ },
+ "echo_05940c44": {
+  "who": "echo",
+  "text": "...Fine. You were good. Happy?",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "1b5f16d3651416d092bee1c656497d3269185842e831f0278bdeb65d1f75591f"
+ },
+ "volt_39be5b85": {
+  "who": "volt",
+  "text": "Extremely.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "28dd83b88f5cd08ecb4eba193fe0bf582d3fe5996f7d0a7e5fcfdf248af7e530"
+ },
+ "echo_bcabb2ab": {
+  "who": "echo",
+  "text": "That last villain. Decent.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "0569843481f5bb8c11d0da75d0121bb2b639aae9fe70dc3ab0ef2a25649da4c3"
+ },
+ "volt_ed49975c": {
+  "who": "volt",
+  "text": "Decent? I took back a whole district!",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d121d5e83f0ba9a2f5b11535eb9bd88813c3d8c913a360eef65b44ab9a61ee94"
+ },
+ "echo_7318c1ad": {
+  "who": "echo",
+  "text": "I'd have been faster.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "8ff27df1172a4e0bbf739a58628052c96c30a291047fabc8938aba0f7f2a2342"
+ },
+ "volt_a4c82b55": {
+  "who": "volt",
+  "text": "You would not.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ec57f6b9db04b2d34ca43ca8d881f26404c394f4fc171c11919acd20b260c1ad"
+ },
+ "echo_d6ccfaeb": {
+  "who": "echo",
+  "text": "I would. And I'd have looked better doing it.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "e00b72f13a41b45129434bd74da2bb0c530280577c2dffe7d1e77c521b4f4a96"
+ },
+ "echo_5725d234": {
+  "who": "echo",
+  "text": "I saw the strike too late. By the time I called, you were already down.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "b337ea2dbfdef841363f79a93e1025c1087d6d44767be4afc90abbdab3d95dfd"
+ },
+ "volt_c9623dfe": {
+  "who": "volt",
+  "text": "And you didn't think to warn me?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "60771140fd7f0e1f6db88f42af5d5a4739fd537feab91c1cc863ef4491b5272e"
+ },
+ "echo_778e32bb": {
+  "who": "echo",
+  "text": "I did. The relay interference swallowed the warning.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "6647aab58e58c120cb229fccb29c206b8c999fd6e6a575655deabb710b6bb81f"
+ },
+ "volt_863b6d94": {
+  "who": "volt",
+  "text": "And?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "bb73368788c76006d28fd64c3b599c48b589e493259fb868956849838835f581"
+ },
+ "echo_bda0db28": {
+  "who": "echo",
+  "text": "Next time I call earlier. You listen earlier. Deal?",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "b7ae4206fc2b2aedac4dcbbd81e2f854c569d8a2e14ed84d1002f698fc0d4456"
+ },
+ "echo_9dc84c04": {
+  "who": "echo",
+  "text": "You keep coming back.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "200f3a607fd5187d749a6e0f1aa226e977b0b49df9289ca6fbf63fbcdaf71017"
+ },
+ "volt_fd0dd1ae": {
+  "who": "volt",
+  "text": "Yep.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "35f2622306c768cd994da227b99023e4c85bb4520503276fe58dd6ea42625a5f"
+ },
+ "echo_09763584": {
+  "who": "echo",
+  "text": "That's either really brave or really stupid. I'm still reading which.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "9c277e0708eb069d8934aa448e8a6545f06ed4bc144f8746d2f8d1eeddcd566f"
+ },
+ "volt_707f0cc2": {
+  "who": "volt",
+  "text": "Can't you just tell me?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ce6d6664875ea1b8bfb3058a3dc85f8732f93439149a28f7459ac0a95f18c6e0"
+ },
+ "echo_39c992a8": {
+  "who": "echo",
+  "text": "Where's the fun in that?",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "1283459a60c79f2bc4a8c6ce55a99609bd21f78db2427f8d9a7177f1d4afa7fa"
+ },
+ "volt_21b94b0c": {
+  "who": "volt",
+  "text": "Hi. I'm—",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0233d0c17e583def933943a289318833bb93ec51980c55ae5c721c8c779cf1fd"
  },
  "thorn_8d482764": {
   "who": "thorn",
@@ -558,6 +2903,125 @@
   "model": "eleven_v4",
   "voice_id": "nPczCjzI2devNBz1zQrb",
   "sha256": "cddea86dfb01ca7e937f8b381b00b86a613450a9de8066f9c99e5f6f92effd06"
+ },
+ "thorn_2176f27c": {
+  "who": "thorn",
+  "text": "Verdigris asked about the plant.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "cdfa24982eade1e249e46f47994998cb0d6d93e3e2a22294c1fd9156d661c333"
+ },
+ "volt_d329e829": {
+  "who": "volt",
+  "text": "The one in the blue pot. They said they gave it to you.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "1e4b18da15d3924637ebedd171922e3fe9eb0de762dc9bd12c6b00c264cc01a4"
+ },
+ "thorn_12c2183f": {
+  "who": "thorn",
+  "text": "They did. Back when we still grew things that were alive.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "7a0e1cd853dead6e05fb838c3a70d024f79dc399a16aedb9246a27f5f83db30b"
+ },
+ "thorn_dbebbcc1": {
+  "who": "thorn",
+  "text": "I'm keeping it going until they want it back.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "45f9bd174cfa98b25fecd81f6755bde857b62d56d9fa7374627a8a1b02a65bbb"
+ },
+ "volt_ec01dde3": {
+  "who": "volt",
+  "text": "Do you think they will?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8527d8f79a44a103e596581783bbe48757c8b66ce1c46ba0e2b46fbf928bdcfc"
+ },
+ "thorn_3d26d32a": {
+  "who": "thorn",
+  "text": "Plants are patient. So am I.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "5eb163e21a460c6bac344808d421c975257e72f5a42a34bb76e1e99ec99bea12"
+ },
+ "thorn_5a2dbfee": {
+  "who": "thorn",
+  "text": "You beat Verdigris.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "bf22f4f43e780623b5ea24aa3da58d965f8b3607afbefd35f7d4368296ecab6b"
+ },
+ "volt_9b634ea9": {
+  "who": "volt",
+  "text": "Are you... okay with that?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7aa4cf570eed4d81f3a4cf651b2e357cb5209dccd4bcf16a539a099906727de1"
+ },
+ "thorn_d7d64d96": {
+  "who": "thorn",
+  "text": "Their vines were never alive. Mine are. That's the whole difference.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "52fcb0630bb9b558662e342e29a5972f3530d55d89a326d46bfd01c171a73876"
+ },
+ "thorn_65a218d6": {
+  "who": "thorn",
+  "text": "...Yes. I'm okay.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "cc170eadb9dd263f10a7728ba321506273462e2b8cbec00d61d4b2dcf7e8aa44"
+ },
+ "thorn_92a284b8": {
+  "who": "thorn",
+  "text": "Plants get cut back. Then they grow back stronger.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "545133da7f86715281c117c570edfc2452a54340d5ff7db44ee360728bed2a2f"
+ },
+ "thorn_c1e110ce": {
+  "who": "thorn",
+  "text": "It's botany. Take it however you like.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "2e32b93d64df3b0772a20f85a7ceabcc37028de7cc133d555339c47fa3cc2298"
+ },
+ "thorn_9ee5ab4a": {
+  "who": "thorn",
+  "text": "Half this Fortress still watches me like I'm going to turn.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "42baa7dc77081b6f41b2736ae2d4f03764dabab4f09ab946c51ce211827c4609"
+ },
+ "volt_f531135b": {
+  "who": "volt",
+  "text": "They watch me like I'm going to trip.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "a3e272aad315a4334262d122124148d4157f8fe5c9606150761bc9478fb93f49"
+ },
+ "thorn_0d5012e2": {
+  "who": "thorn",
+  "text": "Then we prove them wrong.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "f6a8dbf638fea3f636fe874881da94c1c6b6a2638dc88a8f1c049adf3c549f2e"
+ },
+ "volt_00ac8955": {
+  "who": "volt",
+  "text": "Together?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "744882dd4bc1a8decc36cb223558bff23a87816f906b2d926825927cd124c28d"
+ },
+ "thorn_d2465f88": {
+  "who": "thorn",
+  "text": "...Don't make it a thing.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "ede7fed80cd3acaa0c8ef5178fac366246207e6bf9e01e48b2056d2c452ece58"
  },
  "patch_8005dcb9": {
   "who": "patch",
@@ -594,208 +3058,215 @@
   "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
   "sha256": "49e1a61b30e92fca987ba8e21ea1fb6463b8540906e3d6fa88808f9fe3064352"
  },
- "redactor_b4d8de1e": {
-  "who": "redactor",
-  "text": "Good evening. Your heroes have been very brave. I have taken the liberty of making that unnecessary.",
+ "patch_92b1c9ab": {
+  "who": "patch",
+  "text": "Kilnheart complimented my suit design.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "dbcc9c7e1d7e6437228be3b7860f8e90448ed3c9b16c9f4e459ba4ef8166834b"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "f2f99653431355d398dadf3574e0ca861f8b3589d96af85c3fa96221238b862c"
  },
- "redactor_b90b86d7": {
-  "who": "redactor",
-  "text": "Their powers are gone. Do listen carefully. I would hate to repeat the demonstration.",
+ "volt_19580638": {
+  "who": "volt",
+  "text": "And then insulted me.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "7f6713a357973984a9ce526f0230635438820fef585287c9af77e0d7798a4727"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "40920a582d434ec12f8ff6fa02a0c7690e32183ac342a06e60108e0796a145ec"
  },
- "redactor_6fdd44a1": {
-  "who": "redactor",
-  "text": "My associates will attend to each district. Stay inside. If you hear someone calling for a hero, let them finish.",
+ "patch_d9c9e227": {
+  "who": "patch",
+  "text": "Both were correct.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "564805043d8e924c75e455c735b4001ad23507fd087178811663d3ab6934999d"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "1cb320ac90dca1cf0b184e90ae50f92efbfa160998fd22ff132eb9efc047fac5"
  },
- "redactor_8d38b4d9": {
-  "who": "redactor",
-  "text": "Sleep well. I know how much safer you feel when someone else is watching.",
+ "volt_fbfc912b": {
+  "who": "volt",
+  "text": "Patch!",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "08fc3eec30fa8a2cab7201192783cfe7bb3ec6307a474c8d6909b52bbc98f108"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "104861d82a6a4691380ed0d2742809c45f9f6ba692f0a76a8582836cb09267c6"
  },
- "redactor_6506d425": {
-  "who": "redactor",
-  "text": "Ah, Volt. Such a promising file. And one complaint I would like to discuss in person.",
+ "patch_d3b7e43a": {
+  "who": "patch",
+  "text": "I stand by it.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "77df2a86bd8f9b07d91a7c3b1fd691bad270af7e150bfb540f951e54e16c1eb4"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "4d5daae65bb9023c51e0cc02871f6062769307f97679f8348f7cabe9d79e0cb2"
  },
- "redactor_2a8cf135": {
-  "who": "redactor",
-  "text": "Mine. You have mistaken my patience for permission to enter.",
+ "patch_c7072d4b": {
+  "who": "patch",
+  "text": "You've got shards just sitting there.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "60569bed4bbb84ed2e74543f632dfef8965d302ca4f6bd60a4c2788222f8d3d9"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "eed9db2ef4662bf8640dbfab14d44d113cb8b7c0a866f3ddac585338cb546821"
  },
- "redactor_5ef5078d": {
-  "who": "redactor",
-  "text": "You think the lightning makes you brave. I shall remove it, and we can meet the person underneath.",
+ "volt_345a2ecc": {
+  "who": "volt",
+  "text": "Is this a sales pitch?",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "f7dddf08535f93bb8c9ccd73fcb1953b2d2aa1fbb91145d609f20b4e9702c26a"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "d832246add0e04247762a9d1cb41a88b401621a02b252bf4d458813eef46d7ba"
  },
- "redactor_878971ec": {
-  "who": "redactor",
-  "text": "Of course you are. They all ask to keep something.",
+ "patch_c3f54c1d": {
+  "who": "patch",
+  "text": "It's an observation. A pointed one. Terminal's right there.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "9b9a4ea09af248c6763efaa661e42fc89e33c60cb9799cad72e1897b3edc7f4c"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "0a18f015fb30117b7df2cd467c0e0b68f8d801f22d875b5f66f15615d45c1e3d"
  },
- "redactor_75177cac": {
-  "who": "redactor",
-  "text": "A small question, Volt. Before we begin. Indulge me.",
+ "patch_f29db6e9": {
+  "who": "patch",
+  "text": "Licence paperwork cleared.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "f353e79cf9612f4a33075758ca7534cf17fcf9de993e46a8c18ce092cd91eb13"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "9f969f083cff667a18cdecbd45873f09008de048ba976bac016a7902fe1caefb"
  },
- "redactor_04dfa97e": {
-  "who": "redactor",
-  "text": "Does Halo still stand on that balcony every night? Watching the city. Never looking down.",
+ "volt_c0244c5a": {
+  "who": "volt",
+  "text": "Thanks, Patch!",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "b8660d99f1a7aec013e63a2ea971c73a4b25a1eb237450a6cd3505c076ddd905"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "66b99c9ceaf2f7d083a568787491fdb5869f5f12329bf06b191e9bf9b3455c32"
  },
- "redactor_c7a64760": {
-  "who": "redactor",
-  "text": "Ask her who stood beside her. Watch her face when you do.",
+ "patch_4440b468": {
+  "who": "patch",
+  "text": "Don't thank me. Thank the forms. There were nine.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "00b504d94b38a79a165cf404c747a4dda7d9fc7c75c91a7c432c9c1b457ff48a"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "3e7ea9e99cb4caa52ae179dbedc9ec97e2265f4648357bfa32e4385a3a83f65a"
  },
- "redactor_c7703c3e": {
-  "who": "redactor",
-  "text": "You are breathing rather well, considering how we left things. Someone has been taking care of you.",
+ "patch_d1232b3a": {
+  "who": "patch",
+  "text": "Your suit beacon tripped last operation. I pulled you out before the signal died.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "0c7bc377e9cc6aeaa03b4ea7a70b269ed1d0099b9e9ad2bae98ac22c9f3a1843"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "da49631ef875e53e335c6571f442a7ad63be6e26d0f23a4724519eeedb4b7e54"
  },
- "redactor_a15e2922": {
-  "who": "redactor",
-  "text": "I shall remember that. Someone ought to.",
+ "volt_93f8fae9": {
+  "who": "volt",
+  "text": "It felt dramatic.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "75d1711070901cd1d910c400ab7580d6785a001aaf15a345d2e0fd005444e4c8"
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "b8085d12cf60b094eaaceb9568c20296b525f6919efb905e78f0809a00d9b1e9"
  },
- "redactor_3fbb88c9": {
-  "who": "redactor",
-  "text": "Persistence is not a power, Volt. It is simply fear that has not recognised itself yet.",
+ "patch_509bb535": {
+  "who": "patch",
+  "text": "It looked dramatic. I've patched it. That's repair number...",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "f334cbc77456b88d4fe66bbd751a078f4ea0a67951ce75699521112777da4aac"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "937667d3310b7027fdfe89a1d2e122f8a090d5d90a37e2d4cd39417394eeadf3"
  },
- "redactor_75a0a3da": {
-  "who": "redactor",
-  "text": "For the moment. I prefer to let a habit establish itself before I correct it.",
+ "patch_ad336741": {
+  "who": "patch",
+  "text": "I've lost count. Let's call it 'again'.",
   "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "8ae69c5d2882243303a68ff99e57c321e363e42ca5263c717a840f3a4710049b"
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "a4f1ea2a1ab048b35da2e63a9d1cbfb1da26b5d15f2c93383a126ba911424fdc"
  },
- "redactor_b6cbf93b": {
-  "who": "redactor",
-  "text": "I flagged your little victory. I have spent the interval learning exactly where you break.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "6d3d441423f37a3a6737de2aae2d1a89f91e1a1b7f4ee0f346a514de158c7425"
- },
- "redactor_bd93a30b": {
-  "who": "redactor",
-  "text": "With pleasure. This time, I shall be thorough.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "a2155e6bbde78676da18667d844fef6d72a1fa98394d777e9af360cd627cb438"
- },
- "redactor_e64699b4": {
-  "who": "redactor",
-  "text": "She has not told you. How considerate. She always did know what people could bear.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "c1c73194ca343d4698e80c4748a48984074dbd861e17dc2c05524854a1fd8f91"
- },
- "redactor_2083de34": {
-  "who": "redactor",
-  "text": "Halo and I were partners. Then the tower fell. There was time to make one choice. She made it while I was still calling her name.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "7a7b95015192e6365a814d1c77d8f087c0d2e14f392272c529408c4ccbe35f64"
- },
- "redactor_5206bb26": {
-  "who": "redactor",
-  "text": "The city was saved. I was left beneath it. She found the distinction quite manageable.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "8bd39799609dd86ffd15015a0c8587161d1aaf6c9f371638ca8f5c8dbb665631"
- },
- "redactor_9b78b1de": {
-  "who": "redactor",
-  "text": "Redacted. There are things even she does not get to keep.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "d77027937797272dbb361c20fcc53cd5dc465fd6719b071d33965508e5760b1e"
- },
- "redactor_4197797c": {
-  "who": "redactor",
-  "text": "Because power lets a person decide who is worth saving. I have been on the other side of that decision.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "6f5c7ffda2c8c3b740fc15f03ed5c0889aa24827667e5c16ff7b7fc3e3ffed12"
- },
- "redactor_0449b764": {
-  "who": "redactor",
-  "text": "Take it away, and the choosing stops. Every life is equally fragile. Even hers.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "c7c020da48f68f968639c37fc402703bcc47a7536ad82e7046601bdf71e1a287"
- },
- "redactor_64e04831": {
-  "who": "redactor",
-  "text": "Yes. You understand me perfectly.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "2baf2d34c742a81ad7dbf72c25a7fd43cede07eb5548ed913a891c6a31c0db74"
- },
- "redactor_7f97590e": {
-  "who": "redactor",
-  "text": "Halo. I wondered how long you could bear to listen.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "28e90b7ac88bcbdb30a9546f0dd86989cc69fa1e7ea8bec383a9acd014889bf8"
- },
- "redactor_13a9ef31": {
-  "who": "redactor",
-  "text": "Of course. There is always someone else to save while I am speaking.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "0af90b6950d90eb8aa04d711d9805eb4c001c903becc3c7ade43b4546c540a31"
- },
- "redactor_66e8933c": {
-  "who": "redactor",
-  "text": "Twice you have left this room alive. You are beginning to mistake a pattern for a promise.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "e717dffcbb26d141ef924d0ccdc2deb57aed5ac2eca15ecb198ecd6fcc8b7010"
- },
- "redactor_8e8295fb": {
-  "who": "redactor",
-  "text": "Some rooms must be kept exactly as they were. She understands why.",
-  "model": "eleven_v4",
-  "voice_id": "L3YenFTIrljaqm205FWd",
-  "sha256": "8c076ea542e323aab3f47ccde5ffdc26622b12a669bfc6aea86d7e9a65633c95"
- },
- "halo_17bd91ed": {
+ "halo_505bc7d5": {
   "who": "halo",
-  "text": "I'm not here for you. I'm here for him.",
+  "text": "Not now, rookie.",
   "model": "eleven_v4",
   "voice_id": "pFZP5JQG7iQjIQuC4Bku",
-  "sha256": "749cc602300ad154f024ae18183e88a5d054e95ce4aaea24939788223da39adc"
+  "sha256": "de189ec398045653d304f08882022423de9f340f68bd7a8e3ff15cedb2e7ae3a"
+ },
+ "halo_e3181463": {
+  "who": "halo",
+  "text": "The city doesn't sleep. Neither do I.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "2cb5cc81cb9c940bc944655284cf0d7d020b1584e23ab24c1f97add452eea193"
+ },
+ "halo_0673f1f8": {
+  "who": "halo",
+  "text": "...Hm.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "7a6ea67d993075757d7acd67f8f3166853b48ee9580cab6d4e68fd13bc6d6063"
+ },
+ "bastion_f55b161c": {
+  "who": "bastion",
+  "text": "Gate's that way.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "dfcfc4320ccddeddd4a1bbb2ada59b080a8368c371f2eab32f14b3080b9ef7bd"
+ },
+ "bastion_ffd0189a": {
+  "who": "bastion",
+  "text": "Still here? Good. Now be somewhere else.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "19dfa86e88a01da7819974350e6e318e8c8db94b9d9ab283b5668ea4f7af3075"
+ },
+ "bastion_0547caa1": {
+  "who": "bastion",
+  "text": "Did you touch my table?",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "edc2f150a1fe9f01dbc19b12bff880293f65ae7b1212d7c151df44e0283b0722"
+ },
+ "echo_7997d13e": {
+  "who": "echo",
+  "text": "I'm training. Want to spar? No? Smart.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "dbd60a975955cefb713f13c2985ab4598c55f6c0d961503ae19e8996ab37c63f"
+ },
+ "echo_dd7e278a": {
+  "who": "echo",
+  "text": "You're thinking really loud right now.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "063ec19f86e5351d3bc2b6e73cd7845d93beb8e6d8bc436f850bac253c283802"
+ },
+ "echo_9cb43fb8": {
+  "who": "echo",
+  "text": "Yes. The gate's that way. You were about to ask.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "b6a935e6da9293d119335403ed580fa09ec1d79a5c4fdea3f11b8c61af48f782"
+ },
+ "thorn_92a88603": {
+  "who": "thorn",
+  "text": "Mind the ferns.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "f1132897c9e04c62b3ea2a8c48bf641489ed759342e04dd42cfd45df1c7d40a9"
+ },
+ "thorn_fd1fbe4e": {
+  "who": "thorn",
+  "text": "This is the only quiet spot in the Fortress. Don't ruin it.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "01c9c8a21db6ab3401fa8ae628ba0f60ee74ea13f59eb5eb8a608008dd7b116b"
+ },
+ "thorn_6ab3499b": {
+  "who": "thorn",
+  "text": "Go on. The city won't wait.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "3ef69b00772671ca9ccdf4b9db28b5d191bd6ac9eae4fc79f2b5674c4ccf6def"
+ },
+ "patch_c262e5a9": {
+  "who": "patch",
+  "text": "Busy. Talk to the terminal, it's friendlier.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "fd663f4fdff21e7c04e435e262cc76ad59f64b31f3d73d1e4a7d4b423fc3de8b"
+ },
+ "patch_31c9692d": {
+  "who": "patch",
+  "text": "Comms are green. Go break something that isn't mine.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "9838aa4dc245c2ce5427bcfcb5f93abec7c6d10dfe97f0def6a6a02eaa9ecc85"
+ },
+ "patch_56899b65": {
+  "who": "patch",
+  "text": "Are you leaning on my workbench?",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "ce1850a21d787795c51e996f39b15cfcdc0e6e3c6ac19e2636179e51415927b8"
  },
  "bastion_07f9aa96": {
   "who": "bastion",
@@ -999,6 +3470,1609 @@
   "model": "eleven_v4",
   "voice_id": "L3YenFTIrljaqm205FWd",
   "sha256": "612b6823d83d3eb42968381125865203b209207cd8e405bccb8f12ca81c088d6"
+ },
+ "halo_4c1366ed": {
+  "who": "halo",
+  "text": "Rookie. The city's watching tonight, and so am I. Take this.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "c9a6d66aaf38f7c45702ed8b6b37574f9307e55c1ccc075b9667b9080fef000e"
+ },
+ "halo_025b05e0": {
+  "who": "halo",
+  "text": "Again? Fine. Make it count.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "f73c5eac5a54e3bfb46488e30def8dc861bbf1a48e76577e82b919dec31e8df8"
+ },
+ "halo_0302aeea": {
+  "who": "halo",
+  "text": "Light doesn't bend for anyone. Neither should you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "501594e11adbdb1fb6b271257b4da7e0f1333c7d946ac6d729b1056a7b0fb0d5"
+ },
+ "halo_e0d64881": {
+  "who": "halo",
+  "text": "You're still standing. Good. Here.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "070f5936f06cd4c239644119524a21823f5128e47258252c2f58d5a03c671187"
+ },
+ "bastion_946067ff": {
+  "who": "bastion",
+  "text": "Shield channel ready. Choose the reinforcement you need for this roof.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "64998a5327d6a7a6209acc493505eb5298d3d3ed1f4ae7d1699e13c4dac81b65"
+ },
+ "bastion_623faf9d": {
+  "who": "bastion",
+  "text": "Shields up, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "bb7c6dbac58ca7b6ab7ca76bf15fa6e83ce8f9cb9c00a65fe9b3cd549beb3db8"
+ },
+ "bastion_7462e523": {
+  "who": "bastion",
+  "text": "Hold the line. Let them break on you.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "4eece4772ac43b7ff755e8fbcaf0b1a797a681775e370dfb12b1edff5b375411"
+ },
+ "bastion_8775498b": {
+  "who": "bastion",
+  "text": "Less flash, more footwork. Take this.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "44c7b3653f5709e7db14deab30365a2c757f814fa9f4b21e527a4c2818a2f8d4"
+ },
+ "echo_03e7422d": {
+  "who": "echo",
+  "text": "Heard you were struggling. Loudly. Want help? Don't answer, I already know.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "a4c3d128858eea9706922a1c7f8824ff0d1734ea763353e39bcfd124eec03617"
+ },
+ "echo_8963629a": {
+  "who": "echo",
+  "text": "I read your next move. It was bad. Try this instead.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "7f344da6bc670e4d05aec487cddfa84176e036729e02332ea6cf777c21f8cbcf"
+ },
+ "echo_967d4bde": {
+  "who": "echo",
+  "text": "Stop thinking so loud and pick one.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "88489032a11c6149b725ab80f82adab89ffe39f1d4e480601c063d15bfb9bc2d"
+ },
+ "echo_ee9dade4": {
+  "who": "echo",
+  "text": "Fine, I'll carry you. Again.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "5cff46100472d9578e77a5e0c3881e13ab5f627cca20335dd090ef4a8a97ed74"
+ },
+ "thorn_8dd5e6c9": {
+  "who": "thorn",
+  "text": "They don't trust me at the Fortress either. Guess we have that in common.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "c9c0352f3d4e75d8a35394e6a4730730f61e7b37d8fc95aaf430f698729f94a0"
+ },
+ "thorn_ae159419": {
+  "who": "thorn",
+  "text": "Nature doesn't rush. It just wins.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "5bb471748b84870748a85199422b248f946a887ace73fe343d221ba1881e50b3"
+ },
+ "thorn_77dcf42a": {
+  "who": "thorn",
+  "text": "Let them come to you. Then don't let them leave.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "64cde04c20e7a055933f382cd7e4d134b50465af450bd65ad1c2f3ba32f50366"
+ },
+ "thorn_a1f948aa": {
+  "who": "thorn",
+  "text": "Roots hold. So should you.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "1de7c0e9ab954cf9823e13c34cd3c595182d4e1456692f2f1c3ca9655ada4579"
+ },
+ "patch_37bde316": {
+  "who": "patch",
+  "text": "Patch here. I stashed a Fortress tech locker on this roof. One item, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "63915f1989971a6b6049b3e52745c337218b8684a1f85d76f74773d2becc212e"
+ },
+ "patch_41a148ec": {
+  "who": "patch",
+  "text": "Tech locker's open. Don't break anything.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "75482daa968a0042f775504ff90a2c45d61c4fa3dac6e596c92992476e6e18cc"
+ },
+ "patch_64a11053": {
+  "who": "patch",
+  "text": "Pick one. I'm not made of prototypes.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "4f521e55e71555b085da4a8038b2d7d05bd09fb81fc25d15b1b71add7e4e65eb"
+ },
+ "halo_be249ad3": {
+  "who": "halo",
+  "text": "I'm not here to hold your hand. I'm here to make sure it's steady.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "152eb016ef9874e9035b183732028d19c9a7cbb98cfdc6857deb11a12495b1d9"
+ },
+ "halo_bad368d3": {
+  "who": "halo",
+  "text": "Breathe. Aim. Then shine.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "fc9b608bc96f3b727b22b3ca57fb1edfddbf1aaf552955288cc40c7c5c8677da"
+ },
+ "halo_dea58bc8": {
+  "who": "halo",
+  "text": "Every hero starts somewhere. Yours is this roof.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "70f8c2727d3ec67f15aab497237992c6ee1ede09003aa730cc61ea758abe69f1"
+ },
+ "halo_eac68f20": {
+  "who": "halo",
+  "text": "Take it. Use it. Don't make me watch you waste it.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "f9f74e3b89547ae90d6cad80764308e8bc5a3592b0ae7c5654227c268a52da6b"
+ },
+ "halo_f700ea50": {
+  "who": "halo",
+  "text": "The city doesn't need perfect. It needs you upright.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "6570dbeb8bc959d8d679d5ff7f60258e3c3808133130e8089f42f104f842fb64"
+ },
+ "halo_38f52862": {
+  "who": "halo",
+  "text": "You're running on fumes. Take this, and stop bleeding.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "6a30d6d4ec17883f77d624561c197a86ee9dcd1480f0bbb438e0ce465438e90d"
+ },
+ "halo_68632807": {
+  "who": "halo",
+  "text": "Get up. Heroes get up.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "30c6781f3d0b3186ee732d10e680bd384e3932cf36c4edde3134688da5ae41e1"
+ },
+ "halo_864dec84": {
+  "who": "halo",
+  "text": "I've seen that look before. In a mirror. Take this.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "04ebef7b2af63125c2cfe1856ee19df4ec3a02dbb9c08274ce3cc247831a890a"
+ },
+ "halo_ed5c6716": {
+  "who": "halo",
+  "text": "You've come further than most. Don't stop now.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "83eb84df6c22c97d8e22321b11dadccb822c8d2b288541c232426bcd80df259f"
+ },
+ "halo_03b1a007": {
+  "who": "halo",
+  "text": "The Redactor's tower is close. I can see it from here. So can you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "5145aa1a5c3420df88111a0d811c91471a95db13429251961eef039d009969eb"
+ },
+ "halo_600ba391": {
+  "who": "halo",
+  "text": "Not a scratch. Show-off. Keep it up.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "d208192bc92b0af0286c6d10c5b3e3d65360423f264ec887cf583d7b6a2829f0"
+ },
+ "halo_48921c8c": {
+  "who": "halo",
+  "text": "Clean parries. Somebody's been paying attention.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "0cad8aede1e12107fc064abc1fdfc3935da4246a4b7a1a98eee0d34671c10797"
+ },
+ "halo_219fb88b": {
+  "who": "halo",
+  "text": "Kilnheart burns hot and fast. Be faster.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "61fc159b0e75117f3b6d0cec327808a73671c6a54849ede00358ea20c93332e6"
+ },
+ "halo_a8f4dec0": {
+  "who": "halo",
+  "text": "Bellwether loves an audience. Don't give them one.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "fa3ce38da685ea6704606f63df4e06ed570a6c59a5c17d714a30f953e83aa2a0"
+ },
+ "halo_68ca3db6": {
+  "who": "halo",
+  "text": "Verdigris wants you slow. Don't be.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "5cf50c951b1f4d4c698e4d6b12e8922f198ad5520ba1f4544a10392fedbfd933"
+ },
+ "halo_58b09671": {
+  "who": "halo",
+  "text": "Glasswake lies with light. I don't. Trust this.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "0b4d8ed256b84cd92cef4dc08120f1b724883bb483cb3e32bd31da19405879eb"
+ },
+ "halo_f7eb5f12": {
+  "who": "halo",
+  "text": "Undertow drags people down. Keep your head up.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "ecf058c3b842ca59f46ac0be6349129982094590ef5248a9aad83fd5bcc99b56"
+ },
+ "halo_fde67617": {
+  "who": "halo",
+  "text": "Gravemark. Of course. Take this, and don't let it pin you.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "e973d57dc4f8c6cc2843185dc0c9ae6db5968cd1cce6b23016a0a21825da6913"
+ },
+ "halo_b48a2e7a": {
+  "who": "halo",
+  "text": "The control room is ahead. Shut down the drain, then get clear.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "bfb09ce66caa7c54938fb63138900e6ce064c6f450ca7769625e3d5eaab07337"
+ },
+ "bastion_b918bb7b": {
+  "who": "bastion",
+  "text": "Gear check: you're still in one piece. Good.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "3e60ae98561db3503663d924157f50b7718eb5f3ee3fa0091d83cdfa95e6f978"
+ },
+ "bastion_23b4aa33": {
+  "who": "bastion",
+  "text": "Rule two: hit them before they hit you.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "8d5932135eea9ba959d0d770ba9ce914e385f8668403c13b5a626bef4654c9a3"
+ },
+ "bastion_c1e1dd13": {
+  "who": "bastion",
+  "text": "I've seen worse rookies. Not many. Some.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "8c58b903dcd3e631b7277e6de4777beea581d128512601cbe06129149e15abd5"
+ },
+ "bastion_2eff7f59": {
+  "who": "bastion",
+  "text": "Stand your ground. Here's something to stand on.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "f19e38695562f3fdbed718992b14ecc0f7ef24e2fe668b87d0a0d7c3836f443b"
+ },
+ "bastion_96f4b61f": {
+  "who": "bastion",
+  "text": "Don't make me come down there.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "cc0aa3b025d64fcac1f2b744b0d9c8ee3417182e4bb06757a866762be7121bfd"
+ },
+ "bastion_2246c2a6": {
+  "who": "bastion",
+  "text": "You're bleeding out there. Defensive gear, now.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "68d7cf9640c45d9e82cd952d5e52049d63ebeeb84356438babf784316d6598c2"
+ },
+ "bastion_b58f0532": {
+  "who": "bastion",
+  "text": "Back off, reset, go again. That's an order.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "be2f27181e892e940e596db8cccff4acc073e552b37f83f84e44c71840ec8047"
+ },
+ "bastion_955c32c0": {
+  "who": "bastion",
+  "text": "Medic's a long way off, rookie. This'll have to do.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "4d4449591609ef7b3cfdcea91f114e88bd7d17d4c59fa8c583b27c0d807a4be3"
+ },
+ "bastion_604a515f": {
+  "who": "bastion",
+  "text": "Deep in their territory now. Stay sharp.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "f3432d93987c93b363bf3dc78f5aec9e6e808c0734a2fdaec40695c5e53713e6"
+ },
+ "bastion_cabb7885": {
+  "who": "bastion",
+  "text": "Long night. Longer if you get sloppy.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "4dcc42b858e15b2852fa6df18ee86c2936a4185ecbecb20b90cc8561611c48d3"
+ },
+ "bastion_9e975ee9": {
+  "who": "bastion",
+  "text": "No hits taken. Don't let it go to your head.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "b01d86e0fea3ae6bb1475ee362a1b28fb5b47022771d972bda7b7e2e1eaed9f1"
+ },
+ "bastion_a39295a5": {
+  "who": "bastion",
+  "text": "Textbook parries. I'll pretend I didn't see, so you don't get cocky.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "81fd8bc7ebc19b7ed0360248cc8c18fca8ac32e6aa57b76d744e2e8af28de678"
+ },
+ "bastion_8873c3ac": {
+  "who": "bastion",
+  "text": "Kilnheart telegraphs everything. Read the wind-up.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "2238534d6493fbae6620e3732bdc3a2e42bb1ed01b9076558a097789eb548638"
+ },
+ "bastion_ad3b9434": {
+  "who": "bastion",
+  "text": "Watch the gaps in Bellwether's rings. Move through them.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "2f7597b3489523b8041d41f50540025efcef06f061ec0c4ada7d43fad3c8b45f"
+ },
+ "bastion_2724ca1b": {
+  "who": "bastion",
+  "text": "Keep moving. Verdigris turns standing still into a death sentence.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "04e36f8703f3a3fd29b2b9a07583d664e57f5a7ad3cf46da74b1c6170c8e2ebf"
+ },
+ "bastion_62d49b44": {
+  "who": "bastion",
+  "text": "Glasswake's copies don't think. Hit the one that does.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "35905533fb0ce88a7557c1561e6301bb4a8611cc8d2fff289775c517faee40e7"
+ },
+ "bastion_49e2befe": {
+  "who": "bastion",
+  "text": "Undertow's on my old docks. Make him pay for every metre.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "0c08bfd717e47221d75f873953dd6a596bfa8ec922d0442d70b2f8655c029315"
+ },
+ "bastion_43b1a41a": {
+  "who": "bastion",
+  "text": "Gravemark hits like a building. Don't be standing there.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "4fd5dc26172aa946161bcd5e266abf29f63e31a0e9bccbe1c3fe15e78cf499c1"
+ },
+ "bastion_738b7b43": {
+  "who": "bastion",
+  "text": "Final push. Everything we've got is behind you.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "ad71dd57c55789cfba9e0e9c43f47c4bf9d90e781b5dddc68eec48fd69a93f66"
+ },
+ "echo_fe0b80c9": {
+  "who": "echo",
+  "text": "You were about to ask for help. Don't. Just take it.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "f5e462b451c387f588834f0fc378507ec9e8c9698f8fbdf0cd98b6f75943e532"
+ },
+ "echo_593a3ca6": {
+  "who": "echo",
+  "text": "I've seen how this goes. You'll want this one.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "f6871e82b69ad956352ceafcb6b76bdb051c14c3883be2e1e547259abdbc3ea1"
+ },
+ "echo_5ee44b48": {
+  "who": "echo",
+  "text": "Pick the left one. ...Kidding. Pick whatever.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "afa928d67a74602b20790d0b5e57629f4028ea38d3898e326ff887cad36b8afe"
+ },
+ "echo_24838c2a": {
+  "who": "echo",
+  "text": "Your brain is very busy right now. Here's something simpler.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "4e5d8035425b2ada3eb5551132d5fe598a9f891f634b9b2c834ce9952ce0462d"
+ },
+ "echo_3471bf6a": {
+  "who": "echo",
+  "text": "I'm not saying I'm worried. I'm saying here.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "92bdd8ac5ba271087b7d23927109e4fb6799e937154035c1b1f0beecd270c5fb"
+ },
+ "echo_3b6b89f1": {
+  "who": "echo",
+  "text": "Your thoughts are getting fuzzy. That's the blood loss. Take this.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "2bef566584d50631bf2965a778034bf9c4f8b9f8de67f81cd3a4a0d6f761fadb"
+ },
+ "echo_1dc304cd": {
+  "who": "echo",
+  "text": "Okay. I'm actually worried. Don't tell anyone.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "dd5bbf6df8b8fee79ea6ebfeb8aedb933275ed69578afbe48ac016b91dd93997"
+ },
+ "echo_4a2ac326": {
+  "who": "echo",
+  "text": "Almost there. I can hear the tower humming.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "576ba572f468ebfd25ed1f2c1887a611ac7736298cf4f6ac4d798e795996fed5"
+ },
+ "echo_3a29c124": {
+  "who": "echo",
+  "text": "You're tired. I can tell. Your inner monologue got shorter.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "ea55d3fb3371cba642d6fe61e06fcfb104441c916be84475d6ef1344fd4859ea"
+ },
+ "echo_33f61bdf": {
+  "who": "echo",
+  "text": "Not a single hit? Who are you and what did you do with Volt?",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "10e2173a0690773d8953ab7d013ac4651433b8f46755ecca60524d24c6385e9d"
+ },
+ "echo_1d4df732": {
+  "who": "echo",
+  "text": "Okay, those parries were decent. I'd have done them faster.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "f1e88563f540eaed3181003cc648c42b373f8d8cd9a2593d1a05f9364c15c1b4"
+ },
+ "echo_1eb84957": {
+  "who": "echo",
+  "text": "Kilnheart's angry. Angry people telegraph.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "3e2dd85a7d2e327d80bbb0da3a43184886e1a4ab7ae8c16bdbc7cee4e9b1396d"
+ },
+ "echo_8ae12614": {
+  "who": "echo",
+  "text": "Bellwether's head is all bass. Go left when it drops.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "a280a704478c2f320168354e152515e9fa4786d36eb5a9bcf6ac06bbc2d136de"
+ },
+ "echo_31b52f3d": {
+  "who": "echo",
+  "text": "Verdigris is so patient it's creepy. Be impatient.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "b18203bedd0150d015064c20169adba324f153b55d5da8b8049b695664296ee2"
+ },
+ "echo_9af40945": {
+  "who": "echo",
+  "text": "The real Glasswake is the one thinking about their hair. Trust me.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "36e56c72a4488f5b557d8b042ae3e837a92b48e5937da0c3f368ec42f29cc47c"
+ },
+ "echo_6b1c1cbc": {
+  "who": "echo",
+  "text": "Undertow keeps thinking about the docks. Use it.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "297ff07cc67befe7af383f8bdd3a9ba8deff61ee620219eabe226c3864d1c2b0"
+ },
+ "echo_a747c893": {
+  "who": "echo",
+  "text": "Gravemark's mind is just rock grinding. Loud, slow rock.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "12cf81fab919e6326362611e4085ae71193991221b17ab34de86f7be1531eb79"
+ },
+ "echo_cf84e3d7": {
+  "who": "echo",
+  "text": "His mind's a locked filing cabinet. Hit it anyway.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "6c7b927d32edc5e3fb96235acde70e3965bee80e8f34ed020069217c3d76f180"
+ },
+ "thorn_73d67a92": {
+  "who": "thorn",
+  "text": "Grow where you're planted. Even on a rooftop.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "6e9a1aa2a28e641fa9332c2d22d0fbe5227b1131b4d6ea9e3d3410ea8260eb8d"
+ },
+ "thorn_f82f56aa": {
+  "who": "thorn",
+  "text": "Here. Something with thorns.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "35e82543ff1ce56d943688abae48d4e33d47ac4ef4e8c003ccad9f1b67f5ded0"
+ },
+ "thorn_a93a7554": {
+  "who": "thorn",
+  "text": "Patience is a weapon. Use it.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "9b562277fb95350e9e23365579ec43a08ae2816ba21be674e8535a7f467bffec"
+ },
+ "thorn_f6f03665": {
+  "who": "thorn",
+  "text": "Quiet night. Let's keep it that way. Mostly.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "04c51dfd65f64594d53dc26b51edf26dc6e7a294f1a1e2dbcdbd67b96cceff72"
+ },
+ "thorn_5b726acc": {
+  "who": "thorn",
+  "text": "I don't call much. When I do, take what I'm giving.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "7d7824ef2451cdf587f7973e86903cb70d00c84fb147654284b71a61e58170fc"
+ },
+ "thorn_206796dc": {
+  "who": "thorn",
+  "text": "Bent, not broken. Take this.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "2012edb772d304fce5b2b899ca7babe1dc921b6ad954fb19d652a4f95d0fa73d"
+ },
+ "thorn_605664f0": {
+  "who": "thorn",
+  "text": "Even burned forests grow back. Hold on.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "95273f93373fd7b946c275019325b0a7dcf7279856c378a46903a6df1b9713d8"
+ },
+ "thorn_f508f957": {
+  "who": "thorn",
+  "text": "Deep roots now. Don't pull up.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "9eb7e01801fa4036994d23168478253dfb4d0eb52eeda559547e9dd56508246b"
+ },
+ "thorn_ab74c7fd": {
+  "who": "thorn",
+  "text": "Clean work. The ferns would be proud.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "616630d7a280e0068a528f66ce93e1e407622976f85d06f4c38923e025c4f75d"
+ },
+ "thorn_71c03760": {
+  "who": "thorn",
+  "text": "You're learning to wait for the right moment. Good.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "84dc67f54aa61132208e5ed50876b3fac87893b6585ff0b3b053c114645d6720"
+ },
+ "thorn_a7cb5ee6": {
+  "who": "thorn",
+  "text": "Fire and plants don't mix. Stay out of the heat.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "297bf15616d5570de79485ac4a25ca62ace5f7469daf600201fb5f71c95b6173"
+ },
+ "thorn_3fddec32": {
+  "who": "thorn",
+  "text": "Even sound has roots. Cut them.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "7aedb946988a506170ac1e207e1c0663c418689c03b2c7877817e87fb5874d9f"
+ },
+ "thorn_f9101d11": {
+  "who": "thorn",
+  "text": "Verdigris. Don't hold back on my account.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "7b827bd652e2d328a43507ef13692bf71dec783ca8de8b0d70d6ea6ab553305a"
+ },
+ "thorn_d9a7c0d8": {
+  "who": "thorn",
+  "text": "Mirrors don't grow. Break them.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "3ee34228ff085b7a94a9a11a9ef1f5e2786dc1f19abb04c28f1ba5a6f15afc15"
+ },
+ "thorn_df2756b2": {
+  "who": "thorn",
+  "text": "Water's good for roots. Not for you. Keep moving.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "eb819f2139c248af2c4e631d4774bf13a57deecaa5d5e71c0acac5ef31df858b"
+ },
+ "thorn_68991c27": {
+  "who": "thorn",
+  "text": "Stone cracks when roots get in. Find the cracks.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "62d9ac72a12117800ede6e65e3e6bd3ede369ad7543bbc71d706711989699958"
+ },
+ "thorn_b4f7b4eb": {
+  "who": "thorn",
+  "text": "He took my powers once. Don't let him take yours.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "959646bff97deb9ab13a31fdd1c23290eed63f43599d3a773deed61b2da55134"
+ },
+ "patch_788beb88": {
+  "who": "patch",
+  "text": "Fresh from the bench. Some of it was even tested.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "b82fe47fa110035e18d4e574fe116af46a4a82bd59a476b6308e81b07cb134ec"
+ },
+ "patch_4f468b8a": {
+  "who": "patch",
+  "text": "Fortress tech, still warm. Literally. Don't lick it.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "5e3bd62b7053d060104bcb2f4675a438148cc28c908d000df70be6976f3987ba"
+ },
+ "patch_ca5ce3d7": {
+  "who": "patch",
+  "text": "I fought Bastion for this budget. Choose wisely.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "342040ae999c86e81aa263303fd5065bed6f882888d0b465a956eef59bb5e1d2"
+ },
+ "patch_0fad3fe3": {
+  "who": "patch",
+  "text": "Upgrade time. Try to bring the parts back in one piece.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "340787e9e8070df0a7bf75388eef7b619f3c975472fb191fa9b78b6aaa247e1e"
+ },
+ "patch_e85afbd0": {
+  "who": "patch",
+  "text": "Your suit's flashing red. That's bad. Here's something less bad.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "877ee9c22907a302c0f09521b9b247b02a1bebbbd17bb6d4f68bd5030551b153"
+ },
+ "patch_b273120a": {
+  "who": "patch",
+  "text": "Deep in the city now. Comms are getting patchy. Pun intended.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "9f837c8d5f900e11bc345554d2bc6bb3a32d4f480e683c94ef3f8a8dbfab4aec"
+ },
+ "patch_4b5cc1b7": {
+  "who": "patch",
+  "text": "Zero damage reports. Are you even out there?",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "72d41942c46ea36aa9fa98e5d1354e201972ead9194f024a93dbd824152517f8"
+ },
+ "halo_a75edeb5": {
+  "who": "halo",
+  "text": "Fine. Something else, then.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "e3b50c9d3059803dae12a6899c53a7410942545a466624bad7f6e44eaf34667e"
+ },
+ "bastion_27d662a5": {
+  "who": "bastion",
+  "text": "Fine. Something else, then.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "d400fe1bf5d8c48cfca4bbbf9cbd9c8b20d553ff06e9b85a2635e5010440832a"
+ },
+ "echo_462f960a": {
+  "who": "echo",
+  "text": "Fine. Something else, then.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "4e5eb53a642e8b3d35e615e5838596ce0327f0f5c2e7ed8871f242d4f1c5ea8c"
+ },
+ "thorn_c6fe9298": {
+  "who": "thorn",
+  "text": "Fine. Something else, then.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "c85051f96502d91a0e8bac2f01444353fcfbad92a5938083f99d62e24c12e210"
+ },
+ "patch_4606f40f": {
+  "who": "patch",
+  "text": "Fine. Something else, then.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "47580f1da925eadafcf3fb324133781393b564ea124518d552fb0109c17f0560"
+ },
+ "patch_77bc5144": {
+  "who": "patch",
+  "text": "Different crate, same rules.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "2aae205645ca089b9950dc6e8afeb6957d9adf56e86d0358caa8688a6cd965f3"
+ },
+ "halo_e46feb23": {
+  "who": "halo",
+  "text": "So you're the rookie everyone keeps talking about. Show me why.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "f78e105821bcd3b506611afa4a656a862a94066593979e4a879e8081c0230f97"
+ },
+ "bastion_0b87fa9d": {
+  "who": "bastion",
+  "text": "Bastion. I hold this city's line. Tonight I'm holding yours.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "336869c51fceaf7def99a0fd83c898ff00764030a693d36acf2c0ecc8314a1ba"
+ },
+ "echo_c3d466ff": {
+  "who": "echo",
+  "text": "Echo. I already know how this ends. You're going to need me.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "a35e543609f07c2e17836149a7614207369e59401c45f397b51e37f10c2f3da7"
+ },
+ "thorn_b8cc0708": {
+  "who": "thorn",
+  "text": "Thorn. I used to be on the other side. Turns out I'm better at this one.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "36d4e559c133de5409724578bd5ed7a0964c6c2a9a036f2a5e90f857ebf5c885"
+ },
+ "patch_381f5efa": {
+  "who": "patch",
+  "text": "Patch. I build the gear, you break it. Try not to break yourself.",
+  "model": "eleven_v4",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "sha256": "ab69b2030aa375a9ed985b6c293ce1e7cf2c89eeb1c32a514bb6a55a52b28552"
+ },
+ "volt_68f07a45": {
+  "who": "volt",
+  "text": "Then I'll just have to turn you off.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7a082519b13ca2056bb93390b54d4f1a74ff25b95f0bcbd6f6d1a4aac521b22a"
+ },
+ "volt_8b873c16": {
+  "who": "volt",
+  "text": "I brought a bigger extinguisher.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "eebb6de48ff1d37ee3f71a653b178317a99032b7562960ae2504cf7ba18caac4"
+ },
+ "volt_37937d32": {
+  "who": "volt",
+  "text": "Cool off, Kilnheart.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "182f211c12959da573cd968f57bc30c0b91da262a9e7f89ee590f97c0ad31784"
+ },
+ "volt_1eda7208": {
+  "who": "volt",
+  "text": "Let's see who burns out first.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8a2a1a932d6ea325e08ab703e5f70ff8f18d50525097b0033beac61e695c8175"
+ },
+ "volt_8a05c585": {
+  "who": "volt",
+  "text": "Funny. I was about to say the same about your music.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "abd363df60c8a7b22e435eaaf75a109cd93a75f248e2beed455f0be8e0820067"
+ },
+ "volt_28707e84": {
+  "who": "volt",
+  "text": "Same song again? Change the record.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "7ccea5638110397d9e5a45db0c935c3c84c3ef0b7e7254e816bb50f3ee4a7649"
+ },
+ "volt_9118e26f": {
+  "who": "volt",
+  "text": "I'm cutting the power to the speakers.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "f8bb906d16d35caebfc7095ffb4a3c3c1b137f5a5e9dbc35655fcf22a0037256"
+ },
+ "volt_1e2bf25c": {
+  "who": "volt",
+  "text": "Time for the last track.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ce266f6c0002a925cb93dba2f4b6d35ff7a49e6ddc4e6f40fee753392d2bce76"
+ },
+ "volt_8bb21ed9": {
+  "who": "volt",
+  "text": "Then I'll scrape every roof clean.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "5a246da9cdcf1f559056a290cab1af95552987c5e3939be76f368a07bfb6b240"
+ },
+ "volt_b79dbcb4": {
+  "who": "volt",
+  "text": "Weeding time.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "a892067a6268cd7ea99d7bf1290e719e155e55a51c1ad6260142bd04cb678562"
+ },
+ "volt_bc3b822a": {
+  "who": "volt",
+  "text": "Your garden's getting pruned.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "9a370dbc3fea0da6d037ad666940ae3c86910eab2ee4ad6b9533e6eb272d89f7"
+ },
+ "volt_0b5cf687": {
+  "who": "volt",
+  "text": "Pest control, Verdigris. That's me.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "b4c53a214c729dc2c0f58ad77ffe4a2b1532f7950ff84457d5798f89b5937847"
+ },
+ "volt_7343b215": {
+  "who": "volt",
+  "text": "Then I'll just hit all of you.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "17659deee0d4dec5ad0040912e8061218238622bcb4b3904570474f5861a2e85"
+ },
+ "volt_f2344026": {
+  "who": "volt",
+  "text": "Smash enough mirrors and you find the real one.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "77ecf9a96127cd6409f5af8751f5eb5687a7afb34ea1a94e1132c47004d3c22f"
+ },
+ "volt_45686a3d": {
+  "who": "volt",
+  "text": "Seven years' bad luck? I'll risk it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8db18f9b0fd5c9f17d927a4d117482b6b0d6669833611930bd640bf4148d1ee0"
+ },
+ "volt_ef14e404": {
+  "who": "volt",
+  "text": "I can see straight enough.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "8042786f8c5fd951ee080466d6ae2ba38190a132324790ce92301a35a31a23f3"
+ },
+ "volt_36cb431a": {
+  "who": "volt",
+  "text": "Good thing I don't plan on standing still.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2dd409f6b1a06c32e515294c8b863cb9e20c8af277708ba5e145b3cb618c2600"
+ },
+ "volt_2f2de50e": {
+  "who": "volt",
+  "text": "I've been practising holding my breath.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "fe1ec0b29b3a5034ab363441d6ee6db7b5b0576f9c6a89b7a0d087b1e3b953a4"
+ },
+ "volt_5dea148f": {
+  "who": "volt",
+  "text": "Electricity and water. You sure about this?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "186ba04f9860d6b37d8d910d5560581a4fed32a88c1a1f63da14ad560d0fd574"
+ },
+ "volt_df44580d": {
+  "who": "volt",
+  "text": "Tide's turning, Undertow.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0dcd6b2e66da9fea13fac5af0ad38328e8648a8e183f5e41c8bdfa647526fadb"
+ },
+ "volt_db8f53ff": {
+  "who": "volt",
+  "text": "Carve it big. You'll want everyone to read it.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "251d1dd7bf2a60f5ac1041872e9f9dc4990c2d006682506bfb7a7d216e41d3f7"
+ },
+ "volt_e45f5a9b": {
+  "who": "volt",
+  "text": "Rocks don't remember. I do.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "54368b67e61f8535f691ab3ceff96eee7900af709f917a4a24f90d0374a84ccf"
+ },
+ "volt_fea415d4": {
+  "who": "volt",
+  "text": "Back on your roof. Miss me?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "42dc10141793f2af520997f35bbc8b9db8673f769abbaa93f402b36b9334a068"
+ },
+ "volt_1ce4b4cd": {
+  "who": "volt",
+  "text": "Let's see which of us cracks first.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "3613a5f66084209524c8a4c9dd4d1b07fa24a2afd1426f31a160575ed2445685"
+ },
+ "volt_2dedcdbe": {
+  "who": "volt",
+  "text": "Revoke this.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "420d765e745832ee32f042805e7edc43dcd0e65d8c3421f3e53b6891f61cda69"
+ },
+ "volt_cd9463cc": {
+  "who": "volt",
+  "text": "My file's still open.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2976067b1f8c20567f631b3642dc5a58637b46fd3b57b94275566fe8fa55d1fe"
+ },
+ "volt_b06e10fc": {
+  "who": "volt",
+  "text": "You can't edit me out.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "811138bb0182f772894dc1cc3894396a8b7e33a204b2ecfd34c413ac8a88ef1d"
+ },
+ "volt_70d52086": {
+  "who": "volt",
+  "text": "Let's finish this.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "ddcd087acbf92bf1e434811b832bc56fd81fb3a3e3142053dc61ec78c86e0f70"
+ },
+ "volt_0394d6c5": {
+  "who": "volt",
+  "text": "Halo? THE Halo? ...I won't let you down.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "2c141b75bfb315e08c7f1f206aba56069687c27596ac7159f57ca3ecf0bf8957"
+ },
+ "volt_ccdb45aa": {
+  "who": "volt",
+  "text": "Then I'll hold the roof. Thanks, Bastion.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "0fb0d34886ba7a58aa6bf923ad821a57cede4156233c9efce22868c90b7ddcd3"
+ },
+ "volt_8b45ae34": {
+  "who": "volt",
+  "text": "Do you, though?",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "5e2bf5026a79268908fea4fd06d73a224e7b24b32922a62200de2cf678e5811d"
+ },
+ "volt_a4f326c2": {
+  "who": "volt",
+  "text": "Glad you switched sides.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "28b409f327a0e218b0532bd6b9aee91a817063f33c99d7ae6ca59863828b5308"
+ },
+ "volt_425837f5": {
+  "who": "volt",
+  "text": "No promises.",
+  "model": "eleven_v4",
+  "voice_id": "RmtUVKbwMJFKYraSJIVs",
+  "sha256": "11c9ff288b2ab047a74e310efffa23ee09be857ccac776fbe4dbef7326e04f56"
+ },
+ "kilnheart_bcab0749": {
+  "who": "kilnheart",
+  "text": "Feel that heat? That's the city's pressure, and I'm the valve. Step closer, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "088e53a5aa11f3201294f38431bb688e598866175237dcfd3cc65bafce7f4ae8"
+ },
+ "kilnheart_69de72ba": {
+  "who": "kilnheart",
+  "text": "Back for another burn?",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "e1c74e15a2a0b37356c0e646555130084f9ddecb15aac8b8ff2f158731b9ea14"
+ },
+ "kilnheart_3d593e4f": {
+  "who": "kilnheart",
+  "text": "The furnace never cools. Neither do I.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "5abfd342239a187958a14954fb7e42729e3e9cb4f415176d52191b4674b7e2f6"
+ },
+ "kilnheart_38a874b0": {
+  "who": "kilnheart",
+  "text": "You again? I'll stoke the fire.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "4d10a0524c7bee1dba03b970097a748d7fa8d11594af11cac30d1a620eda4fd9"
+ },
+ "kilnheart_862215f5": {
+  "who": "kilnheart",
+  "text": "You call that heat? I've had kettles put up more of a fight.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "0bac1b5e8c2bf024069d983e88c277a38188ed68ccfd467c331d82a520c5f837"
+ },
+ "kilnheart_c01e3c51": {
+  "who": "kilnheart",
+  "text": "Pressure finds every crack, rookie. You're all cracks.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "1e4f94f593808c65e3a2b4c75af1008b10aacd22d0884c2eff8d9299216c3a5c"
+ },
+ "kilnheart_83dcfcd8": {
+  "who": "kilnheart",
+  "text": "Run back to your Fortress. Tell them the furnace is still lit.",
+  "model": "eleven_v4",
+  "voice_id": "yWRPuhQv7d5rFyrtj0GI",
+  "sha256": "6cf073738aba7bb14cd9740953ca9109723a97b3105fe7afc20104152b279993"
+ },
+ "bastion_3b8f3ae2": {
+  "who": "bastion",
+  "text": "Kilnheart telegraphs every punch. When the white ring closes, block it and make her pay.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "447be91980d329523da321f4e39f78b61800cd21b7e1e74d51b87c4f2d74b026"
+ },
+ "echo_ae544e55": {
+  "who": "echo",
+  "text": "She charges in a straight line. Step sideways, not backwards. Or parry it and watch her fold.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "1b697ad3cf863c957887482c05d288d13c92f35cfba7df5fba1b0be70d74c6a2"
+ },
+ "halo_9e1b8dd7": {
+  "who": "halo",
+  "text": "Get out of the disk first, then thread between the embers. Or knock the embers back at her.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "bc252441c68bc87314d3a8eaa6ad6c66ae4e67c4871b0b6be68654b4e8c6024d"
+ },
+ "halo_10a7ed7e": {
+  "who": "halo",
+  "text": "Those embers can be parried. Send them back where they came from.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "0c371bc7e7428e17b7d9227f3cb490ad5db6eee63de111d01d84dc9c56eb3188"
+ },
+ "thorn_d1aa9a2a": {
+  "who": "thorn",
+  "text": "Don't fight on scorched ground. Pull her somewhere cooler.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "93d0e14476e0ac900165c04f935580252e932ab92e09b2a6a533bcd24c795bac"
+ },
+ "bellwether_f016a8bc": {
+  "who": "bellwether",
+  "text": "Hear that? That's the whole city humming my song. You're just a wrong note.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "55647870da45ebcd5d2b6d0fb6979fb888b50b8c2bfe8e4db4da90df26c17571"
+ },
+ "bellwether_96d88b5d": {
+  "who": "bellwether",
+  "text": "Encore? Fine. Try to keep the beat this time.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "797ba833184b4d2fb45b24febfbf7628afbcdb9599e92808f8e64ca6371a868a"
+ },
+ "bellwether_596bf876": {
+  "who": "bellwether",
+  "text": "Same stage, same rookie. Let's turn it up.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "016fbcb2abf1a7cc1d172bd3800d5ec909cbb9759d68c65e490e4bc8bbc915e1"
+ },
+ "bellwether_976872f8": {
+  "who": "bellwether",
+  "text": "Feel the bass, Volt. Then fall to it.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "64a90afd68da8070eb949b1f20249a26ed5ed371ca61e85f6fd6e604c1ca1ec8"
+ },
+ "bellwether_32a57425": {
+  "who": "bellwether",
+  "text": "Off-beat from start to finish. Painful to listen to.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "13caded79a3be71e7a21b85d6cbb568ac2f755754eacd7886056c4d6abf85e3d"
+ },
+ "bellwether_4d0f8497": {
+  "who": "bellwether",
+  "text": "You never found the gaps. Everyone finds the gaps.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "1b0e37ed0132101d724ff2429f228db0d4c8ce85ae78cf4b666abf97b3991fd2"
+ },
+ "bellwether_5b6993ab": {
+  "who": "bellwether",
+  "text": "That's a wrap, rookie. No encore for you.",
+  "model": "eleven_v4",
+  "voice_id": "AJuNP3sFJckEVT7VAAqm",
+  "sha256": "8581a689c6b0ebf7d20a2316e58d1e6a1f70f948933e4f98ee553ae71157223c"
+ },
+ "echo_96c4c059": {
+  "who": "echo",
+  "text": "Her rings always have gaps, and they line up before they fire. Walk into one and let the sound pass.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "228861f7354c309743b13b1824cd40e514c5d63374b897be8ee6737c5538b31f"
+ },
+ "bastion_02923fea": {
+  "who": "bastion",
+  "text": "Focused Burst is a straight cone with a glint. Parry it and her speakers choke.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "0cf136aa5921779c7cb4f69d65e8f349089915cd886c719c8513c3c1be201c52"
+ },
+ "thorn_aa4238af": {
+  "who": "thorn",
+  "text": "The resonators mark the ground first. Two spots, never more. Step off them.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "92e418456a924d4789c24b69e27ed05a49cc7205970cca357b0556a29907e7f1"
+ },
+ "verdigris_5ac84c44": {
+  "who": "verdigris",
+  "text": "Rust always wins, rookie. Every roof in this city is already mine. It just doesn't know it yet.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "3c323e2f123fed3a8bba68936ac9c2451f9cfb694ab1e2cccc629074217a83db"
+ },
+ "verdigris_131234a5": {
+  "who": "verdigris",
+  "text": "Back to feed the garden?",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "2a7f5e8d64cb6dd2cbac85cc3a984458ef8c83551f81a2094edb836ba7e67a19"
+ },
+ "verdigris_951e6c01": {
+  "who": "verdigris",
+  "text": "Everything you build, I grow through.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "1d154eb0dd7a09ae885cf8963a0a67328a861933bcb095a664c17a94304e0d03"
+ },
+ "verdigris_aedd7be3": {
+  "who": "verdigris",
+  "text": "Mind your step. The roof is hungry.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "6c1d37c5f5bcedbfcef1f60340e3eac2995810aa1de0e711f8b852e11347dafe"
+ },
+ "verdigris_d5ca8daa": {
+  "who": "verdigris",
+  "text": "Compost. That's all you'll be.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "27340671b13f9e8dcf8b8fae7167468fdb479dbf50982afc939b12fb215b8fda"
+ },
+ "verdigris_40337ed4": {
+  "who": "verdigris",
+  "text": "You let my garden grow. Shame.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "d1046ee588d578d305c751f8344eb0b60048c996982ca40a880a48f06a9fc06f"
+ },
+ "verdigris_dc3a57b3": {
+  "who": "verdigris",
+  "text": "Rust takes everything eventually. You just went first.",
+  "model": "eleven_v4",
+  "voice_id": "5PhA4LJ8zKeDCb1ZxraK",
+  "sha256": "c56aad036bb1dafc7f722fc172f4e50e01d83fc664e8cb104154490f44763288"
+ },
+ "thorn_08a053b0": {
+  "who": "thorn",
+  "text": "She aims the seeds at you. Bait them to the edges so the middle stays clean.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "d77a8b9c10ed0c03a4b6a2581b7dde415f10cfe241475747a447ddd43c37ca3e"
+ },
+ "thorn_18f4a374": {
+  "who": "thorn",
+  "text": "Never fight standing in acid. Rotate around the roof and keep the centre clear.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "ccb5aedacb173a0953f7f0d77150040343c6a6919079cb5b5470421a560ed1db"
+ },
+ "bastion_912957d2": {
+  "who": "bastion",
+  "text": "The vine sweep has a white tell. Parry it, or just get behind her.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "c79b1787a6b7c3e716e698b591b165eb276a3cca79bd931eb23f6752e929f2ed"
+ },
+ "echo_4664e47b": {
+  "who": "echo",
+  "text": "Break the buds before they bloom. All three, and she's wide open.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "023238179d82d87ee2931883b75aa7371331cb5482f9087f019ca91889361001"
+ },
+ "glasswake_2cf783de": {
+  "who": "glasswake",
+  "text": "Which one of me are you looking at? Doesn't matter. You'll be wrong either way.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "817a7c236988829e387690324392fb0fd33bba21a5f35680cc9c2631b335d2eb"
+ },
+ "glasswake_3eaa97e4": {
+  "who": "glasswake",
+  "text": "Seen through me yet? No? Thought not.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "e06b28388f5bb7f71677c073fda93bb13f456f36349eda23d1b1fb15a6d98f7b"
+ },
+ "glasswake_2f412b57": {
+  "who": "glasswake",
+  "text": "Same trick, rookie. Still works.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "cfe2207875e523bd5d880b6948e670f2a470cc681a04fc8662d2b6a1bf7b9d8c"
+ },
+ "glasswake_3da0b24a": {
+  "who": "glasswake",
+  "text": "Mirror, mirror. Who falls first?",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "f5fd7dbe488dd8a030917a06d3a358d2d2eaacbc89f5bdff1203c80e9fda15a5"
+ },
+ "glasswake_19fd1de3": {
+  "who": "glasswake",
+  "text": "You hit my reflection three times. Flattering, really.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "47df2e1ed8f325f3a6d1cabe12c6aea8354d8685aa97f764af35a6256b8a1774"
+ },
+ "glasswake_c11e6d96": {
+  "who": "glasswake",
+  "text": "Easy to beat someone who can't see straight.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "dccf76fa6c6be5866e9965b8eb5f26a7ad94292ae9a729e52a8a1bb2ff8279aa"
+ },
+ "glasswake_305ed3e7": {
+  "who": "glasswake",
+  "text": "Next time, look before you leap. Or don't. I enjoy this.",
+  "model": "eleven_v4",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "sha256": "7a2de9a401043d828dcaf50ac746e98f1c13ff54343a2380dc07e26f14147689"
+ },
+ "halo_0c169b9a": {
+  "who": "halo",
+  "text": "Three beams, always the same spread. Stand between them, or behind her.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "964c8baa52660d3ba76ec93a4cafb224d96b28df2eac81eed8fb91cefb6af1e1"
+ },
+ "bastion_aa63fe1d": {
+  "who": "bastion",
+  "text": "She shows you where she's landing. Don't be standing there.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "6c276296c628a908edb68e8794503e4ecd8b5ba077956ffcccb896f2c4736259"
+ },
+ "echo_ddb2e523": {
+  "who": "echo",
+  "text": "The real one has the solid white ring. Hit the decoys and their beams vanish, but every warned beam still hurts.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "041a61efaee0c5ae088cd647c216cbfd64fc5da7420f72cec050427a0dc6d79b"
+ },
+ "bastion_da59be28": {
+  "who": "bastion",
+  "text": "Only the real Glasswake lunges. Parry it and her glass cracks.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "aa9983bc5744547bf32977caf6581c8c288d3cd769abaffcfa71d526df072827"
+ },
+ "undertow_c89f4124": {
+  "who": "undertow",
+  "text": "The tide always comes in, rookie. Stand still and it'll take you with it.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "9ea3f4b97fca10bec9f7fd6f1e6fc1315fe401a136ba243314d6bd80d05b5fed"
+ },
+ "undertow_b9fc535a": {
+  "who": "undertow",
+  "text": "Back in the water? Brave. Or stupid.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "845c98a1a11204b49c67e5587959d066fc1003426c0d9d32c1a6fe5fd122bd25"
+ },
+ "undertow_47e5fed1": {
+  "who": "undertow",
+  "text": "Pressure builds. It always breaks something.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "7d89607046e018ee94486c229d11cb815af51ebda673943187e6a4cce7a1ec8b"
+ },
+ "undertow_ab9d89ca": {
+  "who": "undertow",
+  "text": "Let's see how long you can hold your breath.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "b6843400f976e2171eb1fc80cb3492070051c73e49c14e6f890c1eedbd614cbd"
+ },
+ "undertow_a1d70cd3": {
+  "who": "undertow",
+  "text": "Washed out. Like I said you would be.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "edaceb5fa5b71331abb96eb199422cb7cdcfb2cdbff739484faf8727f43069ff"
+ },
+ "undertow_3a2d5e60": {
+  "who": "undertow",
+  "text": "Cold, isn't it? You'll get used to it at the bottom.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "8958d1f87cfdf25652ab965834bb1dceb226a44a5e52b3807008c2294bfd66ab"
+ },
+ "undertow_2cd8b6ee": {
+  "who": "undertow",
+  "text": "The docks keep what they catch.",
+  "model": "eleven_v4",
+  "voice_id": "urczK0YCwtnTeJkvb4PB",
+  "sha256": "1ea422b885de5cc51cb8224775eea456546d3ae80163e7ef2e8a298b21e57370"
+ },
+ "echo_36805d6d": {
+  "who": "echo",
+  "text": "The jet shows its whole sweep before it fires. Get behind him or outside the arc. Ice blocks it too.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "83b88107a31515d0779320176cce500249584889e85008548082a8598a740d33"
+ },
+ "halo_605b6228": {
+  "who": "halo",
+  "text": "Depth Charges slow you. Leave the circle early: getting hit while slow snowballs.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "265d57990eb7bdff2302be19789e24e5ebe8f83a450b5b08b8a2490525e1ad76"
+ },
+ "bastion_154200fe": {
+  "who": "bastion",
+  "text": "The hook has a white tell. Parry it and his gauntlet cracks wide open.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "18cf02c34d3220eecd335d78cf64f7571d706bc898901561b8eece17007b8acc"
+ },
+ "gravemark_11181a1d": {
+  "who": "gravemark",
+  "text": "Another rookie on my roof. I'll carve your name next to the others.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "e7f9b5e7416a1067dad08ac62745a39e9e73249692f7d36c966fef3760838303"
+ },
+ "gravemark_aee999e1": {
+  "who": "gravemark",
+  "text": "Every fall makes you lighter. Every stone makes me heavier.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "ab963cae2be2f94015414ec08f248bd9e20cd836ad75cd801833d0efc4f72b69"
+ },
+ "gravemark_93dad802": {
+  "who": "gravemark",
+  "text": "Back again? Then stay down this time.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "65c184831dacca90c21fe8239e20a913f0c858b48016dc8c5e90399a0b609d62"
+ },
+ "gravemark_d05fc740": {
+  "who": "gravemark",
+  "text": "Is this what the Fortress sends now? I've crushed sturdier gravel.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "94267b7e6e55cf9909adb3c8fe273b78c9a1e33cd956a1c25f9eeabdd9cc0e9d"
+ },
+ "gravemark_52f77eff": {
+  "who": "gravemark",
+  "text": "Little spark. You flickered, and then you went out.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "f3b7170c892dfb70a99d40e5fa7d4fe4d061aa93871fd4170f3bb68c9eb25a3f"
+ },
+ "gravemark_b7267b4d": {
+  "who": "gravemark",
+  "text": "Run home to your heroes. Tell them Gravemark sends its regards.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "d8b3ecda31dc6647bd9359cb7797fd26c87345399b71fd366e102f0dc1213c64"
+ },
+ "gravemark_77ca6c98": {
+  "who": "gravemark",
+  "text": "The roof will remember you. As a stain.",
+  "model": "eleven_v4",
+  "voice_id": "UrBeqP9db3vlQVM3Tmfu",
+  "sha256": "2c490dc25807be8c0223bc9a0e3b9558cac268e7d15c61a309b7d00409f3a9b0"
+ },
+ "bastion_a9721278": {
+  "who": "bastion",
+  "text": "That rock cannon telegraphs a straight lane. Parry the rock and it goes right back at Gravemark.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "66cc3f88a5ddf6c40e8f1f87fb7336da92f524505f24d171f93152d820adf107"
+ },
+ "echo_e9bc25b5": {
+  "who": "echo",
+  "text": "The rubble circles before it flies. Stay outside the orbit, then slip between the spokes.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "99f8eda63f1e92cf54ba798daef4214c66b6705dcc14852513afe2032e0fd39f"
+ },
+ "halo_b05d7691": {
+  "who": "halo",
+  "text": "The pull is weak. Walk against it, or dash out before the centre detonates.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "e9082052dc45f428485d62dd3f71675d83853e4d4bf98fc3eb8d598fec2a5c05"
+ },
+ "thorn_5fd53476": {
+  "who": "thorn",
+  "text": "The ring always leaves one way out, and it points at where you stood. Or hug Gravemark: the middle is safe.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "5bc8fda6bb030461a9f3e78abfbd328fa379f9822dc130e0f08691f49acb0225"
+ },
+ "redactor_f05dffa2": {
+  "who": "redactor",
+  "text": "Powers are a privilege, rookie. I decide who keeps them. Tonight, I'm revoking yours.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "4cb841a739824a3d8790a1f3405db2cbc4b5d2c1ca85e4e0bdcedbfbb26fcea4"
+ },
+ "redactor_dd1224bc": {
+  "who": "redactor",
+  "text": "You again. Persistence is not a power.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "7f27a258b41413b27ddbfef420e90303c4c39ab486aa85ba8d574103259f17ab"
+ },
+ "redactor_7040f6c5": {
+  "who": "redactor",
+  "text": "Let's see what's left of you after the edit.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "0cff341164563b5514eb1755126a5e2c83d3430ffe45c654cf75b5a942de4a9a"
+ },
+ "redactor_ba2c5a30": {
+  "who": "redactor",
+  "text": "Every hero gets redacted eventually.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "04e5e05e70ebbf5e0e977cc4bdb57b1c0151da6d1cf082ca73a67cb72823725a"
+ },
+ "redactor_378ec4fb": {
+  "who": "redactor",
+  "text": "Request denied.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "e29549ab617812eb4e7c9d4b32c61430861bcb80cb117aa2aa22b2f1e6d8797c"
+ },
+ "redactor_bd605d11": {
+  "who": "redactor",
+  "text": "Your file is closed, rookie.",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "16c93f02fccc74b45a1b46fceba805e45fd23b1b7e29c7345e97679d3b4b05d8"
+ },
+ "redactor_6ac7efad": {
+  "who": "redactor",
+  "text": "Did you really think the city would let you keep that spark?",
+  "model": "eleven_v4",
+  "voice_id": "L3YenFTIrljaqm205FWd",
+  "sha256": "6abf6a2de7bb0f79d0fc8d5274ac1bff2c2b3f049799aeda24034528dd5dc85a"
+ },
+ "halo_89b4ffeb": {
+  "who": "halo",
+  "text": "His lanes are always a third of a circle apart. Live in the wide gaps between them.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "6db30b66a45cc51365043c32c682f5bfe25061f3562b5dcf92edee07793921dc"
+ },
+ "bastion_dd757158": {
+  "who": "bastion",
+  "text": "Final Verdict gives you two ways out, then a second warning. Read both.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "23337d6d7822225d5e0946ac679ff697c19159ebc4940723d2d1be197331dacb"
+ },
+ "halo_8e1f0555": {
+  "who": "halo",
+  "text": "District by district, and Gravemark in the dirt. The city noticed tonight. So did I.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "c00ad1611bee5abbab94ac58d0db1f70ee435bc6219a72b22139d8d2be0ed138"
+ },
+ "bastion_caaf8df0": {
+  "who": "bastion",
+  "text": "Clean work, rookie. Don't let it go to your head. The next roof won't be so kind.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "00e7ca45628ccf86c3ae686febff7d6691a5ea950ca19579a293122ff8702b40"
+ },
+ "echo_9572d181": {
+  "who": "echo",
+  "text": "Okay. Fine. That was impressive. Don't tell anyone I said that.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "056da9ac240b037ea3dbd32bcaf515ce1c07b452f49154b4adeb0df83a593785"
+ },
+ "halo_203b44f8": {
+  "who": "halo",
+  "text": "Not bad. I've seen worse first years. I was one of them.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "b31ed39d062488aeb8d1d35c32d4015056350eba9b1f3d0d29490d2faa10de1d"
+ },
+ "thorn_da1768a9": {
+  "who": "thorn",
+  "text": "You fight like someone with something to prove. Good. Keep proving it.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "6bc055b153462bc3b1b0ac4a13b0e09d82cd949ba5c483a857045065d2947c8c"
+ },
+ "bastion_5c3530e8": {
+  "who": "bastion",
+  "text": "Solid. Now do it again without the close calls.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "650fa3a39b5ecf0bf67db914bc6b19990b71ea28ebfc0d7b5f2ed16271ec00b9"
+ },
+ "halo_3689df37": {
+  "who": "halo",
+  "text": "Heroes aren't measured by how they fall. Get up. Again.",
+  "model": "eleven_v4",
+  "voice_id": "pFZP5JQG7iQjIQuC4Bku",
+  "sha256": "e0e4d59e6609082590c4558a10f6f968d4b4af46e3d8deaa6ff48f41dd07da6b"
+ },
+ "thorn_98197f30": {
+  "who": "thorn",
+  "text": "I spent years on the wrong side of this fight. Losing isn't the end. Quitting is.",
+  "model": "eleven_v4",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "sha256": "ce5314d86514dc94b67e66488fefe8e19aafaa1be4017e1afbedee83b6a38da8"
+ },
+ "echo_c8d76bac": {
+  "who": "echo",
+  "text": "I'd have lasted longer. Probably. ...That was decent, I guess.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "c97d6c278d0b50f72d6d6996c6ffac4b332ce041a72c3cfe155f0a36b43ca37b"
+ },
+ "bastion_e3477cf8": {
+  "who": "bastion",
+  "text": "You hesitated. Hesitation gets people hurt. Dash first, think second.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "33d698ff53fe23e709a13beb5a16278309e09c24d81b3423b70a2cb9ff29577b"
+ },
+ "bastion_f099c668": {
+  "who": "bastion",
+  "text": "Watch the coral arc. When the pipe goes back, you go sideways.",
+  "model": "eleven_v4",
+  "voice_id": "SRAtZ2ZOED030czOR8WQ",
+  "sha256": "08eeb223a52efa678b838c3d2b8735425161b5c2f77541a5b50a222fbbf398ab"
+ },
+ "echo_c3e57de0": {
+  "who": "echo",
+  "text": "Those drones telegraph like bad poker players. Watch the amber line, then move.",
+  "model": "eleven_v4",
+  "voice_id": "Y5YV8HtWsJXkknTppIP7",
+  "sha256": "0b2e16899ad58b8f5d0a6dbcb1e26ed7d72f8f5dbfd78a8f72aeacebfa6dcd48"
  },
  "volt_b0d74eee": {
   "who": "volt",

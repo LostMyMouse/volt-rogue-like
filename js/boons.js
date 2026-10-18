@@ -10,7 +10,7 @@ const SLOT_NAME = { strike:'Strike', power:'Special', dash:'Dash', overload:'Ove
 const HEROES = {
   halo:{ c:'#fff1d0', first:"Rookie. The city's watching tonight, and so am I. Take this.",
     lines:["Again? Fine. Make it count.","Light doesn't bend for anyone. Neither should you.","You're still standing. Good. Here."] },
-  bastion:{ c:'#9fb0c8', first:"Volt, Bastion. You're on my roof, you play by my rules. Rule one: don't die.",
+  bastion:{ c:'#9fb0c8', first:"Shield channel ready. Choose the reinforcement you need for this roof.",
     lines:["Shields up, rookie.","Hold the line. Let them break on you.","Less flash, more footwork. Take this."] },
   echo:{ c:'#8b93ff', first:"Heard you were struggling. Loudly. Want help? Don't answer, I already know.",
     lines:["I read your next move. It was bad. Try this instead.","Stop thinking so loud and pick one.","Fine, I'll carry you. Again."] },
@@ -76,7 +76,7 @@ const COMMS_LINES = {
     late:["You've come further than most. Don't stop now.","The Redactor's tower is close. I can see it from here. So can you."],
     clean:["Not a scratch. Show-off. Keep it up."], parry:["Clean parries. Somebody's been paying attention."],
     kilnheart:"Kilnheart burns hot and fast. Be faster.", bellwether:"Bellwether loves an audience. Don't give them one.", verdigris:"Verdigris wants you slow. Don't be.",
-    glasswake:"Glasswake lies with light. I don't. Trust this.", undertow:"Undertow drags people down. Keep your head up.", gravemark:"Gravemark. Of course. Take this, and don't let it pin you.", redactor:"This is it, rookie. Whatever he says about me, finish it.",
+    glasswake:"Glasswake lies with light. I don't. Trust this.", undertow:"Undertow drags people down. Keep your head up.", gravemark:"Gravemark. Of course. Take this, and don't let it pin you.", redactor:"The control room is ahead. Shut down the drain, then get clear.",
   },
   bastion:{
     any:["Shields up, rookie.","Hold the line. Let them break on you.","Less flash, more footwork. Take this.","Gear check: you're still in one piece. Good.","Rule two: hit them before they hit you.","I've seen worse rookies. Not many. Some.","Stand your ground. Here's something to stand on.","Don't make me come down there."],
