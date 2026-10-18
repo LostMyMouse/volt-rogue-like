@@ -179,7 +179,7 @@ function refreshSplash(){
   $('#splashPressWord').textContent = inputMode==='touch' ? 'Tap' : 'Press'; $('#splashKey').textContent = inputMode==='touch' ? 'Start' : inputMode==='pad' ? 'A' : 'Enter';
 }
 function startFromSplash(){
-  if(state!=='start')return;
+  if(!window.__voltBootReady||state!=='start')return;
   audioUnlock();
   goFullscreen(); show('#splash',false); show('#mSlots',false);
   // First launch: the opening cutscene, then the Fortress.

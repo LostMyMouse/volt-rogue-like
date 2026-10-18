@@ -39,3 +39,10 @@ function frame(now){
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+// The splash is painted before these ordered scripts finish downloading.
+// Accept input only after audio and the complete game loop are available.
+window.__voltBootReady=true;
+$('#splash .splash-menu').removeAttribute('inert');
+$('#btnStart').disabled=false;
+$('#bootStatus').hidden=true;
+$('#splashPress').hidden=false;
