@@ -76,9 +76,11 @@ function update(dt){
     if (e.tutDummy){ e.vx=e.vy=0; continue; } // training dummy: stands still and takes hits
     if (typeof tut!=='undefined' && tut && e.tutWeak && tut.age<tut.readyAt){ e.vx=e.vy=0; continue; }
     if (e.isDecoy || e.isIce || e.isPlate){ e.flashT-=dt; continue; }
+    if(e.kind==='relay'&&(e.stunT>0||e.exposedT>0))interruptRelay(e);
     if (isSpecBoss(e)) bossUpdate(e,dt);
     else if (e.stunT<=0){
-      if (e.kind==='rusher'){
+      if(e.kind==='lockjaw'||e.kind==='relay')updateAdvanced(e,dt,dx,dy,d,a);
+      else if (e.kind==='rusher'){
         const sp=150*T.enemySpeed;
         if (e.state==='chase'){
           e.face=a; e.mx=dx/d*sp; e.my=dy/d*sp; e.timer-=dt;

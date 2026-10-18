@@ -79,10 +79,13 @@ function showIntro(card, done){
   art.innerHTML='';art.style.backgroundImage='';art.classList.remove('bust');
   const image=new Image();image.alt=card.name;image.className='intro-character-art';
   image.onerror=()=>{image.onerror=null;image.src=`assets/portraits/${card.id}.png?v=2026-10-18-story`;};
-  image.src=`assets/intro/${card.id}.png?v=2026-10-18-story`;art.appendChild(image);
+  const extension=['volt','halo','bastion','echo','thorn','patch'].includes(card.id)?'webp':'png';
+  image.src=`assets/intro/${card.id}.${extension}?v=2026-10-18-comms`;art.appendChild(image);
   el.classList.remove('in','out'); el.hidden=false; void el.offsetWidth; el.classList.add('in');
   introDone=done; introStart=performance.now();
-  clearTimeout(introTimer); introTimer=setTimeout(()=>dismissIntro(true),2800);
+  clearTimeout(introTimer);
+  const ready=()=>{if(state==='intro'&&art.contains(image)){clearTimeout(introTimer);introTimer=setTimeout(()=>dismissIntro(true),2800);}};
+  image.onload=ready;if(image.complete&&image.naturalWidth)ready();
 }
 function dismissIntro(force){
   if (state!=='intro') return;

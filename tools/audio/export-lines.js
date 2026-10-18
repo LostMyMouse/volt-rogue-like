@@ -2,6 +2,7 @@
 const out=[],add=(who,text,set)=>{if(who&&typeof text==='string'&&text.trim()&&!out.some(x=>x.who===who&&x.text===text))out.push({who,text,set});};
 const pages=(owner,list,set)=>{for(const pg of list){if(Array.isArray(pg))add(pg[0]===''?owner:pg[0]==='v'?'volt':pg[0],pg[1],set);else if(typeof pg==='string')add(owner,pg,set);else add(pg.who||owner,pg.text,set);}};
 for(const p of CUTSCENE)add(p.who,p.text,'cutscene');
+for(const list of Object.values(UNIT_INTEL))pages(null,list,'unit-intel');
 for(const [id,list] of Object.entries(STORY.first))pages(id,list,'first');
 for(const kind of ['encounter','comms'])for(const [id,entries] of Object.entries(STORY[kind]))for(const e of entries)pages(id,e.pages,e.id);
 for(const [key,list] of Object.entries(MISSION))pages(null,list,'mission:'+key);

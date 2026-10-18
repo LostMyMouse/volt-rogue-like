@@ -468,3 +468,15 @@ body.touch-mode.tutorial-mode .tut strong{font-size:19px}
 body.touch-mode.tutorial-mode .tut p{font-size:12px;line-height:1.4;margin:3px 0 0}
 body.touch-mode.tutorial-mode .tut .tag{font-size:9px}
 body.touch-mode.tutorial-mode .tut-skip{top:8px;right:8px;max-width:80px;min-height:44px;pointer-events:auto;white-space:normal}
+/* Motion comic: readable narration stays below the action on every viewport. */
+.motion-comic .cs-bar,.motion-comic .cs-card,.motion-comic .cs-portrait{display:none!important}
+.motion-comic .cs-caption{position:absolute;left:3%;right:3%;bottom:12px;max-width:none;transform:none;display:block;background:#f2dfac;color:#17120d;border:4px solid #07090e;box-shadow:5px 5px #000;padding:12px 18px;min-height:0}
+.motion-comic .cs-who,.motion-comic .cs-tag{color:#292016;text-shadow:none}
+.motion-comic #csText{color:#17120d;font-size:clamp(14px,1.7vw,21px);line-height:1.35;margin:5px 0}
+.motion-comic .cs-count{color:#504330;font-size:11px}
+.comic-controls{position:absolute;top:10px;left:12px;display:flex;gap:8px}.motion-comic .cs-skip{top:10px;right:12px;bottom:auto}
+@media(max-height:450px){.motion-comic .cs-caption{bottom:5px;padding:6px 12px;border-width:3px}.motion-comic #csText{font-size:14px;margin:2px 0}.motion-comic .cs-who{display:none!important}.motion-comic .cs-tag{font-size:12px}.comic-controls .chip,.motion-comic .cs-skip{padding:6px 10px;font-size:12px}}
+.progression-panel{max-height:90dvh;overflow:auto;width:min(900px,94vw)}.progression-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}.progression-list .style-card{display:flex;flex-direction:column;gap:12px;padding:18px;text-align:left}.progression-list button:disabled{opacity:.5}.progression-panel .row{position:sticky;bottom:0;background:#080d18;padding-top:8px}
+.motion-comic .cs-caption{width:auto;display:block!important}.motion-comic #csText{font-family:var(--body,"Chakra Petch"),sans-serif}.motion-comic .cs-lines{gap:4px}
+.in-cut #banner{display:none!important}
+.progression-panel{max-width:900px}

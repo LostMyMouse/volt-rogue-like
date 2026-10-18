@@ -85,7 +85,7 @@ const QUOTES = {
 };
 const pick = a => a[Math.floor(Math.random()*a.length)];
 // Which villain taunts a D rank: whoever's attack landed the final blow, else Gravemark.
-function villainFor(src){ for (const id in BOSSES) if (BOSSES[id].cause && BOSSES[id].cause[src]) return id; return 'gravemark'; }
+function villainFor(src){ for (const id in BOSSES) if (BOSSES[id].cause && BOSSES[id].cause[src]) return id; return null; }
 function bossAdvice(src){ for (const id in BOSSES) if (BOSSES[id].advice && BOSSES[id].advice[src]) return BOSSES[id].advice[src]; return null; }
 function causeText(src){ if (CAUSE[src]) return CAUSE[src]; for (const id in BOSSES) if (BOSSES[id].cause && BOSSES[id].cause[src]) return BOSSES[id].cause[src]; return 'the rooftop'; }
 // Comms portraits: a real image in assets/portraits/<id>.png wins; until then each speaker gets a drawn bust
@@ -143,7 +143,7 @@ function fillResults(){
   for (const b of owned){ const c=document.createElement('span'); c.className='boon-chip'; c.textContent=b.name; c.style.setProperty('--c',b.c||COL.boon); boons.appendChild(c); }
   let pool;
   if (run.won) pool=QUOTES.won;
-  else if (rk.r==='D'){ const v=villainFor(run.lastHit); pool = v==='gravemark' ? QUOTES.villain : BOSSES[v].quotes.map(l=>[v,l]); }
+  else if (rk.r==='D'){ const v=villainFor(run.lastHit); pool = !v ? QUOTES.mid : v==='gravemark' ? QUOTES.villain : BOSSES[v].quotes.map(l=>[v,l]); }
   else if (rk.r==='S'||rk.r==='A') pool=QUOTES.high;
   else { const adv=QUOTES[run.lastHit] || bossAdvice(run.lastHit); pool = (adv && Math.random()<0.65) ? adv : QUOTES.mid; }
   const [who,line]=pick(pool), sp=SPEAKERS[who];
@@ -182,7 +182,7 @@ function startFromSplash(){
   audioUnlock();
   goFullscreen(); show('#splash',false); show('#mSlots',false);
   // First launch: the opening cutscene, then the Fortress.
-  if (!save.seenIntro) playCutscene(()=>enterHub()); else enterHub();
+  if (save.seenIntro!==2) playCutscene(()=>enterHub()); else enterHub();
 }
 let confirmOk=null;
 function askConfirm(tag,title,text,ok,run){ $('#confirmTag').textContent=tag; $('#confirmTitle').textContent=title; $('#confirmText').textContent=text; $('#btnConfirmOk').textContent=ok; confirmOk=run; show('#mConfirm',true); $('#btnConfirmBack').focus(); }
