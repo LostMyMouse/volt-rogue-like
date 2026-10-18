@@ -60,7 +60,7 @@ function randomLayout(){
 function buildRoom(){
   districtPainting(curDistrict());
   obstacles = finishObstacles(PAINTED_LAYOUT.map(b=>Object.assign({},b)));
-  floorTint = DISTRICTS[curDistrict()] ? DISTRICTS[curDistrict()].tint : pick(FLOOR_TINTS);
+  floorTint = arenaTheme() ? DISTRICTS[curDistrict()].tint : FLOOR_TINTS[0];
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }
   obstacles=obstacles.filter(o=>o.kind!=='ice');

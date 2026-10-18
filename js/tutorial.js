@@ -3,16 +3,16 @@
 // through it. Finishing (or skipping) a first-time session goes straight into a real run.
 'use strict';
 
-const TUT_PAD = {"move": "Use the <kbd>left stick</kbd> to move around the roof.", "strike": "Press <kbd>X</kbd> to Strike the training dummy. Hold it to keep swinging.", "special": "Press <kbd>Y</kbd> for your Special. Each style has a different one.", "dash": "Press <kbd>A</kbd> to dash. You can't be hurt mid-dash.", "parry": "Tap <kbd>RB</kbd> as the white ring closes: no damage, reflected shots, Dash reset and Overload charge.", "composure":"Parry with <kbd>RB</kbd> again. Empty the gold bar for a three-second stagger and double damage. Attacks chip it; parries crush it.", "overload": "Overload is charged. Press <kbd>LB</kbd> to blast everything nearby.", "clear": "Clear the roof."};
+const TUT_PAD = {"move": "Use the <kbd>left stick</kbd> to move around the training floor.", "strike": "Press <kbd>X</kbd> to Strike the training dummy. Hold it to keep swinging.", "special": "Press <kbd>Y</kbd> for your Special. Each style has a different one.", "dash": "Press <kbd>A</kbd> to dash. You can't be hurt mid-dash.", "parry": "Tap <kbd>RB</kbd> as the white ring closes: no damage, reflected shots, Dash reset and Overload charge.", "composure":"Parry with <kbd>RB</kbd> again. Empty the gold bar for a three-second stagger and double damage. Attacks chip it; parries crush it.", "overload": "Overload is charged. Press <kbd>LB</kbd> to blast everything nearby.", "clear": "Clear the training floor."};
 const TUT_STEPS = [
-  { id:'move',   title:'Move',     kb:'Use <kbd>WASD</kbd> to move around the roof.', touch:'Drag anywhere on the left side of the screen to move.', say:"Let's see you move. And no climbing anything." },
+  { id:'move',   title:'Move',     kb:'Use <kbd>WASD</kbd> to move around the training floor.', touch:'Drag anywhere on the left side of the screen to move.', say:"Let's see you move. And no climbing anything." },
   { id:'strike', title:'Strike',   kb:'<kbd>Left click</kbd> to Strike the training dummy. Hold it to keep swinging.', touch:'Tap <b>Strike</b> to hit the dummy. Hold it to keep swinging.', say:"That dummy's survived forty rookies. Ruin its streak." },
   { id:'special',title:'Special',  kb:'<kbd>Right click</kbd> for your Special. Each style has a different one.', touch:'Tap <b>Special</b>. Each style has a different one.', say:"Now your Special. Every style's is different. Let's find out what yours does." },
   { id:'dash',   title:'Dash',     kb:'<kbd>Space</kbd> to dash. You can\'t be hurt mid-dash.', touch:'Tap <b>Dash</b>. You can\'t be hurt mid-dash.', say:"Dash. You're untouchable for half a second. Make the half second count." },
   { id:'parry', title:'Catch the white ring', kb:'Tap <kbd>Shift</kbd> as the white ring closes. A parry prevents damage, reflects shots, resets Dash and charges Overload.', touch:'Tap <b>Block</b> as the white ring closes. Parries stop damage, reset Dash and charge Overload.', say:"Watch the white ring. Tap Block as it closes. A parry stops damage, reflects shots, resets your dash and charges Overload. Now catch one." },
   { id:'composure', title:'Break their Composure', kb:'Parry again to empty the gold Composure bar. Strikes chip it down; parries remove a large chunk. A break staggers the enemy for three seconds and doubles your damage.', touch:'Parry again. Empty the gold <b>Composure</b> bar for a three-second stagger and <b>double damage</b>. Strikes chip it; parries crush it.', say:"That took a chunk of his Composure. Strikes chip it away. Parries crush it. Empty the gold bar and he staggers for three seconds. Your hits deal double damage." },
   { id:'overload',title:'Overload',kb:'Overload is charged. Press <kbd>Q</kbd> to blast everything nearby.', touch:'Overload is charged. Tap <b>Ovld</b> to blast everything nearby.', say:"Overload's full. Let it rip." },
-  { id:'clear',  title:'Finish them', kb:'Clear the roof.', touch:'Clear the roof.', say:"Last ones. Then you're on the clock for real." },
+  { id:'clear',  title:'Finish them', kb:'Clear the training floor.', touch:'Clear the training floor.', say:"Last ones. Then you're on the clock for real." },
 ];
 let tut=null;
 const inTutorial = () => !!tut;
@@ -26,9 +26,11 @@ function startTutorial(first){
   R.windMul=(R.windMul||1)*2.2; // everything winds up slowly while you learn
   player.x=ARENA.w/2; player.y=ARENA.h*0.8;
   tut={ i:-1, first, moved:0, lx:player.x, ly:player.y, hits:0, dashes:0, wasDash:false, lastHp:0 };
+  practice=false;if($('#practiceControls'))$('#practiceControls').hidden=true;
+  obstacles=armouryObstacles();supplyCrates=[];fieldDrops=[];
   document.body.classList.add('tutorial-mode');
   roomPhase='tutorial'; state='play';
-  if(inputMode==='touch')$('#banner').classList.remove('show');else banner('TRAINING ROOF'); show('#tut',true);
+  if(inputMode==='touch')$('#banner').classList.remove('show');else banner('ARMOURY TRAINING'); show('#tut',true);
   tutNext();
 }
 function tutSpawn(n,opt={}){
@@ -95,6 +97,6 @@ function finishTutorial(skipped){
   save.tutorialDone=1; writeSave();
   if (!skipped) banner('TRAINING COMPLETE');
   // First time: straight into a real run. Replays go back to the Fortress.
-  setTimeout(()=>{ if (first) startGame(); else enterHub(); }, skipped?0:1400);
+  setTimeout(()=>{ if (first) startGame(); else enterPracticeRoom(); }, skipped?0:1400);
 }
 $('#tutSkip').addEventListener('click', () => finishTutorial(true));

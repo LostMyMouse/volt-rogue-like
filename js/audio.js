@@ -5,7 +5,7 @@
 'use strict';
 
 const AUDIO = { ctx:null, buses:{}, buffers:{}, loading:{}, music:null, musicName:null, amb:null, ambName:null, voice:null, unlocked:false, html:location.protocol==='file:', lastSfx:{}, barkT:0 };
-const VOL = () => ({music:(T.musicVol??0.35)*0.65,sfx:T.sfxVol??0.75,voice:T.voiceVol??0.9});
+const VOL = () => ({music:(T.musicVol??0.35)*0.65,sfx:(T.sfxVol??0.75)*0.55,voice:(T.voiceVol??0.9)*0.65});
 
 // FNV-1a: the same hash the generator used to name voice files.
 function voiceKey(who,text){ let h=0x811c9dc5; for (const b of new TextEncoder().encode(who+'|'+text)){ h^=b; h=Math.imul(h,0x01000193)>>>0; } return who+'_'+h.toString(16).padStart(8,'0'); }
