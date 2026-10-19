@@ -1,6 +1,6 @@
 'use strict';
 // The cover is an opening state, not a spoken story beat. Existing narration stays intact.
-// Halo leads the Vanguard; preserve her first introduction after the team spread.
+// Preserve Halo’s first introduction after the team spread.
 CUTSCENE.splice(0,CUTSCENE.length,...COMIC_BEATS.map(b=>({...b,who:'volt'})));
 const COMIC_COVER=new Image();COMIC_COVER.src='assets/comic/volt-cover-v1.webp';
 comicImage('halo');
@@ -46,39 +46,6 @@ function drawComicCover(){
  ctx.save();ctx.globalAlpha=Math.min(1,c.t/1.1);ctx.shadowColor='#000';ctx.shadowBlur=24;ctx.shadowOffsetY=10;
  if(COMIC_COVER.complete&&COMIC_COVER.naturalWidth)ctx.drawImage(COMIC_COVER,box.x,box.y,box.w,box.h);ctx.restore();ctx.fillStyle='#c7d7df';ctx.font='600 13px sans-serif';ctx.textAlign='center';ctx.fillText(comic.auto?'Issue #1 - Opening in a moment...':'Issue #1 - Tap Open comic to begin',W/2,H-12);
 }
-// Brief, unvoiced character speech accompanies the existing Volt narration.
-// Each entry follows the four actions in that character's illustrated sequence.
-const COMIC_BUBBLES={
- echo:[['echo','Duck. Yes, before you hear it.'],['echo','Your aim is extremely loud.'],['echo','Try pointing that somewhere useful.'],['echo',"You're welcome. Remember this bit."]],
- halo:[['halo',"Stay behind me. I've got you."],['halo','Eyes on me. Away from them.'],['halo','You want a target? Here.'],['halo',"Everyone out. I'm right behind you."]],
- bastion:[['bastion','Nobody gets past this point.'],['bastion','Stay together. Keep moving.'],['bastion','That was my six inches.'],['bastion',"Line held. Don't look so surprised."]],
- thorn:[['thorn','This way. Mind the roots.'],['thorn',"They're alive. Try asking nicely."],['thorn','You should have left them alone.'],['thorn',"Go. I'll keep the path open."]],
- patch:[['patch',"Nobody touch the exposed wire."],['patch','Of course it needs a bypass.'],['patch','Tools. Patience. Mild swearing.'],['patch',"There. Try not to break it."]],
- kilnheart:[['kilnheart','You call that a barricade?'],['kilnheart','Stand back. Or be moved.'],['kilnheart',"Let's open this district up."],['kilnheart',"Your heroes built nothing that lasts."]],
- bellwether:[['bellwether','Everyone quiet. My turn.'],['bellwether',"Let's hear the city crack."],['bellwether','No talking over the performance.'],['bellwether',"Still breathing? There's an encore."]],
- verdigris:[['verdigris','Such faith in solid walls.'],['verdigris','Steel gives way. So will you.'],['verdigris','Look how easily it comes apart.'],['verdigris',"Nothing you hide behind will last."]],
- glasswake:[['glasswake',"Certain that's me?"],['glasswake','A little further. Nearly there.'],['glasswake','Wrong again.'],['glasswake',"I only need you to hesitate."]],
- undertow:[['undertow','The docks are closed.'],['undertow',"Careful. Nothing here holds steady."],['undertow','Down you go.'],['undertow',"Take your time getting up."]],
- gravemark:[['gravemark','Small steps. Small hero.'],['gravemark','The roof comes to me.'],['gravemark','Nowhere higher to run.'],['gravemark','Stay down. Save the city time.']],
- redactor:[['redactor','How reassuring. A registered hero.'],['redactor',"You may stop struggling now."],['redactor','I prefer a quieter city.'],['redactor',"There. Doesn't that feel orderly?"]],
- volt:[['volt',"Okay. Heavy sign. Very heavy sign."],['volt',"I can help. Just… give me a second."],['volt','Please work. People are watching.'],['volt',"All good! Mostly. We're mostly good."]],
- crisis:[['volt',"That's my street."],['volt',"They need help out there."],['volt',"Right. Fortress. Ask the professionals."],['volt',"Nerves later. People first."]],
- arrival:[['volt',"Front door. Obviously locked."],['volt',"Sixty floors. Great first impression."],['patch',"No registered signature. Interesting."],['volt',"Training first. Extremely fair, actually."]],
-};
-const BUBBLE_ANCHORS={echo:[.72,.78,.43,.25],halo:[.23,.78,.55,.36],bastion:[.75,.2,.5,.43],thorn:[.73,.2,.46,.4],patch:[.72,.2,.44,.4],volt:[.72,.2,.4,.48],arrival:[.25,.2,.5,.5]};
-function drawComicBubble(){
- if(!comic||comic.cover||comic.spread||comic.loading||comic.t<(COMIC_CHAPTERS[comic.i]?3.3:1.3))return;
- const b=COMIC_BEATS[comic.i],entry=COMIC_BUBBLES[b.id]?.[comic.phase];if(!entry)return;
- const [who,line]=entry,p=comicPanel(comic.phase),box=comicView(),a=BUBBLE_ANCHORS[b.id]||[.25,.2,.55,.5],z=comic.cam.z;
- const font=clamp(Math.min(W,H)*.036,13,19),width=Math.min(270,Math.max(155,box.w*.32)),lines=[];ctx.font=`700 ${font}px "Chakra Petch",sans-serif`;
- let current='';for(const word of line.split(' ')){const next=current?current+' '+word:word;if(ctx.measureText(next).width>width-28&&current){lines.push(current);current=word;}else current=next;}if(current)lines.push(current);
- const height=lines.length*font*1.22+31,x=clamp(box.x+box.w/2+(p.x+p.w*a[0]-comic.cam.x)*z-width/2,box.x+8,box.x+box.w-width-8),y=clamp(box.y+box.h/2+(p.y+p.h*a[1]-comic.cam.y)*z-height/2,box.y+8,box.y+box.h-height-16);
- const tx=clamp(box.x+box.w/2+(p.x+p.w*a[2]-comic.cam.x)*z,x+12,x+width-12),targetY=box.y+box.h/2+(p.y+p.h*a[3]-comic.cam.y)*z,above=targetY<y,edge=above?y:y+height,ty=above?Math.max(box.y+3,y-36):Math.min(box.y+box.h-3,y+height+36);
- ctx.save();ctx.beginPath();ctx.rect(box.x,box.y,box.w,box.h);ctx.clip();ctx.fillStyle='#fff9e9';ctx.strokeStyle='#080b10';ctx.lineWidth=3;ctx.beginPath();ctx.roundRect(x,y,width,height,16);ctx.fill();ctx.stroke();
- ctx.beginPath();ctx.moveTo(x+width*.35,edge+(above?2:-2));ctx.lineTo(tx,ty);ctx.lineTo(x+width*.35+18,edge+(above?2:-2));ctx.fill();ctx.stroke();ctx.fillRect(x+width*.35+2,edge-3,14,6);
- ctx.textAlign='left';ctx.textBaseline='top';ctx.fillStyle='#46515a';ctx.font='800 10px sans-serif';ctx.fillText((SPEAKERS[who]?.name||who).toUpperCase(),x+14,y+8);ctx.fillStyle='#121821';ctx.font=`700 ${font}px "Chakra Petch",sans-serif`;lines.forEach((s,i)=>ctx.fillText(s,x+14,y+23+i*font*1.22));ctx.restore();
- comic.lastBubble={who,line,x,y,width,height,view:box};
-}
 function drawComicPageTurn(){
  const tr=comic.pageTurn,box=tr.box,im=tr.spread?COMIC_SPREADS[tr.spread]:comicImage(COMIC_BEATS[tr.to].id);ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);
  if(tr.spread)paintComicSpread(tr.spread,0);else{const ratio=Math.min((box.w-18)/im.naturalWidth,(box.h-18)/im.naturalHeight),w=im.naturalWidth*ratio,h=im.naturalHeight*ratio;ctx.drawImage(im,box.x+(box.w-w)/2,box.y+(box.h-h)/2,w,h);}
@@ -91,7 +58,7 @@ function spreadCamera(kind,t){
 function paintComicSpread(kind,t){
  const im=COMIC_SPREADS[kind],box=spreadView();if(!im.complete||!im.naturalWidth)return;const ratio=W>H?box.w/im.naturalWidth:Math.min(box.w/im.naturalWidth,box.h/im.naturalHeight),w=im.naturalWidth*ratio,h=W>H?box.h:im.naturalHeight*ratio,x=(W-w)/2,y=box.y+(box.h-h)/2,c=spreadCamera(kind,t),sw=im.naturalWidth*ratio*c.z,sh=im.naturalHeight*ratio*c.z,dx=clamp(x+w/2-c.x*sw,x+w-sw,x),dy=clamp(y+h/2-c.y*sh,y+h-sh,y);
  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.drawImage(im,dx,dy,sw,sh);ctx.restore();ctx.strokeStyle='#e7d8b3';ctx.lineWidth=2;ctx.strokeRect(x-2,y-2,w+4,h+4);ctx.fillStyle=kind==='heroes'?'#eecf79':'#e68176';ctx.textAlign='center';ctx.font='900 '+clamp(W*.033,20,36)+'px "Big Shoulders Display",Impact,sans-serif';ctx.fillText(kind==='heroes'?'THE VANGUARD':'THE CITY UNDER SIEGE',W/2,box.y-8);
- ctx.fillStyle='#d8e1e6';ctx.font='600 '+clamp(W*.016,11,15)+'px sans-serif';const part=t/SPREAD_HOLD[kind];const label=kind==='heroes'?(part<.3?'Halo leads the Vanguard.':part<.48?'Halo - the city’s shield.':part<.65?'Bastion and Thorn - hold the line, make a way.':part<.86?'Echo and Patch - rescue, repair, repeat.':'Halo. Bastion. Echo. Thorn. Patch.'):'The Redactor and the villains taking the city.';ctx.fillText(label,W/2,H-13);
+ ctx.fillStyle='#d8e1e6';ctx.font='600 '+clamp(W*.016,11,15)+'px sans-serif';const part=t/SPREAD_HOLD[kind];const label=kind==='heroes'?(part<.3?'':part<.48?'Halo - the city’s shield.':part<.65?'Bastion and Thorn - hold the line, make a way.':part<.86?'Echo and Patch - rescue, repair, repeat.':'Halo. Bastion. Echo. Thorn. Patch.'):'The Redactor and the villains taking the city.';ctx.fillText(label,W/2,H-13);
 }
 function drawComicSpread(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.fillStyle='#080d16';ctx.fillRect(0,0,W,H);paintComicSpread(comic.spread.kind,comic.spread.t);}
-renderCinematic=function(){if(comic?.cover){drawComicCover();return;}if(comic?.pageTurn){drawComicPageTurn();return;}if(comic?.spread){drawComicSpread();return;}storyRenderComic();drawComicBubble();};
+renderCinematic=function(){if(comic?.cover){drawComicCover();return;}if(comic?.pageTurn){drawComicPageTurn();return;}if(comic?.spread){drawComicSpread();return;}storyRenderComic();drawComicLettering();};
