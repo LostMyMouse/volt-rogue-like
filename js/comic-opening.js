@@ -8,7 +8,7 @@ const COMIC_SPREADS={heroes:new Image(),villains:new Image()};
 COMIC_SPREADS.heroes.src='assets/comic/vanguard-spread-v1.webp';COMIC_SPREADS.villains.src='assets/comic/villains-spread-v1.webp';
 const VANGUARD_WORDMARK=new Image();VANGUARD_WORDMARK.src='assets/comic/vanguard-wordmark.svg';
 const COVER_TIMING={hold:4.2,zoom:.9,turn:1.6};
-const COMIC_PAGE_TURN=1.45,SPREAD_HOLD={heroes:18,villains:6};
+const COMIC_PAGE_TURN=1.45,SPREAD_HOLD={heroes:3,villains:3};
 const storyPlayComic=playCutscene,storyNextComic=nextCutPanel,storyUpdateComic=updateCinematic,storyRenderComic=renderCinematic,storyEndComic=endCutscene;
 playCutscene=function(done){storyPlayComic(done);if(!comic)return;stopVoice();comic.i=-1;comic.t=0;comic.cover={t:0,turning:false,turnT:0};$('#cutscene').dataset.cover='true';$('#csNext').textContent='Open comic →';};
 function openComicBook(){if(!comic?.cover||comic.cover.turning||comic.cover.t<.8)return;comic.cover.turning=true;comic.cover.zoomT=0;comic.cover.turnT=0;}

@@ -258,9 +258,10 @@ function drawHubNpcSprite(n){
   // Heroes keep to their own business; they only turn to Volt while you're talking to them.
   const face = talk && talk.npc===n.id ? Math.atan2(player.y-n.y,player.x-n.x) : n.face;
   ctx.save();
-  ctx.globalAlpha=near?0.9:0.45; ctx.strokeStyle=c; ctx.lineWidth=near?3:2; ctx.beginPath(); ctx.ellipse(n.x,n.y,26,10,0,0,PI2); ctx.stroke();
-  ctx.globalAlpha=0.5; ctx.fillStyle='#000'; ctx.beginPath(); ctx.ellipse(n.x,n.y,20,7,0,0,PI2); ctx.fill(); ctx.globalAlpha=1;
-  drawNpcSprite(n.id,n.x,n.y,face,{talking:!!(talk && talk.npc===n.id && talk.pages[talk.i]?.who===n.id)});
+  // A contact shadow sits on the floor; no permanent luminous hover ring.
+  if(near){ctx.globalAlpha=.55;ctx.strokeStyle=c;ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(n.x,n.y+1,26,9,0,0,PI2);ctx.stroke();}
+  ctx.globalAlpha=0.5; ctx.fillStyle='#000'; ctx.beginPath(); ctx.ellipse(n.x,n.y+1,23,6,0,0,PI2); ctx.fill(); ctx.globalAlpha=1;
+  drawNpcSprite(n.id,n.x,n.y,face,{grounded:true,talking:!!(talk && talk.npc===n.id && talk.pages[talk.i]?.who===n.id)});
   if (near || d<200){
     const y=n.y-92; ctx.globalAlpha=near?1:0.7;
     ctx.font='700 13px "Chakra Petch", sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';

@@ -101,7 +101,7 @@ function comicPose(name,c,elapsed,frame){
   if(/idle|talk|react|intro|phase_change/.test(name))return 0;
   return at<(c.key_frame??Math.floor(c.frames/2))?3:4;
 }
-function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
+function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null,options={}){
   let a=comicAtlas(id);if(!a?.ready)return false;
   const s=SPRITES[id],c=ANIMATION_DATA[id]?.[name]||{frames:4,fps:8,loop:true};
   const moving=/^(run|walk)$/.test(name),jog=null;
@@ -114,7 +114,7 @@ function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
   const cell=a.cells[row][pose],worldHeight=s.frame*(id==='needle'?.8:.94),ratio=worldHeight/(moving?cell.h:a.reference[row])*scale;
   let sheet=cell.img||a.img;
   if(tint){const owner=cell.img?cell:a,key=tint==='white'?'white':'ghost';if(!owner[key])owner[key]=tintSheet(sheet,tint==='white'?'#ffffff':COL.volt);sheet=owner[key];}
-  const bob=name==='idle'?-Math.sin(elapsed*2.4)*1.2*scale:0;
+  const bob=name==='idle'&&!options.grounded?-Math.sin(elapsed*2.4)*1.2*scale:0;
   const ax=moving?(cell.cx??cell.ax):cell.ax,ay=id==='needle'?cell.y+cell.h/2:cell.ay;
   ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   if(weaponAttack){const k=Math.sin(progress*Math.PI),travel={brawler:6,caster:-4,titan:11,speedster:19,magnetar:4}[run.style];ctx.translate(Math.cos(face)*travel*k,Math.sin(face)*travel*k);if(run.style==='titan'){ctx.translate(x,y);ctx.scale(1+k*.045,1-k*.035);ctx.translate(-x,-y);}}
@@ -124,8 +124,8 @@ function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
   ctx.restore();return true;
 }
 const pixelDrawAnimation=drawAnimation,pixelDrawTurn=drawTurn,pixelAnimationClip=animationClip;
-drawAnimation=function(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null){
-  if(drawComicPose(id,name,x,y,face,scale,elapsed,frame,tint))return true;
+drawAnimation=function(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null,options={}){
+  if(drawComicPose(id,name,x,y,face,scale,elapsed,frame,tint,options))return true;
   // The legacy hook sheet contains fragments of neighbouring bodies. Use the clean turn while loading.
   if(id==='undertow'&&name==='glacier_hook')return pixelDrawTurn(id,x,y,face,scale);
   return pixelDrawAnimation(id,name,x,y,face,scale,elapsed,frame,tint);
