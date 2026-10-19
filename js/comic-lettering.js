@@ -3,7 +3,7 @@
 // not against the screen. The page camera projects all three together.
 // These printed lines are unvoiced; Volt's recorded narration is unchanged.
 const COMIC_LETTERING={
- halo:{speech:{0:{text:'Behind me. Keep moving.',mouth:[0.394,0.252],at:[.72,.12]}}},
+ halo:{speech:{0:{text:'Get behind me',mouth:[0.394,0.252],at:[.72,.12]}}},
  bastion:{speech:{3:{text:'Everyone through?',mouth:[0.604,0.237],at:[.20,.15]}}},
  echo:{speech:{0:{text:'Down. Now.',mouth:[0.41,0.241],at:[.74,.13]}}},
  thorn:{speech:{3:{text:'The way is clear. Go.',mouth:[0.61,0.122],at:[.20,.13]}}},
@@ -13,7 +13,7 @@ const COMIC_LETTERING={
  verdigris:{speech:{}},
  glasswake:{speech:{2:{text:'Wrong one.',mouth:[0.417,0.196],at:[.76,.12]}}},
  undertow:{speech:{0:{text:'The docks are mine.',mouth:[0.335,0.163],at:[.80,.13]}}},
- gravemark:{speech:{3:{text:'Stay down.',mouth:[0.55,0.207],at:[.79,.14]}}},
+ gravemark:{speech:{3:{text:'Target eliminated',mouth:[0.55,0.207],at:[.79,.14]}}},
  redactor:{speech:{3:{text:'You can rest now.',mouth:[0.831,0.163],at:[.40,.13]}}},
  volt:{speech:{3:{text:'Just glad you’re okay.',mouth:[0.585,0.215],at:[.18,.13]}}},
  crisis:{speech:{0:{text:'That’s our street.',mouth:[0.473,0.311],at:[.76,.13]}}},
@@ -63,13 +63,15 @@ function drawComicBubble(){
  const height=lines.length*font*1.22+24;
  if(height>bounds.bottom-bounds.y-10)return;
  const x=clamp(at.x-width/2,bounds.x,bounds.right-width),y=clamp(at.y-height/2,bounds.y,bounds.bottom-height),cx=x+width/2,cy=y+height/2,rx=width/2,ry=height/2;
- // Don't place speech over the speaker's face. Its tail ends at the authored mouth.
+ // Point toward the speaker, leaving breathing room around the face.
  if(Math.hypot((mouth.x-cx)/rx,(mouth.y-cy)/ry)<1.16)return;
  const angle=Math.atan2((mouth.y-cy)/ry,(mouth.x-cx)/rx),gap=.13;
+ const edge={x:cx+Math.cos(angle)*rx,y:cy+Math.sin(angle)*ry},dx=mouth.x-edge.x,dy=mouth.y-edge.y,distance=Math.hypot(dx,dy);
+ const length=Math.min(clamp(540*comic.cam.z*.10,14,32),distance*.48),tail={x:edge.x+dx/distance*length,y:edge.y+dy/distance*length};
  ctx.save();ctx.fillStyle='#fff9e9';ctx.strokeStyle='#090d16';ctx.lineWidth=clamp(comic.cam.z*8,2,3.5);ctx.lineJoin='round';
- ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,angle+gap,angle+Math.PI*2-gap);ctx.lineTo(mouth.x,mouth.y);ctx.closePath();ctx.fill();ctx.stroke();
+ ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,angle+gap,angle+Math.PI*2-gap);ctx.lineTo(tail.x,tail.y);ctx.closePath();ctx.fill();ctx.stroke();
  ctx.fillStyle='#111722';ctx.font=face;ctx.textAlign='center';ctx.textBaseline='middle';lines.forEach((line,i)=>ctx.fillText(line,cx,cy+(i-(lines.length-1)/2)*font*1.22));ctx.restore();
- comic.lastBubble={who:b.id==='arrival'?'bastion':b.id==='crisis'?'volt':b.id,line:entry.text,x,y,width,height,view:comicView(),mouth,authoredMouth:entry.mouth,phase:comic.phase};
+ comic.lastBubble={who:b.id==='arrival'?'bastion':b.id==='crisis'?'volt':b.id,line:entry.text,x,y,width,height,view:comicView(),mouth,tail,authoredMouth:entry.mouth,phase:comic.phase};
 }
 function drawComicImpact(){
  comic.lastImpact=null;
