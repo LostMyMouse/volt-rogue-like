@@ -1,7 +1,8 @@
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert');
 const{chromium}=require(process.env.VOLT_PLAYWRIGHT_PATH||'playwright');const root=path.join(__dirname,'../..'),out=path.join(root,'test-results');fs.mkdirSync(out,{recursive:true});
-(async()=>{const server=http.createServer((q,r)=>{const file=path.join(root,new URL(q.url,'http://local').pathname);fs.readFile(file.endsWith(path.sep)?file+'index.html':file,(e,b)=>{r.statusCode=e?404:200;r.end(e?'missing':b);});});await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:'chrome',headless:true});try{
+(async()=>{const server=http.createServer((q,r)=>{const file=path.join(root,new URL(q.url,'http://local').pathname);fs.readFile(file.endsWith(path.sep)?file+'index.html':file,(e,b)=>{r.statusCode=e?404:200;if(q.url.split('?')[0].endsWith('.svg'))r.setHeader('Content-Type','image/svg+xml');r.end(e?'missing':b);});});await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:'chrome',headless:true});try{
  const p=await browser.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:'+server.address().port+'/?debug&nointro');await p.waitForFunction(()=>window.__voltBootReady);await p.locator('#btnStart').click();await p.evaluate(()=>{window.__volt.noIntro=false;playCutscene(()=>enterHub());comic.auto=false;comic.cover=null;delete $('#cutscene').dataset.cover;comic.i=-1;storyNextComic();});await p.waitForFunction(()=>COMIC_BEATS.every(b=>comicImage(b.id).complete&&comicImage(b.id).naturalWidth));
+ assert.equal(await p.evaluate(()=>COMIC_LETTERING.halo.speech[0].text),'Get behind me');assert.equal(await p.evaluate(()=>COMIC_LETTERING.gravemark.speech[3].text),'Target eliminated');
  const report=[];
  for(const size of [{width:1280,height:800},{width:667,height:375},{width:844,height:390},{width:390,height:844}]){
   await p.setViewportSize(size);await p.evaluate(()=>new Promise(r=>requestAnimationFrame(r)));
@@ -15,7 +16,7 @@ const{chromium}=require(process.env.VOLT_PLAYWRIGHT_PATH||'playwright');const ro
      renderCinematic();const expected=!!COMIC_LETTERING[b.id]?.speech[phase],bubble=comic.lastBubble;
      if(expected&&!bubble)throw Error('Missing authored bubble '+b.id+' '+phase+' '+W+'x'+H);
      if(!expected&&bubble)throw Error('Unexpected bubble');
-     if(bubble){const mouth=comicPoint(COMIC_LETTERING[b.id].speech[phase].mouth);if(Math.hypot(mouth.x-bubble.mouth.x,mouth.y-bubble.mouth.y)>.01)throw Error('Tail detached');}
+     if(bubble){const mouth=comicPoint(COMIC_LETTERING[b.id].speech[phase].mouth);if(Math.hypot(mouth.x-bubble.mouth.x,mouth.y-bubble.mouth.y)>.01)throw Error('Speaker reference detached');if(Math.hypot(mouth.x-bubble.tail.x,mouth.y-bubble.tail.y)<10)throw Error('Tail touches face');}
      comic.t-=2.3;renderCinematic();const impact=comic.lastImpact;
      rows.push({id:b.id,phase,expected,bubble,impact});
     }
