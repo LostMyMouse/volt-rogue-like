@@ -424,7 +424,7 @@ function drawAnimatedNpc(id,x,y,face,options={}){
   if (n.override){const c=ANIMATION_DATA[id][n.override];if(time-n.overrideAt<c.frames/c.fps)name=n.override;else n.override=null;}
   if (name!==n.name){n.name=name;n.t0=time;}
   n.x=x;n.y=y;NPC_MOTION.set(id,n);
-  if (!drawAnimation(id,name,x,y,stickyFace(id,face),SPRITES[id].scale,time-n.t0))drawTurn(id,x,y,face);
+  if (!drawAnimation(id,name,x,y,stickyFace(id,face),SPRITES[id].scale,time-n.t0,null,null,options))drawTurn(id,x,y,face);
 }
 // Corpses are visual-only snapshots. No collision, damage, drops or encounter timing changes.
 const PREVIOUS_SPRITE_ACTORS=new Set();let SPRITE_CORPSES=[],SPRITE_LAST_TIME=-1;
