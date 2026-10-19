@@ -62,7 +62,7 @@ nextCutPanel=function(){
  if(comic.i>=0&&comic.t<.35)return;
  stopVoice();
  if(++comic.i>=COMIC_BEATS.length){endCutscene();return;}
- comic.t=0;comic.phase=0;comic.voiceStarted=false;comic.voiceSeen=false;comic.voiceEndedAt=null;comic.loading=true;comic.lastPhase=-1;
+ comic.t=0;comic.phase=0;comic.voiceStarted=false;comic.voiceSeen=false;comic.voiceEndedAt=null;comic.loading=true;comic.lastPhase=-1;comic.enteredFromTurn=false;
  const b=COMIC_BEATS[comic.i];comicImage(b.id);
  prepareVoice('volt',b.text);
  const context=comicContext(comic.i);
@@ -84,7 +84,7 @@ updateCinematic=function(dt){
  c.phase=b.frames?b.frames[c.t<COMIC_TIMING.twoPanelChange?0:1]:c.t<COMIC_TIMING.panelStarts[1]?0:c.t<COMIC_TIMING.panelStarts[2]?1:c.t<COMIC_TIMING.panelStarts[3]?2:3;
  if(c.phase!==c.lastPhase){c.lastPhase=c.phase;if(!reduceMotion&&c.phase===1)sfx(b.id==='crisis'?'broadcast':'block',{vol:.28});if(c.phase===2){const sound={electric:'lightning',stone:'stone',fire:'fire',sound:'sound',acid:'acid',glass:'glass',ice:'ice',drain:'redact',repair:'special',mind:'sound',plant:'acid',shield:'block',light:'beam'};sfx(sound[b.el]||'enemyhit',{vol:.22});}}
  const p=comicPanel(c.phase),box=comicView(),target={x:p.x+p.w/2,y:p.y+p.h/2,z:Math.min(box.w/p.w,box.h/p.h)*.96};
- if(c.t<COMIC_TIMING.overview&&!b.hold){target.x=970;target.y=550;target.z=Math.min(box.w/1940,box.h/1100)*.95;}
+ if(c.t<COMIC_TIMING.overview&&!b.hold&&!c.enteredFromTurn){target.x=970;target.y=550;target.z=Math.min(box.w/1940,box.h/1100)*.95;}
  const k=reduceMotion?1:1-Math.exp(-dt*COMIC_TIMING.cameraRate);for(const key of ['x','y','z'])c.cam[key]+=(target[key]-c.cam[key])*k;
  // Let the camera establish the panel before the narration starts.
  if(!c.voiceStarted&&c.t>COMIC_TIMING.narrationDelay){c.voiceStarted=true;playVoice('volt',b.text);}
