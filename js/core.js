@@ -62,20 +62,21 @@ buildTune();
 // existed moves into slot 1.
 const SLOT_COUNT=3;
 let activeSlot=1;
-try { activeSlot=clamp(+localStorage.getItem('volt-slot')||1,1,SLOT_COUNT);
+try { activeSlot=clamp(Math.floor(+localStorage.getItem('volt-slot')||1),1,SLOT_COUNT);
   const old=localStorage.getItem('volt-save'); if (old && !localStorage.getItem('volt-save-1')){ localStorage.setItem('volt-save-1',old); localStorage.removeItem('volt-save'); } } catch(e){}
 let SAVE_KEY='volt-save-'+activeSlot;
+let saveRecoveryNotice='';
 function loadSave(){
-  const base={v:1, shards:0, meta:{}, runs:0, best:null, licences:0, unlocked:['brawler'], style:'brawler', met:{heroes:[], villains:{}}, talk:{}, beaten:{}, last:null, story:{}, killedBy:{}, wins:0, comm:{}};
-  try { const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null'); if (s && s.v===1) return Object.assign(base,s); } catch(e){}
-  return base;
+ for(const suffix of['','-backup']){try{const raw=localStorage.getItem(SAVE_KEY+suffix);if(!raw)continue;const data=normaliseSave(JSON.parse(raw));if(data){if(suffix)saveRecoveryNotice='Recovered the previous good save. Export a backup from Save Slots.';return data;}saveRecoveryNotice='This save could not be read. A fresh slot is available; the original data has been kept for recovery.';}catch{saveRecoveryNotice='Save recovery was needed. Open Save Slots to manage backups.';}}
+ return freshSave();
 }
 const save=loadSave();
-function writeSave(){ save.updated=Date.now(); try{ localStorage.setItem(SAVE_KEY,JSON.stringify(save)); }catch(e){} }
-function readSlot(n){ try { const s=JSON.parse(localStorage.getItem('volt-save-'+n)||'null'); return s && s.v===1 ? s : null; } catch(e){ return null; } }
+function writeSave(){save.updated=Date.now();try{const previous=localStorage.getItem(SAVE_KEY);if(previous){let good=false;try{good=!!normaliseSave(JSON.parse(previous));}catch{}if(good)localStorage.setItem(SAVE_KEY+'-backup',previous);else if(!localStorage.getItem(SAVE_KEY+'-recovery'))localStorage.setItem(SAVE_KEY+'-recovery',previous);}localStorage.setItem(SAVE_KEY,JSON.stringify(save));}catch{saveRecoveryNotice='Saving is unavailable. Export this slot before closing the game.';}}
+function readSlot(n){try{return normaliseSave(JSON.parse(localStorage.getItem('volt-save-'+n)||'null'));}catch{return null;}}
+function readBackup(n){try{return normaliseSave(JSON.parse(localStorage.getItem('volt-save-'+n+'-backup')||'null'));}catch{return null;}}
 // Switch to slot n: the shared save object is refilled in place, so everything holding it stays valid.
 function useSlot(n){
   activeSlot=n; SAVE_KEY='volt-save-'+n; try{ localStorage.setItem('volt-slot',n); }catch(e){}
-  const fresh=loadSave(); for (const k of Object.keys(save)) delete save[k]; Object.assign(save,fresh);
+  saveRecoveryNotice='';const fresh=loadSave(); for (const k of Object.keys(save)) delete save[k]; Object.assign(save,fresh);
 }
 function metaRank(id){ return save.meta[id]||0; }

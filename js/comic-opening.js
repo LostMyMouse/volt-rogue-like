@@ -22,7 +22,7 @@ nextCutPanel=function(){
 };
 function startComicPageTurn(to,spread=null){const snapshot=document.createElement('canvas');snapshot.width=cv.width;snapshot.height=cv.height;snapshot.getContext('2d').drawImage(cv,0,0);comic.pageTurn={t:0,to,spread,snapshot,box:comicBookRect()};comicImage(COMIC_BEATS[to].id);stopVoice();sfx('ui_move',{vol:.18});}
 function beginComicSpread(kind){comic.spread={kind,t:0};if(kind==='villains')comic.villainsSpreadSeen=true;$('#cutscene').dataset.cover='spread';$('#csNext').textContent='Turn page →';}
-endCutscene=function(){delete $('#cutscene').dataset.cover;storyEndComic();};
+endCutscene=function(){delete $('#cutscene').dataset.cover;for(const id of Object.keys(COMIC_IMAGES))delete COMIC_IMAGES[id];COMIC_HIGHLIGHTS.clear();storyEndComic();};
 updateCinematic=function(dt){
  if(comic?.pageTurn){const tr=comic.pageTurn,im=tr.spread?COMIC_SPREADS[tr.spread]:comicImage(COMIC_BEATS[tr.to].id);if(!im.complete||!im.naturalWidth)return;tr.t+=dt;if(tr.t>=COMIC_PAGE_TURN){comic.pageTurn=null;if(tr.spread)beginComicSpread(tr.spread);else{delete $('#cutscene').dataset.cover;$('#csNext').textContent='Next scene →';storyNextComic();comic.enteredFromTurn=true;const panel=comicPanel(COMIC_BEATS[comic.i].frames?.[0]||0),box=comicBookRect();comic.phase=COMIC_BEATS[comic.i].frames?.[0]||0;comic.cam={x:panel.x+panel.w/2,y:panel.y+panel.h/2,z:Math.min(box.w/panel.w,box.h/panel.h)*.96};}}return;}
  if(comic?.spread){const im=COMIC_SPREADS[comic.spread.kind];if(im.complete&&im.naturalWidth)comic.spread.t+=dt;if(comic.auto&&comic.spread.t>=SPREAD_HOLD[comic.spread.kind])nextCutPanel();return;}

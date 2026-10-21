@@ -18,7 +18,7 @@ const DISTRICT_POOL = ['kilnheart','bellwether','verdigris','glasswake','underto
 const builtPool = () => DISTRICT_POOL.filter(id=>BOSSES[id]);
 
 // run.route = { order:[district ids so far], i: index of current district, room: room within it (1-based) }
-function routeStart(){ const picks=Math.min(DISTRICT_PICKS,builtPool().length);run.route={order:[],i:-1,room:0,picks,plan:shuffle(builtPool().slice()).slice(0,picks),pendingDistrict:null}; }
+function routeStart(){const picks=Math.min(DISTRICT_PICKS,builtPool().length),plan=shuffle(builtPool().slice()).slice(0,picks),lengths={};[...plan,...['gravemark','redactor'].filter(id=>BOSSES[id])].forEach((id,i)=>lengths[id]=5+Math.min(2,Math.floor(i/2))+Math.floor(Math.random()*2));run.route={order:[],i:-1,room:0,picks,plan,lengths,pendingDistrict:null};}
 const curDistrict = () => run.route.order[run.route.i];
 // Roll once on entering a district. Later stretches grow from 5–6 to 7–8 combat roofs.
 const roomsIn = id => run.route.lengths?.[id] || 5;
@@ -77,9 +77,8 @@ function districtCleared(){
   run.districtsCleared=run.route.i+1;
   if (n.type==='end'){ winRun(); return; }
   roomPhase='done';
-  setTimeout(()=>{
-    if (state!=='play') return;
-    if (n.type==='map') openCityMap();
-    else jumpTo({x:player.x, y:-40, side:'top', reward:{type:'district', id:n.id}, hold:0, t:0});
-  },1600);
+  run.pendingTransition={remaining:1.6,next:n};
+  if(typeof captureCheckpoint==='function')captureCheckpoint('pending');
 }
+
+function advanceDistrictTransition(dt){const pending=run.pendingTransition;if(!pending||state!=='play')return;pending.remaining-=dt;if(pending.remaining>0)return;delete run.pendingTransition;const n=pending.next;if(n.type==='map')openCityMap();else if(n.id)jumpTo({x:player.x,y:-40,side:'top',reward:{type:'district',id:n.id},hold:0,t:0});}

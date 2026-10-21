@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<meta name="volt-build" content="2026-10-19-fortress-grounding-v13">
+<meta name="volt-build" content="2026-10-21-quality-v14">
 <script>/* Some hosts serve this page at /folder with no trailing slash, which breaks relative paths. */ if (!/\/$|\.html?$/.test(location.pathname)) document.write('<base href="'+location.pathname+'/">');</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Chakra+Petch:wght@500;700&display=swap">
-<link rel="stylesheet" href="css/volt.css">
+<script>(()=>{const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href="css/volt.css";document.head.appendChild(sheet);})();</script>
 
 <canvas id="game" aria-label="Volt combat arena"></canvas>
 
@@ -273,53 +273,62 @@
 </div>
 
 <!-- Plain scripts, loaded in order. No build step: open index.html directly or serve the folder. -->
-<script src="js/core.js"></script>
-<script src="js/world.js"></script>
-<script src="js/input.js"></script>
-<script src="js/gamepad.js"></script>
-<script src="js/combat.js"></script>
-<script src="js/update.js"></script>
-<script src="js/bosses/framework.js"></script>
-<script src="js/bosses/kilnheart.js"></script>
-<script src="js/bosses/bellwether.js"></script>
-<script src="js/bosses/verdigris.js"></script>
-<script src="js/bosses/glasswake.js"></script>
-<script src="js/bosses/undertow.js"></script>
-<script src="js/bosses/gravemark.js"></script>
-<script src="js/bosses/redactor.js"></script>
-<script src="js/vfx.js"></script>
-<script src="js/boons.js"></script>
-<script src="js/parry.js"></script>
-<script src="js/composure.js"></script>
-<script src="js/styles.js"></script>
-<script src="js/rooms.js"></script>
-<script src="js/route.js"></script>
-<script src="js/commend.js"></script>
-<script src="js/draft.js"></script>
-<script src="js/intro.js"></script>
-<script src="js/story.js"></script>
-<script src="js/narrative.js"></script>
-<script src="js/rival-memory.js"></script>
-<script src="js/sprites.js"></script>
-<script src="js/comic-sprites.js"></script>
-<script src="js/render.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/hub.js"></script>
-<script src="js/cutscene.js"></script>
-<script src="js/motion-comic.js"></script>
-<script src="js/comic-opening.js"></script>
-<script src="js/comic-lettering.js"></script>
-<script src="js/tutorial.js"></script>
-<script src="js/codex.js"></script>
-<script src="js/advanced-enemies.js"></script>
-<script src="js/progression.js"></script>
-<script src="js/weapon-channels.js"></script>
-<script src="js/field-shop.js"></script>
-<script src="js/practice.js"></script>
-<script src="js/robot-motion.js"></script>
-<script src="js/glass-hall.js"></script>
-<script src="js/debug.js"></script>
-<script src="js/audio-manifest.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/voicefx.js"></script>
-<script src="js/main.js"></script>
+<script data-volt-src="js/save-data.js"></script>
+<script data-volt-src="js/core.js"></script>
+<script data-volt-src="js/world.js"></script>
+<script data-volt-src="js/input.js"></script>
+<script data-volt-src="js/gamepad.js"></script>
+<script data-volt-src="js/combat.js"></script>
+<script data-volt-src="js/update.js"></script>
+<script data-volt-src="js/bosses/framework.js"></script>
+<script data-volt-src="js/bosses/kilnheart.js"></script>
+<script data-volt-src="js/bosses/bellwether.js"></script>
+<script data-volt-src="js/bosses/verdigris.js"></script>
+<script data-volt-src="js/bosses/glasswake.js"></script>
+<script data-volt-src="js/bosses/undertow.js"></script>
+<script data-volt-src="js/bosses/gravemark.js"></script>
+<script data-volt-src="js/bosses/redactor.js"></script>
+<script data-volt-src="js/vfx.js"></script>
+<script data-volt-src="js/boons.js"></script>
+<script data-volt-src="js/parry.js"></script>
+<script data-volt-src="js/composure.js"></script>
+<script data-volt-src="js/styles.js"></script>
+<script data-volt-src="js/rooms.js"></script>
+<script data-volt-src="js/route.js"></script>
+<script data-volt-src="js/commend.js"></script>
+<script data-volt-src="js/draft.js"></script>
+<script data-volt-src="js/intro.js"></script>
+<script data-volt-src="js/story.js"></script>
+<script data-volt-src="js/narrative.js"></script>
+<script data-volt-src="js/rival-memory.js"></script>
+<script data-volt-src="js/sprites.js"></script>
+<script data-volt-src="js/comic-sprites.js"></script>
+<script data-volt-src="js/render.js"></script>
+<script data-volt-src="js/ui.js"></script>
+<script data-volt-src="js/hub.js"></script>
+<script data-volt-src="js/cutscene.js"></script>
+<script data-volt-src="js/motion-comic.js"></script>
+<script data-volt-src="js/comic-opening.js"></script>
+<script data-volt-src="js/comic-lettering.js"></script>
+<script data-volt-src="js/tutorial.js"></script>
+<script data-volt-src="js/codex.js"></script>
+<script data-volt-src="js/advanced-enemies.js"></script>
+<script data-volt-src="js/progression.js"></script>
+<script data-volt-src="js/weapon-channels.js"></script>
+<script data-volt-src="js/field-shop.js"></script>
+<script data-volt-src="js/practice.js"></script>
+<script data-volt-src="js/robot-motion.js"></script>
+<script data-volt-src="js/glass-hall.js"></script>
+<script data-volt-src="js/debug.js"></script>
+<script data-volt-src="js/audio-manifest.js"></script>
+<script data-volt-src="js/audio.js"></script>
+<script data-volt-src="js/voicefx.js"></script>
+<script data-volt-src="js/power-icons.js"></script>
+<script data-volt-src="js/weapon-motion.js"></script>
+<script data-volt-src="js/station-motion.js"></script>
+<script data-volt-src="js/recovery.js"></script>
+<script data-volt-src="js/main.js"></script>
+
+<script>/* Load in document order after the portable base is established. Avoid speculative wrong-path requests on clean URLs. */
+for(const placeholder of document.querySelectorAll('script[data-volt-src]')){const script=document.createElement('script');script.async=false;script.src=placeholder.dataset.voltSrc;script.onerror=()=>{const status=document.getElementById('bootStatus');if(status){status.hidden=false;status.textContent='A game file could not load. Refresh to try again; your saved progress is kept.';}};placeholder.replaceWith(script);}
+</script>

@@ -4,13 +4,13 @@
 const COMIC_IDS=['volt','halo','bastion','echo','thorn','patch','kilnheart','bellwether','verdigris','glasswake','undertow','gravemark','redactor','rusher','needle'];
 const COMIC_ART=new Map();
 // Select complete connected bodies rather than slicing oversized shoulders/hands at grid edges.
-function connectedComicCells(canvas,data,cw,ch,columns=8){
+function connectedComicCells(canvas,data,cw,ch,columns=8,rows=4){
  const w=canvas.width,h=canvas.height,labels=new Int32Array(w*h),queue=new Int32Array(w*h),parts=[null];
  for(let at=0;at<w*h;at++){if(labels[at]||data[at*4+3]<100)continue;const id=parts.length;let head=0,tail=1;queue[0]=at;labels[at]=id;const b={x:w,y:h,right:0,bottom:0};
   while(head<tail){const i=queue[head++],x=i%w,y=(i/w)|0;b.x=Math.min(b.x,x);b.y=Math.min(b.y,y);b.right=Math.max(b.right,x);b.bottom=Math.max(b.bottom,y);for(const n of[x?i-1:-1,x<w-1?i+1:-1,y?i-w:-1,y<h-1?i+w:-1])if(n>=0&&!labels[n]&&data[n*4+3]>=100){labels[n]=id;queue[tail++]=n;}}
   parts.push(b);
  }
- return Array.from({length:4},(_,row)=>Array.from({length:columns},(_,col)=>{const counts=new Map();for(let y=Math.ceil(row*ch);y<(row+1)*ch;y++)for(let x=Math.ceil(col*cw);x<(col+1)*cw;x++){const id=labels[y*w+x];if(id)counts.set(id,(counts.get(id)||0)+1);}const id=[...counts].sort((a,b)=>b[1]-a[1])[0]?.[0];if(!id)throw Error('Empty connected pose');const b=parts[id],c=document.createElement('canvas');c.width=b.right-b.x+5;c.height=b.bottom-b.y+5;const g=c.getContext('2d'),p=g.createImageData(c.width,c.height);let sum=0,count=0;
+ return Array.from({length:rows},(_,row)=>Array.from({length:columns},(_,col)=>{const counts=new Map();for(let y=Math.ceil(row*ch);y<(row+1)*ch;y++)for(let x=Math.ceil(col*cw);x<(col+1)*cw;x++){const id=labels[y*w+x];if(id)counts.set(id,(counts.get(id)||0)+1);}const id=[...counts].sort((a,b)=>b[1]-a[1])[0]?.[0];if(!id)throw Error('Empty connected pose');const b=parts[id],c=document.createElement('canvas');c.width=b.right-b.x+5;c.height=b.bottom-b.y+5;const g=c.getContext('2d'),p=g.createImageData(c.width,c.height);let sum=0,count=0;
   for(let y=b.y;y<=b.bottom;y++)for(let x=b.x;x<=b.right;x++)if(labels[y*w+x]===id){const from=(y*w+x)*4,to=((y-b.y+2)*c.width+x-b.x+2)*4;p.data.set(data.subarray(from,from+4),to);if(y>b.bottom-(b.bottom-b.y)*.08){sum+=x-b.x+2;count++;}}
   g.putImageData(p,0,0);return{img:c,x:0,y:0,w:c.width,h:c.height,ax:count?sum/count:c.width/2,cx:c.width/2,ay:c.height-2};
  }));
@@ -94,12 +94,14 @@ function drawVoltStride(x,y,face,scale,elapsed,tint){
 function comicPose(name,c,elapsed,frame){
   const at=frame===null?animationFrame(c,elapsed):clamp(Math.floor(frame),0,c.frames-1);
   if(name==='hover')return 0;
-  if(/^(run|walk)$/.test(name))return [1,2][Math.floor(elapsed*(name==='run'?4.8:3.6))%2];
-  if(/hurt|exposed|death/.test(name))return 6;
+  if(/^(run|walk)$/.test(name))return [1,0,2,0][Math.floor(elapsed*(name==='run'?9.6:7.2))%4];
+  if(name==='hurt')return [0,6,5][Math.min(2,Math.floor(at*3/c.frames))];
+  if(/exposed|death/.test(name))return 6;
   if(/block|parry|recovery|vents_open/.test(name))return 5;
   if(/dash|rush|mirror_step/.test(name))return 7;
   if(/idle|talk|react|intro|phase_change/.test(name))return 0;
-  return at<(c.key_frame??Math.floor(c.frames/2))?3:4;
+  const contact=c.key_frame??Math.floor(c.frames/2);
+  return at<Math.max(1,contact-1)?0:at<contact?3:at===contact?4:5;
 }
 function drawComicPose(id,name,x,y,face,scale,elapsed=0,frame=null,tint=null,options={}){
   let a=comicAtlas(id);if(!a?.ready)return false;

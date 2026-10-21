@@ -30,7 +30,7 @@ function comicContext(i){
 }
 const COMIC_CHAPTERS={0:['BEFORE THE BLACKOUT','Heroes stood between danger and the people.'],5:['THEN THE CITY WAS TAKEN','The Redactor’s villains seized the districts.'],12:['SOMEONE STILL HAD TO HELP','Before he could save a city, Volt protected his block.']};
 const COMIC_IMAGES={};
-const COMIC_TIMING={overview:.9,panelStarts:[0,4.2,7.6,11],twoPanelChange:5.5,minScene:14.4,minTwoPanelScene:10.5,narrationDelay:1.65,afterVoice:1.2,cameraRate:3.2};
+const COMIC_TIMING={overview:.9,panelStarts:[0,3.2,6.1,9],twoPanelChange:4.2,minScene:11.8,minTwoPanelScene:8.6,narrationDelay:.9,afterVoice:.65,cameraRate:3.2};
 function comicImage(id){
  if(COMIC_IMAGES[id])return COMIC_IMAGES[id];
  const im=new Image();im.failed=false;im.onerror=()=>im.failed=true;im.src=`assets/comic/${id}-action.webp?v=2026-10-18-motion`;COMIC_IMAGES[id]=im;return im;
@@ -55,7 +55,8 @@ playCutscene=function(done){
   $('#csNext').onclick=()=>nextCutPanel();
  }
  $('#csAuto').textContent='Auto: on';$('#csAuto').setAttribute('aria-pressed','true');nextCutPanel();
- for(const b of COMIC_BEATS)comicImage(b.id);
+ // Keep only the approaching pages warm rather than downloading the entire issue at once.
+ for(const b of COMIC_BEATS.slice(0,2))comicImage(b.id);
 };
 nextCutPanel=function(){
  if(!comic)return;
@@ -64,6 +65,7 @@ nextCutPanel=function(){
  if(++comic.i>=COMIC_BEATS.length){endCutscene();return;}
  comic.t=0;comic.phase=0;comic.voiceStarted=false;comic.voiceSeen=false;comic.voiceEndedAt=null;comic.loading=true;comic.lastPhase=-1;comic.enteredFromTurn=false;
  const b=COMIC_BEATS[comic.i];comicImage(b.id);
+ for(const upcoming of COMIC_BEATS.slice(comic.i+1,comic.i+3))comicImage(upcoming.id);
  prepareVoice('volt',b.text);
  const context=comicContext(comic.i);
  $('#cutscene').dataset.faction=context.side;

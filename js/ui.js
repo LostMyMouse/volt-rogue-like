@@ -34,7 +34,7 @@ function updateHud(){
 /* ---------- Flow ---------- */
 function show(id,on){ $(id).hidden=!on; }
 function startGame(){
-  reset(); lastCaller=null; routeStart(); exits=[]; roomPhase='reward'; arrivalT=0; transit=null; powerHeld=false;
+  if(typeof clearCheckpoint==='function')clearCheckpoint();reset(); lastCaller=null; routeStart(); exits=[]; roomPhase='reward'; arrivalT=0; transit=null; powerHeld=false;
   { const so=STYLE(); so.init && so.init(player); } applyStyleHud();
   save.runs++; writeSave(); leaveHub();
   show('#splash',false); show('#mStart',false); show('#mOver',false); show('#mPause',false); show('#mDraft',false); show('#mFortress',false); show('#mCity',false); refreshSlotHud(); state='play';
@@ -42,9 +42,10 @@ function startGame(){
 }
 function openPause(){ if (state!=='play') return; state='paused'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null;if($('#fieldClaim'))$('#fieldClaim').hidden=true;if($('#practiceControls'))$('#practiceControls').hidden=true;$('#btnPauseFortress').hidden=!armouryRoom(); fillBuild($('#pauseBuild')); show('#mPause',true); $('#btnResume').focus(); }
 function closePause(){ show('#mPause',false); state='play'; }
-function gameOver(){ state='over'; playVoice('volt',"Not... yet..."); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
+function gameOver(){ if(typeof clearCheckpoint==='function')clearCheckpoint();state='over'; playVoice('volt',"Not... yet..."); fillResults(); setTimeout(()=>{ if (state!=='over') return; show('#mOver',true); $('#btnAgain').focus(); },650); }
 function winRun(){
   if(run.won)return;
+  if(typeof clearCheckpoint==='function')clearCheckpoint();
   run.won=true;commendWin();
   const finish=()=>{state='over';banner('THE DRAIN IS OFFLINE');fillResults();setTimeout(()=>{if(state==='over'){show('#mOver',true);$('#btnAgain').focus();}},1600);};
   if(curDistrict()==='redactor')runDialogue(missionPages('victory'),'Operation complete',finish);else finish();
@@ -120,7 +121,7 @@ function setPortrait(el,who,expression='neutral'){
   img.src=expression==='neutral'?base:`assets/portraits/${who}/${expression}-256.png?v=2026-10-18`;
 }
 // Rooftops plus villain rooms in a full run with the villains built so far.
-function routeLength(){ const p=Math.min(DISTRICT_PICKS,builtPool().length); return p*(ROOMS_PER_DISTRICT+1)+(BOSSES.gravemark?ROOMS_PER_DISTRICT+1:0)+(BOSSES.redactor?3:0) || 15; }
+function routeLength(){const r=run.route,plan=r?.plan||builtPool().slice(0,Math.min(DISTRICT_PICKS,builtPool().length));return [...plan,...['gravemark','redactor'].filter(id=>BOSSES[id])].reduce((n,id,i)=>n+(r?.lengths?.[id]||5+Math.min(2,Math.floor(i/2)))+1,0)||15;}
 function runScore(){
   return Math.round((run.roomsCleared||0)*10 + run.bossKills*30 + kills*0.5 + (run.won?60:0) - run.hits*3);
 }
@@ -175,13 +176,14 @@ const slotSummary = s => { const b=Object.keys(s.beaten||{}).length; return `${s
 function refreshSplash(){
   const any=hasSave();
   $('#btnStart span').textContent = any ? 'Continue' : 'Start Game';
-  $('#splashMeta').textContent = any ? `Slot ${activeSlot} · ${slotSummary(save)}` : '';
+  $('#splashMeta').textContent = saveRecoveryNotice || (save.checkpoint?'Rooftop checkpoint saved · combat resumes from the start of that roof.':any ? `Slot ${activeSlot} · ${slotSummary(save)}` : '');
   $('#splashPressWord').textContent = inputMode==='touch' ? 'Tap' : 'Press'; $('#splashKey').textContent = inputMode==='touch' ? 'Start' : inputMode==='pad' ? 'A' : 'Enter';
 }
 function startFromSplash(){
   if(!window.__voltBootReady||state!=='start')return;
   audioUnlock();
   goFullscreen(); show('#splash',false); show('#mSlots',false);
+  if(typeof restoreCheckpoint==='function'&&restoreCheckpoint())return;
   // First launch: the opening cutscene, then the Fortress.
   if (save.seenIntro!==2) playCutscene(()=>enterHub()); else enterHub();
 }
@@ -194,7 +196,7 @@ $('#btnConfirmBack').addEventListener('click', () => { show('#mConfirm',false); 
 function fillSlots(msg){
   const list=$('#slotList'); list.innerHTML=''; $('#slotMsg').textContent=msg||'';
   for (let n=1;n<=SLOT_COUNT;n++){
-    const s=readSlot(n), used=!!(s && (s.runs>0 || s.seenIntro)), act=n===activeSlot;
+    const s=n===activeSlot?save:readSlot(n), used=!!(s && (s.runs>0 || s.seenIntro)), act=n===activeSlot;
     const when = used && s.updated ? new Date(s.updated).toLocaleDateString(undefined,{day:'numeric',month:'short'})+' · '+new Date(s.updated).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}) : '';
     const card=document.createElement('div'); card.className='slot-card'+(act?' active':'')+(used?'':' empty');
     card.innerHTML=`<div class="slot-head"><strong>Slot ${n}</strong>${act?'<span class="slot-badge">Current</span>':''}</div>
@@ -204,17 +206,21 @@ function fillSlots(msg){
     add(used?'Play':'New game','primary',()=>{ useSlot(n); refreshSplash(); startFromSplash(); });
     add('Export','',()=>exportSlot(n),!used);
     add('Import','',()=>importSlot(n));
-    add('Erase','',()=>askConfirm('Slot '+n,'Erase this slot?','This permanently deletes slot '+n+': shards, upgrades, licences, styles and story progress. Export it first if you might want it back.','Erase',()=>{ try{ localStorage.removeItem('volt-save-'+n); }catch(e){} if (n===activeSlot) useSlot(n); refreshSplash(); fillSlots('Slot '+n+' erased.'); }),!used);
+    if(readBackup(n))add('Restore previous save','',()=>askConfirm('Slot '+n,'Restore the previous save?','This restores the most recent good backup of this slot.','Restore',()=>{try{const key='volt-save-'+n,old=localStorage.getItem(key);if(old)localStorage.setItem(key+'-recovery',old);localStorage.setItem(key,JSON.stringify(readBackup(n)));if(n===activeSlot)useSlot(n);refreshSplash();fillSlots('Previous save restored into slot '+n+'.');}catch{fillSlots('The backup could not be restored. Export it before closing.');}}));
+    let rawRecovery=null;try{rawRecovery=localStorage.getItem('volt-save-'+n+'-recovery');}catch{}
+    if(rawRecovery)add('Export recovery data','',()=>downloadSlotData(n,rawRecovery,'recovery'));
+    add('Erase','',()=>askConfirm('Slot '+n,'Erase this slot?','This permanently deletes slot '+n+': shards, upgrades, licences, styles and story progress. Export it first if you might want it back.','Erase',()=>{ try{ for(const suffix of['','-backup','-recovery'])localStorage.removeItem('volt-save-'+n+suffix); }catch(e){} if (n===activeSlot) useSlot(n); refreshSplash(); fillSlots('Slot '+n+' erased.'); }),!used);
     list.appendChild(card);
   }
 }
 function exportSlot(n){
-  const s=readSlot(n); if (!s) return;
+  const s=n===activeSlot?save:readSlot(n); if (!s) return;
   const blob=new Blob([JSON.stringify({game:'volt', format:1, slot:n, exported:new Date().toISOString(), save:s},null,1)],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`volt-slot${n}-${new Date().toISOString().slice(0,10)}.json`;
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
   fillSlots('Slot '+n+' exported. Keep the file somewhere safe; Import loads it back on any device.');
 }
+function downloadSlotData(n,raw,label){const url=URL.createObjectURL(new Blob([raw],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=`volt-slot${n}-${label}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
 let importTarget=1;
 function importSlot(n){ importTarget=n; const f=$('#slotFile'); f.value=''; f.click(); }
 $('#slotFile').addEventListener('change', e => {
@@ -223,8 +229,8 @@ $('#slotFile').addEventListener('change', e => {
   r.onload=()=>{
     let data; try { data=JSON.parse(r.result); } catch(err){ fillSlots("That file isn't a Volt save."); return; }
     const s=data && data.game==='volt' ? data.save : null;
-    if (!s || s.v!==1 || typeof s.runs!=='number'){ fillSlots("That file isn't a Volt save."); return; }
-    const put=()=>{ try{ localStorage.setItem('volt-save-'+importTarget,JSON.stringify(s)); }catch(err){} if (importTarget===activeSlot) useSlot(importTarget); refreshSplash(); fillSlots('Imported into slot '+importTarget+'.'); };
+    if (!normaliseSave(s)){ fillSlots("That file isn't a Volt save."); return; }
+    const put=()=>{ try{ localStorage.setItem('volt-save-'+importTarget,JSON.stringify(normaliseSave(s))); }catch(err){fillSlots('Import could not be saved. The existing slot is unchanged.');return;} if (importTarget===activeSlot) useSlot(importTarget); refreshSplash(); fillSlots('Imported into slot '+importTarget+'.'); };
     const cur=readSlot(importTarget);
     if (cur && (cur.runs>0 || cur.seenIntro)) askConfirm('Slot '+importTarget,'Replace this slot?','Slot '+importTarget+' already has a save. Importing replaces it.','Replace',put); else put();
   };

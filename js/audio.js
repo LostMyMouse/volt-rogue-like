@@ -42,11 +42,20 @@ document.addEventListener('webkitfullscreenchange',audioWake);
 addEventListener('pageshow',audioWake);
 function audioVolumes(){ if (!AUDIO.ctx) return; const v=VOL(); for (const b in AUDIO.buses) AUDIO.buses[b].gain.value=v[b]; }
 
+const AUDIO_BUDGET=32*1024*1024;
+const AUDIO_CACHE=new Map();
+function trimAudioCache(){
+ let bytes=Object.values(AUDIO.buffers).reduce((n,b)=>n+b.length*b.numberOfChannels*4,0);
+ const pinned=new Set([AUDIO.music?.path,AUDIO.amb?.path,AUDIO.voice?.path,...OLD_LOOPS.map(l=>l.path)]);
+ for(const [path]of [...AUDIO_CACHE].sort((a,b)=>a[1]-b[1])){if(bytes<=AUDIO_BUDGET)break;if(pinned.has(path))continue;const b=AUDIO.buffers[path];if(b)bytes-=b.length*b.numberOfChannels*4;delete AUDIO.buffers[path];AUDIO_CACHE.delete(path);}
+ return bytes;
+}
 function loadBuf(path){
+  AUDIO_CACHE.set(path,performance.now());
   if (AUDIO.buffers[path]) return Promise.resolve(AUDIO.buffers[path]);
   if (AUDIO.loading[path] || !AUDIO.ctx) return AUDIO.loading[path];
   const revision = path.startsWith('voice/') ? `?v=${VOICE_REVISION}` : '';
-  AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3${revision}`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; delete AUDIO.loading[path]; return buf; }).catch(()=>{ delete AUDIO.loading[path]; return null; });
+  AUDIO.loading[path]=fetch(`assets/audio/${path}.mp3${revision}`).then(r=>r.ok?r.arrayBuffer():Promise.reject()).then(b=>AUDIO.ctx.decodeAudioData(b)).then(buf=>{ AUDIO.buffers[path]=buf; delete AUDIO.loading[path]; trimAudioCache(); return buf; }).catch(()=>{ delete AUDIO.loading[path]; return null; });
   return AUDIO.loading[path];
 }
 // One-shot sound. vol and rate vary slightly so repeated hits don't sound machine-gunned.
@@ -58,14 +67,14 @@ function sfx(name, o={}){
   const go=buf=>{ if (!buf) return; const s=AUDIO.ctx.createBufferSource(), g=AUDIO.ctx.createGain(); s.buffer=buf; s.playbackRate.value=rate; g.gain.value=vol; s.connect(g); g.connect(AUDIO.buses.sfx);
     const len=o.max?Math.min(o.max,buf.duration):buf.duration; if (o.max){ g.gain.setValueAtTime(vol,AUDIO.ctx.currentTime+Math.max(0,len-0.06)); g.gain.linearRampToValueAtTime(0,AUDIO.ctx.currentTime+len); }
     s.start(0,0,len); };
-  const b=AUDIO.buffers['sfx/'+name]; if (b) go(b); else { const p=loadBuf('sfx/'+name); p && p.then(go); }
+  const b=AUDIO.buffers['sfx/'+name]; if (b){AUDIO_CACHE.set('sfx/'+name,performance.now());go(b);} else { const p=loadBuf('sfx/'+name); p && p.then(go); }
 }
 
 /* ---------- Music and ambience: crossfading loops ---------- */
 function makeLoop(path, bus, vol){
   if (AUDIO.html){ const a=new Audio(`assets/audio/${path}.mp3`); a.loop=true; a.volume=0; a.play().catch(()=>{}); return {html:a, target:vol, level:0}; }
   const g=AUDIO.ctx.createGain(); g.gain.value=0; g.connect(AUDIO.buses[bus]);
-  const loop={g, target:vol, level:0, src:null};
+  const loop={g, path, target:vol, level:0, src:null};
   const p=loadBuf(path); p && p.then(buf=>{ if (!buf || loop.dead) return; const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; s.loop=true; s.connect(g); s.start(); loop.src=s; });
   return loop;
 }
@@ -106,6 +115,7 @@ function audioTick(dt){
   const v=VOL();
   fadeLoop(AUDIO.music,dt,v.music); fadeLoop(AUDIO.amb,dt,v.sfx);
   OLD_LOOPS=OLD_LOOPS.filter(l=>fadeLoop(l,dt,v.music));
+  if(!AUDIO.trimAt||performance.now()-AUDIO.trimAt>2000){AUDIO.trimAt=performance.now();trimAudioCache();}
 }
 
 /* ---------- Voice ---------- */
@@ -115,7 +125,7 @@ function playVoice(who, text){
   if (!AUDIO.unlocked || !who || !text) return false;
   const key=voiceKey(who,text); if (!VOICED.has(key)) return false;
   const rate = 1; // Size comes from casting and pitch layers, never from dragging out the delivery.
-  const v={playing:true,started:false}; AUDIO.voice=v;
+  const v={playing:true,started:false,path:'voice/'+key}; AUDIO.voice=v;
   if (AUDIO.html){ const a=new Audio(`assets/audio/voice/${key}.mp3?v=${VOICE_REVISION}`); a.volume=clamp(VOL().voice,0,1); a.preservesPitch=false; a.playbackRate=rate; a.onplaying=()=>v.started=true;a.onended=()=>v.playing=false;a.onerror=()=>v.playing=false; a.play().catch(()=>v.playing=false); v.stop=()=>{ a.pause(); v.playing=false; }; return true; }
   const p=loadBuf('voice/'+key); p && p.then(buf=>{ if(AUDIO.voice!==v)return;if(!buf){v.playing=false;return;} const s=AUDIO.ctx.createBufferSource(); s.buffer=buf; const cleanup=voiceChain(AUDIO.ctx,s,who,AUDIO.buses.voice)||(()=>{}); s.onended=()=>{v.playing=false;setTimeout(cleanup,3500);}; s.start(AUDIO.ctx.currentTime+.06);v.started=true; v.stop=()=>{ try{ s.stop(); }catch(e){} v.playing=false;cleanup(); }; });
   return true;
