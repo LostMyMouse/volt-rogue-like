@@ -47,8 +47,8 @@ function buyShopOffer(i){
  o.sold=true;run.credits-=o.cost;sfx('power_pick');
  if(o.type==='health')player.hp=Math.min(player.maxHp,player.hp+o.amount);
  else if(o.type==='shards')gainShards(o.amount,player.x,player.y-40);
- else{fillFieldShop();$('#fieldClaim').hidden=true;const def=BOON_BY_ID[o.id],line=commsLine(def.hero);runDialogue([{who:def.hero,text:line}],'Supply comms',()=>{takeBoon(o.id,o.rarity);state='play';roomPhase='shop';keys.clear();fillFieldShop();});return;}
- fillFieldShop();
+ else{fillFieldShop();$('#fieldClaim').hidden=true;const def=BOON_BY_ID[o.id],line=commsLine(def.hero);runDialogue([{who:def.hero,text:line}],'Supply comms',()=>{takeBoon(o.id,o.rarity);state='play';roomPhase='shop';keys.clear();fillFieldShop();captureCheckpoint('shop');});return;}
+ fillFieldShop();captureCheckpoint('shop');
 }
 function leaveFieldShop(){if(!shop)return;stopVoice();if($('#fieldClaim'))$('#fieldClaim').hidden=true;shop=null;roomPhase='exits';invalidateRender();}
 const jumpFromSupply=jumpTo;

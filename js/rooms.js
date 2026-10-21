@@ -30,6 +30,18 @@ const PAINTED_LAYOUT = [
   {x:0,y:600,w:225,h:160,ht:0,kind:'ac',painted:true},
   {x:1300,y:585,w:200,h:185,ht:0,kind:'vent',painted:true},
 ];
+// Floor footprints traced against the bespoke paintings (1536 × 1024).
+// Tall artwork extends above these feet; only its floor contact blocks movement.
+const ARENA_FOOTPRINTS={
+ kilnheart:[[145,178,155,105],[1190,178,180,85],[75,710,200,145],[1280,740,175,125]],
+ bellwether:[[105,178,170,110],[1210,178,160,95],[20,650,200,215],[1300,665,180,205]],
+ verdigris:[[120,178,175,125],[1220,178,155,95],[30,700,230,160],[1300,700,175,175]],
+ glasswake:[[85,178,90,75],[1365,178,80,80],[45,740,100,105],[1380,740,100,105]],
+ undertow:[[155,178,155,115],[1175,178,210,90],[20,710,235,160],[1300,710,165,165]],
+ gravemark:[[90,178,95,110],[1345,178,95,95],[35,705,190,165],[1330,705,160,170]],
+ redactor:[[65,178,90,100],[1380,178,95,100],[40,730,210,155],[1300,730,190,155]],
+};
+function arenaLayout(id){return ARENA_FOOTPRINTS[id]?.map(([x,y,w,h])=>({x:(x-ROOF.ox)*ROOF.k,y:(y-ROOF.oy)*ROOF.k,w:w*ROOF.k,h:h*ROOF.k,ht:0,kind:'fixture',painted:true}))||PAINTED_LAYOUT;}
 // The older vector layouts, used only if the painting fails to load.
 const CONCEPT_LAYOUT = [
   {x:70,y:60,w:200,h:200,ht:120,kind:'tower',circle:true},
@@ -58,8 +70,8 @@ function randomLayout(){
   return out;
 }
 function buildRoom(){
-  districtPainting(curDistrict());
-  obstacles = finishObstacles(PAINTED_LAYOUT.map(b=>Object.assign({},b)));
+  const theme=arenaTheme();districtPainting(theme);
+  obstacles = finishObstacles(arenaLayout(theme).map(b=>Object.assign({},b)));
   floorTint = arenaTheme() ? DISTRICTS[curDistrict()].tint : FLOOR_TINTS[0];
   for (const s of floorBlots){ s.x=rand(0,ARENA.w); s.y=rand(0,ARENA.h); }
   for (const s of stains){ s.x=rand(60,ARENA.w-60); s.y=rand(60,ARENA.h-60); }

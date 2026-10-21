@@ -182,7 +182,7 @@ const STYLES = {
       const p=player, d=p.disc; if (p.shield) return;
       if (d.state==='held'){
         setStrikeCd(0.2); const a=p.aim;
-        Object.assign(d,{state:'out',x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,vx:Math.cos(a)*1000,vy:Math.sin(a)*1000,t:0,bounces:2+powerReach(),hit:[],first:true,dist:0});
+        Object.assign(d,{state:'out',x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,vx:Math.cos(a)*1000,vy:Math.sin(a)*1000,t:0,age:0,bounces:2+powerReach(),hit:[],first:true,dist:0});
         sparks(d.x,d.y,a,4,COL.volt,300,.4);
       } else {
         // Empty-handed: a weak jab while the disc is away.
@@ -201,6 +201,7 @@ const STYLES = {
     },
     update(dt){
       const p=player, d=p.disc;
+      if(d.state!=='held')d.age=(d.age||0)+dt;
       if (d.state==='out'){
         d.t+=dt; const px=d.x, py=d.y; d.x+=d.vx*dt; d.y+=d.vy*dt; d.dist+=Math.hypot(d.x-px,d.y-py);
         if (d.x<24||d.y<24||d.x>ARENA.w-24||d.y>ARENA.h-24||inObstacle(d.x,d.y)||d.dist>560*R.reachMul){ d.state='back'; d.hit=[]; sparks(d.x,d.y,rand(PI2),5,COL.volt,260,Math.PI); }
@@ -219,7 +220,8 @@ const STYLES = {
       } else if (d.state==='back'){
         const a=Math.atan2(p.y-d.y,p.x-d.x); d.vx=Math.cos(a)*1150; d.vy=Math.sin(a)*1150; d.x+=d.vx*dt; d.y+=d.vy*dt;
         for (const e of attackTargets()) if (!d.hit.includes(e) && Math.hypot(e.x-d.x,e.y-d.y)<e.r+12){ d.hit.push(e); strikeHit(e,strikeDmg(4),a,120,0.05); }
-        if (Math.hypot(p.x-d.x,p.y-d.y)<p.r+12){ d.state='held'; p.strikeCd=Math.min(p.strikeCd,0.05); sparks(p.x,p.y,a+Math.PI,6,COL.volt,260,.6); }
+        // Close catches must not bypass the throw's recovery. Longer flights retain their quick catch.
+        if (Math.hypot(p.x-d.x,p.y-d.y)<p.r+12){ d.state='held'; p.strikeCd=Math.max(Math.min(p.strikeCd,0.05),.34-(d.age??.34)); sparks(p.x,p.y,a+Math.PI,6,COL.volt,260,.6); }
       } else { d.x=p.x; d.y=p.y; }
     },
   },
@@ -246,7 +248,7 @@ function stainAtColor(x,y,r,c){ decals.push({x,y,r,pts:Array.from({length:9},()=
 function doStrike(){
   const p=player; if (state!=='play'||p.strikeCd>0||p.dashT>0||p.blockHeld||p.stunT>0) return;
   STYLE().strike();
-  if (p.strikeCd>0){ const n=(p.combo||0)%3; playerAnim(['strike1','strike2','strike3'][n]); sfx(['strike1','strike2','strike3'][n],{vol:0.8}); comicAttack(p.x,p.y,p.aim,42+n*8); }
+  if (p.strikeCd>0){p.motionAttack='strike'; const n=(p.combo||0)%3; playerAnim(['strike1','strike2','strike3'][n]); sfx(['strike1','strike2','strike3'][n],{vol:0.8}); comicAttack(p.x,p.y,p.aim,42+n*8); }
 }
 let powerHeld=false;
 function doPower(){
@@ -256,7 +258,7 @@ function doPower(){
   STYLE().powerPress();
   if (p.powerCd>0 || p.charging) sfx('special');
   if (typeof tut!=='undefined' && tut) tut.usedSpecial=true;
-  if (p.powerCd>0 || p.charging){ playerAnim('strike2'); comicAttack(p.x,p.y,p.aim,72); }
+  if (p.powerCd>0 || p.charging){p.motionAttack='power'; playerAnim('strike2'); comicAttack(p.x,p.y,p.aim,72); }
 }
 function releasePower(){
   powerHeld=false;
@@ -291,7 +293,7 @@ function drawStyleFx(){
       ctx.strokeStyle=COL.volt; ctx.lineWidth=3; ctx.stroke(); ctx.strokeStyle=COL.spark; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(-7,0); ctx.lineTo(7,0); ctx.moveTo(0,-7); ctx.lineTo(0,7); ctx.stroke();
       ctx.restore();
     }
-    if (d.state==='held' && !p.blockHeld){
+    if (d.state==='held' && !p.blockHeld && !p.weaponDiscInPose){
       ctx.save(); ctx.fillStyle='#1b2433'; ctx.strokeStyle=COL.volt; ctx.lineWidth=2.5; const hx=p.x+Math.cos(p.aim-1.4)*18, hy=p.y+Math.sin(p.aim-1.4)*18;
       ctx.beginPath(); ctx.arc(hx,hy,8,0,PI2); ctx.fill(); ctx.stroke(); ctx.restore();
     }

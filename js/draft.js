@@ -20,10 +20,11 @@ function openDraft(kind='boon', hero=null, reroll=false){
   }
   return openDraftNow(kind,hero,reroll);
 }
-function openDraftNow(kind, hero, reroll){
+function openDraftNow(kind, hero, reroll, restored=null){
   const p=player; draftKind=kind;
   let who, line;
-  if (kind==='tech'){
+  if(restored){who=hero;line=restored.line;draftCards=checkpointCopy(restored.cards);}
+  else if (kind==='tech'){
     who='patch'; const n=reroll?run.calls.patch:(run.calls.patch=(run.calls.patch||0)+1); line=reroll?"Different crate, same rules.":n===1?PATCH.first:commsLine('patch');
     draftCards=shuffle(TECH.filter(t=>!t.variant||!p.tech[t.id])).slice(0,3).map(t=>({kind:'tech',id:t.id}));
   } else {
@@ -32,7 +33,8 @@ function openDraftNow(kind, hero, reroll){
     const pool=BOONS.filter(b=>b.weapon===run.style && b.hero===who && !(p.owned[b.id] && p.owned[b.id].level>=3));
     draftCards=shuffle(pool).slice(0,3).map(b=>{ const o=p.owned[b.id]; return {kind:'boon',id:b.id,rarity:o?o.rarity:rollRarity(),levelUp:!!o}; });
   }
-  if(kind!=='tech'){const pool=eligibleHybrids(who);if(pool.length)draftCards[draftCards.length-1]={kind:'hybrid',id:pick(pool)};}
+  if(!restored&&kind!=='tech'){const pool=eligibleHybrids(who);if(pool.length)draftCards[draftCards.length-1]={kind:'hybrid',id:pick(pool)};}
+  draftHero=who;
   const comms=$('#draftComms'), sp=SPEAKERS[who];
   comms.style.setProperty('--c',sp.c); setPortrait($('#draftPortrait'),who);
   $('#draftLine').textContent=line; $('#draftWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;playVoice(who,line);
@@ -50,13 +52,27 @@ function openDraftNow(kind, hero, reroll){
       b.style.setProperty('--c',HEROES[def.hero].c); b.style.setProperty('--r',rar.c);
       b.innerHTML=`<span class="card-top"><span class="tag">${SLOT_NAME[def.slot]} · <em>${rar.name}</em></span><span class="card-key">${i+1}</span></span><strong>${def.name}${lvl>1?' '+'I'.repeat(lvl):''}</strong><span class="card-desc">${def.desc(base('v'),base('v2'))}</span><span class="card-foot">${c.levelUp?`Level up · ${lvl}/3`:old?`Replaces ${old.name}`:'New'}</span>`;
     }
+    // Keep the consequences of choosing visible before the long mechanics copy.
+    const foot=b.querySelector('.card-foot'),title=b.querySelector('strong');
+    const icon=document.createElement('span');icon.className='power-art';icon.innerHTML=powerEmblem(run.style,c.kind==='boon'?BOON_BY_ID[c.id].hero:c.kind==='hybrid'?HYBRIDS[c.id].heroes[0]:'patch');title.before(icon);
+    if(foot&&title){foot.classList.add('card-decision');title.after(foot);}
+    const desc=b.querySelector('.card-desc');
+    if(desc){desc.innerHTML=desc.innerHTML.replace(/<br\s*\/?>/gi,' ');const full=plainPowerCopy(desc.textContent);desc.textContent=full.split(/(?<=[.!?])\s+/)[0];
+      if(full!==desc.textContent){const details=document.createElement('span');details.className='card-details';details.hidden=true;details.textContent=full;desc.after(details);
+       const more=document.createElement('button');more.type='button';more.className='power-details-toggle';more.textContent='Details';more.setAttribute('aria-expanded','false');more.onclick=e=>{e.stopPropagation();details.hidden=!details.hidden;more.setAttribute('aria-expanded',String(!details.hidden));more.textContent=details.hidden?'Details':'Less';};
+       // A separate control avoids nesting a button inside the selection button.
+       b.afterDetails=more;
+      }
+    }
     b.addEventListener('click',()=>pickCard(i));
     box.appendChild(b);
+    const wrap=document.createElement('div');wrap.className='power-choice';b.replaceWith(wrap);wrap.append(b);if(b.afterDetails)wrap.append(b.afterDetails);
   });
   const rr=$('#btnReroll'); rr.hidden=run.rerolls<=0; rr.textContent=`Reroll (${run.rerolls})`;
   state='draft'; keys.clear(); strikeHeld=false; mouse.left=false; stick.id=null;
-  show('#mDraft',true);$('#mDraft .panel').scrollTop=0; box.firstChild && box.firstChild.focus({preventScroll:true});
+  show('#mDraft',true);$('#mDraft .panel').scrollTop=0; box.querySelector('.card')?.focus({preventScroll:true});
 }
+function plainPowerCopy(text){return text.replace(/\b\d+(?:\.\d+)?-range\s*/g,'').replace(/within \d+(?:\.\d+)? range/g,'nearby').replace(/at \d+(?:\.\d+)? radians per second/g,'as they fly').replace(/\s+/g,' ').trim();}
 function rerollDraft(){ if (state!=='draft' || run.rerolls<=0) return; run.rerolls--; openDraft(draftKind,draftHero,true); }
 function pickCard(i){
   if (state!=='draft' || !draftCards[i]) return;
