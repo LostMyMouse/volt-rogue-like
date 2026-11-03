@@ -13,9 +13,10 @@ function spawnPoint(){
   }
   return {x:90,y:90};
 }
-// Ordinary enemies scale with how many rooftops this run has crossed (capped so late districts stay fair).
+// Ordinary enemies scale with how many rooftops this run has crossed. Spawn counts cap at 18 so late
+// districts stay readable; health keeps climbing (more slowly) so stacked powers don't trivialise them.
 const diffStep = () => Math.min(wave,18);
-const waveHp = () => T.enemyHealth*(1+(diffStep()-1)*0.06);
+const waveHp = () => T.enemyHealth*(1+(diffStep()-1)*0.06+Math.max(0,Math.min(wave,40)-18)*0.035);
 function makeEnemy(kind,delay,at){
   const {x,y}=at||spawnPoint();
   const base={kind,x,y,vx:0,vy:0,mx:0,my:0,flashT:0,stunT:0,spawnT:delay,face:Math.atan2(player.y-y,player.x-x),dead:false};

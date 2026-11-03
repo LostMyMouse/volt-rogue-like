@@ -102,7 +102,7 @@ const STYLES = {
       const p=player; if (p.charging) return;
       setStrikeCd(0.16); p.shotN=(p.shotN||0)+1;
       const heavy=p.shotN%4===0, a=p.aim+rand(-0.04,0.04), s=heavy?820:960, ox=p.x+Math.cos(a)*20, oy=p.y+Math.sin(a)*20;
-      shots.push({kind:'bolt',x:ox,y:oy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,t:0,life:560*R.reachMul/s,dmg:strikeDmg(heavy?15:6),heavy,r:heavy?9:5,pierce:heavy?1:0,hit:[]});
+      shots.push({kind:'bolt',x:ox,y:oy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,t:0,life:560*R.reachMul/s,dmg:strikeDmg(heavy?18:8),heavy,r:heavy?9:5,pierce:heavy?1:0,hit:[]});
       p.vx-=Math.cos(a)*(heavy?90:30); p.vy-=Math.sin(a)*(heavy?90:30);
       sparks(ox,oy,a,heavy?6:2,COL.volt,320,.4);
     },
@@ -115,7 +115,7 @@ const STYLES = {
         .filter(h=>h.t>-h.e.r && h.t<L && h.perp<w+h.e.r).sort((x,y)=>x.t-y.t);
       hits.forEach((h,i)=>powerHit(h.e,powerDmg(16+44*k),a,200+300*k,0.2+0.35*k,i===0));
       bolts.push({pts:[{x:sx,y:sy},{x:sx+Math.cos(a)*L,y:sy+Math.sin(a)*L}],t:0,dur:.18+.12*k,c:powerTint(),w:1+k*1.6});
-      setPowerCd(T.powerCooldown*R.powerCdMul*1.1);
+      setPowerCd(T.powerCooldown*R.powerCdMul);
       p.vx-=Math.cos(a)*260*k; p.vy-=Math.sin(a)*260*k;
       flash=Math.max(flash,.05+.08*k); hitStop=Math.max(hitStop,T.hitPause*(1+k)); addShake(4+8*k);
     },
@@ -162,7 +162,8 @@ const STYLES = {
       const a=Math.atan2(t.y-p.y,t.x-p.x), ox=p.x, oy=p.y;
       fx.push({type:'ghost',x:ox,y:oy,a,t:0,dur:.22});
       p.x=t.x+Math.cos(a)*(t.r+p.r+8); p.y=t.y+Math.sin(a)*(t.r+p.r+8); collide(p);
-      p.aim=a; p.iT=Math.max(p.iT,0.09); p.vx=Math.cos(a)*160; p.vy=Math.sin(a)*160;
+      p.aim=a; p.iT=Math.max(p.iT,heavy?0.12:0.03); // short i-frames so held Flash isn't near-permanent immunity
+      p.vx=Math.cos(a)*160; p.vy=Math.sin(a)*160;
       bolts.push({pts:[{x:ox,y:oy},{x:p.x,y:p.y}],t:0,dur:.1,w:0.6});
       strikeHit(t,strikeDmg(heavy?17:8),a,heavy?420:160,heavy?0.28:0.08);
       if (heavy){ heavyLanded(t.x,t.y); addShake(7); hitStop=Math.max(hitStop,T.hitPause*1.4); } else addShake(2);

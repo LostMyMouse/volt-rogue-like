@@ -13,7 +13,7 @@ function registerBoss(def){ BOSSES[def.id]=def; Object.assign(BOSS_PARRY, def.pa
 const isSpecBoss = e => !!(e && BOSSES[e.kind]);
 
 function makeBoss(id, at, opt={}){
-  const def=BOSSES[id], hp=def.hp*T.enemyHealth*(opt.hpMul||1)*(id==='redactor'?1.8:1.6);
+  const def=BOSSES[id], hp=def.hp*T.enemyHealth*(opt.hpMul||1)*(id==='redactor'?1.3:1.6);
   return { kind:id, isBoss:true, name:def.name, x:at.x, y:at.y, vx:0, vy:0, mx:0, my:0, r:def.radius*U, hp, maxHp:hp,
     flashT:0, stunT:0, spawnT:0, face:Math.PI/2, dead:false,
     bstate:'INTRO', stateT:0, phase:1, queuedPhase:1, seqI:0, atk:null, invuln:true, exposedT:0, vent:0 };

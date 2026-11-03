@@ -46,15 +46,16 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (e.dead) return;
   if (e.invuln){ if (!opt.quiet) sparks(e.x-Math.cos(ang)*e.r,e.y-Math.sin(ang)*e.r,ang+Math.PI,4,'#9aa0ad',260,.8); return; }
   sfx(e.isBoss?'bosshit':'enemyhit',{vol:0.7,gap:55});
-  // Boon multipliers stack multiplicatively, like Hades.
-  let m=1;
+  // Exposed and boss modifiers multiply; conditional boon bonuses add together so they can't snowball.
+  let m=1, bonus=0;
   if (e.exposedT>0) m*=e.composureBrokenT>0?COMPOSURE.multiplier:BLOCK.exposedMul;
   if (isSpecBoss(e) && BOSSES[e.kind].damageMul) m*=BOSSES[e.kind].damageMul(e);
-  if (e.markT>0) m*=1+(has('mindspike')?val('mindspike'):25)/100;
-  if (has('inspire') && player.hp>=player.maxHp*0.8) m*=1+val('inspire')/100;
-  if (has('guiding') && e.isBoss) m*=1+val('guiding')/100;
-  if (has('natsel') && e.hp<e.maxHp*0.3) m*=1+val('natsel')/100;
-  if (has('briar') && opt.src==='strike' && e.rootT>0) m*=1+val('briar')/100;
+  if (e.markT>0) bonus+=has('mindspike')?val('mindspike'):25;
+  if (has('inspire') && player.hp>=player.maxHp*0.8) bonus+=val('inspire');
+  if (has('guiding') && e.isBoss) bonus+=val('guiding');
+  if (has('natsel') && e.hp<e.maxHp*0.3) bonus+=val('natsel');
+  if (has('briar') && opt.src==='strike' && e.rootT>0) bonus+=val('briar');
+  m*=1+bonus/100;
   dmg*=m;
   // Mind Link shares damage once; shared hits don't spread again.
   if (e.linkT>0 && !opt.linked && has('mindlink')) for (const o of liveEnemies()) if (o!==e && o.linkT>0) damageEnemy(o,dmg*val('mindlink')/100,0,0,0,{quiet:true,linked:true,c:HEROES.echo.c});
