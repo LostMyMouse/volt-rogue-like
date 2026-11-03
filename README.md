@@ -1,6 +1,6 @@
 # Volt
 
-An illustrated superhero action roguelite for desktop browsers, touch screens and controllers. Volt helps the Vanguard reclaim a city occupied by the Redactor. Serve `index.html` through a static HTTP server; there is no build step or framework. The launcher hosts the game at `/games/volt`; `node tools/deploy-launcher.cjs` mirrors index.html, css, js and assets into a sibling `james-lost-his-mouse` checkout (`--check` reports drift only), then commit and push that repo to deploy.
+An illustrated superhero action roguelite for desktop browsers, touch screens and controllers. Volt helps the Vanguard reclaim a city occupied by the Redactor. Serve `index.html` through a static HTTP server; there is no build step or framework. The launcher hosts the game at `/games/volt`; `node tools/deploy-launcher.cjs` mirrors index.html, css, js and assets into a sibling `james-lost-his-mouse` checkout (`--check` reports drift only), then commit and push that repo to deploy. Later scripts extend earlier ones by replacing global functions; [docs/override-map.md](docs/override-map.md) lists every replacement in load order (`node tools/override-map.cjs` regenerates it).
 
 ## Playing
 

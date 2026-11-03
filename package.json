@@ -1,0 +1,14 @@
+{
+  "name": "volt-rogue-like",
+  "private": true,
+  "description": "Volt: an illustrated superhero action roguelite. No build step; these scripts are for tests and deploys only.",
+  "scripts": {
+    "test": "node tools/tests/run.cjs",
+    "deploy:check": "node tools/deploy-launcher.cjs --check",
+    "deploy": "node tools/deploy-launcher.cjs",
+    "inventory": "node tools/audio/export-inventory.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}

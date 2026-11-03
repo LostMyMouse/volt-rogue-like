@@ -76,9 +76,11 @@ function showIntro(card, done){
   art.innerHTML='';art.style.backgroundImage='';art.classList.remove('bust');
   const image=new Image();image.alt=card.name;image.className='intro-character-art';
   image.onerror=()=>{image.onerror=null;image.src=`assets/portraits/${card.id}.png?v=2026-10-18-story`;};
-  // Villain posters have painted scenery; their portrait cut-outs have genuine alpha.
+  // Heroes have cut-outs with genuine alpha. Villains use their full-body posters, whose painted
+  // scenery is faded out at the edges (.villain-poster) so they tower over the card instead of a stretched bust.
   const heroArt=['volt','halo','bastion','echo','thorn','patch'].includes(card.id);
-  image.src=heroArt?`assets/intro/${card.id}.webp?v=2026-10-18-comms`:`assets/portraits/${card.id}.png?v=2026-10-18-cutout`;art.appendChild(image);
+  image.classList.toggle('villain-poster',!heroArt&&!!BOSSES[card.id]);
+  image.src=heroArt?`assets/intro/${card.id}.webp?v=2026-10-18-comms`:BOSSES[card.id]?`assets/intro/${card.id}.webp?v=2026-11-04-poster`:`assets/portraits/${card.id}.png?v=2026-10-18-cutout`;art.appendChild(image);
   el.classList.remove('in','out'); el.hidden=false; void el.offsetWidth; el.classList.add('in');
   introDone=done; introStart=performance.now();
   clearTimeout(introTimer);

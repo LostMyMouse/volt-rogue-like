@@ -10,6 +10,26 @@ function rollRarity(){
 function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 let draftKind='boon', draftHero=null;
 const GUEST_CHANCE=0.25;
+// Powers that apply a status, and powers that pay off on it. A draft card names the owned powers it pairs with.
+const SYNERGY={
+ mark:{gives:['mindspike','storm','cascade'],wants:['afterthought','premonition','cascade','feedback']},
+ stun:{gives:['solar','sunflare','flashstep','storm'],wants:['prism','feedback']},
+ root:{gives:['snare','overgrowth','vinelash'],wants:['briar','deeproots','feedback']},
+ poison:{gives:['bramble','snare','overgrowth','briar','spore'],wants:['venom']},
+ guard:{gives:['bulwark','bastille'],wants:['riposte']},
+ healthy:{gives:['ironwill','barrier','hold','fortress'],wants:['inspire']},
+};
+function synergyPartners(id){
+ const base=BOON_BY_ID[id]?.baseId||id,out=new Set();
+ for(const {gives,wants} of Object.values(SYNERGY)){
+  if(gives.includes(base))wants.forEach(w=>out.add(w));
+  if(wants.includes(base))gives.forEach(g=>out.add(g));
+ }
+ out.delete(base);
+ // A partner in the same active slot would be replaced by this card, so it doesn't count.
+ const slot=BOON_BY_ID[id]?.slot;
+ return [...out].filter(p=>has(p)&&(slot==='passive'||BOON_BY_ID[p].slot!==slot)).map(p=>BOON_BY_ID[p].name);
+}
 // Three powers for this hero's call: at least two the player doesn't own yet when the pool allows,
 // favouring ones this hero didn't just offer. Sometimes the last card is patched in from another hero.
 function draftOffer(who){
@@ -68,6 +88,8 @@ function openDraftNow(kind, hero, reroll, restored=null){
       b.style.setProperty('--c',HEROES[def.hero].c); b.style.setProperty('--r',rar.c);
       const guest=def.hero!==who?` · via ${SPEAKERS[def.hero].name}`:'';
       b.innerHTML=`<span class="card-top"><span class="tag">${SLOT_NAME[def.slot]} · <em>${rar.name}</em>${guest}</span><span class="card-key">${i+1}</span></span><strong>${def.name}${lvl>1?' '+'I'.repeat(lvl):''}</strong><span class="card-desc">${def.desc(base('v'),base('v2'))}</span><span class="card-foot">${c.levelUp?`Level up · ${lvl}/3`:old?`Replaces ${old.name}`:'New'}</span>`;
+      const pairs=c.levelUp?[]:synergyPartners(c.id);
+      if(pairs.length){const s=document.createElement('span');s.className='card-synergy';s.textContent='Works with '+pairs.slice(0,2).join(' & ')+(pairs.length>2?` +${pairs.length-2}`:'');b.querySelector('.card-foot').after(s);}
     }
     // Keep the consequences of choosing visible before the long mechanics copy.
     const foot=b.querySelector('.card-foot'),title=b.querySelector('strong');
