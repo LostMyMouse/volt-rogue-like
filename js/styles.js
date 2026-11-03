@@ -6,14 +6,22 @@
 // Boons hook the slot rather than the style (strike hits, heavy hits, power hits), so every boon works with every style.
 // Each style has one "heavy hit" that triggers heavy-hit boons (Radiant Strike, Bulwark Strike).
 const STYLE = () => STYLES[run.style] || STYLES.brawler;
-function strikeDmg(base){ return base*R.dmgMul*(1+val('radiant')/100)*(STYLE().dmgMul?STYLE().dmgMul():1); }
+function strikeDmg(base){ return base*R.dmgMul*(1+val('radiant')/100)*(player.riposteT>0?1+val('riposte')/100:1)*(STYLE().dmgMul?STYLE().dmgMul():1); }
 function powerDmg(base){ return base*R.dmgMul*(1+val('resonance')/100)*(STYLE().dmgMul?STYLE().dmgMul():1); }
 const powerReach = () => R.chainMax-4; // extra reach from Resonance and Relay Node
 const powerTint = () => player.slots.power ? HEROES[BOON_BY_ID[player.slots.power.id].hero].c : null;
 function strikeHit(e,dmg,ang,knock,stun,opt={}){
+  // Read status before the hit: every strike applies its own brief stun.
+  const marked=e.markT>0, stunned=e.stunT>0.15;
   damageEnemy(e,dmg,ang,knock,stun,Object.assign({src:'strike'},opt));
   if (has('mindspike')) e.markT=3;
   if (has('bramble')) poisonEnemy(e,1);
+  if (has('prism') && stunned && run.time>=(player.prismAt||0)){
+    const t=nearestEnemy(e.x,e.y,280,[e]);
+    if (t){ player.prismAt=run.time+0.25; bolts.push({pts:[{x:e.x,y:e.y},{x:t.x,y:t.y}],t:0,dur:.16,c:HEROES.halo.c}); damageEnemy(t,val('prism'),Math.atan2(t.y-e.y,t.x-e.x),160,0,{src:'boon',c:HEROES.halo.c}); }
+  }
+  if (has('afterthought') && marked) zones.push({kind:'blast',x:e.x,y:e.y,target:e,t:0,delay:0.4,dur:0.6,dmg:dmg*val('afterthought')/100,r:e.r+10,c:HEROES.echo.c});
+  if (has('briar') && e.rootT>0) for (const t of liveEnemies()) if (t!==e && Math.hypot(t.x-e.x,t.y-e.y)<100) poisonEnemy(t,1);
 }
 function heavyLanded(x,y){
   const p=player;
@@ -25,10 +33,16 @@ function powerHit(e,dmg,ang,knock,stun,first,opt={}){
   damageEnemy(e,dmg+(solar?val('solar'):0),ang,has('kinetic')?Math.max(knock,520):knock,solar?Math.max(stun,0.8):stun,Object.assign({src:'power'},opt));
   if (has('kinetic')) e.kbT=0.45;
   if (has('snare')){ rootEnemy(e,val('snare')); poisonEnemy(e,1); }
+  if (has('mindlink')) e.linkT=4;
+  if (first && has('sunflare')){ fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.3,r:110,c:HEROES.halo.c}); for (const t of liveEnemies()) if (t!==e && Math.hypot(t.x-e.x,t.y-e.y)<110+t.r){ damageEnemy(t,val('sunflare'),Math.atan2(t.y-e.y,t.x-e.x),200,t.isBoss?0:0.5,{src:'boon',c:HEROES.halo.c}); } }
+  if (first && has('spore')) zones.push({kind:'blast',x:e.x,y:e.y,target:null,t:0,delay:1,dur:1.2,dmg:val('spore'),r:115,poison:2,c:HEROES.thorn.c});
 }
 function inCone(e,x,y,a,range,arc){ const dx=e.x-x, dy=e.y-y, d=Math.hypot(dx,dy); return d<=range+e.r && (Math.abs(angDiff(Math.atan2(dy,dx),a))<=arc/2 || d<e.r+player.r+6); }
 function setStrikeCd(s){ player.strikeCd=s; player.strikeCdMax=s; }
-function setPowerCd(s){ player.powerCd=s; player.powerCdMax=s; }
+function setPowerCd(s){
+  player.powerCd=s; player.powerCdMax=s;
+  if (state==='play' && has('barrier')){ zones=zones.filter(z=>z.kind!=='ward'); zones.push({kind:'ward',x:player.x,y:player.y,t:0,dur:3,r:120,c:HEROES.bastion.c}); }
+}
 
 const STYLES = {
   brawler: {

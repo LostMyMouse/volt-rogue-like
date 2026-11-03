@@ -47,7 +47,7 @@ addEventListener('keydown', e => {
   if (state==='intro'){ dismissIntro(); return; }
   if (state==='map'){ if ((k==='1'||k==='2') && cityGates[+k-1]) chooseDistrict(cityGates[+k-1]); return; }
   if (state==='start' && k==='enter' && !$('#splash').hidden && $('#mConfirm').hidden && $('#mStart').hidden && $('#mTune').hidden && $('#mSlots').hidden){ startFromSplash(); return; }
-  if (state==='draft'){ if (k==='1'||k==='2'||k==='3') pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
+  if (state==='draft'){ if (k>='1'&&k<='4'&&k.length===1) pickCard(+k-1); else if (k==='r') rerollDraft(); return; }
   keys.add(k);
   if(state==='hub'&&k===' '){doDash();return;}
   if (state==='hub' && (k==='e'||k==='enter')){ hubInteract(); return; }

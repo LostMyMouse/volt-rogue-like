@@ -54,7 +54,10 @@ function damageEnemy(e,dmg,ang,knock,stun,opt={}){
   if (has('inspire') && player.hp>=player.maxHp*0.8) m*=1+val('inspire')/100;
   if (has('guiding') && e.isBoss) m*=1+val('guiding')/100;
   if (has('natsel') && e.hp<e.maxHp*0.3) m*=1+val('natsel')/100;
+  if (has('briar') && opt.src==='strike' && e.rootT>0) m*=1+val('briar')/100;
   dmg*=m;
+  // Mind Link shares damage once; shared hits don't spread again.
+  if (e.linkT>0 && !opt.linked && has('mindlink')) for (const o of liveEnemies()) if (o!==e && o.linkT>0) damageEnemy(o,dmg*val('mindlink')/100,0,0,0,{quiet:true,linked:true,c:HEROES.echo.c});
   const pressure=dmg;
   if(typeof squadProtection==='function')dmg*=squadProtection(e);
   if(!opt.quiet&&typeof lockjawGuard==='function'&&lockjawGuard(e,ang))dmg*=.5;
@@ -121,6 +124,10 @@ function doDash(){
   if (has('aegis')) p.reflectT=T.dashTime+val('aegis');
   if (has('phase')) zones.push({kind:'echo',x:p.x,y:p.y,a:p.aim,t:0,dur:0.8,dmg:val('phase'),r:90,c:HEROES.echo.c});
   if (has('thorntrail')) zones.push({kind:'thorns',x:p.x,y:p.y,t:0,dur:4,dps:val('thorntrail'),r:58,c:HEROES.thorn.c,seed:rand(PI2)});
+  if (has('comet')){ const L=T.dashSpeed*T.dashTime, x=clamp(p.x+p.dashDir.x*L,40,ARENA.w-40), y=clamp(p.y+p.dashDir.y*L,40,ARENA.h-40); zones.push({kind:'blast',x,y,target:null,t:0,delay:0.35,dur:0.5,dmg:val('comet'),r:85,stun:0.2,c:HEROES.halo.c,star:true}); }
+  if (has('ram')) p.ramHit=[];
+  if (has('vinelash')){ const t=nearestEnemy(p.x,p.y,260); if (t){ rootEnemy(t,val('vinelash')); bolts.push({pts:[{x:p.x,y:p.y},{x:(p.x+t.x)/2+rand(-20,20),y:(p.y+t.y)/2+rand(-20,20)},{x:t.x,y:t.y}],t:0,dur:.3,c:HEROES.thorn.c,w:1.4}); } }
+  if (has('premonition')) for (const e of liveEnemies()) if (e.markT>0) e.markT+=1;
   sparks(p.x,p.y,Math.atan2(-p.dashDir.y,-p.dashDir.x),10,COL.volt,500,.5);
   addShake(1.5);
 }
@@ -130,6 +137,15 @@ function doSig(){
   p.sig=0; sfx('overload'); bark('overload',0.7);
   fx.push({type:'shock',x:p.x,y:p.y,t:0,dur:.45,r:290});
   comicAttack(p.x,p.y,p.aim,110);
+  if (has('cascade')){
+    const marked=liveEnemies().filter(e=>e.markT>0);
+    for (const e of marked){
+      e.markT=0; fx.push({type:'shock',x:e.x,y:e.y,t:0,dur:.25,r:60,c:HEROES.echo.c});
+      damageEnemy(e,val('cascade'),rand(PI2),160,0.2,{src:'boon',c:HEROES.echo.c});
+      const next=nearestEnemy(e.x,e.y,320,liveEnemies().filter(o=>o.markT>0||marked.includes(o)));
+      if (next){ next.markT=4; bolts.push({pts:[{x:e.x,y:e.y},{x:next.x,y:next.y}],t:0,dur:.2,c:HEROES.echo.c}); }
+    }
+  }
   const storm=has('storm');
   for (const e of liveEnemies()){ const dx=e.x-p.x, dy=e.y-p.y, d=Math.hypot(dx,dy); if (d<290+e.r){
     damageEnemy(e,42*(1+val('storm')/100),Math.atan2(dy,dx),760,storm?2.4:0.9,{src:'overload'});
@@ -138,6 +154,16 @@ function doSig(){
   } }
   if (has('daybreak')) zones.push({kind:'light',x:p.x,y:p.y,t:0,dur:4,dps:val('daybreak'),r:160,c:HEROES.halo.c});
   if (has('fortress')){ p.iT=Math.max(p.iT,val('fortress')); texts.push({x:p.x,y:p.y-64,v:'FORTRESS',t:0,c:HEROES.bastion.c}); }
+  if (has('bastille')){ p.guard=Math.max(p.guard||0,val('bastille')); p.reflectT=Math.max(p.reflectT||0,3); texts.push({x:p.x,y:p.y-64,v:'LAST BASTION',t:0,c:HEROES.bastion.c}); }
+  if (has('zenith')){
+    const targets=liveEnemies().filter(e=>!e.anchored).sort((a,b)=>Math.hypot(b.x-p.x,b.y-p.y)-Math.hypot(a.x-p.x,a.y-p.y)).slice(0,5);
+    for (const e of targets){ bolts.push({pts:[{x:e.x,y:e.y-300},{x:e.x,y:e.y}],t:0,dur:.22,c:HEROES.halo.c,w:1.6}); damageEnemy(e,val('zenith'),-Math.PI/2,120,0.3,{src:'boon',c:HEROES.halo.c}); }
+  }
+  if (has('reaping')) for (const e of liveEnemies()) if (!e.isBoss && !e.anchored && e.hp<e.maxHp*val('reaping')/100 && Math.hypot(e.x-p.x,e.y-p.y)<290+e.r){
+    zones.push({kind:'thorns',x:e.x,y:e.y,t:0,dur:3,dps:10,r:60,c:HEROES.thorn.c,seed:rand(PI2)});
+    texts.push({x:e.x,y:e.y-e.r-18,v:'REAPED',t:0,c:HEROES.thorn.c});
+    e.hp=0; killEnemy(e,Math.atan2(e.y-p.y,e.x-p.x));
+  }
   for (const b of bullets){ if (Math.hypot(b.x-p.x,b.y-p.y)<290){ b.dead=true; sparks(b.x,b.y,0,5,COL.amber,300,Math.PI); } }
   for (let i=0;i<10;i++){ const a=rand(PI2); bolts.push({pts:[{x:p.x,y:p.y},{x:p.x+Math.cos(a)*rand(160,290),y:p.y+Math.sin(a)*rand(160,290)}],t:0,dur:rand(.15,.3)}); }
   hitStop=Math.max(hitStop,0.14); addShake(18); flash=.28;
@@ -149,8 +175,9 @@ function hurtPlayer(dmg,ang,src,opt={}){
   rumble(blk.result==='parried'?0.2:0.7, blk.result==='parried'?0.8:0.4, blk.result==='parried'?60:140);
   sfx({parried:'parry',blocked:'block',shattered:'guardbreak'}[blk.result]||'hurt', {gap:30});
   if (blk.result==='parried') bark('parry',0.35); else if (blk.result==='hit'){ if (p.hp-blk.dmg<p.maxHp*0.3) bark('low',0.6); else bark('hurt',0.25); }
+  if (blk.result==='parried'||blk.result==='blocked') p.riposteT=2;
   if (blk.result==='parried') return 'parried';
-  dmg=blk.dmg*R.dmgTakenMul*(so.dmgTaken||1);
+  dmg=blk.dmg*R.dmgTakenMul*(so.dmgTaken||1)*(has('barrier')&&inWard(p.x,p.y)?1-val('barrier')/100:1);
   if (blk.result==='blocked'){
     dmg=Math.round(dmg); p.iT=0.3; p.vx+=Math.cos(ang)*210; p.vy+=Math.sin(ang)*210;
     if (dmg>0){ p.hp-=dmg; run.dmgTaken+=dmg; run.lastHit=src; texts.push({x:p.x,y:p.y-24,v:'-'+dmg,t:0,c:COL.threat,small:true}); if (p.hp<=0){ if (run.lastStands>0){ run.lastStands--; p.hp=1; p.iT=2; banner('LAST STAND',true); } else { p.hp=0; gameOver(); } } }

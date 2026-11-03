@@ -168,8 +168,27 @@ function drawZones(){
       drawComicRoots(z.x,z.y,z.r,9,z.seed||0);
     } else if (z.kind==='echo' && !z.fired){
       ctx.translate(z.x,z.y); ctx.rotate(z.a); ctx.globalAlpha=0.5+0.4*Math.sin(time*40); heroShape(); ctx.fillStyle=z.c; ctx.fill();
+    } else if (z.kind==='blast' && !z.fired){
+      // A closing ring shows when the delayed hit lands; stars streak in from above.
+      const q=clamp(z.t/z.delay,0,1), r=z.target?z.r:z.r*(1.6-0.6*q);
+      ctx.strokeStyle=z.c; ctx.lineWidth=2+2*q; ctx.globalAlpha=0.35+0.5*q; ctx.setLineDash(z.target?[]:[10,8]); ctx.lineDashOffset=time*60;
+      ctx.beginPath(); ctx.arc(z.x,z.y,r,0,PI2); ctx.stroke(); ctx.setLineDash([]);
+      if (z.star){ const h=320*(1-q); ctx.lineWidth=5; ctx.lineCap='round'; ctx.shadowColor=z.c; ctx.shadowBlur=16; ctx.beginPath(); ctx.moveTo(z.x+h*0.35,z.y-h-40); ctx.lineTo(z.x+h*0.35*0.8,z.y-h); ctx.stroke(); }
+      if (z.poison){ ctx.fillStyle=z.c; ctx.globalAlpha=0.6+0.3*Math.sin(time*18); ctx.beginPath(); ctx.ellipse(z.x,z.y,10+6*q,8+5*q,0,0,PI2); ctx.fill(); }
+    } else if (z.kind==='ward'){
+      const g=ctx.createRadialGradient(z.x,z.y,z.r*0.3,z.x,z.y,z.r); g.addColorStop(0,'rgba(159,176,200,0)'); g.addColorStop(1,'rgba(159,176,200,.28)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(z.x,z.y,z.r,0,PI2); ctx.fill();
+      ctx.strokeStyle=z.c; ctx.lineWidth=3; ctx.shadowColor=z.c; ctx.shadowBlur=12; ctx.stroke(); ctx.shadowBlur=0;
+      ctx.globalAlpha*=0.5; ctx.lineWidth=1.5;
+      for (let i=0;i<6;i++){ const a=i*Math.PI/3+time*0.4; ctx.beginPath(); ctx.moveTo(z.x+Math.cos(a)*z.r*0.55,z.y+Math.sin(a)*z.r*0.55); ctx.lineTo(z.x+Math.cos(a+Math.PI/3)*z.r*0.55,z.y+Math.sin(a+Math.PI/3)*z.r*0.55); ctx.stroke(); }
     }
     ctx.restore();
+  }
+  // Mind Link tethers between linked enemies.
+  const linked=enemies.filter(e=>!e.dead&&e.linkT>0);
+  if (linked.length>1){
+    ctx.save(); ctx.strokeStyle=HEROES.echo.c; ctx.lineWidth=2; ctx.globalAlpha=0.55+0.25*Math.sin(time*10); ctx.setLineDash([6,6]); ctx.lineDashOffset=-time*50;
+    ctx.beginPath(); for (let i=1;i<linked.length;i++){ ctx.moveTo(linked[i-1].x,linked[i-1].y); ctx.lineTo(linked[i].x,linked[i].y); } ctx.stroke(); ctx.restore();
   }
 }
 function drawTelegraphs(){

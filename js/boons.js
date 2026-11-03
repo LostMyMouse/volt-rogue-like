@@ -27,6 +27,10 @@ const BOONS = [
   {id:'inspire', hero:'halo', slot:'passive', name:'Inspire', v:[15,22,30], desc:a=>`While above 80% health you deal <b>+${a}%</b> damage.`},
   {id:'guiding', hero:'halo', slot:'passive', name:'Guiding Light', v:[20,30,45], desc:a=>`Deal <b>+${a}%</b> damage to villains.`},
   {id:'halo_sig', hero:'halo', slot:'passive', name:'Spotlight', v:[25,35,50], desc:a=>`Overload charges <b>${a}%</b> faster.`},
+  {id:'prism', hero:'halo', slot:'strike', name:'Prism Strike', v:[12,18,26], desc:a=>`Striking a stunned enemy refracts a light ray into the nearest other enemy for <b>${a}</b> damage.`},
+  {id:'sunflare', hero:'halo', slot:'power', name:'Sunflare', v:[16,24,34], desc:a=>`Special's first target erupts: enemies around it take <b>${a}</b> damage and are <b>blinded</b> (stunned 0.5s).`},
+  {id:'comet', hero:'halo', slot:'dash', name:'Comet Dash', v:[18,26,36], desc:a=>`A falling star lands where your dash ends, dealing <b>${a}</b> damage around it.`},
+  {id:'zenith', hero:'halo', slot:'overload', name:'Zenith', v:[30,45,60], desc:a=>`Overload also strikes up to 5 enemies anywhere on the roof with a light beam for <b>${a}</b> damage each.`},
   // Bastion: force fields. Guards, deflection, invulnerability, punishing walls.
   {id:'bulwark', hero:'bastion', slot:'strike', name:'Bulwark Strike', v:[50,70,100], desc:a=>`Landing a heavy hit raises a <b>Guard</b> that blocks <b>${a}%</b> of the next hit.`},
   {id:'kinetic', hero:'bastion', slot:'power', name:'Kinetic Ram', v:[20,30,42], desc:a=>`Special knocks enemies far back. Any that hit a wall or obstacle take <b>${a}</b> damage.`},
@@ -35,6 +39,10 @@ const BOONS = [
   {id:'ironwill', hero:'bastion', slot:'passive', name:'Iron Will', v:[10,14,18], desc:a=>`Take <b>${a}%</b> less damage.`},
   {id:'retaliate', hero:'bastion', slot:'passive', name:'Retaliate', v:[14,20,28], desc:a=>`When hit, release a force pulse dealing <b>${a}</b> damage around you.`},
   {id:'hold', hero:'bastion', slot:'passive', name:'Hold the Line', v:[0.15,0.25,0.35], desc:a=>`After taking a hit you stay invulnerable <b>${a}s</b> longer.`},
+  {id:'riposte', hero:'bastion', slot:'strike', name:'Riposte Strike', v:[40,60,85], desc:a=>`For 2s after you block or parry, Strike deals <b>+${a}%</b> damage.`},
+  {id:'barrier', hero:'bastion', slot:'power', name:'Barrier Dome', v:[20,30,40], desc:a=>`Special raises a dome where you stand for 3s. Enemy shots inside it are destroyed and you take <b>${a}%</b> less damage within it.`},
+  {id:'ram', hero:'bastion', slot:'dash', name:'Battering Dash', v:[12,18,26], desc:a=>`Enemies you dash through are slammed aside for <b>${a}</b> damage.`},
+  {id:'bastille', hero:'bastion', slot:'overload', name:'Last Bastion', v:[40,60,80], desc:a=>`Overload raises a <b>Guard</b> that blocks <b>${a}%</b> of the next hit and reflects Needle shots for 3s.`},
   // Echo: psychic control. Marks, chain resonance, delayed echoes, slower enemy tells.
   {id:'mindspike', hero:'echo', slot:'strike', name:'Mind Spike', v:[20,30,40], desc:a=>`Strikes <b>mark</b> enemies for 3s. Marked enemies take <b>+${a}%</b> damage from everything.`},
   {id:'resonance', hero:'echo', slot:'power', name:'Resonance', v:[10,20,30], desc:a=>`Special deals <b>+${a}%</b> damage and reaches further: one more chain, bounce or hit, a longer lance or a wider pound.`},
@@ -43,6 +51,10 @@ const BOONS = [
   {id:'feedback', hero:'echo', slot:'passive', name:'Feedback', v:[16,24,34], desc:a=>`Marked, stunned or rooted enemies burst when they fall, dealing <b>${a}</b> damage nearby.`},
   {id:'foresight', hero:'echo', slot:'passive', name:'Foresight', v:[15,22,30], desc:a=>`Enemy wind-ups and telegraphs last <b>${a}%</b> longer.`},
   {id:'echo_cd', hero:'echo', slot:'passive', name:'Quick Thinking', v:[15,20,25], desc:a=>`Special recharges <b>${a}%</b> faster.`},
+  {id:'afterthought', hero:'echo', slot:'strike', name:'Afterthought', v:[40,55,75], desc:a=>`Strikes on <b>marked</b> enemies repeat 0.4s later for <b>${a}%</b> of the damage.`},
+  {id:'mindlink', hero:'echo', slot:'power', name:'Mind Link', v:[25,35,50], desc:a=>`Special links the enemies it hits for 4s. <b>${a}%</b> of the damage dealt to one is shared with every other linked enemy.`},
+  {id:'premonition', hero:'echo', slot:'dash', name:'Premonition', v:[30,45,60], desc:a=>`While any enemy is marked, Dash recharges <b>${a}%</b> faster. Dashing extends every mark by 1s.`},
+  {id:'cascade', hero:'echo', slot:'overload', name:'Synapse Cascade', v:[20,30,42], desc:a=>`Overload detonates every mark on the roof for <b>${a}</b> damage, and each detonation marks the nearest unmarked enemy.`},
   // Thorn: nature. Poison stacks, roots, lingering thorn fields, executes.
   {id:'bramble', hero:'thorn', slot:'strike', name:'Bramble Strike', v:[4,6,8], desc:a=>`Strikes <b>poison</b>: <b>${a}</b> damage per second per stack, up to 3 stacks, for 3s.`},
   {id:'snare', hero:'thorn', slot:'power', name:'Root Snare', v:[1.0,1.4,1.8], desc:a=>`Special <b>roots</b> every enemy it hits for <b>${a}s</b> and poisons them.`},
@@ -51,6 +63,10 @@ const BOONS = [
   {id:'venom', hero:'thorn', slot:'passive', name:'Venom', v:[30,45,60], desc:a=>`Poison deals <b>+${a}%</b> damage.`},
   {id:'natsel', hero:'thorn', slot:'passive', name:'Natural Selection', v:[30,45,60], desc:a=>`Deal <b>+${a}%</b> damage to enemies below 30% health.`},
   {id:'deeproots', hero:'thorn', slot:'passive', name:'Deep Roots', v:[0.5,0.8,1.1], desc:a=>`Roots last <b>${a}s</b> longer and rooted enemies can't attack.`},
+  {id:'briar', hero:'thorn', slot:'strike', name:'Briar Lash', v:[30,45,60], desc:a=>`Strikes deal <b>+${a}%</b> damage to <b>rooted</b> enemies and spread a poison stack to enemies close to them.`},
+  {id:'spore', hero:'thorn', slot:'power', name:'Spore Pod', v:[14,20,28], desc:a=>`Special plants a pod on its first target that bursts after 1s for <b>${a}</b> damage and 2 poison stacks to everything nearby.`},
+  {id:'vinelash', hero:'thorn', slot:'dash', name:'Vine Lash', v:[0.8,1.1,1.5], desc:a=>`Dashing lashes the nearest enemy with a vine and <b>roots</b> it for <b>${a}s</b>.`},
+  {id:'reaping', hero:'thorn', slot:'overload', name:'Reaping Bloom', v:[15,20,25], desc:a=>`Overload executes ordinary enemies below <b>${a}%</b> health. Each one bursts into a thorn field for 3s.`},
 ];
 const BOON_BY_ID = Object.fromEntries(BOONS.map(b=>[b.id,b]));
 // Patch's Fortress tech: offered after each Gravemark wave. Stat upgrades, never healing.
@@ -174,6 +190,7 @@ function tickStatus(e,dt){
   if (e.exposedT>0) e.exposedT-=dt;
   if (e.rootT>0) e.rootT-=dt;
   if (e.kbT>0) e.kbT-=dt;
+  if (e.linkT>0) e.linkT-=dt;
   const pz=e.poison;
   if (pz && pz.t>0){
     pz.t-=dt; pz.acc+=dt;
@@ -181,11 +198,26 @@ function tickStatus(e,dt){
     if (pz.t<=0) e.poison=null;
   }
 }
+const inWard = (x,y) => zones.some(z=>z.kind==='ward' && Math.hypot(x-z.x,y-z.y)<z.r);
 function updateZones(dt){
   for (const z of zones){
     z.t+=dt;
     if (z.kind==='echo'){
       if (!z.fired && z.t>=0.5){ z.fired=true; burst(z.x,z.y,90,z.dmg,HEROES.echo.c,0.2); addShake(4); }
+      continue;
+    }
+    // Delayed hits: falling stars, spore pods and Afterthought repeats. A followed target is hit alone.
+    if (z.kind==='blast'){
+      if (z.target && !z.target.dead){ z.x=z.target.x; z.y=z.target.y; }
+      if (!z.fired && z.t>=z.delay){
+        z.fired=true; addShake(3);
+        if (z.target){ if (!z.target.dead) damageEnemy(z.target,z.dmg,0,0,0,{src:'boon',c:z.c}); }
+        else { burst(z.x,z.y,z.r,z.dmg,z.c,z.stun||0); if (z.poison) for (const e of liveEnemies()) if (Math.hypot(e.x-z.x,e.y-z.y)<z.r+e.r) poisonEnemy(e,z.poison); }
+      }
+      continue;
+    }
+    if (z.kind==='ward'){
+      for (const b of bullets) if (!b.dead && Math.hypot(b.x-z.x,b.y-z.y)<z.r){ b.dead=true; sparks(b.x,b.y,0,4,z.c,260,Math.PI); }
       continue;
     }
     z.acc=(z.acc||0)+dt;

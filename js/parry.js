@@ -28,7 +28,7 @@ function exposeEnemy(e,duration){
 }
 function onParry(ang,opt){
   const p=player;
-  p.blockUsed=true; p.parries=(p.parries||0)+1; run.parries=(run.parries||0)+1;
+  p.blockUsed=true; p.riposteT=2; p.parries=(p.parries||0)+1; run.parries=(run.parries||0)+1;
   p.iT=Math.max(p.iT,0.25); p.dashCd=0; p.sig=Math.min(100,p.sig+BLOCK.sig);
   const attacker=opt.attacker || (opt.bullet && opt.bullet.owner);
   if (attacker && !attacker.dead){ exposeEnemy(attacker); damageComposure(attacker,attacker.isBoss?COMPOSURE.bossParry:COMPOSURE.parry,'parry'); }

@@ -184,6 +184,7 @@ button{font:inherit;color:inherit}
 /* Comms draft */
 .draft-panel{max-width:780px}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cards.four{grid-template-columns:repeat(4,minmax(0,1fr))}
 .card{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:14px 14px 12px;background:var(--ink);border:2px solid color-mix(in srgb,var(--c) 55%,transparent);border-top:5px solid var(--c);box-shadow:4px 4px 0 rgba(4,7,14,.8);transition:transform .1s,box-shadow .1s,border-color .1s;min-width:0}
 .card:hover,.card:focus-visible{transform:translate(-2px,-3px);box-shadow:6px 7px 0 rgba(4,7,14,.8),0 0 22px color-mix(in srgb,var(--c) 40%,transparent);border-color:var(--c);outline:none}
 .card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -241,7 +242,7 @@ button{font:inherit;color:inherit}
   .abilities{display:none}
   .bossbar{top:calc(env(safe-area-inset-top,0px) + 74px)}
   .stats4{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cards{grid-template-columns:1fr}
+  .cards,.cards.four{grid-template-columns:1fr}
   .card strong{font-size:22px}
   .rank{width:76px;height:76px;font-size:64px}
   .rank-text h2{font-size:30px}

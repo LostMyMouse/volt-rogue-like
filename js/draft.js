@@ -9,6 +9,22 @@ function rollRarity(){
 }
 function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 let draftKind='boon', draftHero=null;
+const GUEST_CHANCE=0.25;
+// Three powers for this hero's call: at least two the player doesn't own yet when the pool allows,
+// favouring ones this hero didn't just offer. Sometimes the last card is patched in from another hero.
+function draftOffer(who){
+  const p=player, last=(run.lastOffers||(run.lastOffers={}))[who]||[];
+  const poolOf=h=>BOONS.filter(b=>b.weapon===run.style && b.hero===h && !(p.owned[b.id] && p.owned[b.id].level>=3));
+  const ranked=pool=>{ const fresh=pool.filter(b=>!p.owned[b.id]); return [...shuffle(fresh.filter(b=>!last.includes(b.id))),...shuffle(fresh.filter(b=>last.includes(b.id)))]; };
+  const pool=poolOf(who), unowned=ranked(pool), cards=unowned.slice(0,2);
+  for (const b of [...unowned.slice(2),...shuffle(pool.filter(b=>p.owned[b.id]&&!last.includes(b.id))),...shuffle(pool.filter(b=>p.owned[b.id]&&last.includes(b.id)))]){ if (cards.length>=3) break; if (!cards.includes(b)) cards.push(b); }
+  if (cards.length===3 && Math.random()<GUEST_CHANCE){
+    const guest=ranked(poolOf(pick(Object.keys(HEROES).filter(h=>h!==who))))[0];
+    if (guest) cards[2]=guest;
+  }
+  run.lastOffers[who]=cards.map(b=>b.id);
+  return cards;
+}
 function openDraft(kind='boon', hero=null, reroll=false){
   if (!reroll){
     const who0 = kind==='tech' ? 'patch' : (hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)));
@@ -30,15 +46,15 @@ function openDraftNow(kind, hero, reroll, restored=null){
   } else {
     who=hero||pick(Object.keys(HEROES).filter(h=>h!==lastCaller)); lastCaller=who; draftHero=who;
     const n=reroll?run.calls[who]:(run.calls[who]=(run.calls[who]||0)+1); line=reroll?"Fine. Something else, then.":n===1?HEROES[who].first:commsLine(who);
-    const pool=BOONS.filter(b=>b.weapon===run.style && b.hero===who && !(p.owned[b.id] && p.owned[b.id].level>=3));
-    draftCards=shuffle(pool).slice(0,3).map(b=>{ const o=p.owned[b.id]; return {kind:'boon',id:b.id,rarity:o?o.rarity:rollRarity(),levelUp:!!o}; });
+    draftCards=draftOffer(who).map(b=>{ const o=p.owned[b.id]; return {kind:'boon',id:b.id,rarity:o?o.rarity:rollRarity(),levelUp:!!o}; });
   }
-  if(!restored&&kind!=='tech'){const pool=eligibleHybrids(who);if(pool.length)draftCards[draftCards.length-1]={kind:'hybrid',id:pick(pool)};}
+  // Hybrids join as an extra card rather than displacing a power.
+  if(!restored&&kind!=='tech'){const pool=eligibleHybrids(who);if(pool.length)draftCards.push({kind:'hybrid',id:pick(pool)});}
   draftHero=who;
   const comms=$('#draftComms'), sp=SPEAKERS[who];
   comms.style.setProperty('--c',sp.c); setPortrait($('#draftPortrait'),who);
   $('#draftLine').textContent=line; $('#draftWho').innerHTML=`<b>${sp.name}</b> · ${sp.role}`;playVoice(who,line);
-  const box=$('#draftCards'); box.innerHTML='';
+  const box=$('#draftCards'); box.innerHTML=''; box.classList.toggle('four',draftCards.length>3);
   draftCards.forEach((c,i)=>{
     const b=document.createElement('button'); b.type='button'; b.className='card';
     if(c.kind==='hybrid'){const h=HYBRIDS[c.id];b.style.setProperty('--c',COL.boon);b.innerHTML=`<span class="card-top"><span class="tag">Hybrid · ${h.heroes.map(id=>SPEAKERS[id].name).join(' + ')}</span><span class="card-key">${i+1}</span></span><strong>${h.name}</strong><span class="card-desc">${h.desc}</span><span class="card-foot">Combine the powers collected this run</span>`;}else if (c.kind==='tech'){
@@ -50,11 +66,12 @@ function openDraftNow(kind, hero, reroll, restored=null){
       const base=k=>def[k]?Math.round(def[k][c.rarity]*(1+0.4*(lvl-1))*100)/100:0;
       const old=def.slot!=='passive' && p.slots[def.slot] && p.slots[def.slot].id!==c.id ? BOON_BY_ID[p.slots[def.slot].id] : null;
       b.style.setProperty('--c',HEROES[def.hero].c); b.style.setProperty('--r',rar.c);
-      b.innerHTML=`<span class="card-top"><span class="tag">${SLOT_NAME[def.slot]} · <em>${rar.name}</em></span><span class="card-key">${i+1}</span></span><strong>${def.name}${lvl>1?' '+'I'.repeat(lvl):''}</strong><span class="card-desc">${def.desc(base('v'),base('v2'))}</span><span class="card-foot">${c.levelUp?`Level up · ${lvl}/3`:old?`Replaces ${old.name}`:'New'}</span>`;
+      const guest=def.hero!==who?` · via ${SPEAKERS[def.hero].name}`:'';
+      b.innerHTML=`<span class="card-top"><span class="tag">${SLOT_NAME[def.slot]} · <em>${rar.name}</em>${guest}</span><span class="card-key">${i+1}</span></span><strong>${def.name}${lvl>1?' '+'I'.repeat(lvl):''}</strong><span class="card-desc">${def.desc(base('v'),base('v2'))}</span><span class="card-foot">${c.levelUp?`Level up · ${lvl}/3`:old?`Replaces ${old.name}`:'New'}</span>`;
     }
     // Keep the consequences of choosing visible before the long mechanics copy.
     const foot=b.querySelector('.card-foot'),title=b.querySelector('strong');
-    const icon=document.createElement('span');icon.className='power-art';icon.innerHTML=powerEmblem(run.style,c.kind==='boon'?BOON_BY_ID[c.id].hero:c.kind==='hybrid'?HYBRIDS[c.id].heroes[0]:'patch');title.before(icon);
+    const icon=document.createElement('span');icon.className='power-art';icon.innerHTML=powerEmblem(run.style,c.kind==='boon'?BOON_BY_ID[c.id].hero:c.kind==='hybrid'?HYBRIDS[c.id].heroes[0]:'patch',c.kind==='boon'?BOON_BY_ID[c.id].slot:null);title.before(icon);
     if(foot&&title){foot.classList.add('card-decision');title.after(foot);}
     const desc=b.querySelector('.card-desc');
     if(desc){desc.innerHTML=desc.innerHTML.replace(/<br\s*\/?>/gi,' ');const full=plainPowerCopy(desc.textContent);desc.textContent=full.split(/(?<=[.!?])\s+/)[0];

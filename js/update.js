@@ -50,14 +50,19 @@ function spawnRoomWave(){
 function update(dt){
   const p=player; run.time+=dt;
   const mv=moveInput(); updateAim(mv);
-  p.strikeCd-=dt; p.powerCd-=dt; p.dashCd-=dt; p.iT-=dt; p.comboT-=dt; p.reflectT-=dt; if (p.slowT>0) p.slowT-=dt; tickBlock(dt);
+  p.strikeCd-=dt; p.powerCd-=dt; p.dashCd-=dt; p.iT-=dt; p.comboT-=dt; p.reflectT-=dt; if (p.slowT>0) p.slowT-=dt; if (p.riposteT>0) p.riposteT-=dt; tickBlock(dt);
+  if (p.dashCd>0 && has('premonition') && liveEnemies().some(e=>e.markT>0)) p.dashCd-=dt*val('premonition')/100;
   if ((mouse.left||strikeHeld) && p.strikeCd<=0) doStrike();
 
   if (p.dashT>0){
     p.vx=p.dashDir.x*T.dashSpeed; p.vy=p.dashDir.y*T.dashSpeed; p.dashT-=dt; p.ghostT-=dt;
+    if (p.ramHit) for (const e of liveEnemies()) if (!p.ramHit.includes(e) && Math.hypot(e.x-p.x,e.y-p.y)<p.r+e.r+12){
+      p.ramHit.push(e); const side=Math.atan2(e.y-p.y,e.x-p.x);
+      damageEnemy(e,val('ram'),side,520,0.25,{src:'boon',c:HEROES.bastion.c}); addShake(3);
+    }
     if (p.ghostT<=0){ p.ghostT=0.018; fx.push({type:'ghost',x:p.x,y:p.y,a:Math.atan2(p.dashDir.y,p.dashDir.x),t:0,dur:.2}); }
     if (Math.random()<.7) particles.push({x:p.x+rand(-10,10),y:p.y+rand(-10,10),vx:-p.dashDir.x*rand(200,500),vy:-p.dashDir.y*rand(200,500),life:.18,max:.18,color:COL.volt,w:2});
-    if (p.dashT<=0){ p.vx*=0.3; p.vy*=0.3; }
+    if (p.dashT<=0){ p.vx*=0.3; p.vy*=0.3; p.ramHit=null; }
   } else {
     const so=STYLE(), sp=p.stunT>0 ? 0 : T.moveSpeed*R.moveMul*(so.move||1)*(p.strikeCd>0?(so.strikeSlow??0.55):1)*(p.charging?0.5:1)*(p.blockHeld?0.4:1)*(p.slowT>0?0.75:1);
     const k=Math.min(1,((mv.x||mv.y)?14:11)*dt);

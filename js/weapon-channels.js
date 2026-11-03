@@ -8,11 +8,10 @@ const WEAPON_CHANNELS={
  speedster:{noun:'Flash',strike:'Every fifth Flash leaves an afterimage that hits again after 0.28s for 10 damage.',power:'Blitz leaves three delayed afterimage hits for 14 damage each.',dash:'The dash leaves a delayed afterimage hit for 5 damage.',overload:'Overload leaves three delayed afterimages for 24 damage each.'},
  magnetar:{noun:'Orbit',strike:'Returning-disc hits leave an 80-range wake for 10 damage (at most once per 0.4s).',power:'Magnet Pull adds three 135-range orbit pulses for 14 damage each.',dash:'The dash leaves a circular disc wake for 5 damage.',overload:'Overload adds three 180-range orbit pulses for 24 damage each.'},
 };
-const CHANNEL_FLAVOUR={halo:'Solar',bastion:'Bulwark',echo:'Psychic',thorn:'Bramble'};
 const CHANNEL_PAYLOAD={halo:'Channel hits also briefly blind enemies.',bastion:'Channel hits knock enemies back and give 20% Guard.',echo:'Channel hits mark enemies for 3s.',thorn:'Channel hits root for 0.35s and apply poison.'};
 const BASE_BOONS=BOONS.slice();
 for(const [weapon,channel]of Object.entries(WEAPON_CHANNELS))for(const base of BASE_BOONS){
- const extra=channel[base.slot],def={...base,id:weapon+'__'+base.id,baseId:base.id,weapon,name:base.slot==='passive'?channel.noun+' · '+base.name:CHANNEL_FLAVOUR[base.hero]+' '+({strike:channel.noun+' Strike',power:STYLES[weapon].powerLabel,dash:channel.noun+' Step',overload:channel.noun+' Overload'}[base.slot]),desc:(...args)=>base.desc(...args)+(extra?`<br><b>${extra}</b> ${CHANNEL_PAYLOAD[base.hero]}`:'')};
+ const extra=channel[base.slot],def={...base,id:weapon+'__'+base.id,baseId:base.id,weapon,name:base.name,desc:(...args)=>base.desc(...args)+(extra?`<br><b>${extra}</b> ${CHANNEL_PAYLOAD[base.hero]}`:'')};
  BOONS.push(def);BOON_BY_ID[def.id]=def;
 }
 const baseHasChannel=has,baseValChannel=val;

@@ -10,10 +10,10 @@ Perfect parries prevent damage, reset Dash, charge Overload and deal substantial
 
 ## Current game
 
-- Five weapons: Brawler, Arc Caster, Titan, Speedster and Magnetar, each with an unlockable variant and a 32-card power/technique pool: 160 weapon-qualified offers. Each weapon has four authored attack poses in four directions.
+- Five weapons: Brawler, Arc Caster, Titan, Speedster and Magnetar, each with an unlockable variant and a 48-card power/technique pool: 240 weapon-qualified offers. Every hero has two powers per slot. Each weapon has four authored attack poses in four directions.
 - Three randomly assigned district villains, then Gravemark and the Redactor. Identity stays concealed until arrival. Districts contain 5–8 combat rooftops, a supply stop and a boss. Ordinary roofs share city rooftop art; bosses have bespoke paintings and collision footprints, with a distinct final tower approach.
 - Seven bosses: Kilnheart, Bellwether, Verdigris, Glasswake, Undertow, Gravemark and the Redactor. Glasswake uses a mirror hall. Lockjaw and Relay add frontal protection/flanking and squad support in later stretches.
-- Hero powers modify Strike, Special, Dash, Overload or passives. Slots replace their previous power; duplicates level up to III. Three hybrid recipes are discovered during runs after a victory and five deployments, with both heroes' prerequisites.
+- Hero powers modify Strike, Special, Dash, Overload or passives. Slots replace their previous power; duplicates level up to III. Offers favour powers not yet owned, avoid repeating that hero's last offer and sometimes include a guest power from another hero; a ready hybrid appears as a fourth card. Three hybrid recipes are discovered during runs after a victory and five deployments, with both heroes' prerequisites.
 - Patch's physical supply stops offer three random purchases. Field Credits visibly drop from some enemies and rooftop storage. Crates can contain credits, health or nothing; enemies rarely drop health. Renown is permanent; Field Credits reset with a new operation.
 - The Fortress has accessible rooms, a separate armoury, a training robot/tutorial, weapon practice, upgrades, contracts, notebook and repeat-run conversations. Heroes perform grounded activities at their stations.
 - The narrated motion comic opens with cover, Vanguard spread without Volt, heroes, villain spread, villains and Volt's story. Page turns, three-second spreads, Auto/manual and Skip controls remain available.
