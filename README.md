@@ -1,6 +1,6 @@
 # Volt
 
-An illustrated superhero action roguelite for desktop browsers, touch screens and controllers. Volt helps the Vanguard reclaim a city occupied by the Redactor. Serve `index.html` through a static HTTP server; there is no build step or framework. The launcher hosts the game at `/games/volt`.
+An illustrated superhero action roguelite for desktop browsers, touch screens and controllers. Volt helps the Vanguard reclaim a city occupied by the Redactor. Serve `index.html` through a static HTTP server; there is no build step or framework. The launcher hosts the game at `/games/volt`; `node tools/deploy-launcher.cjs` mirrors index.html, css, js and assets into a sibling `james-lost-his-mouse` checkout (`--check` reports drift only), then commit and push that repo to deploy.
 
 ## Playing
 
